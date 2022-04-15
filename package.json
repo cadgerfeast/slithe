@@ -1,0 +1,26 @@
+{
+  "name": "slithe",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "run-s build:lib build:docs",
+    "build:lib": "run-s build:lib:bundle build:lib:split",
+    "build:lib:bundle": "vite build",
+    "build:lib:split": "vite build",
+    "build:docs": "vite build",
+    "lint": "svelte-check --tsconfig ./tsconfig.json",
+    "serve": "vite preview"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "1.0.0-next.41",
+    "@tsconfig/svelte": "2.0.1",
+    "npm-run-all": "4.1.5",
+    "svelte": "3.47.0",
+    "svelte-check": "2.7.0",
+    "svelte-preprocess": "4.10.6",
+    "tslib": "2.3.1",
+    "typescript": "4.6.3",
+    "vite": "2.9.5"
+  }
+}
