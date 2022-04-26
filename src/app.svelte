@@ -1,70 +1,74 @@
 <script lang="ts">
+  // Helpers
+  import { Router, Link, Route } from 'svelte-navigator';
+  import { routes, fullTextSearch } from './routes';
+  // Style
+  import '../themes/svelte/svelte.css';
   // Assets
-  import logo from './assets/svelte.png';
-  // Components
-  import './components/nested/nested.svelte';
+  import svelte from './assets/svelte.svg';
+  import search from './assets/search.svg';
+  import github from './assets/github.svg';
+  // Methods
+  async function debounceSearch (e: InputEvent) {
+    const pages = await fullTextSearch((e.target as HTMLInputElement).value);
+    console.info(pages);
+  }
 </script>
 
-<main>
-  <img src={logo} alt="Svelte Logo" />
-  <h1>Hello Typescript!</h1>
+<Router>
+  <header>
+    <sl-icon class="svelte" src={svelte} size={40}/>
+    <h1 class="title">Slithe</h1>
+    <sl-input-text class="search" on:input={debounceSearch}>
+      <sl-icon slot="pre" src={search} size={20}/>
+      <span slot="placeholder">
+        <span>Search</span>
+        <sl-kbd>Ctrl</sl-kbd>
+        <sl-kbd>K</sl-kbd>
+      </span>
+    </sl-input-text>
+    <a class="github" href="https://github.com/cadgerfeast/slithe" target="_blank">
+      <sl-icon src={github} size={30}/>
+    </a>
+  </header>
+  <div>
+    <nav>
+      <Link to="/">Home</Link>
+      <Link to="/about">About</Link>
+      <Link to="/components/button">Button</Link>
+    </nav>
+    <main>
+      {#each routes as { path, component }}
+        <Route path={path}>
+          <svelte:component this={component}/>
+        </Route>
+      {/each}
+    </main>
+  </div>
+</Router>
 
-  <sl-button>test</sl-button>
-  <sl-counter/>
-  <br/>
-  <sl-nested>couf</sl-nested>
-
-  <p>
-    Visit <a href="https://svelte.dev">svelte.dev</a> to learn how to build Svelte
-    apps.
-  </p>
-
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-    the officially supported framework, also powered by Vite!
-  </p>
-</main>
-
-<style>
-  :root {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  }
-
-  main {
-    text-align: center;
-    padding: 1em;
-    margin: 0 auto;
-  }
-
-  img {
-    height: 16rem;
-    width: 16rem;
-  }
-
-  h1 {
-    color: #ff3e00;
-    text-transform: uppercase;
-    font-size: 4rem;
-    font-weight: 100;
-    line-height: 1.1;
-    margin: 2rem auto;
-    max-width: 14rem;
-  }
-
-  p {
-    max-width: 14rem;
-    margin: 1rem auto;
-    line-height: 1.35;
-  }
-
-  @media (min-width: 480px) {
-    h1 {
-      max-width: none;
+<style lang="scss">
+  header {
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+    > sl-icon.svelte {
+      margin-left: 12px;
     }
-
-    p {
-      max-width: none;
+    > h1.title {
+      margin: 0 0 0 12px;
+    }
+    > :global(.search) {
+      margin-left: auto;
+    }
+    > a.github {
+      color: inherit;
+      margin: 0 12px;
+      &:hover {
+        color: var(--sl-accent);
+      }
     }
   }
 </style>

@@ -1,0 +1,15 @@
+html {
+  height: 100%;
+}
+body {
+  height: 100%;
+  margin: 0;
+}
+div#app {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--sl-font-family);
+  background-color: var(--sl-background-color);
+  color: var(--sl-text-color);
+}

@@ -1,0 +1,15 @@
+<script context="module">
+  export const metadata = {
+    title: 'titi'
+  };
+</script>
+
+# Button
+
+Hello there, i'm a button.
+
+``` javascript
+const toto = 'bonjour';
+```
+
+<sl-button>Wow that's fancy</sl-button>

@@ -1,7 +1,8 @@
+// Partials
 import App from './app.svelte';
+// Components
+import '../components/index.es';
 
-const app = new App({
+export default new App({
   target: document.getElementById('app')
 });
-
-export default app;

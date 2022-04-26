@@ -1,0 +1,4 @@
+*[sl-theme=svelte-light] {
+  --sl-button-background-color: grey;
+  --sl-button-text-color: black;
+}

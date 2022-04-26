@@ -2,8 +2,9 @@
 import { defineConfig } from 'vite';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import sveltePreprocess from 'svelte-preprocess';
+import { mdsvex } from 'mdsvex';
 // Constants
-const target = process.env.npm_lifecycle_event.slice(6);
+const target = process.env.npm_lifecycle_event.substring(process.env.npm_lifecycle_event.indexOf(':') + 1);
 
 /**
  * Vite Configuration
@@ -13,25 +14,24 @@ const target = process.env.npm_lifecycle_event.slice(6);
 const config = defineConfig({
   // Common
   plugins: [
-    // Documentation
     svelte({
-      preprocess: sveltePreprocess(),
-      exclude: ['./src/components/**/*.svelte']
-    }),
-    // Components
-    svelte({
-      preprocess: sveltePreprocess(),
-      include: ['./src/components/**/*.svelte'],
-      compilerOptions: {
-        customElement: true
-      }
+      extensions: ['.svelte', '.svx'],
+      preprocess: [mdsvex(), sveltePreprocess()],
+      ...(target.startsWith('lib:') && {
+        include: [
+          './src/components/**/*.svelte'
+        ],
+        compilerOptions: {
+          customElement: true
+        }
+      })
     })
   ],
   // Components Bundle
   ...(target === 'lib:bundle' && {
     publicDir: false,
     build: {
-      emptyOutDir: true,
+      emptyOutDir: false,
       outDir: './components',
       lib: {
         entry: './src/components/index.ts',

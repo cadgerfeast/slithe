@@ -1,0 +1,4 @@
+/* Text */
+*[sl-theme=svelte-light] {
+  --sl-input-text-background-color: grey;
+}

@@ -1,0 +1,108 @@
+@font-face {
+  font-family: 'Overpass';
+  font-style: normal;
+  font-weight: 100;
+  src: url('./overpass-100.woff') format('woff');
+}
+@font-face {
+  font-family: 'Overpass';
+  font-style: normal;
+  font-weight: 200;
+  src: url('./overpass-200.woff') format('woff');
+}
+@font-face {
+  font-family: 'Overpass';
+  font-style: normal;
+  font-weight: 300;
+  src: url('./overpass-300.woff') format('woff');
+}
+@font-face {
+  font-family: 'Overpass';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./overpass-400.woff') format('woff');
+}
+@font-face {
+  font-family: 'Overpass';
+  font-style: normal;
+  font-weight: 500;
+  src: url('./overpass-500.woff') format('woff');
+}
+@font-face {
+  font-family: 'Overpass';
+  font-style: normal;
+  font-weight: 600;
+  src: url('./overpass-600.woff') format('woff');
+}
+@font-face {
+  font-family: 'Overpass';
+  font-style: normal;
+  font-weight: 800;
+  src: url('./overpass-800.woff') format('woff');
+}
+@font-face {
+  font-family: 'Overpass';
+  font-style: normal;
+  font-weight: 700;
+  src: url('./overpass-700.woff') format('woff');
+}
+@font-face {
+  font-family: 'Overpass';
+  font-style: normal;
+  font-weight: 900;
+  src: url('./overpass-900.woff') format('woff');
+}
+@font-face {
+  font-family: 'Overpass';
+  font-style: italic;
+  font-weight: 100;
+  src: url('./overpass-100-italic.woff') format('woff');
+}
+@font-face {
+  font-family: 'Overpass';
+  font-style: italic;
+  font-weight: 200;
+  src: url('./overpass-200-italic.woff') format('woff');
+}
+@font-face {
+  font-family: 'Overpass';
+  font-style: italic;
+  font-weight: 300;
+  src: url('./overpass-300-italic.woff') format('woff');
+}
+@font-face {
+  font-family: 'Overpass';
+  font-style: italic;
+  font-weight: 400;
+  src: url('./overpass-400-italic.woff') format('woff');
+}
+@font-face {
+  font-family: 'Overpass';
+  font-style: italic;
+  font-weight: 500;
+  src: url('./overpass-500-italic.woff') format('woff');
+}
+@font-face {
+  font-family: 'Overpass';
+  font-style: italic;
+  font-weight: 600;
+  src: url('./overpass-600-italic.woff') format('woff');
+}
+@font-face {
+  font-family: 'Overpass';
+  font-style: italic;
+  font-weight: 700;
+  src: url('./overpass-700-italic.woff') format('woff');
+}
+@font-face {
+  font-family: 'Overpass';
+  font-style: italic;
+  font-weight: 800;
+  src: url('./overpass-800-italic.woff') format('woff');
+}
+@font-face {
+  font-family: 'Overpass';
+  font-style: italic;
+  font-weight: 900;
+  src: url('./overpass-900-italic.woff') format('woff');
+}
