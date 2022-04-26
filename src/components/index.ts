@@ -8,6 +8,7 @@ import * as Icon from './icon/icon.svelte';
 import * as InputText from './input/text.svelte';
 import * as KBD from './kbd/kbd.svelte';
 import * as Rel from './rel/rel.svelte';
+import * as Card from './card/card.svelte';
 
 const components = [
   Button,
@@ -16,7 +17,8 @@ const components = [
   Icon,
   InputText,
   KBD,
-  Rel
+  Rel,
+  Card
 ];
 
 export function registerElements (_config: Configuration) {

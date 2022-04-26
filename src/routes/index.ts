@@ -9,6 +9,7 @@ interface Route {
   path: string;
   metadata: Record<string, string>;
   component: typeof SvelteComponent;
+  match?: string;
   content?: string;
 }
 
@@ -18,19 +19,36 @@ export const routes: Route[] = [
   { path: '/components/button', metadata: Button.metadata, component: Button.default }
 ];
 
-export async function fullTextSearch (query: string) {
+export async function fullTextSearch (_query: string) {
+  const query = _query.trim().toLowerCase();
   const target = document.createElement('div');
   for (const route of routes) {
     if (!route.content) {
       target.innerHTML = '';
       new route.component({ target });
-      route.content = target.innerText;
+      route.content = target.innerText.toLowerCase();
     }
   }
-  const splits = query.split(' ');
-  return routes.filter((route) => {
-    return splits.every((split) => {
-      return route.content.includes(split);
+  if (!query) {
+    return [];
+  } else {
+    const splits = query.split(' ');
+    const results = routes.filter((route) => {
+      route.match = '';
+      return splits.every((split) => {
+        const matches = route.content.includes(split);
+        if (matches) {
+          const index = route.content.indexOf(split);
+          route.match += '...' + route.content.substring(index - 20, index + 20);
+          return matches;
+        }
+      });
     });
-  });
+    for (const result of results) {
+      for (const split of splits) {
+        result.match = result.match.replace(split, `<mark>${split}</mark>`);
+      }
+    }
+    return results;
+  }
 };

@@ -6,30 +6,38 @@
 <script lang="ts">
   // Helpers
   import { onMount } from 'svelte';
-  import { getRootElement, styleToString } from '../../utils/element';
+  import { getRootElement, observeRect } from '../../utils/element';
   // Data
   let root: HTMLElement;
-  let style = {};
+  let wrapper: HTMLElement;
+  let observer;
+  // Events
+  function onRectChange (rect: DOMRect) {
+    wrapper.style.top = `${rect.top}px`;
+    wrapper.style.left = `${rect.left}px`;
+    wrapper.style.height = `${rect.height}px`;
+    wrapper.style.width = `${rect.width}px`;
+  }
+  // Lifecycle
   onMount(() => {
-    const target = getRootElement(root).previousElementSibling;
-    const rect = target.getBoundingClientRect();
-    style = {
-      top: `${rect.top}px`,
-      left: `${rect.left}px`,
-      height: `${rect.height}px`,
-      width: `${rect.width}px`
-    };
+    wrapper = getRootElement(root);
+    wrapper.style.position = 'fixed';
+    wrapper.style.pointerEvents = 'none';
+    observer = observeRect(wrapper.previousElementSibling, onRectChange);
+    return () => {
+      observer.dispose();
+    }
   });
 </script>
 <!-- Options -->
 <svelte:options tag={null}/>
 <!-- Template -->
-<div bind:this={root} class="sl-rel" style={styleToString(style)}>
+<div bind:this={root} class="sl-rel">
   <slot/>
 </div>
 <!-- Style -->
 <style lang="scss">
   div.sl-rel {
-    position: fixed;
+    pointer-events: all;
   }
 </style>

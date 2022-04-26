@@ -2,8 +2,8 @@
 
 ## TODOs
 
+- replace Overpass by Fira Sans
 - .svx file, usage of global theme picker (vanilla, svelte-light)
-- path, title, matching
 
 - Documentation Site
   - Toolbar

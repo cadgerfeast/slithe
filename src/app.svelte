@@ -2,14 +2,27 @@
   // Helpers
   import { Router, Link, Route } from 'svelte-navigator';
   import { routes, fullTextSearch } from './routes';
+  import { delay } from './utils/time';
   // Assets
   import svelte from './assets/svelte.svg';
   import search from './assets/search.svg';
   import github from './assets/github.svg';
+  // Data
+  let pages = [];
+  let searchInputFocused = false;
+  // Computed
+  $: showSearchResults = searchInputFocused && (pages.length > 0);
+  // Events
+  function onSearchInputFocus () {
+    searchInputFocused = true;
+  }
+  async function onSearchInputBlur () {
+    await delay(100);
+    searchInputFocused = false;
+  }
   // Methods
   async function debounceSearch (e: InputEvent) {
-    const pages = await fullTextSearch((e.target as HTMLInputElement).value);
-    console.info(pages);
+    pages = await fullTextSearch((e.target as HTMLInputElement).value);
   }
 </script>
 
@@ -21,7 +34,7 @@
   <header>
     <sl-icon class="svelte" src={svelte} size={40}/>
     <h1 class="title">Slithe</h1>
-    <sl-input-text class="search" on:input={debounceSearch}>
+    <sl-input-text class="search" on:input={debounceSearch} on:focus={onSearchInputFocus} on:blur={onSearchInputBlur}>
       <sl-icon slot="pre" src={search} size={20}/>
       <span slot="placeholder">
         <span>Search</span>
@@ -30,7 +43,19 @@
       </span>
     </sl-input-text>
     <sl-rel>
-      toto
+      <sl-card class="search-results" class:visible={showSearchResults}>
+        <ul class="results-list">
+          {#each pages as page}
+            <li>
+              <Link to={page.path}>
+                <span class="page-path">{page.path}</span>
+                <h2 class="page-title">{page.metadata.title}</h2>
+                <span class="page-match">{@html page.match}</span>
+              </Link>
+            </li>
+          {/each}
+        </ul>
+      </sl-card>
     </sl-rel>
     <a class="github" href="https://github.com/cadgerfeast/slithe" target="_blank">
       <sl-icon src={github} size={30}/>
@@ -73,6 +98,48 @@
       margin: 0 12px;
       &:hover {
         color: var(--sl-accent);
+      }
+    }
+    sl-card.search-results {
+      display: block;
+      margin-top: 45px;
+      max-height: 500px;
+      visibility: hidden;
+      &.visible {
+        visibility: visible;
+      }
+      ul.results-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        > li {
+          > :global(a) {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            &:hover {
+              background-color: #EEEEEE;
+            }
+          }
+          span.page-path {
+            font-size: 10px;
+            text-transform: uppercase;
+            color: #999999;
+          }
+          h2.page-title {
+            font-size: 16px;
+            color: #444444;
+            margin: 4px 0;
+          }
+          span.page-match {
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 12px;
+            color: #999999;
+          }
+        }
       }
     }
   }
