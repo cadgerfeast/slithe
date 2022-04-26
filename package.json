@@ -2,6 +2,9 @@
   "name": "slithe",
   "version": "0.0.1",
   "type": "module",
+  "main": "./components/index.cjs.js",
+  "module": "./components/index.es.js",
+  "unpkg": "./components/index.umd.js",
   "scripts": {
     "dev": "run-p dev:lib dev:docs",
     "dev:lib": "run-s dev:lib:bundle dev:lib:split",

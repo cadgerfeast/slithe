@@ -1,4 +1,8 @@
-<svelte:options tag="sl-button"/>
+<script context="module">
+  export const tag = 'sl-button';
+</script>
+
+<svelte:options tag={null}/>
 
 <button>
   <slot/>

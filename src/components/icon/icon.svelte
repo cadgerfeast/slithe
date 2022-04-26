@@ -1,3 +1,7 @@
+<script context="module">
+  export const tag = 'sl-icon';
+</script>
+
 <script lang="ts">
   // Helpers
   import { onMount } from 'svelte';
@@ -26,6 +30,6 @@
   });
 </script>
 
-<svelte:options tag="sl-icon"/>
+<svelte:options tag={null}/>
 
 <i class="sl-icon" bind:this={root}/>

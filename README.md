@@ -2,11 +2,8 @@
 
 ## TODOs
 
-- components should have tag=null and define use registerElements method (with config (rename method)
-- vanilla styling for components
-- svelte-light styling for components
 - .svx file, usage of global theme picker (vanilla, svelte-light)
-- searching box resulsts with metadata
+- path, title, matching
 
 - Documentation Site
   - Toolbar

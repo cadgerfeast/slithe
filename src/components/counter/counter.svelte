@@ -1,3 +1,7 @@
+<script context="module">
+  export const tag = 'sl-counter';
+</script>
+
 <script lang="ts">
   let count: number = 0
   const increment = () => {
@@ -5,7 +9,7 @@
   }
 </script>
 
-<svelte:options tag="sl-counter"/>
+<svelte:options tag={null}/>
 
 <button on:click={increment}>
   Clicks: {count}

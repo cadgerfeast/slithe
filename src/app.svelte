@@ -2,8 +2,6 @@
   // Helpers
   import { Router, Link, Route } from 'svelte-navigator';
   import { routes, fullTextSearch } from './routes';
-  // Style
-  import '../themes/svelte/svelte.css';
   // Assets
   import svelte from './assets/svelte.svg';
   import search from './assets/search.svg';
@@ -14,6 +12,10 @@
     console.info(pages);
   }
 </script>
+
+<svelte:head>
+  <link rel="stylesheet" href="../themes/svelte/svelte.css">
+</svelte:head>
 
 <Router>
   <header>
@@ -27,6 +29,9 @@
         <sl-kbd>K</sl-kbd>
       </span>
     </sl-input-text>
+    <sl-rel>
+      toto
+    </sl-rel>
     <a class="github" href="https://github.com/cadgerfeast/slithe" target="_blank">
       <sl-icon src={github} size={30}/>
     </a>

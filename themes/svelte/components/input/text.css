@@ -1,0 +1,13 @@
+*[sl-theme=svelte-light] {
+  --sl-input-text-border-color: var(--sv-silver);
+  --sl-input-text-border-radius: 16px;
+  --sl-input-text-padding-top: 4px;
+  --sl-input-text-padding-right: 4px;
+  --sl-input-text-padding-bottom: 4px;
+  --sl-input-text-padding-left: 4px;
+  --sl-input-text-font-size: 14px;
+  --sl-input-text-pre-color: var(--sv-dusty-gray);
+  --sl-input-text-placeholder-color: var(--sv-dusty-gray);
+  --sl-input-text-placeholder-font-size: 14px;
+  --sl-input-text-focused-border-color: var(--sv-tundora);
+}

@@ -5,3 +5,4 @@
 </script>
 
 <h1>About</h1>
+<svelte:element this="sl-button">test</svelte:element>
