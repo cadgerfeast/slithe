@@ -16,18 +16,21 @@
   function onInputBlur () {
     focused = false;
   }
-  // Methods
-  function triggerFocus (e: MouseEvent) {
+  function onMouseDown (e: MouseEvent) {
     if (e.target !== input) {
       e.preventDefault();
       input.focus();
     }
   }
+  // Methods
+  export function focus () {
+    input.focus();
+  }
 </script>
 <!-- Options -->
 <svelte:options tag={null}/>
 <!-- Template -->
-<div class="sl-input-text" class:focused={focused} on:mousedown={triggerFocus}>
+<div class="sl-input-text" class:focused={focused} on:mousedown={onMouseDown}>
   <div class="input-pre">
     <slot name="pre"/>
   </div>

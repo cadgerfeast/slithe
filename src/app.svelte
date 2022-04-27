@@ -9,6 +9,7 @@
   import github from './assets/github.svg';
   // Data
   let pages = [];
+  let searchInput;
   let searchInputFocused = false;
   // Computed
   $: showSearchResults = searchInputFocused && (pages.length > 0);
@@ -20,6 +21,17 @@
     await delay(100);
     searchInputFocused = false;
   }
+  function onWindowKeydown (e: KeyboardEvent) {
+    switch (e.key) {
+      case 'k': {
+        if (e.ctrlKey) {
+          e.preventDefault();
+          searchInput.focus();
+        }
+        break;
+      }
+    }
+  }
   // Methods
   async function debounceSearch (e: InputEvent) {
     pages = await fullTextSearch((e.target as HTMLInputElement).value);
@@ -29,12 +41,13 @@
 <svelte:head>
   <link rel="stylesheet" href="../themes/svelte/svelte.css">
 </svelte:head>
+<svelte:window on:keydown={onWindowKeydown}/>
 
 <Router>
   <header>
     <sl-icon class="svelte" src={svelte} size={40}/>
     <h1 class="title">Slithe</h1>
-    <sl-input-text class="search" on:input={debounceSearch} on:focus={onSearchInputFocus} on:blur={onSearchInputBlur}>
+    <sl-input-text bind:this={searchInput} class="search" on:input={debounceSearch} on:focus={onSearchInputFocus} on:blur={onSearchInputBlur}>
       <sl-icon slot="pre" src={search} size={20}/>
       <span slot="placeholder">
         <span>Search</span>

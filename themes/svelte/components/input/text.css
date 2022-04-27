@@ -1,5 +1,5 @@
 *[sl-theme=svelte-light] {
-  --sl-input-text-font-family: 'Overpass';
+  --sl-input-text-font-family: 'Fira Sans';
   --sl-input-text-border-color: var(--sv-silver);
   --sl-input-text-border-radius: 16px;
   --sl-input-text-padding-top: 4px;

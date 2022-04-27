@@ -2,23 +2,17 @@
 
 ## TODOs
 
-- replace Overpass by Fira Sans
-- .svx file, usage of global theme picker (vanilla, svelte-light)
-
-- Documentation Site
-  - Toolbar
-    - Search Bar
-  - Sidebar
-    - Getting Started
-    - Installation
-    - Features
-    - Theming
-    - Components
-- Components
-  - accordion
-  - button
-  - kbd
-  - input-text
+- Search 5 recents, or 5 "advices"
+- Sidebar
+  - Accordions
+  - Page: Getting Started
+  - Page: Installation
+  - Page: Features
+  - Page: Theming
+  - Page: Components
+- Documentation
+  - REPL Component (code, preview (themes))
+  - TOC (table of contents) on the right based on generated svx
 - Themes
   - vanilla
   - svelte-light
