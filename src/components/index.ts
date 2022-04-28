@@ -1,5 +1,5 @@
 // Helpers
-import { Configuration, updateConfig } from '../utils/conf';
+import { config, Configuration, updateConfig } from '../utils/conf';
 // Components
 import * as Button from './button/button.svelte';
 import * as Counter from './counter/counter.svelte';
@@ -24,6 +24,16 @@ const components = [
 export function registerElements (_config: Configuration) {
   updateConfig(_config);
   for (const component of components) {
-    customElements.define(component.tag, component.default as unknown as CustomElementConstructor);
+    const _constructor = class SlitheElement extends component.default {
+      constructor () {
+        super();
+        if (config.theme?.[component.tag]) {
+          const style = document.createElement('style');
+          style.innerHTML = config.theme[component.tag];
+          (this as any).shadowRoot.appendChild(style);
+        }
+      }
+    }
+    customElements.define(`sl-${component.tag}`, _constructor as unknown as CustomElementConstructor);
   }
 }

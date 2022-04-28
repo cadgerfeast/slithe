@@ -1,6 +1,6 @@
 <!-- Metadata -->
 <script context="module">
-  export const tag = 'sl-kbd';
+  export const tag = 'kbd';
 </script>
 <!-- Options -->
 <svelte:options tag={null}/>

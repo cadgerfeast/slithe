@@ -1,4 +1,5 @@
 export interface Configuration {
+  theme?: Record<string, string>;
 }
 
 export let config: Configuration = {

@@ -1,6 +1,6 @@
 <!-- Metadata -->
 <script context="module">
-  export const tag = 'sl-input-text';
+  export const tag = 'input-text';
 </script>
 <!-- Script -->
 <script lang="ts">

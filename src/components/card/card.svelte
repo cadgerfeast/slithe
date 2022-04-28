@@ -1,6 +1,6 @@
 <!-- Metadata -->
 <script context="module">
-  export const tag = 'sl-card';
+  export const tag = 'card';
 </script>
 <!-- Options -->
 <svelte:options tag={null}/>

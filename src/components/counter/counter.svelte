@@ -1,5 +1,5 @@
 <script context="module">
-  export const tag = 'sl-counter';
+  export const tag = 'counter';
 </script>
 
 <script lang="ts">

@@ -1,6 +1,6 @@
 <!-- Metadata -->
 <script context="module">
-  export const tag = 'sl-rel';
+  export const tag = 'rel';
 </script>
 <!-- Script -->
 <script lang="ts">

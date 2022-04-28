@@ -1,5 +1,5 @@
 <script context="module">
-  export const tag = 'sl-icon';
+  export const tag = 'icon';
 </script>
 
 <script lang="ts">

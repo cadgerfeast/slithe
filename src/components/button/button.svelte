@@ -1,5 +1,5 @@
 <script context="module">
-  export const tag = 'sl-button';
+  export const tag = 'button';
 </script>
 
 <svelte:options tag={null}/>

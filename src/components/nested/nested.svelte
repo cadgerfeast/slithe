@@ -1,5 +1,5 @@
 <script context="module">
-  export const tag = 'sl-nested';
+  export const tag = 'nested';
 </script>
 
 <svelte:options tag={null}/>

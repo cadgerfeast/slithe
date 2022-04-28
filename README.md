@@ -16,3 +16,4 @@
 - Themes
   - vanilla
   - svelte-light
+  - pixel-light
