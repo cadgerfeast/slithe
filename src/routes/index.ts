@@ -1,11 +1,12 @@
 // Helpers
 import type { SvelteComponent } from 'svelte';
-// Routes
+import { recentSearches } from '../store';
+// pages
 import * as Index from './index.svelte';
 import * as About from './about.svelte';
 import * as Button from '../components/button/button.svx';
 
-interface Route {
+export interface Page {
   path: string;
   metadata: Record<string, string>;
   component: typeof SvelteComponent;
@@ -13,7 +14,7 @@ interface Route {
   content?: string;
 }
 
-export const routes: Route[] = [
+export const pages: Page[] = [
   { path: '/', metadata: Index.metadata, component: Index.default },
   { path: '/about', metadata: About.metadata, component: About.default },
   { path: '/components/button', metadata: Button.metadata, component: Button.default }
@@ -22,24 +23,27 @@ export const routes: Route[] = [
 export async function fullTextSearch (_query: string) {
   const query = _query.trim().toLowerCase();
   const target = document.createElement('div');
-  for (const route of routes) {
-    if (!route.content) {
+  for (const page of pages) {
+    if (!page.content) {
       target.innerHTML = '';
-      new route.component({ target });
-      route.content = target.innerText.toLowerCase();
+      new page.component({ target });
+      page.content = target.innerText.toLowerCase();
     }
   }
   if (!query) {
-    return [];
+    return pages.filter((page) => {
+      delete page.match;
+      return recentSearches.value.includes(page.path);
+    });
   } else {
     const splits = query.split(' ');
-    const results = routes.filter((route) => {
-      route.match = '';
+    const results = pages.filter((page) => {
+      page.match = '';
       return splits.every((split) => {
-        const matches = route.content.includes(split);
+        const matches = page.content.includes(split);
         if (matches) {
-          const index = route.content.indexOf(split);
-          route.match += '...' + route.content.substring(index - 20, index + 20);
+          const index = page.content.indexOf(split);
+          page.match += '...' + page.content.substring(index - 20, index + 20);
           return matches;
         }
       });

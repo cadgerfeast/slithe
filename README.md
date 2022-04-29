@@ -2,7 +2,6 @@
 
 ## TODOs
 
-- Search 5 recents, or 5 "advices"
 - Sidebar
   - Accordions
   - Page: Getting Started

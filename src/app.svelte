@@ -1,21 +1,24 @@
 <script lang="ts">
   // Helpers
   import { Router, Link, Route } from 'svelte-navigator';
-  import { routes, fullTextSearch } from './routes';
+  import { pages, fullTextSearch, Page } from './routes';
   import { delay } from './utils/time';
+  import { recentSearches } from './store';
   // Assets
   import svelte from './assets/svelte.svg';
   import search from './assets/search.svg';
   import github from './assets/github.svg';
   // Data
-  let pages = [];
+  let searchResults = [];
   let searchInput;
+  let searchQuery = '';
   let searchInputFocused = false;
   // Computed
   $: showSearchResults = searchInputFocused && (pages.length > 0);
   // Events
   function onSearchInputFocus () {
     searchInputFocused = true;
+    debounceSearch();
   }
   async function onSearchInputBlur () {
     await delay(100);
@@ -32,9 +35,16 @@
       }
     }
   }
+  function onLinkClick (page: Page) {
+    recentSearches.add(page.path);
+  }
+  function onSearchInputInput (e: Event) {
+    searchQuery = (e.target as any).value;
+    debounceSearch();
+  }
   // Methods
-  async function debounceSearch (e: InputEvent) {
-    pages = await fullTextSearch((e.target as HTMLInputElement).value);
+  async function debounceSearch () {
+    searchResults = await fullTextSearch(searchQuery);
   }
 </script>
 
@@ -47,7 +57,7 @@
   <header>
     <sl-icon class="svelte" src={svelte} size={40}/>
     <h1 class="title">Slithe</h1>
-    <sl-input-text bind:this={searchInput} class="search" on:input={debounceSearch} on:focus={onSearchInputFocus} on:blur={onSearchInputBlur}>
+    <sl-input-text bind:this={searchInput} class="search" on:input={onSearchInputInput} on:focus={onSearchInputFocus} on:blur={onSearchInputBlur}>
       <sl-icon slot="pre" src={search} size={20}/>
       <span slot="placeholder">
         <span>Search</span>
@@ -56,19 +66,23 @@
       </span>
     </sl-input-text>
     <sl-rel>
-      <sl-card class="search-results" class:visible={showSearchResults}>
-        <ul class="results-list">
-          {#each pages as page}
-            <li>
-              <Link to={page.path}>
-                <span class="page-path">{page.path}</span>
-                <h2 class="page-title">{page.metadata.title}</h2>
-                <span class="page-match">{@html page.match}</span>
-              </Link>
-            </li>
-          {/each}
-        </ul>
-      </sl-card>
+      {#if searchResults.length > 0}
+        <sl-card class="search-results" class:visible={showSearchResults}>
+          <ul class="results-list">
+            {#each searchResults as page}
+              <li on:click={() => onLinkClick(page)}>
+                <Link to={page.path}>
+                  <span class="page-path">{page.path}</span>
+                  <h2 class="page-title">{page.metadata.title}</h2>
+                  {#if page.match}
+                    <span class="page-match">{@html page.match}</span>
+                  {/if}
+                </Link>
+              </li>
+            {/each}
+          </ul>
+        </sl-card>
+      {/if}
     </sl-rel>
     <a class="github" href="https://github.com/cadgerfeast/slithe" target="_blank">
       <sl-icon src={github} size={30}/>
@@ -81,7 +95,7 @@
       <Link to="/components/button">Button</Link>
     </nav>
     <main>
-      {#each routes as { path, component }}
+      {#each pages as { path, component }}
         <Route path={path}>
           <svelte:component this={component}/>
         </Route>
