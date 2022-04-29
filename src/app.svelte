@@ -54,6 +54,7 @@
 <svelte:window on:keydown={onWindowKeydown}/>
 
 <Router>
+  <!-- Toolbar -->
   <header>
     <sl-icon class="svelte" src={svelte} size={40}/>
     <h1 class="title">Slithe</h1>
@@ -88,12 +89,46 @@
       <sl-icon src={github} size={30}/>
     </a>
   </header>
-  <div>
-    <nav>
-      <Link to="/">Home</Link>
-      <Link to="/about">About</Link>
-      <Link to="/components/button">Button</Link>
+  <div class="container">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <sl-tree>
+        <sl-tree-item>
+          <Link to="/">Introduction</Link>
+        </sl-tree-item>
+        <sl-tree-item>
+          <span>Features</span>
+          <sl-tree slot="subtree">
+            <sl-tree-item>
+              <Link to="/accessibility">Accessibility</Link>
+            </sl-tree-item>
+            <sl-tree-item>
+              <Link to="/internationalization">Internationalization</Link>
+            </sl-tree-item>
+            <sl-tree-item>
+              <Link to="/themes">Themes</Link>
+            </sl-tree-item>
+          </sl-tree>
+        </sl-tree-item>
+        <sl-tree-item>
+          <span>Components</span>
+          <sl-tree slot="subtree">
+            <sl-tree-item>
+              <Link to="/components/button">Button</Link>
+            </sl-tree-item>
+            <sl-tree-item>
+              <span>Form</span>
+              <sl-tree slot="subtree">
+                <sl-tree-item>
+                  <Link to="/components/form/input-text">Input Text</Link>
+                </sl-tree-item>
+              </sl-tree>
+            </sl-tree-item>
+          </sl-tree>
+        </sl-tree-item>
+      </sl-tree>
     </nav>
+    <!-- Content -->
     <main>
       {#each pages as { path, component }}
         <Route path={path}>
@@ -168,6 +203,30 @@
           }
         }
       }
+    }
+  }
+  div.container {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    transition: all .25s ease-in-out;
+    > nav.sidebar {
+      height: 100%;
+      width: 300px;
+      box-shadow: 0 2px 5px rgb(0 0 0 / 10%);
+      flex-shrink: 0;
+      padding: 12px;
+      box-sizing: border-box;
+    }
+    > main {
+      max-width: 768px;
+      margin: 0 auto;
+    }
+  }
+  // Responsive
+  @media only screen and (max-width: 768px) {
+    div.container {
+      margin-left: -300px;
     }
   }
 </style>

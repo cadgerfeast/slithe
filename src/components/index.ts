@@ -9,6 +9,8 @@ import * as InputText from './input/text.svelte';
 import * as KBD from './kbd/kbd.svelte';
 import * as Rel from './rel/rel.svelte';
 import * as Card from './card/card.svelte';
+import * as Tree from './tree/tree.svelte';
+import * as TreeItem from './tree/tree-item.svelte';
 
 const components = [
   Button,
@@ -18,7 +20,9 @@ const components = [
   InputText,
   KBD,
   Rel,
-  Card
+  Card,
+  Tree,
+  TreeItem
 ];
 
 export function registerElements (_config: Configuration) {
@@ -32,6 +36,9 @@ export function registerElements (_config: Configuration) {
           style.innerHTML = config.theme[component.tag];
           (this as any).shadowRoot.appendChild(style);
         }
+      }
+      disconnectedCallback () {
+        this.$destroy();
       }
     }
     customElements.define(`sl-${component.tag}`, _constructor as unknown as CustomElementConstructor);

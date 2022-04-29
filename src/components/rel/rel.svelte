@@ -5,7 +5,7 @@
 <!-- Script -->
 <script lang="ts">
   // Helpers
-  import { onMount } from 'svelte';
+  import { onMount, onDestroy } from 'svelte';
   import { getRootElement, observeRect } from '../../utils/element';
   // Data
   let root: HTMLElement;
@@ -24,9 +24,9 @@
     wrapper.style.position = 'fixed';
     wrapper.style.pointerEvents = 'none';
     observer = observeRect(wrapper.previousElementSibling, onRectChange);
-    return () => {
-      observer.dispose();
-    }
+  });
+  onDestroy(() => {
+    observer.dispose();
   });
 </script>
 <!-- Options -->

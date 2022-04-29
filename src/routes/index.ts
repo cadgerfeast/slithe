@@ -3,7 +3,7 @@ import type { SvelteComponent } from 'svelte';
 import { recentSearches } from '../store';
 // pages
 import * as Index from './index.svelte';
-import * as About from './about.svelte';
+import * as Accessibility from './accessibility.svelte';
 import * as Button from '../components/button/button.svx';
 
 export interface Page {
@@ -16,7 +16,7 @@ export interface Page {
 
 export const pages: Page[] = [
   { path: '/', metadata: Index.metadata, component: Index.default },
-  { path: '/about', metadata: About.metadata, component: About.default },
+  { path: '/accessibility', metadata: Accessibility.metadata, component: Accessibility.default },
   { path: '/components/button', metadata: Button.metadata, component: Button.default }
 ];
 
