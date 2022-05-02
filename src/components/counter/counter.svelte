@@ -1,15 +1,14 @@
 <script context="module">
   export const tag = 'counter';
 </script>
-
+<!-- Options -->
+<svelte:options tag={null}/>
 <script lang="ts">
   let count: number = 0
   const increment = () => {
     count += 1
   }
 </script>
-
-<svelte:options tag={null}/>
 
 <button on:click={increment}>
   Clicks: {count}

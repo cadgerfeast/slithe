@@ -1,7 +1,7 @@
 <script lang="ts">
   // Helpers
   import { Router, Link, Route } from 'svelte-navigator';
-  import { pages, fullTextSearch, Page } from './routes';
+  import { pages, page, fullTextSearch, Page } from './routes';
   import { delay } from './utils/time';
   import { recentSearches } from './store';
   // Assets
@@ -15,6 +15,9 @@
   let searchInputFocused = false;
   // Computed
   $: showSearchResults = searchInputFocused && (pages.length > 0);
+  $: {
+    console.info($page);
+  }
   // Events
   function onSearchInputFocus () {
     searchInputFocused = true;
@@ -136,16 +139,30 @@
         </Route>
       {/each}
     </main>
+    <!-- Table Of Contents -->
+    <nav class="toc">
+      <sl-tree>
+        <sl-tree-item>
+          <a href="#toto">Introduction</a>
+        </sl-tree-item>
+      </sl-tree>
+    </nav>
   </div>
 </Router>
 
 <style lang="scss">
   header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
     height: 60px;
     display: flex;
     flex-direction: row;
     align-items: center;
+    background-color: var(--sl-background-color);
     box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+    z-index: 1;
     > sl-icon.svelte {
       margin-left: 12px;
     }
@@ -211,22 +228,56 @@
     flex-direction: row;
     transition: all .25s ease-in-out;
     > nav.sidebar {
-      height: 100%;
+      position: fixed;
+      top: 60px;
+      bottom: 0;
+      left: 0;
       width: 300px;
-      box-shadow: 0 2px 5px rgb(0 0 0 / 10%);
       flex-shrink: 0;
       padding: 12px;
       box-sizing: border-box;
+      transition: all .25s ease-in-out;
     }
     > main {
-      max-width: 768px;
+      position: absolute;
+      top: 60px;
+      right: 300px;
+      left: 300px;
+      max-width: 900px;
       margin: 0 auto;
+      transition: all .25s ease-in-out;
+    }
+    > nav.toc {
+      position: fixed;
+      top: 60px;
+      right: 0;
+      bottom: 0;
+      width: 300px;
+      flex-shrink: 0;
+      padding: 12px;
+      box-sizing: border-box;
+      transition: all .25s ease-in-out;
     }
   }
   // Responsive
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1200px) {
     div.container {
-      margin-left: -300px;
+      > nav.sidebar {
+        left: -300px;
+      }
+      > main {
+        left: 0;
+      }
+    }
+  }
+  @media only screen and (max-width: 1400px) {
+    div.container {
+      > main {
+        right: 0;
+      }
+      > nav.toc {
+        right: -300px;
+      }
     }
   }
 </style>

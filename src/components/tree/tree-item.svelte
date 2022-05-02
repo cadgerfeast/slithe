@@ -2,6 +2,8 @@
 <script context="module">
   export const tag = 'tree-item';
 </script>
+<!-- Options -->
+<svelte:options tag={null}/>
 <!-- Script -->
 <script lang="ts">
   // Helpers

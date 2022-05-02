@@ -2,6 +2,8 @@
 <script context="module">
   export const tag = 'tree';
 </script>
+<!-- Options -->
+<svelte:options tag={null}/>
 <!-- Template -->
 <ul class="sl-tree">
   <slot/>
