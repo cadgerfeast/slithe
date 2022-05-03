@@ -301,6 +301,7 @@
       left: 300px;
       max-width: 900px;
       margin: 0 auto;
+      padding-bottom: 60px;
       transition: all .25s ease-in-out;
     }
     > nav.toc {

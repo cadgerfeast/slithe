@@ -7,6 +7,8 @@
 <script lang="ts">
   // Helpers
   import { registerFocus } from '../utils/a11y';
+  // Assets
+  import svelte from '../assets/svelte.svg';
   // Constants
   const autofocus = registerFocus();
 </script>
@@ -15,6 +17,19 @@
 
 <sl-button use:autofocus>aaaaa</sl-button>
 <sl-nested>bbbbb</sl-nested>
+
+<svg class="sl-svg" width="20" height="20">
+  <use xlink:href="#download"></use>
+</svg>
+<svg class="sl-svg" width="20" height="20">
+  <use xlink:href="#arrow-left"></use>
+</svg>
+<svg class="sl-svg" width="20" height="20">
+  <use xlink:href="#edit"></use>
+</svg>
+<svg class="sl-svg" width="20" height="20">
+  <use xlink:href="#chevron"></use>
+</svg>
 
 <h2>Test11</h2>
 <h2>Test12</h2>

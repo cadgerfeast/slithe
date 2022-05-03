@@ -1,5 +1,6 @@
 export interface Configuration {
-  theme?: Record<string, string>;
+  components?: Record<string, string>;
+  body?: string[];
 }
 
 export let config: Configuration = {

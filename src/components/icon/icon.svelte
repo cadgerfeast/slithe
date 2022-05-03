@@ -32,4 +32,4 @@
 
 <svelte:options tag={null}/>
 
-<i class="sl-icon" bind:this={root}/>
+<i class='sl-icon' bind:this={root}/>

@@ -2,7 +2,6 @@
 
 ## TODOs
 
-- SVG Icons (arrow left, + per page)
 - Sidebar
   - Tree Styling (icons, menus, animations)
   - Floating Menu button to open sidebar with @media

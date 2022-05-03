@@ -27,13 +27,18 @@ const components = [
 
 export function registerElements (_config: Configuration) {
   updateConfig(_config);
+  if (config.body) {
+    for (const content of config.body) {
+      document.body.insertAdjacentHTML('beforebegin', content);
+    }
+  }
   for (const component of components) {
     const _constructor = class SlitheElement extends component.default {
       constructor () {
         super();
-        if (config.theme?.[component.tag]) {
+        if (config.components?.[component.tag]) {
           const style = document.createElement('style');
-          style.innerHTML = config.theme[component.tag];
+          style.innerHTML = config.components[component.tag];
           (this as any).shadowRoot.appendChild(style);
         }
       }
