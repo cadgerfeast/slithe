@@ -1,5 +1,6 @@
 <script lang="ts">
   // Helpers
+  import { onMount } from 'svelte';
   import { Router, Link, Route } from 'svelte-navigator';
   import { pages, page, fullTextSearch, Page } from './routes';
   import { delay } from './utils/time';
@@ -15,9 +16,6 @@
   let searchInputFocused = false;
   // Computed
   $: showSearchResults = searchInputFocused && (pages.length > 0);
-  $: {
-    console.info($page);
-  }
   // Events
   function onSearchInputFocus () {
     searchInputFocused = true;
@@ -45,10 +43,29 @@
     searchQuery = (e.target as any).value;
     debounceSearch();
   }
+  $: {
+    scrollIntoHash($page.path);
+  }
   // Methods
   async function debounceSearch () {
     searchResults = await fullTextSearch(searchQuery);
   }
+  function scrollIntoHash (_hash: string, mode: ScrollBehavior = 'smooth') {
+    const hash = _hash.split('#')[1];
+    if (hash) {
+      const element = Array.from(document.querySelectorAll('h1,h2,h3,h4,h5,h6')).find((h) => h.textContent === decodeURIComponent(hash));
+      if (element) {
+        window.scrollTo({
+          top: element.getBoundingClientRect().top + window.scrollY - 80,
+          behavior: mode
+        });
+      }
+    }
+  }
+  // Lifecycle
+  onMount(() => {
+    scrollIntoHash($page.path, 'auto');
+  });
 </script>
 
 <svelte:head>
@@ -140,13 +157,52 @@
       {/each}
     </main>
     <!-- Table Of Contents -->
-    <nav class="toc">
-      <sl-tree>
-        <sl-tree-item>
-          <a href="#toto">Introduction</a>
-        </sl-tree-item>
-      </sl-tree>
-    </nav>
+    {#if $page.page.toc}
+      <nav class="toc">
+        <sl-tree>
+          {#each Object.entries($page.page.toc) as [heading, items]}
+            <sl-tree-item>
+              <a href="#{heading}">{heading}</a>
+              <sl-tree slot="subtree">
+                {#each Object.entries(items) as [heading, items]}
+                  <sl-tree-item>
+                    <a href="#{heading}">{heading}</a>
+                    <sl-tree slot="subtree">
+                      {#each Object.entries(items) as [heading, items]}
+                        <sl-tree-item>
+                          <a href="#{heading}">{heading}</a>
+                          <sl-tree slot="subtree">
+                            {#each Object.entries(items) as [heading, items]}
+                              <sl-tree-item>
+                                <a href="#{heading}">{heading}</a>
+                                <sl-tree slot="subtree">
+                                  {#each Object.entries(items) as [heading, items]}
+                                    <sl-tree-item>
+                                      <a href="#{heading}">{heading}</a>
+                                      <sl-tree slot="subtree">
+                                        {#each Object.entries(items) as [heading, items]}
+                                          <sl-tree-item>
+                                            <a href="#{heading}">{heading}</a>
+                                          </sl-tree-item>
+                                        {/each}
+                                      </sl-tree>
+                                    </sl-tree-item>
+                                  {/each}
+                                </sl-tree>
+                              </sl-tree-item>
+                            {/each}
+                          </sl-tree>
+                        </sl-tree-item>
+                      {/each}
+                    </sl-tree>
+                  </sl-tree-item>
+                {/each}
+              </sl-tree>
+            </sl-tree-item>
+          {/each}
+        </sl-tree>
+      </nav>
+    {/if}
   </div>
 </Router>
 

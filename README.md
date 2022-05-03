@@ -2,7 +2,6 @@
 
 ## TODOs
 
-- TOC generation
 - SVG Icons (arrow left, + per page)
 - Sidebar
   - Tree Styling (icons, menus, animations)
