@@ -18,18 +18,12 @@
 <sl-button use:autofocus>aaaaa</sl-button>
 <sl-nested>bbbbb</sl-nested>
 
-<svg class="sl-svg" width="20" height="20">
-  <use xlink:href="#download"></use>
-</svg>
-<svg class="sl-svg" width="20" height="20">
-  <use xlink:href="#arrow-left"></use>
-</svg>
-<svg class="sl-svg" width="20" height="20">
-  <use xlink:href="#edit"></use>
-</svg>
-<svg class="sl-svg" width="20" height="20">
-  <use xlink:href="#chevron"></use>
-</svg>
+<span>Texte de taille normale</span>
+
+<sl-icon from="icons.svg" name="download" size="19"/>
+<sl-icon from="icons.svg" name="arrow-left" size="19"/>
+<sl-icon from="icons.svg" name="edit" size="19"/>
+<sl-icon from="icons.svg" name="chevron" size="19"/>
 
 <h2>Test11</h2>
 <h2>Test12</h2>

@@ -3,7 +3,7 @@
     svg.sl-svg {
       position: relative;
       overflow: hidden;
-      vertical-align: middle;
+      vertical-align: text-bottom;
       -o-object-fit: contain;
       object-fit: contain;
       -webkit-transform-origin: center center;

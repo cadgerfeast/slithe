@@ -27,11 +27,6 @@ const components = [
 
 export function registerElements (_config: Configuration) {
   updateConfig(_config);
-  if (config.body) {
-    for (const content of config.body) {
-      document.body.insertAdjacentHTML('afterbegin', content);
-    }
-  }
   for (const component of components) {
     const _constructor = class SlitheElement extends component.default {
       constructor () {

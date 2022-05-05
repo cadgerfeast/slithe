@@ -34,6 +34,7 @@
 </script>
 <!-- Template -->
 <li bind:this={root} class="sl-tree-item">
+  <sl-icon from="icons.svg" name="edit" size="19"/>
   <slot/>
   <sl-tree class:visible={slots.subtree}>
     <slot name="subtree"/>

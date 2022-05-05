@@ -70,6 +70,7 @@
 
 <svelte:head>
   <link rel="stylesheet" href="../themes/svelte/global.css">
+  <link rel="stylesheet" href="../themes/svelte/icons/icons.svg">
 </svelte:head>
 <svelte:window on:keydown={onWindowKeydown}/>
 
@@ -92,7 +93,7 @@
           <ul class="results-list">
             {#each searchResults as page}
               <li on:click={() => onLinkClick(page)}>
-                <Link to={page.path}>
+                <Link class="link" to={page.path}>
                   <span class="page-path">{page.path}</span>
                   <h2 class="page-title">{page.metadata.title}</h2>
                   {#if page.match}
@@ -114,19 +115,19 @@
     <nav class="sidebar">
       <sl-tree>
         <sl-tree-item>
-          <Link to="/">Introduction</Link>
+          <Link class="link" to="/">Introduction</Link>
         </sl-tree-item>
         <sl-tree-item>
           <span>Features</span>
           <sl-tree slot="subtree">
             <sl-tree-item>
-              <Link to="/accessibility">Accessibility</Link>
+              <Link class="link" to="/accessibility">Accessibility</Link>
             </sl-tree-item>
             <sl-tree-item>
-              <Link to="/internationalization">Internationalization</Link>
+              <Link class="link" to="/internationalization">Internationalization</Link>
             </sl-tree-item>
             <sl-tree-item>
-              <Link to="/themes">Themes</Link>
+              <Link class="link" to="/themes">Themes</Link>
             </sl-tree-item>
           </sl-tree>
         </sl-tree-item>
@@ -134,13 +135,13 @@
           <span>Components</span>
           <sl-tree slot="subtree">
             <sl-tree-item>
-              <Link to="/components/button">Button</Link>
+              <Link class="link" to="/components/button">Button</Link>
             </sl-tree-item>
             <sl-tree-item>
               <span>Form</span>
               <sl-tree slot="subtree">
                 <sl-tree-item>
-                  <Link to="/components/form/input-text">Input Text</Link>
+                  <Link class="link" to="/components/form/input-text">Input Text</Link>
                 </sl-tree-item>
               </sl-tree>
             </sl-tree-item>

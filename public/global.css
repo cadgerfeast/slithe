@@ -1,3 +1,4 @@
+/* Base */
 html {
   height: 100%;
   overflow-y: scroll;
@@ -13,4 +14,11 @@ div#app {
   font-family: var(--sl-font-family);
   background-color: var(--sl-background-color);
   color: var(--sl-text-color);
+}
+/* Links */
+a.link {
+  text-decoration: none;
+}
+a.link:hover {
+  text-decoration: underline;
 }

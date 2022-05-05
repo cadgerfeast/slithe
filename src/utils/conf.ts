@@ -1,6 +1,5 @@
 export interface Configuration {
   components?: Record<string, string>;
-  body?: string[];
 }
 
 export let config: Configuration = {
