@@ -1,4 +1,4 @@
-i.sl-icon {
+i.sl-icon[name] {
   position: relative;
   overflow: hidden;
   vertical-align: text-bottom;

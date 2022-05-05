@@ -2,6 +2,7 @@
 
 ## TODOs
 
+- Copy svg in public folder (gitignore)
 - Sidebar
   - Tree Styling (icons, menus, animations)
   - Floating Menu button to open sidebar with @media

@@ -70,7 +70,6 @@
 
 <svelte:head>
   <link rel="stylesheet" href="../themes/svelte/global.css">
-  <link rel="stylesheet" href="../themes/svelte/icons/icons.svg">
 </svelte:head>
 <svelte:window on:keydown={onWindowKeydown}/>
 

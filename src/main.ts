@@ -3,9 +3,9 @@ import App from './app.svelte';
 // Components
 import { registerElements } from '../components/index.es';
 // Style
-import { components, body } from '../themes/svelte/svelte';
+import { components } from '../themes/svelte/svelte';
 
-registerElements({ components, body });
+registerElements({ components });
 
 export default new App({
   target: document.getElementById('app')

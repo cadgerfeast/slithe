@@ -42,4 +42,4 @@
   });
 </script>
 <!-- Template -->
-<i class='sl-icon' bind:this={root}/>
+<i class='sl-icon' name={name} bind:this={root}/>
