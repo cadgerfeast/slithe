@@ -16,9 +16,14 @@ div#app {
   color: var(--sl-text-color);
 }
 /* Links */
-a.link {
+a {
+  color: inherit;
   text-decoration: none;
 }
-a.link:hover {
+a[aria-current="page"] {
+  color: var(--sl-primary);
+}
+a:hover {
   text-decoration: underline;
+  color: var(--sl-accent);
 }

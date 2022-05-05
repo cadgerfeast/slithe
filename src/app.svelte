@@ -1,7 +1,7 @@
 <script lang="ts">
   // Helpers
   import { onMount } from 'svelte';
-  import { Router, Link, Route } from 'svelte-navigator';
+  import { Link, Router, Route, navigate } from 'svelte-navigator';
   import { pages, page, fullTextSearch, Page } from './routes';
   import { delay } from './utils/time';
   import { recentSearches } from './store';
@@ -11,11 +11,14 @@
   import github from './assets/github.svg';
   // Data
   let searchResults = [];
-  let searchInput;
+  let searchInput: HTMLElement;
   let searchQuery = '';
   let searchInputFocused = false;
+  let main: HTMLElement;
+  let scrollTimeout;
   // Computed
   $: showSearchResults = searchInputFocused && (pages.length > 0);
+  $: heading = $page.path.split('#')[1];
   // Events
   function onSearchInputFocus () {
     searchInputFocused = true;
@@ -36,29 +39,45 @@
       }
     }
   }
+  async function onWindowScroll () {
+    const elements = Array.from(main.querySelectorAll('h1,h2,h3,h4,h5,h6'));
+    let target: Element;
+    for (const element of elements) {
+      const rect = element.getBoundingClientRect();
+      if (rect.top - rect.height <= 60) {
+        target = element;
+      }
+    }
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      navigate(`#${target.textContent}`);
+    }, 100);
+  }
   function onLinkClick (page: Page) {
     recentSearches.add(page.path);
+  }
+  function onTocClick (heading: string) {
+    scrollIntoHash(`#${heading}`);
   }
   function onSearchInputInput (e: Event) {
     searchQuery = (e.target as any).value;
     debounceSearch();
-  }
-  $: {
-    scrollIntoHash($page.path);
   }
   // Methods
   async function debounceSearch () {
     searchResults = await fullTextSearch(searchQuery);
   }
   function scrollIntoHash (_hash: string, mode: ScrollBehavior = 'smooth') {
-    const hash = _hash.split('#')[1];
-    if (hash) {
-      const element = Array.from(document.querySelectorAll('h1,h2,h3,h4,h5,h6')).find((h) => h.textContent === decodeURIComponent(hash));
-      if (element) {
-        window.scrollTo({
-          top: element.getBoundingClientRect().top + window.scrollY - 80,
-          behavior: mode
-        });
+    if (main) {
+      const hash = _hash.split('#')[1];
+      if (hash) {
+        const element = Array.from(main.querySelectorAll('h1,h2,h3,h4,h5,h6')).find((h) => h.textContent === decodeURIComponent(hash));
+        if (element) {
+          window.scrollTo({
+            top: element.getBoundingClientRect().top + window.scrollY - 80,
+            behavior: mode
+          });
+        }
       }
     }
   }
@@ -69,9 +88,9 @@
 </script>
 
 <svelte:head>
-  <link rel="stylesheet" href="../themes/svelte/global.css">
+  <link rel="stylesheet" href="/themes/svelte/global.css">
 </svelte:head>
-<svelte:window on:keydown={onWindowKeydown}/>
+<svelte:window on:keydown={onWindowKeydown} on:scroll={onWindowScroll}/>
 
 <Router>
   <!-- Toolbar -->
@@ -117,7 +136,7 @@
           <Link class="link" to="/">Introduction</Link>
         </sl-tree-item>
         <sl-tree-item>
-          <span>Features</span>
+          <Link class="link" to="/accessibility" >Features</Link>
           <sl-tree slot="subtree">
             <sl-tree-item>
               <Link class="link" to="/accessibility">Accessibility</Link>
@@ -131,13 +150,13 @@
           </sl-tree>
         </sl-tree-item>
         <sl-tree-item>
-          <span>Components</span>
+          <Link class="link" to="/components/button">Components</Link>
           <sl-tree slot="subtree">
             <sl-tree-item>
               <Link class="link" to="/components/button">Button</Link>
             </sl-tree-item>
             <sl-tree-item>
-              <span>Form</span>
+              <Link class="link" to="/components/form/input-text">Form</Link>
               <sl-tree slot="subtree">
                 <sl-tree-item>
                   <Link class="link" to="/components/form/input-text">Input Text</Link>
@@ -149,7 +168,7 @@
       </sl-tree>
     </nav>
     <!-- Content -->
-    <main>
+    <main bind:this={main}>
       {#each pages as { path, component }}
         <Route path={path}>
           <svelte:component this={component}/>
@@ -160,29 +179,29 @@
     {#if $page.page.toc}
       <nav class="toc">
         <sl-tree>
-          {#each Object.entries($page.page.toc) as [heading, items]}
+          {#each Object.entries($page.page.toc) as [_heading, items]}
             <sl-tree-item>
-              <a href="#{heading}">{heading}</a>
+              <a href="#{_heading}" class:active={heading === _heading} on:click={() => onTocClick(_heading)}>{_heading}</a>
               <sl-tree slot="subtree">
-                {#each Object.entries(items) as [heading, items]}
+                {#each Object.entries(items) as [_heading, items]}
                   <sl-tree-item>
-                    <a href="#{heading}">{heading}</a>
+                    <a href="#{_heading}" class:active={heading === _heading} on:click={() => onTocClick(_heading)}>{_heading}</a>
                     <sl-tree slot="subtree">
-                      {#each Object.entries(items) as [heading, items]}
+                      {#each Object.entries(items) as [_heading, items]}
                         <sl-tree-item>
-                          <a href="#{heading}">{heading}</a>
+                          <a href="#{_heading}" class:active={heading === _heading} on:click={() => onTocClick(_heading)}>{_heading}</a>
                           <sl-tree slot="subtree">
-                            {#each Object.entries(items) as [heading, items]}
+                            {#each Object.entries(items) as [_heading, items]}
                               <sl-tree-item>
-                                <a href="#{heading}">{heading}</a>
+                                <a href="#{_heading}" class:active={heading === _heading} on:click={() => onTocClick(_heading)}>{_heading}</a>
                                 <sl-tree slot="subtree">
-                                  {#each Object.entries(items) as [heading, items]}
+                                  {#each Object.entries(items) as [_heading, items]}
                                     <sl-tree-item>
-                                      <a href="#{heading}">{heading}</a>
+                                      <a href="#{_heading}" class:active={heading === _heading} on:click={() => onTocClick(_heading)}>{_heading}</a>
                                       <sl-tree slot="subtree">
-                                        {#each Object.entries(items) as [heading, items]}
+                                        {#each Object.entries(items) as [_heading]}
                                           <sl-tree-item>
-                                            <a href="#{heading}">{heading}</a>
+                                            <a href="#{_heading}" class:active={heading === _heading} on:click={() => onTocClick(_heading)}>{_heading}</a>
                                           </sl-tree-item>
                                         {/each}
                                       </sl-tree>

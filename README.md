@@ -2,9 +2,9 @@
 
 ## TODOs
 
-- Copy svg in public folder (gitignore)
 - Sidebar
-  - Tree Styling (icons, menus, animations)
+  - Remove sl-tree usage for sidenav and tocnav
+  - TOC Styling (automatic active when scrolling)
   - Floating Menu button to open sidebar with @media
   - Floating Menu button to open toc with @media
 - Documentation

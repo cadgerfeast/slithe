@@ -14,14 +14,14 @@ type Headings5 = Record<string, Headings6>;
 type Headings4 = Record<string, Headings5>;
 type Headings3 = Record<string, Headings4>;
 type Headings2 = Record<string, Headings3>;
-type Headings1 = Record<string, Headings2>;
+export type TocModel = Record<string, Headings2>;
 export interface Page {
   path: string;
   metadata: Record<string, string>;
   component: typeof SvelteComponent;
   match?: string;
   content?: string;
-  toc?: Headings1;
+  toc?: TocModel;
 }
 
 export const pages: Page[] = [
@@ -99,7 +99,7 @@ const computePageContent = (page: Page) => {
     }
   }
 };
-const getPage = (path = `/${location.href.split('/')[3]}`) => {
+const getPage = (path = location.href.replace(location.origin, '')) => {
   const page = [...pages].reverse().find((p) => path.startsWith(p.path));
   if (page) {
     if (!page.content) {
