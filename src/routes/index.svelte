@@ -20,10 +20,9 @@
 
 <span>Texte de taille normale</span>
 
-<sl-icon from="/themes/svelte/icons/icons.svg" name="download" size="19"/>
-<sl-icon from="/themes/svelte/icons/icons.svg" name="arrow-left" size="19"/>
-<sl-icon from="/themes/svelte/icons/icons.svg" name="edit" size="19"/>
-<sl-icon from="/themes/svelte/icons/icons.svg" name="chevron" size="19"/>
+<sl-icon name="github" size="19"/>
+<sl-icon name="activity" size="19"/>
+<sl-icon src={svelte} size="19"/>
 
 <h2>Test11</h2>
 <h2>Test12</h2>

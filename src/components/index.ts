@@ -37,6 +37,13 @@ export function registerElements (_config: Configuration) {
           (this as any).shadowRoot.appendChild(style);
         }
       }
+      connectedCallback () {
+        if (component.style) {
+          for (const property in component.style) {
+            this.style[property] = component.style[property];
+          }
+        }
+      }
       disconnectedCallback () {
         this.$destroy();
       }

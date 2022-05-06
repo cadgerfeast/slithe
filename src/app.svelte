@@ -5,6 +5,7 @@
   import { pages, page, fullTextSearch, Page } from './routes';
   import { delay } from './utils/time';
   import { recentSearches } from './store';
+  import { clickOutside } from './utils/element';
   // Assets
   import svelte from './assets/svelte.svg';
   import search from './assets/search.svg';
@@ -16,6 +17,11 @@
   let searchInputFocused = false;
   let main: HTMLElement;
   let scrollTimeout;
+  let preventHashChange = false;
+  let showFixedSidebar = false;
+  let showFixedTOC = false;
+  let sidebarOpener: HTMLButtonElement;
+  let tocOpener: HTMLButtonElement;
   // Computed
   $: showSearchResults = searchInputFocused && (pages.length > 0);
   $: heading = $page.path.split('#')[1];
@@ -50,18 +56,40 @@
     }
     clearTimeout(scrollTimeout);
     scrollTimeout = setTimeout(() => {
-      navigate(`#${target.textContent}`);
+      if (!preventHashChange) {
+        navigate(`#${target.textContent}`);
+      }
+      preventHashChange = false;
     }, 100);
   }
   function onLinkClick (page: Page) {
     recentSearches.add(page.path);
   }
   function onTocClick (heading: string) {
+    preventHashChange = true;
     scrollIntoHash(`#${heading}`);
   }
   function onSearchInputInput (e: Event) {
     searchQuery = (e.target as any).value;
     debounceSearch();
+  }
+  async function onToggleFixedSidebar () {
+    await delay();
+    showFixedSidebar = !showFixedSidebar;
+  }
+  function onClickOutsideSidebar (e) {
+    if (!sidebarOpener.contains(e.detail.target)) {
+      showFixedSidebar = false;
+    }
+  }
+  async function onToggleFixedTOC () {
+    await delay();
+    showFixedTOC = !showFixedTOC;
+  }
+  function onClickOutsideTOC (e) {
+    if (!tocOpener.contains(e.detail.target)) {
+      showFixedTOC = false;
+    }
   }
   // Methods
   async function debounceSearch () {
@@ -80,6 +108,9 @@
         }
       }
     }
+  }
+  function isTocActive (_heading: string) {
+    return decodeURIComponent(heading) === _heading;
   }
   // Lifecycle
   onMount(() => {
@@ -130,42 +161,45 @@
   </header>
   <div class="container">
     <!-- Sidebar -->
-    <nav class="sidebar">
-      <sl-tree>
-        <sl-tree-item>
+    <button bind:this={sidebarOpener} class="sidebar-opener" on:click={onToggleFixedSidebar}>
+      <sl-icon name="menu-outline" size={30}/>
+    </button>
+    <nav class="sidebar" class:fixed={showFixedSidebar} use:clickOutside on:clickoutside={onClickOutsideSidebar}>
+      <ul>
+        <li>
           <Link class="link" to="/">Introduction</Link>
-        </sl-tree-item>
-        <sl-tree-item>
+        </li>
+        <li>
           <Link class="link" to="/accessibility" >Features</Link>
-          <sl-tree slot="subtree">
-            <sl-tree-item>
+          <ul>
+            <li>
               <Link class="link" to="/accessibility">Accessibility</Link>
-            </sl-tree-item>
-            <sl-tree-item>
+            </li>
+            <li>
               <Link class="link" to="/internationalization">Internationalization</Link>
-            </sl-tree-item>
-            <sl-tree-item>
+            </li>
+            <li>
               <Link class="link" to="/themes">Themes</Link>
-            </sl-tree-item>
-          </sl-tree>
-        </sl-tree-item>
-        <sl-tree-item>
+            </li>
+          </ul>
+        </li>
+        <li>
           <Link class="link" to="/components/button">Components</Link>
-          <sl-tree slot="subtree">
-            <sl-tree-item>
+          <ul>
+            <li>
               <Link class="link" to="/components/button">Button</Link>
-            </sl-tree-item>
-            <sl-tree-item>
+            </li>
+            <li>
               <Link class="link" to="/components/form/input-text">Form</Link>
-              <sl-tree slot="subtree">
-                <sl-tree-item>
+              <ul>
+                <li>
                   <Link class="link" to="/components/form/input-text">Input Text</Link>
-                </sl-tree-item>
-              </sl-tree>
-            </sl-tree-item>
-          </sl-tree>
-        </sl-tree-item>
-      </sl-tree>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
     </nav>
     <!-- Content -->
     <main bind:this={main}>
@@ -176,50 +210,53 @@
       {/each}
     </main>
     <!-- Table Of Contents -->
+    <button bind:this={tocOpener} class="toc-opener" on:click={onToggleFixedTOC}>
+      <sl-icon name="menu-arrow-outline" size={30}/>
+    </button>
     {#if $page.page.toc}
-      <nav class="toc">
-        <sl-tree>
+      <nav class="toc" class:fixed={showFixedTOC} use:clickOutside on:clickoutside={onClickOutsideTOC}>
+        <ul>
           {#each Object.entries($page.page.toc) as [_heading, items]}
-            <sl-tree-item>
-              <a href="#{_heading}" class:active={heading === _heading} on:click={() => onTocClick(_heading)}>{_heading}</a>
-              <sl-tree slot="subtree">
+            <li>
+              <a href="#{_heading}" class="h1" class:active={isTocActive(_heading)} on:click={() => onTocClick(_heading)}>{_heading}</a>
+              <ul>
                 {#each Object.entries(items) as [_heading, items]}
-                  <sl-tree-item>
-                    <a href="#{_heading}" class:active={heading === _heading} on:click={() => onTocClick(_heading)}>{_heading}</a>
-                    <sl-tree slot="subtree">
+                  <li>
+                    <a href="#{_heading}" class="h2" class:active={isTocActive(_heading)} on:click={() => onTocClick(_heading)}>{_heading}</a>
+                    <ul>
                       {#each Object.entries(items) as [_heading, items]}
-                        <sl-tree-item>
-                          <a href="#{_heading}" class:active={heading === _heading} on:click={() => onTocClick(_heading)}>{_heading}</a>
-                          <sl-tree slot="subtree">
+                        <li>
+                          <a href="#{_heading}" class="h3" class:active={isTocActive(_heading)} on:click={() => onTocClick(_heading)}>{_heading}</a>
+                          <ul>
                             {#each Object.entries(items) as [_heading, items]}
-                              <sl-tree-item>
-                                <a href="#{_heading}" class:active={heading === _heading} on:click={() => onTocClick(_heading)}>{_heading}</a>
-                                <sl-tree slot="subtree">
+                              <li>
+                                <a href="#{_heading}" class="h4" class:active={isTocActive(_heading)} on:click={() => onTocClick(_heading)}>{_heading}</a>
+                                <ul>
                                   {#each Object.entries(items) as [_heading, items]}
-                                    <sl-tree-item>
-                                      <a href="#{_heading}" class:active={heading === _heading} on:click={() => onTocClick(_heading)}>{_heading}</a>
-                                      <sl-tree slot="subtree">
+                                    <li>
+                                      <a href="#{_heading}" class="h5" class:active={isTocActive(_heading)} on:click={() => onTocClick(_heading)}>{_heading}</a>
+                                      <ul>
                                         {#each Object.entries(items) as [_heading]}
-                                          <sl-tree-item>
-                                            <a href="#{_heading}" class:active={heading === _heading} on:click={() => onTocClick(_heading)}>{_heading}</a>
-                                          </sl-tree-item>
+                                          <li>
+                                            <a href="#{_heading}" class="h6" class:active={isTocActive(_heading)} on:click={() => onTocClick(_heading)}>{_heading}</a>
+                                          </li>
                                         {/each}
-                                      </sl-tree>
-                                    </sl-tree-item>
+                                      </ul>
+                                    </li>
                                   {/each}
-                                </sl-tree>
-                              </sl-tree-item>
+                                </ul>
+                              </li>
                             {/each}
-                          </sl-tree>
-                        </sl-tree-item>
+                          </ul>
+                        </li>
                       {/each}
-                    </sl-tree>
-                  </sl-tree-item>
+                    </ul>
+                  </li>
                 {/each}
-              </sl-tree>
-            </sl-tree-item>
+              </ul>
+            </li>
           {/each}
-        </sl-tree>
+        </ul>
       </nav>
     {/if}
   </div>
@@ -237,7 +274,7 @@
     align-items: center;
     background-color: var(--sl-background-color);
     box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
-    z-index: 1;
+    z-index: 3;
     > sl-icon.svelte {
       margin-left: 12px;
     }
@@ -309,9 +346,35 @@
       left: 0;
       width: 300px;
       flex-shrink: 0;
-      padding: 12px;
+      padding: 60px 12px 12px 12px;
       box-sizing: border-box;
+      background-color: var(--sl-background-color);
       transition: all .25s ease-in-out;
+      &.fixed {
+        left: 0 !important;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding-left: 20px;
+      }
+    }
+    > button.sidebar-opener {
+      position: fixed;
+      top: 70px;
+      left: -300px;
+      z-index: 2;
+      border-radius: 50%;
+      border: none;
+      padding: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, .25);
+      background-color: var(--sl-primary);
+      color: var(--sl-secondary-text-color);
+      cursor: pointer;
+      transition: all .25s ease-in-out;
+      &:hover {
+        box-shadow: 0 2px 5px rgba(0, 0, 0, .5);
+      }
     }
     > main {
       position: absolute;
@@ -320,8 +383,25 @@
       left: 300px;
       max-width: 900px;
       margin: 0 auto;
-      padding-bottom: 60px;
+      padding: 0 60px 60px 60px;
       transition: all .25s ease-in-out;
+    }
+    > button.toc-opener {
+      position: fixed;
+      top: 70px;
+      right: -300px;
+      z-index: 2;
+      border-radius: 50%;
+      border: none;
+      padding: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, .25);
+      background-color: var(--sl-primary);
+      color: var(--sl-secondary-text-color);
+      cursor: pointer;
+      transition: all .25s ease-in-out;
+      &:hover {
+        box-shadow: 0 2px 5px rgba(0, 0, 0, .5);
+      }
     }
     > nav.toc {
       position: fixed;
@@ -330,15 +410,57 @@
       bottom: 0;
       width: 300px;
       flex-shrink: 0;
-      padding: 12px;
+      padding: 60px 12px 12px 12px;
       box-sizing: border-box;
+      background-color: var(--sl-background-color);
       transition: all .25s ease-in-out;
+      &.fixed {
+        right: 0 !important;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        li {
+          display: grid;
+          a {
+            border-left: 2px solid var(--sl-divider-color);
+            padding: 5px 0;
+            &.h1 {
+              padding-left: 10px;
+            }
+            &.h2 {
+              padding-left: 20px;
+            }
+            &.h3 {
+              padding-left: 30px;
+            }
+            &.h4 {
+              padding-left: 40px;
+            }
+            &.h5 {
+              padding-left: 50px;
+            }
+            &.h6 {
+              padding-left: 60px;
+            }
+            &.active {
+              border-color: var(--sl-primary);
+            }
+          }
+        }
+      }
     }
   }
   // Responsive
   @media only screen and (max-width: 1200px) {
     div.container {
+      > button.sidebar-opener {
+        left: 10px;
+      }
       > nav.sidebar {
+        box-shadow: 0 2px 5px rgba(0, 0, 0, .25);
+        z-index: 1;
         left: -300px;
       }
       > main {
@@ -351,7 +473,12 @@
       > main {
         right: 0;
       }
+      > button.toc-opener {
+        right: 10px;
+      }
       > nav.toc {
+        box-shadow: 0 2px 5px rgba(0, 0, 0, .25);
+        z-index: 1;
         right: -300px;
       }
     }

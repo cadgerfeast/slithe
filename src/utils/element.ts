@@ -35,22 +35,36 @@ function observeElements () {
   });
   handler = requestAnimationFrame(observeElements);
 }
-export function observeRect (target: Element, callback: ObserverCallback) {
+export function observeRect (node: Element, callback: ObserverCallback) {
   let callbacks: Set<ObserverCallback>;
-  if (observers.has(target)) {
-    callbacks = observers.get(target).callbacks;
+  if (observers.has(node)) {
+    callbacks = observers.get(node).callbacks;
     callbacks.add(callback);
   } else {
     callbacks = new Set([callback]);
-    observers.set(target, { callbacks });
+    observers.set(node, { callbacks });
   }
   observeElements();
   return {
     dispose () {
       callbacks.delete(callback);
       if (callbacks.size === 0) {
-        observers.delete(target);
+        observers.delete(node);
       }
     }
   };
+}
+
+export function clickOutside (node: Element) {
+	const handleClick = (event: MouseEvent) => {
+		if (!node.contains(event.target as Node)) {
+			node.dispatchEvent(new CustomEvent('clickoutside', { detail: event }));
+		}
+	};
+	document.addEventListener('click', handleClick);
+	return {
+		destroy () {
+			document.removeEventListener('click', handleClick);
+		}
+	};
 }

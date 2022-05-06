@@ -1,6 +1,9 @@
 <!-- Metadata -->
 <script context="module">
   export const tag = 'icon';
+  export const style = {
+    'display': 'inline-block'
+  };
 </script>
 <!-- Options -->
 <svelte:options tag={null}/>
@@ -11,23 +14,14 @@
   import { fetchSVG } from '../../utils/fetch';
   // Props
   export let src: string = undefined;
-  export let from: string = '';
   export let name: string = undefined;
-  export let size: number = 0;
+  export let size: number = 16;
   // Data
   let root: HTMLElement;
   let svg: SVGSVGElement|HTMLElement;
   // Lifecycle
   onMount(async () => {
-    if (name) {
-      svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      svg.setAttribute('width', size.toString());
-      svg.setAttribute('height', size.toString());
-      const use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
-      use.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', `${from}#${name}`);
-      svg.appendChild(use);
-      root.appendChild(svg);
-    } else if (src) {
+    if (src) {
       svg = await fetchSVG(src);
       if (size) {
         svg.style.display = 'inline-block';
@@ -36,10 +30,8 @@
         svg.style['width'] = `${size}px`;
       }
       root.appendChild(svg);
-    } else {
-      console.warn('Icon should have "src" or "from"/"name" attributes.');
     }
   });
 </script>
 <!-- Template -->
-<i class='sl-icon' name={name} bind:this={root}/>
+<i class='sl-icon' name={name} bind:this={root} style:font-size={`${size}px`}/>
