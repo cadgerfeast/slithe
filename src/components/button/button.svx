@@ -1,6 +1,7 @@
+<!-- Metadata -->
 <script context="module">
   export const metadata = {
-    title: 'titi'
+    title: 'Slithe - Components - Button'
   };
 </script>
 
@@ -10,6 +11,10 @@ Hello there, i'm a button.
 
 ``` javascript
 const toto = 'bonjour';
+```
+
+``` html
+<sl-button>Super Button</sl-button>
 ```
 
 <sl-button>Wow that's fancy</sl-button>

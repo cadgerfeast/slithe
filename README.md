@@ -3,7 +3,8 @@
 ## TODOs
 
 - Documentation
-  - REPL Component (code, preview (themes))
+  - Button Component
+  - Themes (vanilla, svelte-light, pixel-light)
 - Themes
   - vanilla
   - svelte-light
