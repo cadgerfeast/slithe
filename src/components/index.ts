@@ -38,6 +38,7 @@ export function registerElements (_config: Configuration) {
         }
       }
       connectedCallback () {
+        super.connectedCallback();
         if (component.style) {
           for (const property in component.style) {
             this.style[property] = component.style[property];
@@ -45,6 +46,7 @@ export function registerElements (_config: Configuration) {
         }
       }
       disconnectedCallback () {
+        super.disconnectedCallback();
         this.$destroy();
       }
     }

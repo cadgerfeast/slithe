@@ -4,17 +4,46 @@
     title: 'Slithe - Components - Button'
   };
 </script>
+<!-- Options -->
+<svelte:head>
+	<title>{metadata.title}</title>
+</svelte:head>
+<!-- Script -->
+<script lang="ts">
+  // Components
+  import Preview from '../../partials/preview.svelte';
+</script>
 
 # Button
 
-Hello there, i'm a button.
+This replaces the standard HTML `<button>` element.
 
-``` javascript
-const toto = 'bonjour';
-```
+## Attributes
+
+### Type
+
+Modifies the button behavior, defaults to `button`.
+
+When the button is inside a `<form>` element, use `type="submit"` in order to submit the form.
+
+<Preview>
+  <sl-button type="button">Button</sl-button>
+  <sl-button type="submit">Submit</sl-button>
+</Preview>
 
 ``` html
-<sl-button>Super Button</sl-button>
+<sl-button type="button">Button</sl-button>
+<sl-button type="submit">Submit</sl-button>
 ```
 
-<sl-button>Wow that's fancy</sl-button>
+### Disabled
+
+Makes the button non-interactable.
+
+<Preview>
+  <sl-button disabled>Disabled</sl-button>
+</Preview>
+
+``` html
+<sl-button disabled>Disabled</sl-button>
+```

@@ -1,7 +1,9 @@
 code[class*="language-"],
 pre[class*="language-"] {
+  display: block;
+  background-color: #FFFFFF;
 	color: #393A34;
-	font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
+	font-family: var(--sl-font-family-mono);
 	direction: ltr;
 	text-align: left;
 	white-space: pre;

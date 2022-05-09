@@ -2,10 +2,10 @@
 
 ## TODOs
 
-- Documentation
-  - Button Component
-  - Themes (vanilla, svelte-light, pixel-light)
+- Fix scroll on route change (go top)
+- Preview Theme Picker
+- Button Props & Events
 - Themes
   - vanilla
   - svelte-light
-  - pixel-light
+  - svelte-dark

@@ -3,8 +3,8 @@ import type { SvelteComponent } from 'svelte';
 import { readable } from 'svelte/store';
 import { recentSearches } from '../store';
 // Pages
-import * as Index from './index.svelte';
-import * as Accessibility from './accessibility.svelte';
+import * as Index from './index.svx';
+import * as Accessibility from './accessibility.svx';
 import * as Button from '../components/button/button.svx';
 // Constants
 const _pushState = history.pushState;

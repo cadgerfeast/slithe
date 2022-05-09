@@ -1,0 +1,89 @@
+<script context="module">
+  export const metadata = {
+    title: 'toto'
+  };
+</script>
+
+<script lang="ts">
+  // Helpers
+  import { registerFocus } from '../utils/a11y';
+  // Assets
+  import svelte from '../assets/svelte.svg';
+  // Constants
+  const autofocus = registerFocus();
+</script>
+
+<h1>Headings</h1>
+
+<h2>Test211</h2>
+<h3>Test2111</h3>
+<h4>Test21111</h4>
+<h5>Test211111</h5>
+<h6>Test2111111</h6>
+<h6>Test2111112</h6>
+
+<h1>Emphasis</h1>
+
+Emphasis, aka italics, with *asterisks* or _underscores_.
+
+Strong emphasis, aka bold, with **asterisks** or __underscores__.
+
+Combined emphasis with **asterisks and _underscores_**.
+
+Strikethrough uses two tildes. ~~Scratch this.~~
+
+<h1>Lists</h1>
+
+- One
+- Two
+- Three
+
+1. One
+2. Two
+3. Three
+
+<h1>Links</h1>
+
+[I'm an inline-style link with title](https://www.google.com "Google's Homepage")
+
+<h1>Images</h1>
+
+<img src={svelte} alt="Svelte Icon" title="Svelte Icon"/>
+
+<sl-icon name="github" size="19"/>
+<sl-icon name="activity" size="19"/>
+<sl-icon src={svelte} size="19"/>
+
+<h1>Syntax</h1>
+
+Inline `code` text.
+
+``` html
+<sl-button type="button">Button</sl-button>
+<sl-button type="submit">Submit</sl-button>
+```
+
+<h1>Tables</h1>
+
+Markdown | Less | Pretty
+--- | --- | ---
+*Still* | `renders` | **nicely**
+1 | 2 | 3
+
+<h1>Blockquotes</h1>
+
+> Blockquotes are very handy in email to emulate reply text.
+> This line is part of the same quote.
+
+Quote break.
+
+> This is a very long line that will still be quoted properly when it wraps. Oh boy let's keep writing to make sure this is long enough to actually wrap for everyone. Oh, you can *put* **Markdown** into a blockquote.
+
+<h1>Separators</h1>
+
+---
+
+<h1>Custom</h1>
+
+<sl-button use:autofocus>aaaaa</sl-button>
+<sl-nested>bbbbb</sl-nested>

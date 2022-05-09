@@ -15,15 +15,99 @@ div#app {
   background-color: var(--sl-background-color);
   color: var(--sl-text-color);
 }
+/* Headings */
+h1 {
+  padding-bottom: 0.3em;
+  font-size: 2em;
+  border-bottom: 1px solid var(--sl-divider-color);
+  margin-top: 24px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  line-height: 1.25em;
+}
+h2 {
+  padding-bottom: 0.3em;
+  font-size: 1.5em;
+  border-bottom: 1px solid var(--sl-divider-color);
+  margin-top: 24px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  line-height: 1.25em;
+}
+h3 {
+  font-size: 1.25em;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  line-height: 1.25em;
+}
+h4 {
+  font-size: 1em;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  line-height: 1.25em;
+}
+h5 {
+  font-size: .875em;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  line-height: 1.25em;
+}
+h6 {
+  font-size: .85em;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  line-height: 1.25em;
+}
 /* Links */
 a {
-  color: inherit;
+  color: var(--sl-accent);
   text-decoration: none;
-}
-a[aria-current="page"] {
-  color: var(--sl-primary);
 }
 a:hover {
   text-decoration: underline;
-  color: var(--sl-accent);
+}
+/* Code */
+code {
+  padding: 0.2em 0.4em;
+  margin: 0;
+  background-color: var(--sl-background-color-subtle);
+  border-radius: 6px;
+}
+/* Table */
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+tr {
+  background-color: var(--sl-background-color);
+  border-top: 1px solid var(--sl-divider-color);
+}
+tr:nth-child(2n) {
+  background-color: var(--sl-background-color-subtle);
+}
+th {
+  font-weight: 600;
+  padding: 6px 13px;
+  border: 1px solid var(--sl-divider-color);
+}
+td {
+  padding: 6px 13px;
+  border: 1px solid var(--sl-divider-color);
+}
+/* Blockquotes */
+blockquote {
+  padding: 0 1em;
+  color: var(--sl-text-color-subtle);
+  border-left: 0.25em solid var(--sl-divider-color);
+}
+/* Separators */
+hr {
+  padding: 0;
+  margin: 24px 0;
+  border: none;
+  border-top: 1px solid var(--sl-divider-color);
 }

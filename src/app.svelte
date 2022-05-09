@@ -127,7 +127,7 @@
   <!-- Toolbar -->
   <header>
     <sl-icon class="svelte" src={svelte} size={40}/>
-    <h1 class="title">Slithe</h1>
+    <span class="title">Slithe</span>
     <sl-input-text bind:this={searchInput} class="search" on:input={onSearchInputInput} on:focus={onSearchInputFocus} on:blur={onSearchInputBlur}>
       <sl-icon slot="pre" src={search} size={20}/>
       <span slot="placeholder">
@@ -218,27 +218,27 @@
         <ul>
           {#each Object.entries($page.page.toc) as [_heading, items]}
             <li>
-              <a href="#{_heading}" class="h1" class:active={isTocActive(_heading)} on:click={() => onTocClick(_heading)}>{_heading}</a>
+              <a href="#{_heading}" class="link h1" class:active={isTocActive(_heading)} on:click={() => onTocClick(_heading)}>{_heading}</a>
               <ul>
                 {#each Object.entries(items) as [_heading, items]}
                   <li>
-                    <a href="#{_heading}" class="h2" class:active={isTocActive(_heading)} on:click={() => onTocClick(_heading)}>{_heading}</a>
+                    <a href="#{_heading}" class="link h2" class:active={isTocActive(_heading)} on:click={() => onTocClick(_heading)}>{_heading}</a>
                     <ul>
                       {#each Object.entries(items) as [_heading, items]}
                         <li>
-                          <a href="#{_heading}" class="h3" class:active={isTocActive(_heading)} on:click={() => onTocClick(_heading)}>{_heading}</a>
+                          <a href="#{_heading}" class="link h3" class:active={isTocActive(_heading)} on:click={() => onTocClick(_heading)}>{_heading}</a>
                           <ul>
                             {#each Object.entries(items) as [_heading, items]}
                               <li>
-                                <a href="#{_heading}" class="h4" class:active={isTocActive(_heading)} on:click={() => onTocClick(_heading)}>{_heading}</a>
+                                <a href="#{_heading}" class="link h4" class:active={isTocActive(_heading)} on:click={() => onTocClick(_heading)}>{_heading}</a>
                                 <ul>
                                   {#each Object.entries(items) as [_heading, items]}
                                     <li>
-                                      <a href="#{_heading}" class="h5" class:active={isTocActive(_heading)} on:click={() => onTocClick(_heading)}>{_heading}</a>
+                                      <a href="#{_heading}" class="link h5" class:active={isTocActive(_heading)} on:click={() => onTocClick(_heading)}>{_heading}</a>
                                       <ul>
                                         {#each Object.entries(items) as [_heading]}
                                           <li>
-                                            <a href="#{_heading}" class="h6" class:active={isTocActive(_heading)} on:click={() => onTocClick(_heading)}>{_heading}</a>
+                                            <a href="#{_heading}" class="link h6" class:active={isTocActive(_heading)} on:click={() => onTocClick(_heading)}>{_heading}</a>
                                           </li>
                                         {/each}
                                       </ul>
@@ -278,7 +278,9 @@
     > sl-icon.svelte {
       margin-left: 12px;
     }
-    > h1.title {
+    > span.title {
+      font-size: 2em;
+      font-weight: 600;
       margin: 0 0 0 12px;
     }
     > :global(.search) {
@@ -451,6 +453,13 @@
         }
       }
     }
+  }
+  // Global
+  :global(a.link) {
+    color: inherit;
+  }
+  :global(a.link[aria-current="page"]) {
+    color: var(--sl-primary);
   }
   // Responsive
   @media only screen and (max-width: 1200px) {
