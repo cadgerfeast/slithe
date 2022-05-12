@@ -53,3 +53,8 @@ export function registerElements (_config: Configuration) {
     customElements.define(`sl-${component.tag}`, _constructor as unknown as CustomElementConstructor);
   }
 }
+
+export function updateTheme (components: Record<string, string>) {
+  console.info('SNETCH: updateTheme');
+  console.info(components);
+}

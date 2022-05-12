@@ -2,8 +2,7 @@
 
 ## TODOs
 
-- Fix scroll on route change (go top)
-- Preview Theme Picker
+- updateTheme method (update config, and update current elements (keep reference by constructor))
 - Button Props & Events
 - Themes
   - vanilla

@@ -11,6 +11,7 @@
   import search from './assets/search.svg';
   import github from './assets/github.svg';
   // Data
+  let lastPath = location.pathname;
   let searchResults = [];
   let searchInput: HTMLElement;
   let searchQuery = '';
@@ -25,7 +26,19 @@
   // Computed
   $: showSearchResults = searchInputFocused && (pages.length > 0);
   $: heading = $page.path.split('#')[1];
+  // Reactive
+  $: $page.path, onRouteChange();
   // Events
+  async function onRouteChange () {
+    if (lastPath !== location.pathname) {
+      await delay();
+      window.scrollTo({
+        top: 0,
+        behavior: 'auto'
+      });
+      lastPath = location.pathname;
+    }
+  }
   function onSearchInputFocus () {
     searchInputFocused = true;
     debounceSearch();
