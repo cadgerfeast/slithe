@@ -1,5 +1,5 @@
 // Helpers
-import { config, Configuration, updateConfig } from '../utils/conf';
+import { conf, ConfigurationManifest, Theme } from '../utils/conf';
 // Components
 import * as Button from './button/button.svelte';
 import * as Counter from './counter/counter.svelte';
@@ -25,16 +25,25 @@ const components = [
   TreeItem
 ];
 
-export function registerElements (_config: Configuration) {
-  updateConfig(_config);
+interface SlitheElementStyle {
+  tag: string;
+  style?: HTMLStyleElement;
+}
+const elements = new Set();
+export function registerElements (_config: ConfigurationManifest) {
+  conf.update(_config);
   for (const component of components) {
     const _constructor = class SlitheElement extends component.default {
+      private _slithe: SlitheElementStyle;
       constructor () {
         super();
-        if (config.components?.[component.tag]) {
-          const style = document.createElement('style');
-          style.innerHTML = config.components[component.tag];
-          (this as any).shadowRoot.appendChild(style);
+        this._slithe = {
+          tag: component.tag
+        };
+        if (conf.theme?.components?.[component.tag]) {
+          this._slithe.style = document.createElement('style');
+          this._slithe.style.innerHTML = conf.theme.components[component.tag];
+          (this as any).shadowRoot.appendChild(this._slithe.style);
         }
       }
       connectedCallback () {
@@ -44,17 +53,21 @@ export function registerElements (_config: Configuration) {
             this.style[property] = component.style[property];
           }
         }
+        elements.add(this);
       }
       disconnectedCallback () {
         super.disconnectedCallback();
         this.$destroy();
+        elements.delete(this);
       }
     }
     customElements.define(`sl-${component.tag}`, _constructor as unknown as CustomElementConstructor);
   }
 }
 
-export function updateTheme (components: Record<string, string>) {
-  console.info('SNETCH: updateTheme');
-  console.info(components);
+export function updateTheme (theme: Theme) {
+  conf.update({ theme });
+  for (const element of elements) {
+    element._slithe.innerHTML = conf.theme.components[element._slithe.tag];
+  }
 }

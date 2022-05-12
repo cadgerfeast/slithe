@@ -147,7 +147,7 @@ export async function fullTextSearch (_query: string) {
         const matches = page.content.includes(split);
         if (matches) {
           const index = page.content.indexOf(split);
-          page.match += '...' + page.content.substring(index - 20, index + 20);
+          page.match += '...' + page.content.substring(index - 10, index + 50);
           return matches;
         }
       });

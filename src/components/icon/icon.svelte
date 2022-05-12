@@ -30,7 +30,9 @@
         svg.style['height'] = `${size}px`;
         svg.style['width'] = `${size}px`;
       }
-      root.appendChild(svg);
+      if (root) {
+        root.appendChild(svg);
+      }
     }
   });
 </script>

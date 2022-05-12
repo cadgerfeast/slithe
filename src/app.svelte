@@ -4,7 +4,7 @@
   import { Link, Router, Route, navigate } from 'svelte-navigator';
   import { pages, page, fullTextSearch, Page } from './routes';
   import { delay } from './utils/time';
-  import { recentSearches } from './store';
+  import { recentSearches, theme } from './store';
   import { clickOutside } from './utils/element';
   // Assets
   import svelte from './assets/svelte.svg';
@@ -21,6 +21,8 @@
   let preventHashChange = false;
   let showFixedSidebar = false;
   let showFixedTOC = false;
+  let showThemePicker = false;
+  let themePickerOpener: HTMLElement;
   let sidebarOpener: HTMLButtonElement;
   let tocOpener: HTMLButtonElement;
   // Computed
@@ -104,6 +106,15 @@
       showFixedTOC = false;
     }
   }
+  async function onThemePickerToggle () {
+    await delay();
+    showThemePicker = !showThemePicker;
+  }
+  function onThemePickerClickOutside (e) {
+    if (!themePickerOpener.contains(e.detail.target)) {
+      showThemePicker = false;
+    }
+  }
   // Methods
   async function debounceSearch () {
     searchResults = await fullTextSearch(searchQuery);
@@ -125,6 +136,9 @@
   function isTocActive (_heading: string) {
     return decodeURIComponent(heading) === _heading;
   }
+  function setTheme (_theme: string) {
+    $theme = _theme;
+  }
   // Lifecycle
   onMount(() => {
     scrollIntoHash($page.path, 'auto');
@@ -141,7 +155,29 @@
   <header>
     <sl-icon class="svelte" src={svelte} size={40}/>
     <span class="title">Slithe</span>
-    <sl-icon class="theme-picker" name="color-palette-outline" size={30}/>
+    <sl-icon bind:this={themePickerOpener} class="theme-picker-icon" name="color-palette-outline" size={30} on:click={onThemePickerToggle}/>
+    <sl-rel>
+      {#if showThemePicker}
+        <sl-card class="theme-picker-container" use:clickOutside on:clickoutside={onThemePickerClickOutside}>
+          <div class="theme-list">
+            <div class="theme-row">
+              <span>Vanilla</span>
+              <ul>
+                <li><button class="theme-item vanilla-light" class:active={$theme === 'vanilla-light'} on:click={() => setTheme('vanilla-light')}></button></li>
+                <li><button class="theme-item vanilla-dark" class:active={$theme === 'vanilla-dark'} on:click={() => setTheme('vanilla-dark')}></button></li>
+              </ul>
+            </div>
+            <div class="theme-row">
+              <span>Svelte</span>
+              <ul>
+                <li><button class="theme-item svelte-light" class:active={$theme === 'svelte-light'} on:click={() => setTheme('svelte-light')}></button></li>
+                <li><button class="theme-item svelte-dark" class:active={$theme === 'svelte-dark'} on:click={() => setTheme('svelte-dark')}></button></li>
+              </ul>
+            </div>
+          </div>
+        </sl-card>
+      {/if}
+    </sl-rel>
     <sl-input-text bind:this={searchInput} on:input={onSearchInputInput} on:focus={onSearchInputFocus} on:blur={onSearchInputBlur}>
       <sl-icon slot="pre" src={search} size={20}/>
       <span slot="placeholder">
@@ -297,11 +333,78 @@
       font-weight: 600;
       margin: 0 0 0 12px;
     }
-    > sl-icon.theme-picker {
+    > sl-icon.theme-picker-icon {
       margin: 0 12px 0 auto;
       cursor: pointer;
       &:hover {
         color: var(--sl-accent);
+      }
+    }
+    sl-card.theme-picker-container {
+      position: absolute;
+      right: calc(50% - 60px);
+      display: block;
+      margin-top: 45px;
+      div.theme-list {
+        width: 100px;
+        padding: 5px 10px 0 10px;
+        > div.theme-row {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+          padding-bottom: 10px;
+          > span {
+            align-self: end;
+            font-weight: 600;
+          }
+          > ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: inline-flex;
+            flex-direction: row;
+            > li {
+              > button.theme-item {
+                position: relative;
+                cursor: pointer;
+                border: none;
+                border-radius: 50%;
+                width: 20px;
+                height: 20px;
+                margin-left: 5px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, .25);
+                &.active {
+                  &:before {
+                    border-color: var(--sl-accent);
+                  }
+                }
+                &:before {
+                  position: absolute;
+                  top: 0;
+                  right: 0;
+                  bottom: 0;
+                  left: 0;
+                  border-radius: 50%;
+                  content: '';
+                  border: 2px solid transparent;
+                }
+                &.vanilla-light {
+                  background: linear-gradient(90deg, #EFEFEF 50%, #FFFFFF 0);
+                }
+                &.vanilla-dark {
+                  background: linear-gradient(90deg, #EFEFEF 50%, #FFFFFF 0);
+                }
+                &.svelte-light {
+                  background: linear-gradient(90deg, #EFEFEF 50%, #FFFFFF 0);
+                }
+                &.svelte-dark {
+                  background: linear-gradient(90deg, #EFEFEF 50%, #FFFFFF 0);
+                }
+              }
+            }
+          }
+        }
       }
     }
     > a.github {
@@ -338,19 +441,27 @@
             font-size: 10px;
             text-transform: uppercase;
             color: #999999;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
           }
           h2.page-title {
             font-size: 16px;
             color: #444444;
             margin: 4px 0;
-          }
-          span.page-match {
-            display: block;
+            padding: 0;
+            border: none;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+          }
+          span.page-match {
+            display: block;
             font-size: 12px;
             color: #999999;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
           }
         }
       }

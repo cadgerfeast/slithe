@@ -2,10 +2,8 @@
 
 ## TODOs
 
-- Theme picker (palette with sl-rel element)
-- updateTheme method (update config, and update current elements (keep reference by constructor))
+- updateTheme({ components }) should take components from great import
 - Button Props & Events
 - Themes
-  - vanilla
-  - svelte-light
-  - svelte-dark
+  - vanilla (light, dark)
+  - svelte (light, dark)
