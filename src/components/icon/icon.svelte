@@ -2,7 +2,8 @@
 <script context="module">
   export const tag = 'icon';
   export const style = {
-    'display': 'inline-block'
+    'display': 'inline-flex',
+    'align-items': 'center'
   };
 </script>
 <!-- Options -->
@@ -35,3 +36,9 @@
 </script>
 <!-- Template -->
 <i class='sl-icon' name={name} bind:this={root} style:font-size={`${size}px`}/>
+<!-- Style -->
+<style lang="scss">
+  i.sl-icon {
+    display: inline-flex;
+  }
+</style>

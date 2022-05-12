@@ -58,6 +58,8 @@
     font-size: var(--sl-input-text-font-size, 13px);
     cursor: text;
     > div.input-pre {
+      display: inline-flex;
+      flex-direction: row;
       align-self: center;
       color: var(--sl-input-text-pre-color, #777777);
     }

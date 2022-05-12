@@ -141,7 +141,8 @@
   <header>
     <sl-icon class="svelte" src={svelte} size={40}/>
     <span class="title">Slithe</span>
-    <sl-input-text bind:this={searchInput} class="search" on:input={onSearchInputInput} on:focus={onSearchInputFocus} on:blur={onSearchInputBlur}>
+    <sl-icon class="theme-picker" name="color-palette-outline" size={30}/>
+    <sl-input-text bind:this={searchInput} on:input={onSearchInputInput} on:focus={onSearchInputFocus} on:blur={onSearchInputBlur}>
       <sl-icon slot="pre" src={search} size={20}/>
       <span slot="placeholder">
         <span>Search</span>
@@ -296,10 +297,16 @@
       font-weight: 600;
       margin: 0 0 0 12px;
     }
-    > :global(.search) {
-      margin-left: auto;
+    > sl-icon.theme-picker {
+      margin: 0 12px 0 auto;
+      cursor: pointer;
+      &:hover {
+        color: var(--sl-accent);
+      }
     }
     > a.github {
+      display: inline-flex;
+      flex-direction: row;
       color: inherit;
       margin: 0 12px;
       &:hover {
