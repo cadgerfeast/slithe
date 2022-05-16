@@ -27,7 +27,7 @@ Modifies the button behavior, defaults to `button`.
 When the button is inside a `<form>` element, use `type="submit"` in order to submit the form.
 
 <Preview>
-  <sl-button type="button" sl-theme="svelte-light">Button</sl-button>
+  <sl-button type="button">Button</sl-button>
   <sl-button type="submit">Submit</sl-button>
 </Preview>
 

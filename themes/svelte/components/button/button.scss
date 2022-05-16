@@ -1,3 +1,10 @@
-button {
-  color: red;
+:host([sl-theme="svelte-light"]) {
+  button {
+    color: red;
+  }
+}
+:host([sl-theme="svelte-dark"]) {
+  button {
+    color: blue;
+  }
 }

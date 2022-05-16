@@ -1,11 +1,13 @@
 <!-- Script -->
 <script lang="ts">
   // Helpers
+  import { onMount } from 'svelte';
   import { delay } from '../utils/time';
   import { clickOutside } from '../utils/element';
   import { theme } from '../store';
   // Data
   let showThemePicker = false;
+  let root: HTMLElement;
   let themePickerOpener: HTMLElement;
   // Methods
   function setTheme (_theme: string) {
@@ -20,9 +22,15 @@
       showThemePicker = false;
     }
   }
+  // Lifecycle
+  onMount(() => {
+    const elements = Array.from(root.querySelectorAll('*')).filter(e => e.tagName.startsWith('SL-'));
+    console.info('SNETCH');
+    console.info(elements);
+  });
 </script>
 <!-- Template -->
-<div class="preview">
+<div bind:this={root} class="preview">
   <slot/>
   <div class="label">
     <sl-icon bind:this={themePickerOpener} class="theme-picker-icon" name="color-palette-outline" size={18} on:click={onThemePickerToggle}/>
@@ -56,9 +64,6 @@
     position: relative;
     padding: 1em;
     border: 1px solid #DDDDDD;
-    > iframe {
-      width: 100%;
-    }
     > div.label {
       position: absolute;
       top: 5px;
