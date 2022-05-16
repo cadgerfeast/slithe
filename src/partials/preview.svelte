@@ -4,14 +4,22 @@
   import { onMount } from 'svelte';
   import { delay } from '../utils/time';
   import { clickOutside } from '../utils/element';
-  import { theme } from '../store';
+  import { globalTheme, previewTheme } from '../store';
   // Data
   let showThemePicker = false;
   let root: HTMLElement;
   let themePickerOpener: HTMLElement;
   // Methods
-  function setTheme (_theme: string) {
-    $theme = _theme;
+  function setTheme (shade: string, type: string) {
+    $globalTheme = `svelte-${shade}`;
+    $previewTheme = `${type}-${shade}`;
+    updateComponentsTheme();
+  }
+  function updateComponentsTheme () {
+    const elements = Array.from(root.querySelectorAll('*')).filter(e => e.tagName.startsWith('SL-'));
+    for (const element of elements) {
+      element.setAttribute('sl-theme', $previewTheme);
+    }
   }
   async function onThemePickerToggle () {
     await delay();
@@ -24,9 +32,7 @@
   }
   // Lifecycle
   onMount(() => {
-    const elements = Array.from(root.querySelectorAll('*')).filter(e => e.tagName.startsWith('SL-'));
-    console.info('SNETCH');
-    console.info(elements);
+    updateComponentsTheme();
   });
 </script>
 <!-- Template -->
@@ -41,15 +47,15 @@
             <div class="theme-row">
               <span>Vanilla</span>
               <ul>
-                <li><button class="theme-item vanilla-light" class:active={$theme === 'vanilla-light'} on:click={() => setTheme('vanilla-light')}></button></li>
-                <li><button class="theme-item vanilla-dark" class:active={$theme === 'vanilla-dark'} on:click={() => setTheme('vanilla-dark')}></button></li>
+                <li><button class="theme-item vanilla-light" class:active={$previewTheme === 'vanilla-light'} on:click={() => setTheme('light', 'vanilla')}></button></li>
+                <li><button class="theme-item vanilla-dark" class:active={$previewTheme === 'vanilla-dark'} on:click={() => setTheme('dark', 'vanilla')}></button></li>
               </ul>
             </div>
             <div class="theme-row">
               <span>Svelte</span>
               <ul>
-                <li><button class="theme-item svelte-light" class:active={$theme === 'svelte-light'} on:click={() => setTheme('svelte-light')}></button></li>
-                <li><button class="theme-item svelte-dark" class:active={$theme === 'svelte-dark'} on:click={() => setTheme('svelte-dark')}></button></li>
+                <li><button class="theme-item svelte-light" class:active={$previewTheme === 'svelte-light'} on:click={() => setTheme('light', 'svelte')}></button></li>
+                <li><button class="theme-item svelte-dark" class:active={$previewTheme === 'svelte-dark'} on:click={() => setTheme('dark', 'svelte')}></button></li>
               </ul>
             </div>
           </div>

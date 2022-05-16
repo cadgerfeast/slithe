@@ -285,7 +285,6 @@
 </Router>
 
 <style lang="scss" global>
-  @import './style/vanilla.scss';
   @import './style/global.scss';
   @import './style/prism.scss';
   header {
@@ -298,7 +297,7 @@
     flex-direction: row;
     align-items: center;
     background-color: var(--sl-background-color);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .25);
     z-index: 3;
     > sl-icon.svelte {
       margin-left: 12px;
@@ -337,21 +336,22 @@
             display: block;
             padding: 10px;
             text-decoration: none;
+            background-color: var(--sl-background-color);
             &:hover {
-              background-color: #EEEEEE;
+              background-color: var(--sl-background-color-subtle);
             }
           }
           span.page-path {
             font-size: 10px;
             text-transform: uppercase;
-            color: #999999;
+            color: var(--sl-text-color-subtle);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
           }
           h2.page-title {
             font-size: 16px;
-            color: #444444;
+            color: var(--sl-text-color);
             margin: 4px 0;
             padding: 0;
             border: none;
@@ -362,7 +362,7 @@
           span.page-match {
             display: block;
             font-size: 12px;
-            color: #999999;
+            color: var(--sl-text-color-subtle);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;

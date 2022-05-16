@@ -12,6 +12,8 @@ import * as Rel from './rel/rel.svelte';
 import * as Card from './card/card.svelte';
 import * as Tree from './tree/tree.svelte';
 import * as TreeItem from './tree/tree-item.svelte';
+// Style
+import vanillaStyle from '../style/vanilla.scss';
 
 const components = [
   Button,
@@ -32,6 +34,9 @@ interface SlitheElementStyle {
 }
 const elements = new Set();
 export function registerElements (_config: ConfigurationManifest) {
+  const globalStyle = document.createElement('style');
+  globalStyle.innerHTML = vanillaStyle;
+  document.head.insertAdjacentElement('beforeend', globalStyle);
   conf.update(_config);
   for (const component of components) {
     const _constructor = class SlitheElement extends component.default {

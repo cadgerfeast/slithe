@@ -39,8 +39,8 @@ export const recentSearches = (() => {
 
 const preferredShade = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
 
-export const theme = (() => {
-  const { subscribe, set } = writable((localStorage?.getItem('slithe.theme') || `svelte-${preferredShade}`));
+export const globalTheme = (() => {
+  const { subscribe, set } = writable((localStorage?.getItem('slithe.global-theme') || `svelte-${preferredShade}`));
 	return {
     subscribe,
     get value (): string {
@@ -49,12 +49,26 @@ export const theme = (() => {
     set: (value: string) => {
       updateTheme({ key: value, components: themes[value] });
       document.documentElement.setAttribute('sl-theme', value);
-      localStorage?.setItem('slithe.theme', value);
+      localStorage?.setItem('slithe.global-theme', value);
       set(value);
     },
     initialize () {
       updateTheme({ key: get(this), components: themes[get(this) as string] });
       document.documentElement.setAttribute('sl-theme', get(this));
+    }
+	};
+})();
+
+export const previewTheme = (() => {
+  const { subscribe, set } = writable((localStorage?.getItem('slithe.local-theme') || `svelte-${preferredShade}`));
+	return {
+    subscribe,
+    get value (): string {
+      return get(this);
+    },
+    set: (value: string) => {
+      localStorage?.setItem('slithe.local-theme', value);
+      set(value);
     }
 	};
 })();

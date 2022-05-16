@@ -1,6 +1,6 @@
 // Helpers
 import { registerElements } from '../components/index.es';
-import { theme } from './store';
+import { globalTheme } from './store';
 // Partials
 import App from './app.svelte';
 // Style
@@ -11,7 +11,7 @@ registerElements({
     components
   }
 });
-theme.initialize();
+globalTheme.initialize();
 
 export default new App({
   target: document.getElementById('app')
