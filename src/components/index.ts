@@ -1,5 +1,6 @@
 // Helpers
 import { conf, ConfigurationManifest, Theme } from '../utils/conf';
+import { removeElement } from '../utils/element';
 // Components
 import * as Button from './button/button.svelte';
 import * as Counter from './counter/counter.svelte';
@@ -48,6 +49,9 @@ export function registerElements (_config: ConfigurationManifest) {
       }
       connectedCallback () {
         super.connectedCallback();
+        if (conf.theme) {
+          this.setAttribute('sl-theme', conf.theme.key);
+        }
         if (component.style) {
           for (const property in component.style) {
             this.style[property] = component.style[property];
@@ -68,6 +72,15 @@ export function registerElements (_config: ConfigurationManifest) {
 export function updateTheme (theme: Theme) {
   conf.update({ theme });
   for (const element of elements) {
-    element._slithe.innerHTML = conf.theme.components[element._slithe.tag];
+    element.setAttribute('sl-theme', theme.key);
+    if (element._slithe.style) {
+      removeElement(element._slithe.style);
+      delete element._slithe.style;
+    }
+    if (conf.theme?.components?.[element._slithe.tag]) {
+      element._slithe.style = document.createElement('style');
+      element._slithe.style.innerHTML = conf.theme.components[element._slithe.tag];
+      element.shadowRoot.appendChild(element._slithe.style);
+    }
   }
 }

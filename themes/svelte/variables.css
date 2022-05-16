@@ -4,7 +4,9 @@
   --sv-white: #FFFFFF;
   --sv-aqua-haze: #F6F8FA;
   --sv-silver: #CCCCCC;
+  --sv-dark-charcoal: #333333;
   --sv-tundora: #444444;
+  --sv-brilliant-gray: #545454;
   --sv-shuttle-gray: #57606A;
   --sv-dove-gray: #666666;
   --sv-dusty-gray: #999999;
@@ -22,6 +24,22 @@
   --sl-text-color-subtle: var(--sv-shuttle-gray);
   --sl-secondary-text-color: var(--sv-white);
   --sl-divider-color: var(--sv-silver);
+  --sl-white: var(--sv-white);
+  --sl-primary: var(--sv-vermilion);
+  --sl-secondary: var(--sv-dolphin);
+  --sl-accent: var(--sv-dodger-blue);
+}
+
+*[sl-theme=svelte-dark] {
+  --sl-font-family: var(--sv-font-family);
+  --sl-font-family-mono: var(--sv-font-family-mono);
+  --sl-background-color: var(--sv-tundora);
+  --sl-background-color-subtle: var(--sv-brilliant-gray);
+  --sl-text-color: var(--sv-white);
+  --sl-text-color-subtle: var(--sv-aqua-haze);
+  --sl-secondary-text-color: var(--sv-tundora);
+  --sl-divider-color: var(--sv-dark-charcoal);
+  --sl-white: var(--sv-white);
   --sl-primary: var(--sv-vermilion);
   --sl-secondary: var(--sv-dolphin);
   --sl-accent: var(--sv-dodger-blue);

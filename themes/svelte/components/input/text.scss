@@ -1,4 +1,10 @@
-*[sl-theme=svelte-light] {
+:host([sl-theme="svelte-light"]) {
+  color: red;
+}
+:host([sl-theme="svelte-dark"]) {
+  color: blue;
+}
+div.sl-input-text {
   --sl-input-text-font-family: 'Fira Sans';
   --sl-input-text-border-color: var(--sv-silver);
   --sl-input-text-border-radius: 16px;

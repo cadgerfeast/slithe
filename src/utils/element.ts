@@ -5,6 +5,10 @@ export function getRootElement (el: HTMLElement) {
   return null;
 };
 
+export function removeElement (el: HTMLElement) {
+  el.parentNode.removeChild(el);
+};
+
 let handler: number;
 type ObserverCallback = (rect: DOMRect) => void;
 interface ObserverState {

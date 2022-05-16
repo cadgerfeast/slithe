@@ -23,6 +23,7 @@
     wrapper = getRootElement(root);
     wrapper.style.position = 'fixed';
     wrapper.style.pointerEvents = 'none';
+    wrapper.style.zIndex = '2';
     observer = observeRect(wrapper.previousElementSibling, onRectChange);
   });
   onDestroy(() => {
@@ -37,7 +38,7 @@
 </div>
 <!-- Style -->
 <style lang="scss">
-  div.sl-rel {
+  div.sl-rel > * {
     pointer-events: all;
   }
 </style>
