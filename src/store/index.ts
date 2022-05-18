@@ -3,8 +3,8 @@ import { writable, get } from 'svelte/store';
 import { updateTheme } from '../../components/index.es';
 // Style
 import { components } from '../../themes/svelte/svelte';
-// Constants
-const themes = {
+
+export const themes = {
   'vanilla-light': {
     'icon': components['icon']
   },

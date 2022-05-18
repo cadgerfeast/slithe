@@ -2,11 +2,21 @@
 
 ## TODOs
 
-- Notification toasts on the bottom right (events)
-- Better tooltip positioning/style
-- Better tooltip behavior (debounce, mouseleave tooltip)
+- Rename Svelte to Primer
 - Button
-  - Props & Events
+  - Svelte Light
+  - Svelte Dark
+- Tooltip
+  - Positioning
+  - Debounce
+  - Mouseleave
+  - Vanilla Light
+  - Vanilla Dark
+  - Svelte Light
+  - Svelte Dark
+- Notifications
+  - Delay
+  - Dismissable
   - Vanilla Light
   - Vanilla Dark
   - Svelte Light

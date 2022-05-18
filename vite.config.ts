@@ -3,8 +3,27 @@ import { defineConfig } from 'vite';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import sveltePreprocess from 'svelte-preprocess';
 import { mdsvex } from 'mdsvex';
+import * as fs from 'fs';
+import * as path from 'path';
 // Constants
 const target = process.env.npm_lifecycle_event.substring(process.env.npm_lifecycle_event.indexOf(':') + 1);
+// Components
+const components = {};
+fs.readdirSync('./src/components').forEach((c) => {
+  const componentPath = path.resolve('./src/components', c);
+  if (fs.statSync(componentPath).isDirectory()) {
+    fs.readdirSync(componentPath).forEach((f) => {
+      if (f.slice(-6) === 'svelte') {
+        const name = f.slice(0, -7);
+        if (c === name) {
+          components[name] = path.resolve(componentPath, f);
+        } else {
+          components[`${c}/${name}`] = path.resolve(componentPath, f);
+        }
+      }
+    });
+  }
+});
 
 /**
  * Vite Configuration
@@ -48,10 +67,7 @@ const config = defineConfig({
       emptyOutDir: false,
       outDir: './components',
       rollupOptions: {
-        input: {
-          'button': './src/components/button/button.svelte',
-          'card': './src/components/card/card.svelte'
-        },
+        input: components,
         output: {
           format: 'es',
           entryFileNames: '[name].js'

@@ -5,13 +5,13 @@ html {
   > body {
     height: 100%;
     margin: 0;
+    font-family: var(--sl-font-family);
     background-color: var(--sl-background-color);
     color: var(--sl-text-color);
     > div#app {
       height: 100%;
       display: flex;
       flex-direction: column;
-      font-family: var(--sl-font-family);
     }
   }
 }

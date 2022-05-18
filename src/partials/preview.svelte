@@ -4,7 +4,7 @@
   import { onMount } from 'svelte';
   import { delay } from '../utils/time';
   import { clickOutside } from '../utils/element';
-  import { globalTheme, previewTheme } from '../store';
+  import { globalTheme, previewTheme, themes } from '../store';
   // Data
   let showThemePicker = false;
   let root: HTMLElement;
@@ -18,7 +18,7 @@
   function updateComponentsTheme () {
     const elements = Array.from(root.querySelectorAll('*')).filter(e => e.tagName.startsWith('SL-'));
     for (const element of elements) {
-      element.setAttribute('sl-theme', $previewTheme);
+      element.updateTheme?.({ key: $previewTheme, components: themes[$previewTheme] });
     }
   }
   async function onThemePickerToggle () {

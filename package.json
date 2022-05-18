@@ -6,7 +6,7 @@
   "module": "./components/index.es.js",
   "unpkg": "./components/index.umd.js",
   "scripts": {
-    "dev": "run-p dev:lib dev:docs",
+    "dev": "npm run build:lib && run-p dev:lib dev:docs",
     "dev:lib": "run-s dev:lib:bundle dev:lib:split",
     "dev:lib:bundle": "vite build --watch",
     "dev:lib:split": "vite build --watch",

@@ -1,7 +1,7 @@
-:host([sl-theme="svelte-light"]) {
+:host([sl-theme=svelte-light]) {
   color: red;
 }
-:host([sl-theme="svelte-dark"]) {
+:host([sl-theme=svelte-dark]) {
   color: blue;
 }
 div.sl-input-text {

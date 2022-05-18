@@ -10,17 +10,27 @@
 </svelte:head>
 <!-- Script -->
 <script lang="ts">
-  // Components
+  // Helpers
+  import { addNotification } from '../../../components/index.es';
+  // Partials
   import Preview from '../../partials/preview.svelte';
   // Methods
-  function toggleNotification () {
-    console.info('SNETCH: toggleNotification');
+  function _addNotification (msg) {
+    addNotification({
+      type: 'info',
+      message: msg
+    });
   }
 </script>
 
 # Button
 
 This replaces the standard HTML `<button>` element.
+
+<Preview>
+  <button>Button</button>
+  <sl-button>Button</sl-button>
+</Preview>
 
 ## Attributes
 
@@ -57,7 +67,7 @@ Adds extra information about the element, displayed as a `tooltip` when being ho
 Makes the button non-interactable.
 
 <Preview>
-  <sl-button disabled on:click={toggleNotification}>Disabled</sl-button>
+  <sl-button disabled>Disabled</sl-button>
   <sl-button disabled>Disabled</sl-button>
 </Preview>
 
@@ -72,9 +82,9 @@ Makes the button non-interactable.
 Triggered when the user clicks on the element.
 
 <Preview>
-  <sl-button type="button" on:click={toggleNotification}>Button</sl-button>
+  <sl-button type="button" on:click={() => _addNotification('clicked!')}>Click me!</sl-button>
 </Preview>
 
 ``` html
-<sl-button type="submit">Submit</sl-button>
+<sl-button type="button" onclick="notify('clicked!')">Click me!</sl-button>
 ```

@@ -4,6 +4,7 @@ import { removeElement } from '../utils/element';
 // Components
 import * as Button from './button/button.svelte';
 import * as Card from './card/card.svelte';
+import * as Hud from './hud/hud.svelte';
 import * as Icon from './icon/icon.svelte';
 import * as InputText from './input/text.svelte';
 import * as KBD from './kbd/kbd.svelte';
@@ -17,6 +18,7 @@ import vanillaStyle from '../style/vanilla.scss';
 const components = [
   Button,
   Card,
+  Hud,
   Icon,
   InputText,
   KBD,
@@ -67,6 +69,18 @@ export function registerElements (_config: ConfigurationManifest) {
         this.$destroy();
         elements.delete(this);
       }
+      public updateTheme (theme: Theme) {
+        this.setAttribute('sl-theme', theme.key);
+        if (this._slithe.style) {
+          removeElement(this._slithe.style);
+          delete this._slithe.style;
+        }
+        if (theme.components?.[this._slithe.tag]) {
+          this._slithe.style = document.createElement('style');
+          this._slithe.style.innerHTML = conf.theme.components[this._slithe.tag];
+          this.shadowRoot.appendChild(this._slithe.style);
+        }
+      }
     }
     customElements.define(`sl-${component.tag}`, _constructor as unknown as CustomElementConstructor);
   }
@@ -75,15 +89,24 @@ export function registerElements (_config: ConfigurationManifest) {
 export function updateTheme (theme: Theme) {
   conf.update({ theme });
   for (const element of elements) {
-    element.setAttribute('sl-theme', theme.key);
-    if (element._slithe.style) {
-      removeElement(element._slithe.style);
-      delete element._slithe.style;
-    }
-    if (conf.theme?.components?.[element._slithe.tag]) {
-      element._slithe.style = document.createElement('style');
-      element._slithe.style.innerHTML = conf.theme.components[element._slithe.tag];
-      element.shadowRoot.appendChild(element._slithe.style);
-    }
+    element.updateTheme(theme);
   }
+}
+
+let hud;
+function createHud () {
+  const element = document.createElement('sl-hud');
+  document.body.appendChild(element);
+  return element;
+}
+
+export interface Notification {
+  type: 'info'|'success'|'warning'|'error';
+  message: string;
+}
+export function addNotification (notification: Notification) {
+  if (!hud) {
+    hud = createHud();
+  }
+  hud.addNotification(notification);
 }
