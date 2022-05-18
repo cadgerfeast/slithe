@@ -86,4 +86,3 @@ Quote break.
 <h1>Custom</h1>
 
 <sl-button use:autofocus>aaaaa</sl-button>
-<sl-nested>bbbbb</sl-nested>

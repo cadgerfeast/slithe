@@ -12,6 +12,10 @@
 <script lang="ts">
   // Components
   import Preview from '../../partials/preview.svelte';
+  // Methods
+  function toggleNotification () {
+    console.info('SNETCH: toggleNotification');
+  }
 </script>
 
 # Button
@@ -36,14 +40,41 @@ When the button is inside a `<form>` element, use `type="submit"` in order to su
 <sl-button type="submit">Submit</sl-button>
 ```
 
+### Title
+
+Adds extra information about the element, displayed as a `tooltip` when being hovered.
+
+<Preview>
+  <sl-button title="Great Tooltip">Mysterious Button</sl-button>
+</Preview>
+
+``` html
+<sl-button title="Great Tooltip">Mysterious Button</sl-button>
+```
+
 ### Disabled
 
 Makes the button non-interactable.
 
 <Preview>
+  <sl-button disabled on:click={toggleNotification}>Disabled</sl-button>
   <sl-button disabled>Disabled</sl-button>
 </Preview>
 
 ``` html
 <sl-button disabled>Disabled</sl-button>
+```
+
+## Events
+
+### Click
+
+Triggered when the user clicks on the element.
+
+<Preview>
+  <sl-button type="button" on:click={toggleNotification}>Button</sl-button>
+</Preview>
+
+``` html
+<sl-button type="submit">Submit</sl-button>
 ```

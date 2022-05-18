@@ -3,13 +3,12 @@ import { conf, ConfigurationManifest, Theme } from '../utils/conf';
 import { removeElement } from '../utils/element';
 // Components
 import * as Button from './button/button.svelte';
-import * as Counter from './counter/counter.svelte';
-import * as Nested from './nested/nested.svelte';
+import * as Card from './card/card.svelte';
 import * as Icon from './icon/icon.svelte';
 import * as InputText from './input/text.svelte';
 import * as KBD from './kbd/kbd.svelte';
 import * as Rel from './rel/rel.svelte';
-import * as Card from './card/card.svelte';
+import * as Tooltip from './tooltip/tooltip.svelte';
 import * as Tree from './tree/tree.svelte';
 import * as TreeItem from './tree/tree-item.svelte';
 // Style
@@ -17,13 +16,12 @@ import vanillaStyle from '../style/vanilla.scss';
 
 const components = [
   Button,
-  Counter,
-  Nested,
+  Card,
   Icon,
   InputText,
   KBD,
   Rel,
-  Card,
+  Tooltip,
   Tree,
   TreeItem
 ];

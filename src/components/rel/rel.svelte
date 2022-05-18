@@ -7,6 +7,9 @@
   // Helpers
   import { onMount, onDestroy } from 'svelte';
   import { getRootElement, observeRect } from '../../utils/element';
+  // Props
+  export let _for = undefined;
+  export { _for as for };
   // Data
   let root: HTMLElement;
   let wrapper: HTMLElement;
@@ -21,10 +24,12 @@
   // Lifecycle
   onMount(() => {
     wrapper = getRootElement(root);
+    _for = _for || wrapper.previousElementSibling;
     wrapper.style.position = 'fixed';
     wrapper.style.pointerEvents = 'none';
     wrapper.style.zIndex = '2';
-    observer = observeRect(wrapper.previousElementSibling, onRectChange);
+    observer = observeRect(_for, onRectChange);
+    onRectChange(_for.getBoundingClientRect());
   });
   onDestroy(() => {
     observer.dispose();

@@ -6,7 +6,9 @@ export function getRootElement (el: HTMLElement) {
 };
 
 export function removeElement (el: HTMLElement) {
-  el.parentNode.removeChild(el);
+  if (el?.parentNode) {
+    el.parentNode.removeChild(el);
+  }
 };
 
 let handler: number;
@@ -69,6 +71,30 @@ export function clickOutside (node: Element) {
 	return {
 		destroy () {
 			document.removeEventListener('click', handleClick);
+		}
+	};
+}
+
+export function tooltip (node: HTMLElement) {
+  let tooltipElement;
+  const wrapper = getRootElement(node);
+	const handleMouseEnter = () => {
+    if (node.dataset.title) {
+      tooltipElement = document.createElement('sl-tooltip');
+      tooltipElement.for = wrapper;
+      tooltipElement.appendChild(document.createTextNode(node.dataset.title));
+      wrapper.insertAdjacentElement('afterend', tooltipElement);
+    }
+	};
+  const handleMouseLeave = () => {
+		removeElement(tooltipElement);
+	};
+	node.addEventListener('mouseenter', handleMouseEnter);
+  node.addEventListener('mouseleave', handleMouseLeave);
+	return {
+		destroy () {
+			node.removeEventListener('mouseenter', handleMouseEnter);
+      node.removeEventListener('mouseleave', handleMouseLeave);
 		}
 	};
 }

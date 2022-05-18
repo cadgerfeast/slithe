@@ -1,20 +1,28 @@
 <!-- Metadata -->
 <script context="module">
   export const tag = 'button';
+  export const style = {
+    'display': 'inline-block'
+  };
 </script>
 <!-- Script -->
 <script lang="ts">
+  // Helpers
+  import { tooltip } from '../../utils/element';
   // Props
   export let type = 'button';
+  export let title = undefined;
   export let disabled = false;
-  // TODO class
-  // TODO style
-  // TODO title
+  // Methods
+  function onClick (e: MouseEvent) {
+    if (disabled) {
+      e.stopPropagation();
+    }
+  }
   // Events
   // TODO blur
   // TODO contextmenu
   // TODO focus
-  // TODO click
   // TODO dblclick
   // TODO mousedown
   // TODO mousemove
@@ -25,7 +33,7 @@
 <!-- Options -->
 <svelte:options tag={null}/>
 <!-- Template -->
-<button {type} {disabled}>
+<button class:disabled={disabled} {type} on:click={onClick} use:tooltip data-title={title}>
   <slot/>
 </button>
 <!-- Style -->
@@ -35,8 +43,7 @@
     color: #000000;
     border: 1px solid #000000;
     border-radius: 2px;
-    &[disabled] {
-      pointer-events: none;
+    &.disabled {
       opacity: 0.5;
     }
   }

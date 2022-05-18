@@ -50,8 +50,7 @@ const config = defineConfig({
       rollupOptions: {
         input: {
           'button': './src/components/button/button.svelte',
-          'counter': './src/components/counter/counter.svelte',
-          'nested': './src/components/nested/nested.svelte'
+          'card': './src/components/card/card.svelte'
         },
         output: {
           format: 'es',
