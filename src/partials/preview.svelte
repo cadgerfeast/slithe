@@ -11,7 +11,7 @@
   let themePickerOpener: HTMLElement;
   // Methods
   function setTheme (shade: string, type: string) {
-    $globalTheme = `svelte-${shade}`;
+    $globalTheme = `primer-${shade}`;
     $previewTheme = `${type}-${shade}`;
     updateComponentsTheme();
   }
@@ -52,10 +52,10 @@
               </ul>
             </div>
             <div class="theme-row">
-              <span>Svelte</span>
+              <span>Primer</span>
               <ul>
-                <li><button class="theme-item svelte-light" class:active={$previewTheme === 'svelte-light'} on:click={() => setTheme('light', 'svelte')}></button></li>
-                <li><button class="theme-item svelte-dark" class:active={$previewTheme === 'svelte-dark'} on:click={() => setTheme('dark', 'svelte')}></button></li>
+                <li><button class="theme-item primer-light" class:active={$previewTheme === 'primer-light'} on:click={() => setTheme('light', 'primer')}></button></li>
+                <li><button class="theme-item primer-dark" class:active={$previewTheme === 'primer-dark'} on:click={() => setTheme('dark', 'primer')}></button></li>
               </ul>
             </div>
           </div>
@@ -139,10 +139,10 @@
                   &.vanilla-dark {
                     background: linear-gradient(90deg, #444444 50%, #333333 0);
                   }
-                  &.svelte-light {
+                  &.primer-light {
                     background: linear-gradient(90deg, #EFEFEF 50%, #FFFFFF 0);
                   }
-                  &.svelte-dark {
+                  &.primer-dark {
                     background: linear-gradient(90deg, #444444 50%, #333333 0);
                   }
                 }

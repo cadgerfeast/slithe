@@ -1,0 +1,46 @@
+:host([sl-theme=primer-light]) {
+  /* Override */
+  --sl-button-border-radius: 6px;
+  --sl-button-background-color: var(--pr-aqua-haze);
+  --sl-button-color: var(--pr-shark);
+  --sl-button-border-color: rgba(27,31,36,0.15);
+  --sl-button-hover-background-color: var(--pr-athens-gray);
+  --sl-button-hover-border-color: rgba(27,31,36,0.15);
+  --sl-button-active-background-color: var(--pr-clewd);
+  --sl-button-active-border-color: rgba(27,31,36,0.15);
+  /* Custom */
+  --sl-button-outline-color: var(--pr-science-blue);
+  --sl-button-box-shadow: 0 1px 0 rgba(27,31,36,0.04);
+  --sl-button-box-shadow-inset: inset 0 1px 0 rgba(255,255,255,0.25);
+}
+:host([sl-theme=primer-dark]) {
+  /* Override */
+  --sl-button-border-radius: 6px;
+  --sl-button-background-color: var(--pr-sibuya-game-reserve);
+  --sl-button-color: var(--pr-karpa-kora);
+  --sl-button-border-color: rgba(205,217,229,0.1);
+  --sl-button-hover-background-color: var(--pr-dark-sea);
+  --sl-button-hover-border-color: var(--pr-slate-gray);
+  --sl-button-active-background-color: var(--pr-nothing-but-life);
+  --sl-button-active-border-color: var(--pr-nevada);
+  /* Custom */
+  --sl-button-outline-color: var(--pr-cornflower-blue);
+  --sl-button-box-shadow: 0 0 transparent;
+  --sl-button-box-shadow-inset: 0 0 transparent;
+}
+button {
+  font-family: var(--pr-font-family);
+  box-shadow: var(--sl-button-box-shadow), var(--sl-button-box-shadow-inset);
+  padding: 5px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+}
+button:focus-visible {
+  outline-color: var(--sl-button-outline-color);
+  box-shadow: none;
+}

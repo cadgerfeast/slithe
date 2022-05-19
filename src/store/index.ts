@@ -2,7 +2,7 @@
 import { writable, get } from 'svelte/store';
 import { updateTheme } from '../../components/index.es';
 // Style
-import { components } from '../../themes/svelte/svelte';
+import { components } from '../themes/primer/primer';
 
 export const themes = {
   'vanilla-light': {
@@ -11,8 +11,8 @@ export const themes = {
   'vanilla-dark': {
     'icon': components['icon']
   },
-  'svelte-light': components,
-  'svelte-dark': components
+  'primer-light': components,
+  'primer-dark': components
 };
 
 export const recentSearches = (() => {
@@ -40,7 +40,7 @@ export const recentSearches = (() => {
 const preferredShade = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
 
 export const globalTheme = (() => {
-  const { subscribe, set } = writable((localStorage?.getItem('slithe.global-theme') || `svelte-${preferredShade}`));
+  const { subscribe, set } = writable((localStorage?.getItem('slithe.global-theme') || `primer-${preferredShade}`));
 	return {
     subscribe,
     get value (): string {
@@ -60,7 +60,7 @@ export const globalTheme = (() => {
 })();
 
 export const previewTheme = (() => {
-  const { subscribe, set } = writable((localStorage?.getItem('slithe.local-theme') || `svelte-${preferredShade}`));
+  const { subscribe, set } = writable((localStorage?.getItem('slithe.local-theme') || `primer-${preferredShade}`));
 	return {
     subscribe,
     get value (): string {

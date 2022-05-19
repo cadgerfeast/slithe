@@ -4,10 +4,12 @@ import { globalTheme } from './store';
 // Partials
 import App from './app.svelte';
 // Style
-import { components } from '../themes/svelte/svelte';
+import '../themes/primer/global.css';
+import { components } from '../themes/primer';
 
 registerElements({
   theme: {
+    key: 'primer-light',
     components
   }
 });

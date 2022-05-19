@@ -1,0 +1,62 @@
+:root {
+  --pr-font-family: 'Fira Sans';
+  --pr-font-family-mono: 'Fira Mono';
+  
+  --pr-white: #FFFFFF;
+  --pr-aqua-haze: #F6F8FA;
+  --pr-athens-gray: #F3F4F6;
+  --pr-clewd: #EBECF0;
+  --pr-shark: #24292F;
+  --pr-bunker: #22272E;
+  --pr-iron: #DCDDDE;
+  --pr-bright-gray: #373E47;
+  --pr-science-blue: #0969DA;
+  --pr-sibuya-game-reserve: #373E47;
+  --pr-karpa-kora: #ADBAC7;
+  --pr-dark-sea: #444C56;
+  --pr-slate-gray: #768390;
+  --pr-nothing-but-life: #3D444D;
+  --pr-nevada: #636E7B;
+  --pr-cornflower-blue: #539BF5;
+  --pr-geyser: #D0D7DE;
+
+  --pr-silver: #CCCCCC;
+  --pr-tundora: #444444;
+  --pr-brilliant-gray: #545454;
+  --pr-shuttle-gray: #57606A;
+  --pr-dusty-gray: #999999;
+
+  --pr-vermilion: #FF3E00;
+  --pr-dolphin: #676778;
+  --pr-dodger-blue: #40B3FF;
+}
+
+*[sl-theme=primer-light] {
+  --sl-font-family: var(--pr-font-family);
+  --sl-font-family-mono: var(--pr-font-family-mono);
+  --sl-background-color: var(--pr-white);
+  --sl-background-color-subtle: var(--pr-aqua-haze);
+  --sl-text-color: var(--pr-shark);
+  --sl-text-color-subtle: var(--pr-shuttle-gray);
+  --sl-secondary-text-color: var(--pr-white);
+  --sl-divider-color: var(--pr-geyser);
+  --sl-white: var(--pr-white);
+  --sl-primary: var(--pr-vermilion);
+  --sl-secondary: var(--pr-dolphin);
+  --sl-accent: var(--pr-dodger-blue);
+}
+
+*[sl-theme=primer-dark] {
+  --sl-font-family: var(--pr-font-family);
+  --sl-font-family-mono: var(--pr-font-family-mono);
+  --sl-background-color: var(--pr-bunker);
+  --sl-background-color-subtle: var(--pr-brilliant-gray);
+  --sl-text-color: var(--pr-karpa-kora);
+  --sl-text-color-subtle: var(--pr-silver);
+  --sl-secondary-text-color: var(--pr-tundora);
+  --sl-divider-color: var(--pr-bright-gray);
+  --sl-white: var(--pr-white);
+  --sl-primary: var(--pr-vermilion);
+  --sl-secondary: var(--pr-dolphin);
+  --sl-accent: var(--pr-dodger-blue);
+}

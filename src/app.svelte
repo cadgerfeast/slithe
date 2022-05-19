@@ -140,9 +140,6 @@
   });
 </script>
 
-<svelte:head>
-  <link rel="stylesheet" href="/themes/svelte/global.css">
-</svelte:head>
 <svelte:window on:keydown={onWindowKeydown} on:scroll={onWindowScroll}/>
 
 <Router>

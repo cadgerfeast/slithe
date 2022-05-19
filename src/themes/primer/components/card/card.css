@@ -1,0 +1,4 @@
+*[sl-theme=primer-light] {
+  --sl-card-border-color: var(--pr-silver);
+  --sl-card-border-radius: 4px;
+}

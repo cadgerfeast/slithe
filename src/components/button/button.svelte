@@ -64,17 +64,8 @@
       border-color: var(--sl-button-active-border-color);
     }
     &:focus-visible {
-      outline: none;
-      &::after {
-        content: '';
-        position: absolute;
-        top: -1px;
-        right: -1px;
-        bottom: -1px;
-        left: -1px;
-        border: 2px solid #000000;
-        border-radius: var(--sl-button-border-radius);
-      }
+      outline: 2px solid #000000;
+      outline-offset: -2px;
     }
     &.disabled {
       opacity: 0.5;
