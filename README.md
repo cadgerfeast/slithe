@@ -2,13 +2,9 @@
 
 ## TODOs
 
-- Global Primer Colors (Light & Dark)
 - Button
   - https://primer.style/css/components/buttons
-  - primary
-  - outline
-  - danger
-  - smalll
+  - small
   - large
   - transparent (invisible)
   - icon

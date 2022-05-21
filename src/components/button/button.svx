@@ -28,11 +28,28 @@
 This replaces the standard HTML `<button>` element.
 
 <Preview>
-  <button>Button</button>
   <sl-button>Button</sl-button>
 </Preview>
 
 ## Attributes
+
+## Modifiers
+
+Adding those `boolean` attributes allows to modify the button styling.
+
+<Preview>
+  <sl-button>Default Button</sl-button>
+  <sl-button primary>Primary Button</sl-button>
+  <sl-button outline>Outline Button</sl-button>
+  <sl-button danger>Danger Button</sl-button>
+</Preview>
+
+``` html
+<sl-button>Default Button</sl-button>
+<sl-button primary>Primary Button</sl-button>
+<sl-button outline>Outline Button</sl-button>
+<sl-button danger>Danger Button</sl-button>
+```
 
 ### Type
 

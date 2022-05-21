@@ -19,14 +19,29 @@
   --pr-nevada: #636E7B;
   --pr-cornflower-blue: #539BF5;
   --pr-geyser: #D0D7DE;
+  --pr-dark-artifact: #2D333B;
+  --pr-eucalyptus: #2DA44E;
+  --pr-sea-green: #2C974B;
+  --pr-bold-irish: #298e46;
+  --pr-forest-green: #238636;
+  --pr-boeing: #2EA043;
+  --pr-tenne: #0965CE;
+  --pr-malibu: #58A6FF;
+  --pr-outer-space: #30363D;
+  --pr-torea-bay: #0D419D;
+  --pr-cardinal: #CF222E;
+  --pr-shiraz: #A40E26;
+  --pr-miyamoto-red: #C11F2A;
+  --pr-sunset-orange: #F85149;
+  --pr-punch: #DA3633;
+  --pr-tall-poppy: #B62324;
+  --pr-salmon: #FF7B72;
 
   --pr-silver: #CCCCCC;
   --pr-tundora: #444444;
-  --pr-brilliant-gray: #545454;
   --pr-shuttle-gray: #57606A;
   --pr-dusty-gray: #999999;
 
-  --pr-vermilion: #FF3E00;
   --pr-dolphin: #676778;
   --pr-dodger-blue: #40B3FF;
 }
@@ -41,7 +56,7 @@
   --sl-secondary-text-color: var(--pr-white);
   --sl-divider-color: var(--pr-geyser);
   --sl-white: var(--pr-white);
-  --sl-primary: var(--pr-vermilion);
+  --sl-primary: var(--pr-eucalyptus);
   --sl-secondary: var(--pr-dolphin);
   --sl-accent: var(--pr-dodger-blue);
 }
@@ -50,13 +65,13 @@
   --sl-font-family: var(--pr-font-family);
   --sl-font-family-mono: var(--pr-font-family-mono);
   --sl-background-color: var(--pr-bunker);
-  --sl-background-color-subtle: var(--pr-brilliant-gray);
+  --sl-background-color-subtle: var(--pr-dark-artifact);
   --sl-text-color: var(--pr-karpa-kora);
   --sl-text-color-subtle: var(--pr-silver);
   --sl-secondary-text-color: var(--pr-tundora);
   --sl-divider-color: var(--pr-bright-gray);
   --sl-white: var(--pr-white);
-  --sl-primary: var(--pr-vermilion);
+  --sl-primary: var(--pr-forest-green);
   --sl-secondary: var(--pr-dolphin);
   --sl-accent: var(--pr-dodger-blue);
 }

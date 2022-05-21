@@ -382,6 +382,7 @@
       flex-shrink: 0;
       padding: 60px 12px 12px 12px;
       box-sizing: border-box;
+      background-color: var(--sl-background-color);
       transition: all .25s ease-in-out;
       &.fixed {
         left: 0 !important;
