@@ -31,25 +31,37 @@ This replaces the standard HTML `<button>` element.
   <sl-button>Button</sl-button>
 </Preview>
 
-## Attributes
-
 ## Modifiers
 
 Adding those `boolean` attributes allows to modify the button styling.
 
-<Preview>
-  <sl-button>Default Button</sl-button>
-  <sl-button primary>Primary Button</sl-button>
-  <sl-button outline>Outline Button</sl-button>
-  <sl-button danger>Danger Button</sl-button>
+<Preview title="Variants">
+  <sl-button>Default</sl-button>
+  <sl-button primary>Primary</sl-button>
+  <sl-button outline>Outline</sl-button>
+  <sl-button danger>Danger</sl-button>
+  <sl-button borderless>Borderless</sl-button>
+</Preview>
+<Preview title="Sizes">
+  <sl-button size="small">Small</sl-button>
+  <sl-button size="medium">Medium</sl-button>
+  <sl-button size="large">Large</sl-button>
 </Preview>
 
 ``` html
-<sl-button>Default Button</sl-button>
-<sl-button primary>Primary Button</sl-button>
-<sl-button outline>Outline Button</sl-button>
-<sl-button danger>Danger Button</sl-button>
+<!-- Variants -->
+<sl-button>Default</sl-button>
+<sl-button primary>Primary</sl-button>
+<sl-button outline>Outline</sl-button>
+<sl-button danger>Danger</sl-button>
+<sl-button borderless>Borderless</sl-button>
+<!-- Size -->
+<sl-button size="small">Small</sl-button>
+<sl-button size="medium">Medium</sl-button>
+<sl-button size="large">Large</sl-button>
 ```
+
+## Attributes
 
 ### Type
 
@@ -72,11 +84,11 @@ When the button is inside a `<form>` element, use `type="submit"` in order to su
 Adds extra information about the element, displayed as a `tooltip` when being hovered.
 
 <Preview>
-  <sl-button title="Great Tooltip">Mysterious Button</sl-button>
+  <sl-button title="Great Tooltip">Hover me!</sl-button>
 </Preview>
 
 ``` html
-<sl-button title="Great Tooltip">Mysterious Button</sl-button>
+<sl-button title="Great Tooltip">Hover me!</sl-button>
 ```
 
 ### Disabled
@@ -84,7 +96,7 @@ Adds extra information about the element, displayed as a `tooltip` when being ho
 Makes the button non-interactable.
 
 <Preview>
-  <sl-button disabled on:click={(e) => _addNotification('disabled!')}>Disabled</sl-button>
+  <sl-button disabled>Disabled</sl-button>
 </Preview>
 
 ``` html

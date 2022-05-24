@@ -11,6 +11,7 @@
   import { tooltip } from '../../utils/element';
   // Props
   export let type = 'button';
+  export let size = 'medium';
   export let title = undefined;
   export let disabled = false;
   // Methods
@@ -23,7 +24,7 @@
 <!-- Options -->
 <svelte:options tag={null}/>
 <!-- Template -->
-<button {type} {disabled} on:click={onClick} use:tooltip data-title={title}>
+<button class={size} {type} {disabled} on:click={onClick} use:tooltip data-title={title}>
   <slot/>
 </button>
 <!-- Style -->

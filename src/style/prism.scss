@@ -2,7 +2,7 @@
 	code[class*="language-"],
 	pre[class*="language-"] {
 		display: block;
-		background-color: #FFFFFF;
+		background-color: #F6F8FA;
 		color: #393A34;
 		font-family: var(--sl-font-family-mono);
 		direction: ltr;
@@ -19,6 +19,7 @@
 		-moz-hyphens: none;
 		-ms-hyphens: none;
 		hyphens: none;
+		border-radius: 6px;
 	}
 	pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
 	code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
@@ -33,7 +34,7 @@
 		margin: .5em 0;
 		overflow: auto;
 		border: 1px solid #dddddd;
-		background-color: white;
+		background-color: #F6F8FA;
 	}
 	:not(pre) > code[class*="language-"] {
 		padding: .2em;
@@ -150,6 +151,7 @@
 		-moz-hyphens: none;
 		-ms-hyphens: none;
 		hyphens: none;
+		border-radius: 6px;
 	}
 	pre[class*="language-"]::selection,
 	code[class*="language-"]::selection,

@@ -10,25 +10,19 @@
   --pr-bunker: #22272E;
   --pr-iron: #DCDDDE;
   --pr-bright-gray: #373E47;
-  --pr-science-blue: #0969DA;
   --pr-sibuya-game-reserve: #373E47;
   --pr-karpa-kora: #ADBAC7;
   --pr-dark-sea: #444C56;
   --pr-slate-gray: #768390;
   --pr-nothing-but-life: #3D444D;
   --pr-nevada: #636E7B;
-  --pr-cornflower-blue: #539BF5;
   --pr-geyser: #D0D7DE;
   --pr-dark-artifact: #2D333B;
-  --pr-eucalyptus: #2DA44E;
-  --pr-sea-green: #2C974B;
-  --pr-bold-irish: #298e46;
-  --pr-forest-green: #238636;
-  --pr-boeing: #2EA043;
-  --pr-tenne: #0965CE;
-  --pr-malibu: #58A6FF;
+  --pr-science-blue: #0969DA;
+  --pr-true-blue: #085EC4;
+  --pr-endeavour: #0754AE;
+  --pr-cornflower-blue: #539BF5;
   --pr-outer-space: #30363D;
-  --pr-torea-bay: #0D419D;
   --pr-cardinal: #CF222E;
   --pr-shiraz: #A40E26;
   --pr-miyamoto-red: #C11F2A;
@@ -41,9 +35,6 @@
   --pr-tundora: #444444;
   --pr-shuttle-gray: #57606A;
   --pr-dusty-gray: #999999;
-
-  --pr-dolphin: #676778;
-  --pr-dodger-blue: #40B3FF;
 }
 
 *[sl-theme=primer-light] {
@@ -56,9 +47,7 @@
   --sl-secondary-text-color: var(--pr-white);
   --sl-divider-color: var(--pr-geyser);
   --sl-white: var(--pr-white);
-  --sl-primary: var(--pr-eucalyptus);
-  --sl-secondary: var(--pr-dolphin);
-  --sl-accent: var(--pr-dodger-blue);
+  --sl-primary: var(--pr-science-blue);
 }
 
 *[sl-theme=primer-dark] {
@@ -71,7 +60,5 @@
   --sl-secondary-text-color: var(--pr-tundora);
   --sl-divider-color: var(--pr-bright-gray);
   --sl-white: var(--pr-white);
-  --sl-primary: var(--pr-forest-green);
-  --sl-secondary: var(--pr-dolphin);
-  --sl-accent: var(--pr-dodger-blue);
+  --sl-primary: var(--pr-endeavour);
 }

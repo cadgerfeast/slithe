@@ -2,14 +2,6 @@
 
 ## TODOs
 
-- Markdown
-  - Preview should be rounded, attached to code below, link primer style
-- Button
-  - https://primer.style/react/Button
-  - https://primer.style/css/components/buttons
-  - transparent (invisible)
-  - small
-  - large
 - KBD
 - Card
   - https://primer.style/css/components/box
@@ -17,6 +9,7 @@
   - https://primer.style/css/components/forms
   - https://primer.style/react/TextInput
 - Row Group
+  - https://primer.style/react/Button
   - https://primer.style/css/components/buttons
 - Tooltip
   - https://primer.style/react/Tooltip

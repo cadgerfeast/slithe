@@ -313,7 +313,7 @@
       color: inherit;
       margin: 0 12px;
       &:hover {
-        color: var(--sl-accent);
+        color: var(--sl-primary);
       }
     }
     sl-card.search-results {
