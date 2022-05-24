@@ -23,7 +23,7 @@
 <!-- Options -->
 <svelte:options tag={null}/>
 <!-- Template -->
-<button class:disabled={disabled} {type} on:click={onClick} use:tooltip data-title={title} tabindex={disabled ? -1 : 0}>
+<button {type} {disabled} on:click={onClick} use:tooltip data-title={title}>
   <slot/>
 </button>
 <!-- Style -->
@@ -55,6 +55,7 @@
     border: 1px solid var(--sl-button-border-color);
     border-radius: var(--sl-button-border-radius);
     padding: 2px 7px;
+    user-select: none;
     &:hover {
       background-color: var(--sl-button-hover-background-color);
       border-color: var(--sl-button-hover-border-color);
@@ -68,7 +69,8 @@
       outline-offset: -2px;
       box-shadow: 0 0 0 2px #FFFFFF;
     }
-    &.disabled {
+    &[disabled] {
+      pointer-events: none;
       opacity: 0.5;
     }
   }

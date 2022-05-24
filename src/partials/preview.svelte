@@ -7,18 +7,20 @@
   import { globalTheme, previewTheme, themes } from '../store';
   // Data
   let showThemePicker = false;
-  let root: HTMLElement;
   let themePickerOpener: HTMLElement;
   // Methods
   function setTheme (shade: string, type: string) {
     $globalTheme = `primer-${shade}`;
     $previewTheme = `${type}-${shade}`;
-    updateComponentsTheme();
+    updatePreviewComponents()
   }
-  function updateComponentsTheme () {
-    const elements = Array.from(root.querySelectorAll('*')).filter(e => e.tagName.startsWith('SL-'));
-    for (const element of elements) {
-      element.updateTheme?.({ key: $previewTheme, components: themes[$previewTheme] });
+  function updatePreviewComponents () {
+    const previewComponents = document.querySelectorAll('div.preview');
+    for (const previewComponent of previewComponents) {
+      const elements = Array.from(previewComponent.querySelectorAll('*')).filter(e => e.tagName.startsWith('SL-'));
+      for (const element of elements) {
+        element.updateTheme?.({ key: $previewTheme, components: themes[$previewTheme] });
+      }
     }
   }
   async function onThemePickerToggle () {
@@ -32,11 +34,11 @@
   }
   // Lifecycle
   onMount(() => {
-    updateComponentsTheme();
+    updatePreviewComponents();
   });
 </script>
 <!-- Template -->
-<div bind:this={root} class="preview">
+<div class="preview">
   <slot/>
   <div class="label">
     <sl-icon bind:this={themePickerOpener} class="theme-picker-icon" name="color-palette-outline" size={18} on:click={onThemePickerToggle}/>

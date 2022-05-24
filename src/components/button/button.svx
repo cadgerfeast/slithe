@@ -84,8 +84,7 @@ Adds extra information about the element, displayed as a `tooltip` when being ho
 Makes the button non-interactable.
 
 <Preview>
-  <sl-button disabled>Disabled</sl-button>
-  <sl-button disabled>Disabled</sl-button>
+  <sl-button disabled on:click={(e) => _addNotification('disabled!')}>Disabled</sl-button>
 </Preview>
 
 ``` html

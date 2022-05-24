@@ -81,6 +81,13 @@ export function registerElements (_config: ConfigurationManifest) {
           this.shadowRoot.appendChild(this._slithe.style);
         }
       }
+      addEventListener (event: string, handler: Function, options: boolean) {
+        super.addEventListener(event, (...args) => {
+          if (!this.disabled) {
+            handler(...args);
+          }
+        }, options);
+      }
     }
     customElements.define(`sl-${component.tag}`, _constructor as unknown as CustomElementConstructor);
   }
