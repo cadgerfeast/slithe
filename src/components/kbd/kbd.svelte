@@ -1,6 +1,7 @@
 <!-- Metadata -->
 <script context="module">
   export const tag = 'kbd';
+  export const style = {};
 </script>
 <!-- Options -->
 <svelte:options tag={null}/>

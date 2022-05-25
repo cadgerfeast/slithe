@@ -1,3 +1,15 @@
+div.preview + div.preview {
+  border-top: none !important;
+  border-top-left-radius: 0px !important;
+  border-top-right-radius: 0px !important;
+}
+div.preview + pre[class*="language-"] {
+  margin-top: 0;
+  border-top: none;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+// Light
 *[sl-theme$=light] {
 	code[class*="language-"],
 	pre[class*="language-"] {
@@ -129,6 +141,7 @@
 		background: linear-gradient(to right, rgba(193, 222, 241, 0.2) 70%, rgba(221, 222, 241, 0));
 	}
 }
+// Dark
 *[sl-theme$=dark] {
 	pre[class*="language-"],
 	code[class*="language-"] {

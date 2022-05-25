@@ -1,6 +1,7 @@
 <!-- Metadata -->
 <script context="module">
   export const tag = 'rel';
+  export const style = {};
 </script>
 <!-- Script -->
 <script lang="ts">

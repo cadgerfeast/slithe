@@ -28,46 +28,54 @@ const components = [
   TreeItem
 ];
 
+interface HTMLSlitheElement extends HTMLElement {
+  disabled?: boolean;
+}
 interface SlitheElementStyle {
+  el: HTMLSlitheElement;
   tag: string;
   style?: HTMLStyleElement;
 }
-const elements = new Set();
+export interface SlitheElement {
+  _slithe: SlitheElementStyle;
+  updateTheme: (theme: Theme) => void;
+}
+const elements = new Set<SlitheElement>();
 export function registerElements (_config: ConfigurationManifest) {
   const globalStyle = document.createElement('style');
   globalStyle.innerHTML = vanillaStyle;
   document.head.insertAdjacentElement('beforeend', globalStyle);
   conf.update(_config);
   for (const component of components) {
-    const _constructor = class SlitheElement extends component.default {
-      private _slithe: SlitheElementStyle;
+    const _constructor = class extends component.default implements SlitheElement {
+      // Props
+      _slithe: SlitheElementStyle;
+      // Constructor
       constructor () {
         super();
         this._slithe = {
+          el: this as unknown as HTMLSlitheElement,
           tag: component.tag
         };
         if (conf.theme?.components?.[component.tag]) {
           this._slithe.style = document.createElement('style');
           this._slithe.style.innerHTML = conf.theme.components[component.tag];
-          (this as any).shadowRoot.appendChild(this._slithe.style);
+          this._slithe.el.shadowRoot.appendChild(this._slithe.style);
         }
       }
-      connectedCallback () {
-        super.connectedCallback();
-        if (conf.theme) {
-          this.setAttribute('sl-theme', conf.theme.key);
-        }
-        if (component.style) {
-          for (const property in component.style) {
-            this.style[property] = component.style[property];
+      // Methods
+      setAttribute (key: string, value: string) {
+        super.setAttribute(key, value);
+      }
+      addEventListener (event: string, handler: Function, options: boolean) {
+        super.addEventListener(event, (...args) => {
+          if (!this._slithe.el.disabled) {
+            handler(...args);
           }
-        }
-        elements.add(this);
+        }, options);
       }
-      disconnectedCallback () {
-        super.disconnectedCallback();
-        this.$destroy();
-        elements.delete(this);
+      $destroy () {
+        super.$destroy();
       }
       public updateTheme (theme: Theme) {
         this.setAttribute('sl-theme', theme.key);
@@ -78,15 +86,26 @@ export function registerElements (_config: ConfigurationManifest) {
         if (theme.components?.[this._slithe.tag]) {
           this._slithe.style = document.createElement('style');
           this._slithe.style.innerHTML = conf.theme.components[this._slithe.tag];
-          this.shadowRoot.appendChild(this._slithe.style);
+          this._slithe.el.shadowRoot.appendChild(this._slithe.style);
         }
       }
-      addEventListener (event: string, handler: Function, options: boolean) {
-        super.addEventListener(event, (...args) => {
-          if (!this.disabled) {
-            handler(...args);
+      // Lifecycle
+      connectedCallback () {
+        super.connectedCallback();
+        if (conf.theme) {
+          this.setAttribute('sl-theme', conf.theme.key);
+        }
+        if (component.style) {
+          for (const property in component.style) {
+            this._slithe.el.style[property] = component.style[property];
           }
-        }, options);
+        }
+        elements.add(this);
+      }
+      disconnectedCallback () {
+        super.disconnectedCallback();
+        this.$destroy();
+        elements.delete(this);
       }
     }
     customElements.define(`sl-${component.tag}`, _constructor as unknown as CustomElementConstructor);

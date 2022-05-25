@@ -1,7 +1,7 @@
 <script lang="ts">
   // Helpers
   import { onMount } from 'svelte';
-  import { Link, Router, Route, navigate } from 'svelte-navigator';
+  import { Link, Router, Route } from 'svelte-navigator';
   import { pages, page, fullTextSearch, Page } from './routes';
   import { delay } from './utils/time';
   import { recentSearches } from './store';
@@ -70,7 +70,7 @@
     clearTimeout(scrollTimeout);
     scrollTimeout = setTimeout(() => {
       if (!preventHashChange) {
-        navigate(`#${target.textContent}`);
+        location.replace(`#${target.textContent}`);
       }
       preventHashChange = false;
     }, 100);

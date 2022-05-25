@@ -10,12 +10,19 @@ import { mdsvex } from 'mdsvex';
  * https://github.com/sveltejs/svelte-preprocess
  */
 const config = defineConfig({
-  // Common
   plugins: [
     svelte({
       extensions: ['.svelte', '.svx'],
       preprocess: [mdsvex(), sveltePreprocess()]
     })
-  ]
+  ],
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    coverage: {
+      reporter: ['lcov'],
+      include: ['./src/components']
+    }
+  }
 });
 export default config;

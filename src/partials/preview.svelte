@@ -5,6 +5,7 @@
   import { delay } from '../utils/time';
   import { clickOutside } from '../utils/element';
   import { globalTheme, previewTheme, themes } from '../store';
+  import type { SlitheElement } from '../components';
   // Props
   export let title = undefined;
   // Data
@@ -19,7 +20,7 @@
   function updatePreviewComponents () {
     const previewComponents = document.querySelectorAll('div.preview');
     for (const previewComponent of previewComponents) {
-      const elements = Array.from(previewComponent.querySelectorAll('*')).filter(e => e.tagName.startsWith('SL-'));
+      const elements = Array.from(previewComponent.querySelectorAll('*')).filter(e => e.tagName.startsWith('SL-')) as unknown as SlitheElement[];
       for (const element of elements) {
         element.updateTheme?.({ key: $previewTheme, components: themes[$previewTheme] });
       }
@@ -81,17 +82,6 @@
     border: 1px solid #DDDDDD;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
-    :global(+ div.preview) {
-      border-top: none !important;
-      border-top-left-radius: 0px !important;
-      border-top-right-radius: 0px !important;
-    }
-    :global(+ pre[class*="language-"]) {
-      margin-top: 0;
-      border-top: none;
-      border-top-left-radius: 0px;
-      border-top-right-radius: 0px;
-    }
     > div.label {
       position: absolute;
       top: 5px;
