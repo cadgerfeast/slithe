@@ -1,3 +1,4 @@
+/// <reference types="vitest"/>
 // Helpers
 import { defineConfig } from 'vite';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
@@ -20,8 +21,11 @@ const config = defineConfig({
     globals: true,
     environment: 'jsdom',
     coverage: {
-      reporter: ['lcov'],
-      include: ['./src/components']
+      all: true,
+      reporter: ['lcov', 'text'],
+      extensions: ['.ts', '.svelte'],
+      include: ['src/**/*'],
+      exclude: ['src/themes/**/*', 'src/**/*.d.ts']
     }
   }
 });

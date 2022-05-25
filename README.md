@@ -6,7 +6,7 @@
 [![Downloads](https://img.shields.io/npm/dt/slithe)](https://www.npmjs.com/package/slithe)
 [![License](https://img.shields.io/npm/l/slithe)](https://github.com/cadgerfeast/slithe/blob/master/LICENSE)
 
-<p align="center"><br/><img src="https://github.com/cadgerfeast/slithe/blob/master/public/slithe.png?raw=true" alt="Slithe Icon"/><br/><br/></p>
+<p align="center"><br/><img src="https://github.com/cadgerfeast/slithe/blob/master/public/favicon.png?raw=true" alt="Slithe Icon"/><br/><br/></p>
 
 > Snaky web components that moults.
 
