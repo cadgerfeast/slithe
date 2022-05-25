@@ -8,10 +8,32 @@
 
 > Snaky web components that moults.
 
+## Documentation
+
+[Full documentation website can be found here.](https://slithe.cadgerfeast.dev)
+
 ## Installation
 
 ``` bash
 npm install slithe --save
+```
+
+## Usage
+
+``` javascript
+// Import
+import { registerElements } from 'slithe';
+// Theme
+import 'slithe/themes/primer/global.css';
+import { components } from 'slithe/themes/primer';
+// Initialization
+registerElements({ theme: { key: 'primer-light', components } });
+```
+
+``` html
+<!-- Use it! -->
+<sl-button primary>My Cool Buton</sl-button>
+<sl-input-text/>
 ```
 
 ## License
@@ -20,10 +42,12 @@ MIT
 
 ## TODOs
 
-- First npm Publish before commit
-- Proper README.md documentation
 - Snake/Svelte logo
 - sl-kbd
+- Migrate to public repository
+- Initialize sonarcloud
+- Check github pages with custom domain
+- Publish 0.0.2
 - sl-card
   - https://primer.style/css/components/box
 - sl-input-text
@@ -50,3 +74,4 @@ MIT
   - Vanilla Dark
   - Primer Light
   - Primer Dark
+- Per-component (splits) examples
