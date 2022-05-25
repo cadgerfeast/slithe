@@ -9,7 +9,7 @@ on:
       - master
 
 jobs:
-  build:
+  pipeline:
     if: "!contains(github.event.head_commit.message, 'Release slithe@')"
     runs-on: ubuntu-20.04
     steps:
@@ -55,7 +55,6 @@ jobs:
         working-directory: ./coverage
         run: |
           sed -i 's/\/home\/runner\/work\/slithe\/slithe\//\/github\/workspace\//g' lcov.info
-          sed -i 's/\/home\/runner\/work\/slithe\/slithe\//\/github\/workspace\//g' clover.xml
       - name: Sonar
         uses: sonarsource/sonarcloud-github-action@master
         env:
