@@ -1,6 +1,6 @@
 <script context="module">
   export const metadata = {
-    title: 'toto'
+    title: 'Slithe - Introduction'
   };
 </script>
 
@@ -8,7 +8,7 @@
   // Helpers
   import { registerFocus } from '../utils/a11y';
   // Assets
-  import svelte from '../assets/svelte.svg';
+  import slithe from '../assets/slithe.svg';
   // Constants
   const autofocus = registerFocus();
 </script>
@@ -48,11 +48,11 @@ Strikethrough uses two tildes. ~~Scratch this.~~
 
 <h1>Images</h1>
 
-<img src={svelte} alt="Svelte Icon" title="Svelte Icon"/>
+<img src={slithe} alt="Slithe Icon" title="Slithe Icon"/>
 
 <sl-icon name="github" size="19"/>
 <sl-icon name="activity" size="19"/>
-<sl-icon src={svelte} size="19"/>
+<sl-icon src={slithe} size="19"/>
 
 <h1>Syntax</h1>
 

@@ -4,10 +4,6 @@
     title: 'Slithe - Components - Button'
   };
 </script>
-<!-- Options -->
-<svelte:head>
-	<title>{metadata.title}</title>
-</svelte:head>
 <!-- Script -->
 <script lang="ts">
   // Helpers
@@ -25,7 +21,9 @@
 
 # Button
 
-This replaces the standard HTML `<button>` element.
+A `sl-button` component is an interactive element that performs a programmable action when activated.
+
+This component reflects and extends the behavior of the standard `button` element.
 
 <Preview>
   <sl-button>Button</sl-button>

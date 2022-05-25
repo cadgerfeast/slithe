@@ -1,3 +1,9 @@
+<!-- Options -->
+<svelte:head>
+	<title>{title}</title>
+</svelte:head>
+<svelte:window on:keydown={onWindowKeydown} on:scroll={onWindowScroll}/>
+<!-- Script -->
 <script lang="ts">
   // Helpers
   import { onMount } from 'svelte';
@@ -7,8 +13,7 @@
   import { recentSearches } from './store';
   import { clickOutside } from './utils/element';
   // Assets
-  import svelte from './assets/svelte.svg';
-  import search from './assets/search.svg';
+  import slithe from './assets/slithe.svg';
   import github from './assets/github.svg';
   // Data
   let lastPath = location.pathname;
@@ -26,6 +31,7 @@
   // Computed
   $: showSearchResults = searchInputFocused && (pages.length > 0);
   $: heading = $page.path.split('#')[1];
+  $: title = $page.page.metadata.title || 'Slithe';
   // Reactive
   $: $page.path, onRouteChange();
   // Events
@@ -139,16 +145,14 @@
     }
   });
 </script>
-
-<svelte:window on:keydown={onWindowKeydown} on:scroll={onWindowScroll}/>
-
+<!-- Template -->
 <Router>
   <!-- Toolbar -->
   <header>
-    <sl-icon class="svelte" src={svelte} size={40}/>
+    <sl-icon class="slithe" src={slithe} size={50}/>
     <span class="title">Slithe</span>
     <sl-input-text bind:this={searchInput} on:input={onSearchInputInput} on:focus={onSearchInputFocus} on:blur={onSearchInputBlur}>
-      <sl-icon slot="pre" src={search} size={20}/>
+      <sl-icon slot="pre" name="search"/>
       <span slot="placeholder">
         <span>Search</span>
         <sl-kbd>Ctrl</sl-kbd>
@@ -216,6 +220,9 @@
                 </li>
               </ul>
             </li>
+            <li>
+              <Link class="link" to="/components/keyboard">Keyboard</Link>
+            </li>
           </ul>
         </li>
       </ul>
@@ -280,7 +287,7 @@
     {/if}
   </div>
 </Router>
-
+<!-- Style -->
 <style lang="scss" global>
   @import './style/global.scss';
   @import './style/prism.scss';
@@ -296,7 +303,7 @@
     background-color: var(--sl-background-color);
     box-shadow: 0 2px 5px rgba(0, 0, 0, .25);
     z-index: 3;
-    > sl-icon.svelte {
+    > sl-icon.slithe {
       margin-left: 12px;
     }
     > span.title {

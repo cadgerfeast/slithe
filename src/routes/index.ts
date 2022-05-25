@@ -6,6 +6,7 @@ import { recentSearches } from '../store';
 import * as Index from './index.svx';
 import * as Accessibility from './accessibility.svx';
 import * as Button from '../components/button/button.svx';
+import * as Keyboard from '../components/kbd/kbd.svx';
 // Constants
 const _pushState = history.pushState;
 
@@ -27,13 +28,14 @@ export interface Page {
 export const pages: Page[] = [
   { path: '/', metadata: Index.metadata, component: Index.default },
   { path: '/accessibility', metadata: Accessibility.metadata, component: Accessibility.default },
-  { path: '/components/button', metadata: Button.metadata, component: Button.default }
+  { path: '/components/button', metadata: Button.metadata, component: Button.default },
+  { path: '/components/keyboard', metadata: Keyboard.metadata, component: Keyboard.default }
 ];
 
 const computePageContent = (page: Page) => {
   const target = document.createElement('div');
   target.innerHTML = '';
-  new page.component({ target });
+  const instance = new page.component({ target });
   page.content = target.innerText.toLowerCase();
   page.toc = {};
   const headings = target.querySelectorAll('h1,h2,h3,h4,h5,h6');
@@ -98,6 +100,7 @@ const computePageContent = (page: Page) => {
       }
     }
   }
+  instance.$destroy();
 };
 const getPage = (path = location.href.replace(location.origin, '')) => {
   const page = [...pages].reverse().find((p) => path.startsWith(p.path));
@@ -135,10 +138,14 @@ export async function fullTextSearch (_query: string) {
     }
   }
   if (!query) {
-    return pages.filter((page) => {
-      delete page.match;
-      return recentSearches.value.includes(page.path);
-    });
+    if (recentSearches.value.length) {
+      return pages.filter((page) => {
+        delete page.match;
+        return recentSearches.value.includes(page.path);
+      });
+    } else {
+      return pages.slice(0, 5);
+    }
   } else {
     const splits = query.split(' ');
     const results = pages.filter((page) => {

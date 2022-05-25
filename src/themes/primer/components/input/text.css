@@ -1,20 +1,14 @@
-:host([sl-theme=primer-light]) {
-  color: red;
-}
-:host([sl-theme=primer-dark]) {
-  color: blue;
-}
 div.sl-input-text {
   --sl-input-text-font-family: 'Fira Sans';
-  --sl-input-text-border-color: var(--pr-silver);
+  --sl-input-text-border-color: var(--pr-regent-gray);
   --sl-input-text-border-radius: 16px;
   --sl-input-text-padding-top: 4px;
   --sl-input-text-padding-right: 4px;
   --sl-input-text-padding-bottom: 4px;
   --sl-input-text-padding-left: 4px;
   --sl-input-text-font-size: 14px;
-  --sl-input-text-pre-color: var(--pr-dusty-gray);
-  --sl-input-text-placeholder-color: var(--pr-dusty-gray);
+  --sl-input-text-pre-color: var(--pr-pale-sky);
+  --sl-input-text-placeholder-color: var(--pr-pale-sky);
   --sl-input-text-placeholder-font-size: 14px;
   --sl-input-text-focused-border-color: var(--pr-tundora);
 }

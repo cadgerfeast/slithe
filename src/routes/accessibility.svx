@@ -1,6 +1,6 @@
 <script context="module">
   export const metadata = {
-    title: 'tata'
+    title: 'Slithe - Accessibility'
   };
 </script>
 

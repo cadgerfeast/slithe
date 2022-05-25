@@ -5,6 +5,8 @@
     'display': 'inline-block'
   };
 </script>
+<!-- Options -->
+<svelte:options tag={null}/>
 <!-- Script -->
 <script lang="ts">
   // Helpers
@@ -21,8 +23,6 @@
     }
   }
 </script>
-<!-- Options -->
-<svelte:options tag={null}/>
 <!-- Template -->
 <button class={size} {type} {disabled} on:click={onClick} use:tooltip data-title={title}>
   <slot/>
@@ -30,7 +30,6 @@
 <!-- Style -->
 <style lang="scss">
   :host([sl-theme=vanilla-light]) {
-    --sl-button-border-radius: 3px;
     --sl-button-background-color: #EFEFEF;
     --sl-button-color: #000000;
     --sl-button-border-color: #7E7E7E;
@@ -40,7 +39,6 @@
     --sl-button-active-border-color: #7E7E7E;
   }
   :host([sl-theme=vanilla-dark]) {
-    --sl-button-border-radius: 3px;
     --sl-button-background-color: #EFEFEF;
     --sl-button-color: #000000;
     --sl-button-border-color: #7E7E7E;
@@ -54,7 +52,7 @@
     background-color: var(--sl-button-background-color);
     color: var(--sl-button-color);
     border: 1px solid var(--sl-button-border-color);
-    border-radius: var(--sl-button-border-radius);
+    border-radius: 3px;
     padding: 2px 7px;
     user-select: none;
     &:hover {

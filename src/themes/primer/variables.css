@@ -30,11 +30,9 @@
   --pr-punch: #DA3633;
   --pr-tall-poppy: #B62324;
   --pr-salmon: #FF7B72;
-
-  --pr-silver: #CCCCCC;
-  --pr-tundora: #444444;
   --pr-shuttle-gray: #57606A;
-  --pr-dusty-gray: #999999;
+  --pr-regent-gray: #8B949E;
+  --pr-pale-sky: #6E7681;
 }
 
 *[sl-theme=primer-light] {
@@ -44,7 +42,6 @@
   --sl-background-color-subtle: var(--pr-aqua-haze);
   --sl-text-color: var(--pr-shark);
   --sl-text-color-subtle: var(--pr-shuttle-gray);
-  --sl-secondary-text-color: var(--pr-white);
   --sl-divider-color: var(--pr-geyser);
   --sl-white: var(--pr-white);
   --sl-primary: var(--pr-science-blue);
@@ -56,8 +53,7 @@
   --sl-background-color: var(--pr-bunker);
   --sl-background-color-subtle: var(--pr-dark-artifact);
   --sl-text-color: var(--pr-karpa-kora);
-  --sl-text-color-subtle: var(--pr-silver);
-  --sl-secondary-text-color: var(--pr-tundora);
+  --sl-text-color-subtle: var(--pr-regent-gray);
   --sl-divider-color: var(--pr-bright-gray);
   --sl-white: var(--pr-white);
   --sl-primary: var(--pr-endeavour);

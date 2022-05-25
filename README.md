@@ -6,6 +6,8 @@
 [![Downloads](https://img.shields.io/npm/dt/slithe)](https://www.npmjs.com/package/slithe)
 [![License](https://img.shields.io/npm/l/slithe)](https://github.com/cadgerfeast/slithe/blob/master/LICENSE)
 
+<p align="center"><br/><img src="https://github.com/cadgerfeast/slithe/blob/master/public/slithe.png?raw=true" alt="Slithe Icon"/><br/><br/></p>
+
 > Snaky web components that moults.
 
 ## Documentation
@@ -42,12 +44,6 @@ MIT
 
 ## TODOs
 
-- Snake/Svelte logo
-- sl-kbd
-- Migrate to public repository
-- Initialize sonarcloud
-- Check github pages with custom domain
-- Publish 0.0.2
 - sl-card
   - https://primer.style/css/components/box
 - sl-input-text

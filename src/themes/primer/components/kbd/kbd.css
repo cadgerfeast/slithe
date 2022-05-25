@@ -1,15 +1,19 @@
-kbd.sl-kbd {
-  background-color: var(--sl-kbd-background-color, #EEEEEE);
-  color: var(--sl-kbd-color, #666666);
-  border-width: var(--sl-kbd-border-width, 1px);
-  border-style: var(--sl-kbd-border-style, solid);
-  border-color: var(--sl-kbd-border-color, #DDDDDD);
-  padding-top: var(--sl-kbd-padding-top, 1px);
-  padding-right: var(--sl-kbd-padding-right, 2px);
-  padding-bottom: var(--sl-kbd-padding-bottom, 1px);
-  padding-left: var(--sl-kbd-padding-left, 2px);
-  font-size: var(--sl-kbd-font-size, 12px);
-  font-family: var(--sl-kbd-font-family, monospace);
-  border-radius: var(--sl-kbd-border-radius, 2px);
-  text-transform: uppercase;
+/* Host */
+:host([sl-theme=primer-light]) {
+  /* Override */
+  --sl-kbd-background-color: var(--pr-aqua-haze);
+  --sl-kbd-color: var(--pr-shuttle-gray);
+  --sl-kbd-border-color: rgba(27,31,36,0.15);
+}
+:host([sl-theme=primer-dark]) {
+  /* Override */
+  --sl-kbd-background-color: var(--pr-sibuya-game-reserve);
+  --sl-kbd-color: var(--pr-regent-gray);
+  --sl-kbd-border-color: var(--pr-regent-gray);
+}
+/* Keyboard */
+kbd {
+  font-family: var(--pr-font-family);
+  border-radius: 4px;
+  padding: 2px 4px;
 }
