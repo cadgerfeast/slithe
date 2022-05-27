@@ -4,8 +4,8 @@ import { readable } from 'svelte/store';
 import { recentSearches } from '../store';
 // Pages
 import * as Index from './index.svx';
-import * as Accessibility from './accessibility.svx';
 import * as Button from '../components/button/button.svx';
+import * as Card from '../components/card/card.svx';
 import * as Keyboard from '../components/kbd/kbd.svx';
 // Constants
 const _pushState = history.pushState;
@@ -27,8 +27,8 @@ export interface Page {
 
 export const pages: Page[] = [
   { path: '/', metadata: Index.metadata, component: Index.default },
-  { path: '/accessibility', metadata: Accessibility.metadata, component: Accessibility.default },
   { path: '/components/button', metadata: Button.metadata, component: Button.default },
+  { path: '/components/card', metadata: Card.metadata, component: Card.default },
   { path: '/components/keyboard', metadata: Keyboard.metadata, component: Keyboard.default }
 ];
 

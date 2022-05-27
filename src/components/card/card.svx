@@ -1,0 +1,143 @@
+<!-- Metadata -->
+<script context="module">
+  export const metadata = {
+    title: 'Slithe - Components - Card'
+  };
+</script>
+<!-- Script -->
+<script lang="ts">
+  // Helpers
+  import { addNotification } from '../../../components/index.es';
+  // Partials
+  import Preview from '../../partials/preview.svelte';
+  // Data
+  let showHeaderSlot = true;
+  let showDefaultSlot = true;
+  let showFooterSlot = true;
+  // Methods
+  function _addNotification (msg) {
+    addNotification({
+      type: 'info',
+      message: msg
+    });
+  }
+</script>
+<!-- Style -->
+<style lang="scss">
+  :global(div.slots) {
+    display: flex;
+    flex-direction: row;
+    > div.content {
+      width: 60%;
+    }
+    > div.controls {
+      width: 40%;
+      text-align: end;
+    }
+  }
+</style>
+
+# Card
+
+A `sl-card` component is a simple rounded box that contains various other components.
+
+<Preview>
+  <sl-card>
+    <span>Card Title</span>
+  </sl-card>
+</Preview>
+
+``` html
+<sl-card>
+  <span>Card Title</span>
+</sl-card>
+```
+
+## Slots
+
+The component includes multiple slots to cover various layouts.
+
+<Preview title="Variants" class="slots">
+  <div class="content">
+    <sl-card>
+      {#if showHeaderSlot}
+        <span slot="header">Header Slot</span>
+      {/if}
+      {#if showDefaultSlot}
+        <span>Default Slot</span>
+      {/if}
+      {#if showFooterSlot}
+        <span slot="footer">Footer Slot</span>
+      {/if}
+    </sl-card>
+  </div>
+  <div class="controls">
+    <div>
+      <label>Header</label>
+      <input type="checkbox" bind:checked={showHeaderSlot}/>
+    </div>
+    <div>
+      <label>Default</label>
+      <input type="checkbox" bind:checked={showDefaultSlot}/>
+    </div>
+    <div>
+      <label>Footer</label>
+      <input type="checkbox" bind:checked={showFooterSlot}/>
+    </div>
+  </div>
+</Preview>
+
+``` html
+<sl-card>
+  <span slot="header">Header Slot</span>  
+  <span>Default Slot</span>
+  <span slot="footer">Footer Slot</span>  
+</sl-card>
+```
+
+## Modifiers
+
+Adding those `boolean` attributes allows to modify the card styling.
+
+<Preview title="Variants">
+  <sl-card>
+    <span slot="header">Header Slot</span>  
+    <span>Default Slot</span>
+    <span slot="footer">Footer Slot</span>  
+  </sl-card>
+  <br/>
+  <sl-card danger>
+    <span slot="header">Header Slot</span>  
+    <span>Default Slot</span>
+    <span slot="footer">Footer Slot</span>  
+  </sl-card>
+</Preview>
+<Preview title="Sizes">
+  <sl-card size="small">
+    <span slot="header">Header Slot</span>  
+    <span>Default Slot</span>
+    <span slot="footer">Footer Slot</span>  
+  </sl-card>
+  <br/>
+  <sl-card size="medium">
+    <span slot="header">Header Slot</span>  
+    <span>Default Slot</span>
+    <span slot="footer">Footer Slot</span>  
+  </sl-card>
+  <br/>
+  <sl-card size="large">
+    <span slot="header">Header Slot</span>  
+    <span>Default Slot</span>
+    <span slot="footer">Footer Slot</span>  
+  </sl-card>
+</Preview>
+
+``` html
+<!-- Variants -->
+<sl-card>...</sl-card>
+<sl-card danger>...</sl-card>
+<!-- Size -->
+<sl-card size="small">...</sl-card>
+<sl-card size="medium">...</sl-card>
+<sl-card size="large">...</sl-card>
+```

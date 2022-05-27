@@ -193,24 +193,13 @@
           <Link class="link" to="/">Introduction</Link>
         </li>
         <li>
-          <Link class="link" to="/accessibility" >Features</Link>
-          <ul>
-            <li>
-              <Link class="link" to="/accessibility">Accessibility</Link>
-            </li>
-            <li>
-              <Link class="link" to="/internationalization">Internationalization</Link>
-            </li>
-            <li>
-              <Link class="link" to="/themes">Themes</Link>
-            </li>
-          </ul>
-        </li>
-        <li>
           <Link class="link" to="/components/button">Components</Link>
           <ul>
             <li>
               <Link class="link" to="/components/button">Button</Link>
+            </li>
+            <li>
+              <Link class="link" to="/components/card">Card</Link>
             </li>
             <li>
               <Link class="link" to="/components/form/input-text">Form</Link>

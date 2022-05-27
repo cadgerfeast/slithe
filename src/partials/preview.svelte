@@ -8,6 +8,8 @@
   import type { SlitheElement } from '../components';
   // Props
   export let title = undefined;
+  let _class = '';
+  export { _class as class };
   // Data
   let showThemePicker = false;
   let themePickerOpener: HTMLElement;
@@ -41,7 +43,7 @@
   });
 </script>
 <!-- Template -->
-<div class="preview">
+<div class:preview={true} class={_class}>
   <slot/>
   {#if title}
     <div class="label title">

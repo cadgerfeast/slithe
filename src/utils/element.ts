@@ -1,3 +1,6 @@
+// Helpers
+import { get, Writable, writable } from 'svelte/store';
+
 export function getRootElement (el: HTMLElement) {
   if (el.parentNode instanceof ShadowRoot) {
     return el.parentNode.host as HTMLElement;
@@ -97,4 +100,51 @@ export function tooltip (node: HTMLElement) {
       node.removeEventListener('mouseleave', handleMouseLeave);
 		}
 	};
+}
+
+function hasTruthyAssignedNode (slot: HTMLSlotElement) {
+  return !!slot.assignedNodes().filter((n) => {
+    if (n.nodeName !== '#text') {
+      return true;
+    }
+    return !!n.nodeValue.trim();
+  }).length;
+}
+
+export class SlotManager {
+  // Props
+  public slots: Writable<Record<string, boolean>>;
+  private _node?: HTMLElement;
+  private _handlers: Record<string, () => void>;
+  // Constructor
+  constructor () {
+    this.slots = writable({});
+    this._handlers = {};
+  }
+  // Methods
+  public initialize (node: HTMLElement) {
+    this._node = node;
+    this._node.querySelectorAll('slot').forEach((slot) => {
+      const slotName = slot.name || 'default';
+      this.slots.update((slots) => {
+        return {...slots, [slotName]: hasTruthyAssignedNode(slot) }
+      });
+      this._handlers[slotName] = () => {
+        if (this.slots[slotName] !== hasTruthyAssignedNode(slot)) {
+          this.slots.update((slots) => {
+            return {...slots, [slotName]: hasTruthyAssignedNode(slot) }
+          });
+        }
+      };
+      slot.addEventListener('slotchange', this._handlers[slotName]);
+    });
+  }
+  public dispose () {
+    if (this._node) {
+      for (const slotName in get(this.slots)) {
+        const slot = this._node.querySelector(`slot${slotName === 'default' ? ':not([name])' : `[name="${slotName}"]`}`);
+        slot.removeEventListener('slotchange', this._handlers[slotName]);
+      }
+    }
+  }
 }

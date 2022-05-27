@@ -8,7 +8,7 @@
 <!-- Options -->
 <svelte:options tag={null}/>
 <!-- Template -->
-<kbd class="sl-kbd">
+<kbd>
   <slot/>
 </kbd>
 <!-- Style -->

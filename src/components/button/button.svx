@@ -29,9 +29,15 @@ This component reflects and extends the behavior of the standard `button` elemen
   <sl-button>Button</sl-button>
 </Preview>
 
+``` html
+<sl-button>Button</sl-button>
+```
+
 ## Modifiers
 
 Adding those `boolean` attributes allows to modify the button styling.
+
+Size defaults to `medium`.
 
 <Preview title="Variants">
   <sl-button>Default</sl-button>

@@ -48,6 +48,7 @@
     --sl-button-active-border-color: #7E7E7E;
   }
   button {
+    font-family: var(--va-font-family);
     position: relative;
     background-color: var(--sl-button-background-color);
     color: var(--sl-button-color);

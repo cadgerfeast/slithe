@@ -1,4 +1,3 @@
-*[sl-theme=primer-light] {
-  --sl-card-border-color: var(--pr-regent-gray);
-  --sl-card-border-radius: 4px;
+div {
+  font-family: var(--pr-font-family);
 }
