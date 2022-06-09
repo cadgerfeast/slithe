@@ -30,9 +30,9 @@
     > div.content {
       width: 60%;
     }
-    > div.controls {
+    > sl-form {
       width: 40%;
-      text-align: end;
+      padding-left: 2em;
     }
   }
 </style>
@@ -71,20 +71,17 @@ The component includes multiple slots to cover various layouts.
       {/if}
     </sl-card>
   </div>
-  <div class="controls">
-    <div>
-      <label>Header</label>
-      <input type="checkbox" bind:checked={showHeaderSlot}/>
-    </div>
-    <div>
-      <label>Default</label>
-      <input type="checkbox" bind:checked={showDefaultSlot}/>
-    </div>
-    <div>
-      <label>Footer</label>
-      <input type="checkbox" bind:checked={showFooterSlot}/>
-    </div>
-  </div>
+  <sl-form>
+    <sl-form-control label="Header">
+      <sl-input-checkbox value={showHeaderSlot} on:update={({ detail }) => { showHeaderSlot = detail; }}/>
+    </sl-form-control>
+    <sl-form-control label="Default">
+      <sl-input-checkbox value={showDefaultSlot} on:update={({ detail }) => { showDefaultSlot = detail; }}/>
+    </sl-form-control>
+    <sl-form-control label="Footer">
+      <sl-input-checkbox value={showFooterSlot} on:update={({ detail }) => { showFooterSlot = detail; }}/>
+    </sl-form-control>
+  </sl-form>
 </Preview>
 
 ``` html
@@ -124,12 +121,6 @@ Adding those `boolean` attributes allows to modify the card styling.
     <span>Default Slot</span>
     <span slot="footer">Footer Slot</span>  
   </sl-card>
-  <br/>
-  <sl-card size="large">
-    <span slot="header">Header Slot</span>  
-    <span>Default Slot</span>
-    <span slot="footer">Footer Slot</span>  
-  </sl-card>
 </Preview>
 
 ``` html
@@ -139,5 +130,4 @@ Adding those `boolean` attributes allows to modify the card styling.
 <!-- Size -->
 <sl-card size="small">...</sl-card>
 <sl-card size="medium">...</sl-card>
-<sl-card size="large">...</sl-card>
 ```

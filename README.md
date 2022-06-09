@@ -47,18 +47,16 @@ MIT
 - sl-input-text
   - https://primer.style/css/components/forms
   - https://primer.style/react/TextInput
+- sl-card
+  - Vanilla Light
+  - Vanilla Dark
+- sl-form-control
 - sl-input-checkbox
   - https://primer.style/css/components/forms#checkboxes-and-radios
   - https://primer.style/react/FormControl
 - sl-button
   - Vanilla Light
   - Vanilla Dark
-- sl-card
-  - Slot Controls change to sl-input-checkbox
-  - Vanilla Light
-  - Vanilla Dark
-  - Primer Light
-  - Primer Dark
 - sl-hgroup
   - https://primer.style/react/Button
   - https://primer.style/css/components/buttons

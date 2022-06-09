@@ -4,28 +4,30 @@ import { removeElement } from '../utils/element';
 // Components
 import * as Button from './button/button.svelte';
 import * as Card from './card/card.svelte';
+import * as Form from './form/form.svelte';
+import * as FormControl from './form/control.svelte';
 import * as Hud from './hud/hud.svelte';
 import * as Icon from './icon/icon.svelte';
-import * as InputText from './input/text.svelte';
+import * as InputCheckbox from './input/checkbox/checkbox.svelte';
+import * as InputText from './input/text/text.svelte';
 import * as KBD from './kbd/kbd.svelte';
 import * as Rel from './rel/rel.svelte';
 import * as Tooltip from './tooltip/tooltip.svelte';
-import * as Tree from './tree/tree.svelte';
-import * as TreeItem from './tree/tree-item.svelte';
 // Style
 import vanillaStyle from '../style/vanilla.scss';
 
 const components = [
   Button,
   Card,
+  Form,
+  FormControl,
   Hud,
   Icon,
+  InputCheckbox,
   InputText,
   KBD,
   Rel,
-  Tooltip,
-  Tree,
-  TreeItem
+  Tooltip
 ];
 
 interface HTMLSlitheElement extends HTMLElement {

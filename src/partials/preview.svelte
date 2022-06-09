@@ -110,7 +110,6 @@
           display: block;
           margin-top: 20px;
           div.theme-list {
-            width: 100px;
             padding: 5px 10px 0 10px;
             background-color: var(--sl-background-color);
             > div.theme-row {

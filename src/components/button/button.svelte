@@ -10,21 +10,30 @@
 <!-- Script -->
 <script lang="ts">
   // Helpers
-  import { tooltip } from '../../utils/element';
+  import { dispatchEvent, tooltip, closest } from '../../utils/element';
   // Props
   export let type = 'button';
   export let size = 'medium';
   export let title = undefined;
   export let disabled = false;
+  // Data
+  let root: HTMLButtonElement;
   // Methods
   function onClick (e: MouseEvent) {
     if (disabled) {
       e.stopPropagation();
+    } else if (type === 'submit') {
+      const form = closest(root, 'sl-form');
+      if (form) {
+        dispatchEvent(form, 'submit');
+      } else {
+        console.warn('<sl-button> does not have a proper <sl-form> ancestor.');
+      }
     }
   }
 </script>
 <!-- Template -->
-<button class={size} {type} {disabled} on:click={onClick} use:tooltip data-title={title}>
+<button bind:this={root} class={`sl-button ${size}`} {type} {disabled} on:click={onClick} use:tooltip data-title={title}>
   <slot/>
 </button>
 <!-- Style -->
@@ -47,9 +56,10 @@
     --sl-button-active-background-color: #EFEFEF;
     --sl-button-active-border-color: #7E7E7E;
   }
-  button {
+  button.sl-button {
     font-family: var(--va-font-family);
     position: relative;
+    width: 100%;
     background-color: var(--sl-button-background-color);
     color: var(--sl-button-color);
     border: 1px solid var(--sl-button-border-color);

@@ -9,6 +9,8 @@
   // Helpers
   import { onMount, onDestroy } from 'svelte';
   import { SlotManager } from '../../utils/element';
+  // Props
+  export let size = 'medium';
   // Data
   let root: HTMLElement;
   const slotManager = new SlotManager();
@@ -23,7 +25,7 @@
   });
 </script>
 <!-- Template -->
-<div bind:this={root} class:has-header={$slots.header} class:has-default={$slots.default} class:has-footer={$slots.footer}>
+<div bind:this={root} class={`sl-card ${size}`} class:has-header={$slots.header} class:has-default={$slots.default} class:has-footer={$slots.footer}>
   <header>
     <slot name="header"/>
   </header>
@@ -40,17 +42,20 @@
     --sl-card-background-color: #FFFFFF;
     --sl-card-color: #000000;
     --sl-card-border-color: #7E7E7E;
+    --sl-card-border-radius: 3px;
+    --sl-card-slot-divider-color: #7E7E7E;
     --sl-card-header-background-color: #EFEFEF;
   }
   :host([sl-theme=vanilla-dark]) {
     --sl-card-background-color: #FFFFFF;
     --sl-card-color: #000000;
     --sl-card-border-color: #7E7E7E;
+    --sl-card-border-radius: 3px;
+    --sl-card-slot-divider-color: #7E7E7E;
     --sl-card-header-background-color: #EFEFEF;
   }
-  div {
+  div.sl-card {
     font-family: var(--va-font-family);
-    background-color: var(--sl-card-background-color);
     color: var(--sl-card-color);
     &.has-header {
       &.has-default {
@@ -103,17 +108,22 @@
     > header {
       display: none;
       background-color: var(--sl-card-header-background-color);
-      border-radius: 3px;
+      border-radius: var(--sl-card-border-radius);
       border: 1px solid var(--sl-card-border-color);
     }
     > section {
       display: none;
-      border-radius: 3px;
-      border: 1px solid var(--sl-card-border-color);
+      background-color: var(--sl-card-background-color);
+      border-radius: var(--sl-card-border-radius);
+      border-top: 1px solid var(--sl-card-slot-divider-color);
+      border-bottom: 1px solid var(--sl-card-slot-divider-color);
+      border-left: 1px solid var(--sl-card-border-color);
+      border-right: 1px solid var(--sl-card-border-color);
     }
     > footer {
       display: none;
-      border-radius: 3px;
+      background-color: var(--sl-card-background-color);
+      border-radius: var(--sl-card-border-radius);
       border: 1px solid var(--sl-card-border-color);
     }
   }

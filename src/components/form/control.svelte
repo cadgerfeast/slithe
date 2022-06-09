@@ -1,19 +1,22 @@
 <!-- Metadata -->
 <script context="module">
-  export const tag = 'tree';
+  export const tag = 'form-control';
   export const style = {};
 </script>
 <!-- Options -->
 <svelte:options tag={null}/>
+<!-- Script -->
+<script lang="ts">
+  // Props
+  export let label = undefined;
+</script>
 <!-- Template -->
-<ul class="sl-tree">
+<div class="sl-form-control">
   <slot/>
-</ul>
+</div>
 <!-- Style -->
 <style lang="scss">
-  ul.sl-tree {
-    list-style: none;
-    margin: 0;
-    padding-left: 10px;
+  div {
+    margin-bottom: 8px;
   }
 </style>

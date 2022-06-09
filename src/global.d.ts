@@ -4,6 +4,7 @@
 
 declare namespace svelte.JSX {
   interface HTMLProps<T> {
-    onclickoutside?: (e: CustomEvent<MouseEvent>) => void
+    onclickoutside?: (e: CustomEvent<MouseEvent>) => void;
+    onsubmit?: (e: SubmitEvent) => void;
   }
 }

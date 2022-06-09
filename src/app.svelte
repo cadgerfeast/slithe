@@ -320,6 +320,7 @@
       &.visible {
         visibility: visible;
       }
+      --sl-card-padding: 6px 0;
       ul.results-list {
         list-style: none;
         margin: 0;

@@ -8,7 +8,7 @@
 <!-- Options -->
 <svelte:options tag={null}/>
 <!-- Template -->
-<kbd>
+<kbd class='sl-kbd'>
   <slot/>
 </kbd>
 <!-- Style -->
@@ -23,7 +23,7 @@
     --sl-kbd-color: #666666;
     --sl-kbd-border-color: #DDDDDD;
   }
-  kbd {
+  kbd.sl-kbd {
     font-family: monospace;
     font-size: 12px;
     border-radius: 2px;

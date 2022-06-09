@@ -7,6 +7,7 @@ import * as Index from './index.svx';
 import * as Button from '../components/button/button.svx';
 import * as Card from '../components/card/card.svx';
 import * as Keyboard from '../components/kbd/kbd.svx';
+import * as InputText from '../components/input/text/text.svx';
 // Constants
 const _pushState = history.pushState;
 
@@ -29,7 +30,8 @@ export const pages: Page[] = [
   { path: '/', metadata: Index.metadata, component: Index.default },
   { path: '/components/button', metadata: Button.metadata, component: Button.default },
   { path: '/components/card', metadata: Card.metadata, component: Card.default },
-  { path: '/components/keyboard', metadata: Keyboard.metadata, component: Keyboard.default }
+  { path: '/components/keyboard', metadata: Keyboard.metadata, component: Keyboard.default },
+  { path: '/components/form/input-text', metadata: InputText.metadata, component: InputText.default }
 ];
 
 const computePageContent = (page: Page) => {

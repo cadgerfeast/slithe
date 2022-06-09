@@ -64,10 +64,19 @@ export function observeRect (node: Element, callback: ObserverCallback) {
   };
 }
 
+export function dispatchEvent (node: Element, key: string, detail = null) {
+	node.dispatchEvent(new CustomEvent(key, { detail }));
+}
+
+export function dispatchHostEvent (node: HTMLElement, key: string, detail?: unknown) {
+  const wrapper = getRootElement(node);
+  dispatchEvent(wrapper, key, detail);
+}
+
 export function clickOutside (node: Element) {
 	const handleClick = (event: MouseEvent) => {
 		if (!node.contains(event.target as Node)) {
-			node.dispatchEvent(new CustomEvent('clickoutside', { detail: event }));
+			dispatchEvent(node, 'clickoutside', event);
 		}
 	};
 	document.addEventListener('click', handleClick);
@@ -147,4 +156,20 @@ export class SlotManager {
       }
     }
   }
+}
+
+export function closest (node: Element, selector: string) {
+  if (node) {
+    const found = node.closest(selector);
+    if (found) {
+      return found;
+    } else {
+      if (node.parentNode instanceof ShadowRoot) {
+        return closest(node.parentNode.host, selector);
+      } else {
+        return closest(node.parentElement, selector);
+      }
+    }
+  }
+  return null;
 }

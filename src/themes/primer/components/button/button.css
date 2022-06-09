@@ -125,7 +125,7 @@
   --sl-button-active-border-color: transparent;
 }
 /* Button */
-button {
+button.sl-button {
   font-family: var(--pr-font-family);
   font-size: 14px;
   font-weight: 500;
@@ -137,25 +137,25 @@ button {
   cursor: pointer;
   user-select: none;
 }
-button.small {
+button.sl-button.small {
   font-size: 12px;
   padding: 3px 12px;
 }
-button.large {
+button.sl-button.large {
   font-size: 16px;
   padding: 9px 20px;
 }
-button:hover {
+button.sl-button:hover {
   color: var(--sl-button-hover-color, unset);
   border-color: var(--sl-button-hover-border-color, unset);
   box-shadow: var(--sl-button-hover-box-shadow, unset);
 }
-button:active {
+button.sl-button:active {
   color: var(--sl-button-active-color, unset);
   border-color: var(--sl-button-active-border-color, unset);
   box-shadow: var(--sl-button-active-box-shadow, unset);
 }
-button:focus-visible {
+button.sl-button:focus-visible {
   outline-color: var(--sl-button-outline-color);
   box-shadow: var(--sl-button-focus-box-shadow, unset);
 }

@@ -1,14 +1,33 @@
+/* Host */
+:host([sl-theme=primer-light]) {
+  /* Override */
+  --sl-input-text-background-color: #FFFFFF;
+  --sl-input-text-color: var(--pr-shark);
+  --sl-input-text-border-color: var(--pr-geyser);
+  --sl-input-text-pre-color: #777777;
+  --sl-input-text-placeholder-color: #777777;
+  --sl-input-text-focus-border-color: #111111;
+  /* Custom */
+  --sl-input-text-outline-color: var(--pr-science-blue);
+}
+:host([sl-theme=primer-dark]) {
+  /* Override */
+  --sl-input-text-background-color: #FFFFFF;
+  --sl-input-text-color: var(--pr-shark);
+  --sl-input-text-border-color: var(--pr-geyser);
+  --sl-input-text-pre-color: #777777;
+  --sl-input-text-placeholder-color: #777777;
+  --sl-input-text-focus-border-color: #111111;
+  /* Custom */
+  --sl-input-text-outline-color: var(--pr-cornflower-blue);
+}
 div.sl-input-text {
-  --sl-input-text-font-family: 'Fira Sans';
-  --sl-input-text-border-color: var(--pr-regent-gray);
-  --sl-input-text-border-radius: 16px;
-  --sl-input-text-padding-top: 4px;
-  --sl-input-text-padding-right: 4px;
-  --sl-input-text-padding-bottom: 4px;
-  --sl-input-text-padding-left: 4px;
-  --sl-input-text-font-size: 14px;
-  --sl-input-text-pre-color: var(--pr-pale-sky);
-  --sl-input-text-placeholder-color: var(--pr-pale-sky);
-  --sl-input-text-placeholder-font-size: 14px;
-  --sl-input-text-focused-border-color: var(--pr-tundora);
+  font-family: var(--pr-font-family);
+  border-radius: 6px;
+  padding: 1px 12px;
+  min-height: 32px;
+  font-size: 14px;
+}
+div.sl-input-text.focused {
+  outline-color: var(--sl-input-text-outline-color);
 }

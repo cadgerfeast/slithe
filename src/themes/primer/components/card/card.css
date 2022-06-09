@@ -1,3 +1,46 @@
-div {
+/* Host */
+:host([sl-theme=primer-light]) {
+  --sl-card-background-color: var(--pr-white);
+  --sl-card-color: var(--pr-shark);
+  --sl-card-border-color: var(--pr-geyser);
+  --sl-card-border-radius: 6px;
+  --sl-card-slot-divider-color: var(--pr-geyser);
+  --sl-card-header-background-color: var(--pr-aqua-haze);
+}
+:host([sl-theme=primer-dark]) {
+  --sl-card-background-color: var(--pr-bunker);
+  --sl-card-color: var(--pr-karpa-kora);
+  --sl-card-border-color: var(--pr-bright-gray);
+  --sl-card-border-radius: 6px;
+  --sl-card-slot-divider-color: var(--pr-bright-gray);
+  --sl-card-header-background-color: var(--pr-dark-artifact);
+}
+/* Danger */
+:host([sl-theme=primer-light][danger]) {
+  --sl-card-border-color: var(--pr-cardinal);
+}
+:host([sl-theme=primer-dark][danger]) {
+  --sl-card-border-color: var(--pr-punch);
+}
+/* Card */
+div.sl-card {
   font-family: var(--pr-font-family);
+}
+div.sl-card > header {
+  padding: var(--sl-card-padding, 16px);
+}
+div.sl-card > section {
+  padding: var(--sl-card-padding, 16px);
+}
+div.sl-card > footer {
+  padding: var(--sl-card-padding, 16px);
+}
+div.sl-card.small > footer {
+  padding: var(--sl-card-padding, 8px);
+}
+div.sl-card.small > header {
+  padding: var(--sl-card-padding, 8px);
+}
+div.sl-card.small > section {
+  padding: var(--sl-card-padding, 8px);
 }
