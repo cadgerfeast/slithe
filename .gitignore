@@ -1,6 +1,4 @@
-/.scannerwork
-/components
-/coverage
+/.sync
 /dist
 /node_modules
 /themes

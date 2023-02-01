@@ -1,11 +1,8 @@
 {
-  "name": "slithe",
-  "version": "0.0.2",
-  "type": "module",
-  "main": "./components/index.cjs.js",
-  "module": "./components/index.es.js",
-  "unpkg": "./components/index.umd.js",
-  "keywords": [
+	"name": "slithe",
+	"version": "0.0.2",
+	"type": "module",
+	"keywords": [
     "slithe",
     "snake",
     "moult",
@@ -13,51 +10,47 @@
     "web-components",
     "custom-elements"
   ],
-  "author": "Jérémie Pichon <contact@cadgerfeast.com>",
-  "repository": {
+	"author": "Jérémie Pichon <contact@cadgerfeast.com>",
+	"repository": {
     "type": "git",
     "url": "git+https://github.com/cadgerfeast/slithe.git"
   },
-  "bugs": {
+	"bugs": {
     "url": "https://github.com/cadgerfeast/slithe/issues"
   },
-  "license": "MIT",
-  "files": [
-    "components",
-    "themes"
-  ],
-  "scripts": {
-    "dev": "run-s build:lib build:themes && run-p dev:lib dev:themes dev:docs",
-    "dev:lib": "vite build --watch -c vite.lib.config.ts",
-    "dev:themes": "vite build --watch -c vite.themes.config.ts",
-    "dev:docs": "vite",
-    "build": "run-s build:lib build:themes build:docs",
-    "build:lib": "vite build -c vite.lib.config.ts",
-    "build:themes": "vite build -c vite.themes.config.ts",
-    "build:docs": "vite build",
-    "lint": "svelte-check --tsconfig ./tsconfig.json",
-    "test": "vitest run --coverage",
-    "test:watch": "vitest",
-    "serve": "vite preview"
-  },
-  "devDependencies": {
-    "@lukeed/uuid": "2.0.0",
-    "@sveltejs/vite-plugin-svelte": "1.0.0-next.41",
-    "@tsconfig/svelte": "2.0.1",
-    "@types/fs-extra": "9.0.13",
-    "c8": "7.11.3",
-    "fs-extra": "10.1.0",
-    "jsdom": "19.0.0",
-    "mdsvex": "0.10.5",
-    "npm-run-all": "4.1.5",
-    "sass": "1.50.0",
-    "svelte": "3.47.0",
-    "svelte-check": "2.7.1",
-    "svelte-navigator": "3.1.5",
-    "svelte-preprocess": "4.10.6",
-    "tslib": "2.3.1",
-    "typescript": "4.6.3",
-    "vite": "2.9.5",
-    "vitest": "0.12.9"
-  }
+	"license": "MIT",
+	"scripts": {
+		"sync": "svelte-kit sync",
+		"dev": "run-s sync && run-p dev:*",
+		"dev:lib": "svelte-package -w",
+		"dev:themes": "vite build -w -c vite.themes.config.js",
+		"dev:docs": "madoc dev",
+		"build": "run-s sync build:*",
+		"build:lib": "svelte-package",
+		"build:themes": "vite build -c vite.themes.config.js",
+		"build:docs": "madoc build",
+		"lint": "run-s sync lint:*",
+		"lint:svelte": "svelte-check --tsconfig ./tsconfig.json",
+		"lint:tsc": "eslint .",
+		"test": "vitest run"
+	},
+	"dependencies": {
+		"svelte": "^3.54.0"
+	},
+	"devDependencies": {
+		"@madoc/core": "^0.2.2",
+		"@sveltejs/kit": "^1.0.0-next.587",
+		"@sveltejs/package": "^1.0.0-next.6",
+		"@typescript-eslint/eslint-plugin": "^5.45.0",
+		"@typescript-eslint/parser": "^5.45.0",
+		"eslint": "^8.28.0",
+		"eslint-plugin-svelte3": "^4.0.0",
+		"npm-run-all": "^4.1.5",
+		"sass": "^1.57.1",
+		"svelte-check": "^2.9.2",
+		"tslib": "^2.4.1",
+		"typescript": "^4.9.3",
+		"vite": "^4.0.0",
+		"vitest": "^0.25.3"
+	}
 }
