@@ -1,5 +1,5 @@
 /* Host */
-:host([sl-theme=primer-light]) {
+:host([sl-theme=light]) {
   /* Override */
   --sl-button-background-color: var(--pr-aqua-haze);
   --sl-button-color: var(--pr-shark);
@@ -12,7 +12,7 @@
   --sl-button-outline-color: var(--pr-science-blue);
   --sl-button-box-shadow: 0 1px 0 rgba(27,31,36,0.04), inset 0 1px 0 rgba(255,255,255,0.25);
 }
-:host([sl-theme=primer-dark]) {
+:host([sl-theme=dark]) {
   /* Override */
   --sl-button-border-radius: 6px;
   --sl-button-background-color: var(--pr-sibuya-game-reserve);
@@ -27,7 +27,7 @@
   --sl-button-box-shadow: 0 0 transparent, 0 0 transparent;;
 }
 /* Primary */
-:host([sl-theme=primer-light][primary]) {
+:host([sl-theme=light][primary]) {
   --sl-button-background-color: var(--pr-science-blue);
   --sl-button-color: var(--pr-white);
   --sl-button-box-shadow: 0 1px 0 rgba(27,31,36,0.1), inset 0 1px 0 rgba(255,255,255,0.03);
@@ -38,7 +38,7 @@
   --sl-button-active-color: var(--pr-white);
   --sl-button-focus-box-shadow: inset 0 0 0 3px var(--sl-white);
 }
-:host([sl-theme=primer-dark][primary]) {
+:host([sl-theme=dark][primary]) {
   --sl-button-background-color: var(--pr-endeavour);
   --sl-button-color: var(--pr-white);
   --sl-button-box-shadow: 0 1px 0 rgba(27,31,36,0.1), inset 0 1px 0 rgba(255,255,255,0.03);
@@ -50,7 +50,7 @@
   --sl-button-focus-box-shadow: inset 0 0 0 3px var(--pr-white);
 }
 /* Outline */
-:host([sl-theme=primer-light][outline]) {
+:host([sl-theme=light][outline]) {
   --sl-button-color: var(--pr-science-blue);
   --sl-button-box-shadow: 0 1px 0 rgba(27,31,36,0.04), inset 0 1px 0 rgba(255,255,255,0.25);
   --sl-button-hover-background-color: var(--pr-science-blue);
@@ -62,7 +62,7 @@
   --sl-button-active-border-color: rgba(27,31,36,0.15);
   --sl-button-active-box-shadow: inset 0 1px 0 rgba(0,33,85,0.2);
 }
-:host([sl-theme=primer-dark][outline]) {
+:host([sl-theme=dark][outline]) {
   --sl-button-color: var(--pr-cornflower-blue);
   --sl-button-box-shadow: 0 0 transparent, 0 0 transparent;
   --sl-button-hover-background-color: var(--pr-outer-space);
@@ -75,7 +75,7 @@
   --sl-button-active-box-shadow: 0 0 transparent;
 }
 /* Danger */
-:host([sl-theme=primer-light][danger]) {
+:host([sl-theme=light][danger]) {
   --sl-button-color: var(--pr-cardinal);
   --sl-button-box-shadow: 0 1px 0 rgba(27,31,36,0.04), inset 0 1px 0 rgba(255,255,255,0.25);
   --sl-button-hover-background-color: var(--pr-shiraz);
@@ -87,7 +87,7 @@
   --sl-button-active-border-color: rgba(27,31,36,0.15);
   --sl-button-active-box-shadow: inset 0 1px 0 rgba(76,0,20,0.2);
 }
-:host([sl-theme=primer-dark][danger]) {
+:host([sl-theme=dark][danger]) {
   --sl-button-color: var(--pr-sunset-orange);
   --sl-button-box-shadow: 0 0 transparent, 0 0 transparent;
   --sl-button-hover-background-color: var(--pr-punch);
@@ -100,7 +100,7 @@
   --sl-button-active-box-shadow: 0 0 transparent;
 }
 /* Borderless */
-:host([sl-theme=primer-light][borderless]) {
+:host([sl-theme=light][borderless]) {
   --sl-button-background-color: transparent;
   --sl-button-color: var(--pr-science-blue);
   --sl-button-border-color: transparent;
@@ -112,7 +112,7 @@
   --sl-button-active-color: var(--pr-science-blue);
   --sl-button-active-border-color: transparent;
 }
-:host([sl-theme=primer-dark][borderless]) {
+:host([sl-theme=dark][borderless]) {
   --sl-button-background-color: transparent;
   --sl-button-color: var(--pr-cornflower-blue);
   --sl-button-border-color: transparent;
@@ -124,26 +124,28 @@
   --sl-button-active-color: var(--pr-cornflower-blue);
   --sl-button-active-border-color: transparent;
 }
+// Small
+:host([small]) {
+  --sl-button-font-size: 12px;
+  --sl-button-padding: 3px 12px;
+}
+// Large
+:host([large]) {
+  --sl-button-font-size: 16px;
+  --sl-button-padding: 9px 20px;
+}
 /* Button */
 button.sl-button {
   font-family: var(--pr-font-family);
-  font-size: 14px;
+  font-size: var(--sl-button-font-size, 14px);
   font-weight: 500;
-  padding: 5px 16px;
+  padding: var(--sl-button-padding, 5px 16px);
   border-radius: 6px;
   box-shadow: var(--sl-button-box-shadow);
   white-space: nowrap;
   vertical-align: middle;
   cursor: pointer;
   user-select: none;
-}
-button.sl-button.small {
-  font-size: 12px;
-  padding: 3px 12px;
-}
-button.sl-button.large {
-  font-size: 16px;
-  padding: 9px 20px;
 }
 button.sl-button:hover {
   color: var(--sl-button-hover-color, unset);

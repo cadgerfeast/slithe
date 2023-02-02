@@ -1,23 +1,6 @@
-import { vitePreprocess } from '@sveltejs/kit/vite';
+// Helpers
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 
-/**
- * Svelte Configuration
- * @type {import('@sveltejs/kit').Config}
- */
-const config = {
-	preprocess: vitePreprocess(),
-	alias: {
-		'@/*': './src/*'
-	},
-	kit: {
-		outDir: '.sync',
-		files: {
-			lib: 'src'
-		}
-	},
-	package: {
-		dir: './dist'
-	}
+export default {
+  preprocess: vitePreprocess()
 };
-
-export default config;

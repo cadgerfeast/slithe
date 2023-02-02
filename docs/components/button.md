@@ -57,12 +57,16 @@ When the button is inside a `<form>` element, use `type="submit"` in order to su
 
 <Preview>
   <sl-button type="button">Button</sl-button>
-  <sl-button type="submit">Submit</sl-button>
+  <sl-form>
+    <sl-button type="submit">Submit</sl-button>
+  </sl-form>
 </Preview>
 
 ``` html
 <sl-button type="button">Button</sl-button>
-<sl-button type="submit">Submit</sl-button>
+<sl-form @submit="$notify('submit')">
+  <sl-button type="submit">Submit</sl-button>
+</sl-form>
 ```
 
 ### Title
@@ -82,7 +86,7 @@ Adds extra information about the element, displayed as a `tooltip` when being ho
 Makes the button non-interactable.
 
 <Preview>
-  <sl-button disabled @click="alert('toto')">Disabled</sl-button>
+  <sl-button disabled @click="$notify('disabled')">Disabled</sl-button>
 </Preview>
 
 ``` html
@@ -96,7 +100,7 @@ Makes the button non-interactable.
 Triggered when the user clicks on the element.
 
 <Preview>
-  <sl-button type="button" @click="alert('toto')">Click me!</sl-button>
+  <sl-button type="button" @click="$notify('click')">Click me!</sl-button>
 </Preview>
 
 ``` html

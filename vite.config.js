@@ -1,11 +1,22 @@
-import { sveltekit } from '@sveltejs/kit/vite';
+// Helpers
+import { defineConfig } from 'vite';
+import { svelte } from '@sveltejs/vite-plugin-svelte';
 
-/** @type {import('vite').UserConfig} */
-const config = {
-	plugins: [sveltekit()],
-	test: {
-		include: ['test/**/*.spec.ts']
-	}
-};
-
-export default config;
+export default defineConfig({
+	publicDir: false,
+	build: {
+		outDir: './components',
+		lib: {
+      entry: './src/index.ts',
+      name: 'Slithe',
+			formats: ['cjs', 'es', 'umd']
+    }
+	},
+	plugins: [
+		svelte({
+			compilerOptions: {
+        customElement: true
+      }
+		})
+	]
+});

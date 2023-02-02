@@ -9,9 +9,10 @@
 
 <script lang="ts">
   // Helpers
-  import { defineComponent, PropType } from 'vue';
-  import { setTheme } from '../../dist';
-  import primer from '../../themes/primer';
+  import { defineComponent } from 'vue';
+  import { setTheme } from '../../components/slithe';
+  // Types
+  import type { PropType } from 'vue';
   export default defineComponent({
     name: 'Preview',
     props: {
@@ -22,11 +23,11 @@
     },
     watch: {
       '$madoc.theme' () {
-        setTheme(this.$madoc.theme, primer);
+        setTheme(this.$madoc.theme);
       }
     },
     created () {
-      setTheme(this.$madoc.theme, primer);
+      setTheme(this.$madoc.theme);
     }
   });
 </script>

@@ -12,12 +12,12 @@
 </kbd>
 <!-- Style -->
 <style lang="scss">
-  :host([sl-theme=vanilla-light]) {
+  :host([sl-theme=light]) {
     --sl-keyboard-background-color: #EFEFEF;
     --sl-keyboard-color: #666666;
     --sl-keyboard-border-color: #DDDDDD;
   }
-  :host([sl-theme=vanilla-dark]) {
+  :host([sl-theme=dark]) {
     --sl-keyboard-background-color: #EFEFEF;
     --sl-keyboard-color: #666666;
     --sl-keyboard-border-color: #DDDDDD;
