@@ -156,14 +156,12 @@ button.sl-button {
     background-color: var(--sl-button-hover-background-color);
     border-color: var(--sl-button-hover-border-color);
     color: var(--sl-button-hover-color, unset);
-    border-color: var(--sl-button-hover-border-color, unset);
     box-shadow: var(--sl-button-hover-box-shadow, unset);
   }
   &:active {
     background-color: var(--sl-button-active-background-color);
     border-color: var(--sl-button-active-border-color);
     color: var(--sl-button-active-color, unset);
-    border-color: var(--sl-button-active-border-color, unset);
     box-shadow: var(--sl-button-active-box-shadow, unset);
   }
   &:focus-visible {

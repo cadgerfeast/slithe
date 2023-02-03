@@ -4,13 +4,13 @@
     "addUntrackedFiles": true,
     "requireCleanWorkingDir": false,
     "commitMessage": "Release slithe@${version}",
-    "changelog": "npx auto-changelog --hide-credit --package --stdout --commit-limit false --unreleased --template ./devops/changelog/release.hbs"
+    "changelog": "npx auto-changelog --package --stdout --commit-limit false --unreleased --template ./devops/changelog/release.hbs"
   },
   "github": {
     "release": true
   },
   "hooks": {
-    "after:bump": "npx auto-changelog --hide-credit --package --commit-limit false --unreleased --template ./devops/changelog/keep.hbs"
+    "after:bump": "npx auto-changelog --package --commit-limit false --unreleased --template ./devops/changelog/keep.hbs"
   },
   "npm": {
     "publish": true
