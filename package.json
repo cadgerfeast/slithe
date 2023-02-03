@@ -1,63 +1,79 @@
 {
-  "name": "slithe",
-  "version": "0.0.2",
-  "type": "module",
-  "main": "./components/index.cjs.js",
-  "module": "./components/index.es.js",
-  "unpkg": "./components/index.umd.js",
-  "keywords": [
-    "slithe",
-    "snake",
-    "moult",
-    "svelte",
-    "web-components",
-    "custom-elements"
-  ],
-  "author": "Jérémie Pichon <contact@cadgerfeast.com>",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cadgerfeast/slithe.git"
-  },
-  "bugs": {
-    "url": "https://github.com/cadgerfeast/slithe/issues"
-  },
-  "license": "MIT",
-  "files": [
-    "components",
-    "themes"
-  ],
-  "scripts": {
-    "dev": "run-s build:lib build:themes && run-p dev:lib dev:themes dev:docs",
-    "dev:lib": "vite build --watch -c vite.lib.config.ts",
-    "dev:themes": "vite build --watch -c vite.themes.config.ts",
-    "dev:docs": "vite",
-    "build": "run-s build:lib build:themes build:docs",
-    "build:lib": "vite build -c vite.lib.config.ts",
-    "build:themes": "vite build -c vite.themes.config.ts",
-    "build:docs": "vite build",
-    "lint": "svelte-check --tsconfig ./tsconfig.json",
-    "test": "vitest run --coverage",
-    "test:watch": "vitest",
-    "serve": "vite preview"
-  },
-  "devDependencies": {
-    "@lukeed/uuid": "2.0.0",
-    "@sveltejs/vite-plugin-svelte": "1.0.0-next.41",
-    "@tsconfig/svelte": "2.0.1",
-    "@types/fs-extra": "9.0.13",
-    "c8": "7.11.3",
-    "fs-extra": "10.1.0",
-    "jsdom": "19.0.0",
-    "mdsvex": "0.10.5",
-    "npm-run-all": "4.1.5",
-    "sass": "1.50.0",
-    "svelte": "3.47.0",
-    "svelte-check": "2.7.1",
-    "svelte-navigator": "3.1.5",
-    "svelte-preprocess": "4.10.6",
-    "tslib": "2.3.1",
-    "typescript": "4.6.3",
-    "vite": "2.9.5",
-    "vitest": "0.12.9"
-  }
+	"name": "slithe",
+	"version": "0.0.2",
+	"type": "module",
+	"main": "./components/slithe.cjs",
+	"module": "./components/slithe.js",
+	"unpkg": "./components/slithe.umd.cjs",
+	"types": "./types/types.d.ts",
+	"exports": {
+		".": {
+			"import": "./components/slithe.js",
+			"require": "./components/slithe.cjs",
+			"types": "./types/types.d.ts"
+		}
+	},
+	"files": [
+		"components",
+		"themes",
+		"types"
+	],
+	"keywords": [
+		"slithe",
+		"snake",
+		"moult",
+		"svelte",
+		"web-components",
+		"custom-elements"
+	],
+	"author": "Jérémie Pichon <contact@cadgerfeast.com>",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/cadgerfeast/slithe.git"
+	},
+	"bugs": {
+		"url": "https://github.com/cadgerfeast/slithe/issues"
+	},
+	"license": "MIT",
+	"scripts": {
+		"dev": "run-p dev:*",
+		"dev:lib": "vite build -w",
+		"dev:themes": "vite build -w -c vite.themes.config.js",
+		"dev:dts": "tsc -w -p tsconfig.dts.json",
+		"dev:docs": "madoc dev",
+		"build": "run-s build:*",
+		"build:lib": "vite build",
+		"build:themes": "vite build -c vite.themes.config.js",
+		"build:dts": "tsc -p tsconfig.dts.json",
+		"build:docs": "madoc build",
+		"preview": "madoc preview",
+		"lint": "run-s lint:*",
+		"lint:svelte": "svelte-check --tsconfig ./tsconfig.svelte.json",
+		"lint:tsc": "eslint addons src test",
+		"test": "vitest run --coverage"
+	},
+	"dependencies": {
+		"svelte": "^3.54.0"
+	},
+	"devDependencies": {
+		"@madoc/core": "^0.2.3",
+		"@primer/octicons": "^17.11.1",
+		"@sveltejs/vite-plugin-svelte": "^2.0.0",
+		"@testing-library/svelte": "^3.2.2",
+		"@tsconfig/svelte": "^3.0.0",
+		"@types/primer__octicons": "^17.5.0",
+		"@typescript-eslint/eslint-plugin": "^5.45.0",
+		"@typescript-eslint/parser": "^5.45.0",
+		"@vitest/coverage-c8": "^0.28.4",
+		"eslint": "^8.28.0",
+		"eslint-plugin-svelte3": "^4.0.0",
+		"jsdom": "^21.1.0",
+		"npm-run-all": "^4.1.5",
+		"sass": "^1.57.1",
+		"svelte-check": "^2.10.0",
+		"tslib": "^2.4.1",
+		"typescript": "^4.9.3",
+		"vite": "^4.0.0",
+		"vitest": "^0.25.3"
+	}
 }

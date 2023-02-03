@@ -1,0 +1,23 @@
+// Light
+:host([sl-theme=light]) {
+  --sl-keyboard-background-color: var(--pr-aqua-haze);
+  --sl-keyboard-color: var(--pr-shuttle-gray);
+  --sl-keyboard-border-color: rgba(27,31,36,0.15);
+}
+// Dark
+:host([sl-theme=dark]) {
+  --sl-keyboard-background-color: var(--pr-sibuya-game-reserve);
+  --sl-keyboard-color: var(--pr-regent-gray);
+  --sl-keyboard-border-color: var(--pr-regent-gray);
+}
+// Keyboard
+kbd.sl-keyboard {
+  font-family: var(--pr-font-family);
+  border-radius: 4px;
+  padding: 2px 4px;
+  font-size: 12px;
+  background-color: var(--sl-keyboard-background-color);
+  color: var(--sl-keyboard-color);
+  border: 1px solid var(--sl-keyboard-border-color);
+  text-transform: uppercase;
+}

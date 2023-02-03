@@ -1,25 +1,20 @@
 {
-  "extends": "@tsconfig/svelte/tsconfig.json",
+	"extends": "@tsconfig/svelte/tsconfig.json",
   "compilerOptions": {
-    "outDir": "dist",
-    "target": "esnext",
+    "target": "ESNext",
     "useDefineForClassFields": true,
-    "module": "esnext",
+    "module": "ESNext",
     "resolveJsonModule": true,
-    "baseUrl": ".",
-    "allowJs": true,
-    "checkJs": true,
+    "allowJs": false,
+    "checkJs": false,
     "isolatedModules": true
   },
   "include": [
-    "src/**/*.d.ts",
-    "src/**/*.ts",
-    "src/**/*.svelte",
-    "src/**/*.svx"
-  ],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    }
-  ]
+		"./addons",
+		"./src/**/*.d.ts",
+		"./src/**/*.ts",
+		"./src/**/*.svelte",
+		"./test",
+		"./types.d.ts"
+	]
 }

@@ -8,7 +8,7 @@
 <!-- Script -->
 <script lang="ts">
   // Props
-  export let label = undefined;
+  export const label = undefined;
 </script>
 <!-- Template -->
 <div class="sl-form-control">

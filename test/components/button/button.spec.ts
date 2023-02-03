@@ -1,16 +1,17 @@
 // Helpers
-import { describe, expect, it, beforeEach } from 'vitest';
+import { describe, expect, it } from 'vitest';
+import { render, screen } from '@testing-library/svelte';
 // Components
 import Button from '../../../src/components/button/button.svelte';
 
 describe('sl-button', () => {
-  let instance;
-  beforeEach(() => {
-    const host = document.createElement('div');
-    document.body.append(host);
-    instance = new Button({ target: host });
-  });
   it('should mount()', () => {
-    expect(instance).toBeTruthy();
+    render(Button, {
+      props: {
+        type: 'button'
+      }
+    });
+    const button = screen.getByRole('button');
+    expect(button).toBeTruthy();
   });
 });

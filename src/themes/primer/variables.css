@@ -8,10 +8,13 @@
   --pr-clewd: #EBECF0;
   --pr-shark: #24292F;
   --pr-bunker: #22272E;
+  --pr-incomplete-eclipse: #0D1117;
+  --pr-black-squared: #010409;
   --pr-iron: #DCDDDE;
   --pr-bright-gray: #373E47;
   --pr-sibuya-game-reserve: #373E47;
   --pr-karpa-kora: #ADBAC7;
+  --pr-norborne: #C9D1D9;
   --pr-dark-sea: #444C56;
   --pr-slate-gray: #768390;
   --pr-nothing-but-life: #3D444D;
@@ -33,6 +36,8 @@
   --pr-shuttle-gray: #57606A;
   --pr-regent-gray: #8B949E;
   --pr-pale-sky: #6E7681;
+  --pr-eucalyptus: #2DA44E;
+  --pr-pirate-gold: #BF8700;
 }
 
 *[sl-theme=primer-light] {

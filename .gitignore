@@ -1,6 +1,6 @@
-/.scannerwork
+/.docs
 /components
 /coverage
-/dist
 /node_modules
 /themes
+/types

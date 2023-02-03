@@ -1,0 +1,21 @@
+// Checkbox
+div.sl-input-checkbox {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  user-select: none;
+  > input {
+    margin: 3px 0;
+    cursor: pointer;
+  }
+  > label {
+    font-weight: 600;
+    font-size: 14px;
+    padding-left: 8px;
+    cursor: pointer;
+  }
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}

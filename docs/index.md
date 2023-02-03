@@ -1,3 +1,6 @@
+---
+title: Slithe
+---
 # Slithe
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=cadgerfeast_slithe&metric=alert_status)](https://sonarcloud.io/dashboard?id=cadgerfeast_slithe)

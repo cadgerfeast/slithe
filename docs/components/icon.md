@@ -1,0 +1,66 @@
+---
+title: Slithe - Components - Icon
+---
+# Icon
+
+A `sl-icon` component provides a large set of glyphs to provide context for various use-cases.
+
+<Preview>
+  <sl-icon name="bug"/>
+  <sl-icon name="law" size="24px"/>
+  <sl-icon name="copilot" size="48px"/>
+</Preview>
+
+``` html
+<sl-icon name="bug"/>
+<sl-icon name="law" size="24px"/>
+<sl-icon name="copilot" size="48px"/>
+```
+
+## Attributes
+
+### Name
+
+The icon name, should be part of icon list from current theme.
+
+> If icon cannot be found, it uses a fallback icon.
+
+<Preview>
+  <sl-icon name="bug"/>
+  <sl-icon name="does-not-exist"/>
+</Preview>
+
+<div class="prism-last"/>
+
+``` html
+<sl-icon name="bug"/>
+<sl-icon name="does-not-exist"/>
+```
+
+### Size
+
+Modifies the icon size, default to `1em`, that represents the current font-size.
+
+<Preview>
+  <sl-icon name="bug" size="2em"/>
+</Preview>
+
+<div class="prism-last"/>
+
+``` html
+<sl-icon name="bug" size="2em"/>
+```
+
+### Title
+
+Adds a tooltip text to provide more information.
+
+<Preview>
+  <sl-icon name="gift" title="Something awesome hides inside!"/>
+</Preview>
+
+<div class="prism-last"/>
+
+``` html
+<sl-icon name="gift" title="Something awesome hides inside!"/>
+```
