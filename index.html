@@ -1,14 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" sl-theme="primer-light">
+<html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Snaky web components that moults"> 
     <title>Slithe</title>
-    <script type="module" crossorigin src="/assets/index.de6d54af.js"></script>
-    <link rel="stylesheet" href="/assets/index.4e748c46.css">
+    <link rel="icon" href="/icons/slithe.svg"/>
+    <script type="module" crossorigin src="/assets/index-4fd2fa10.js"></script>
+    <link rel="stylesheet" href="/assets/index-c4e22fb0.css">
   </head>
   <body>
+    <script>
+      (function(){
+        var redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect != location.href) {
+          history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
     <div id="app"></div>
     
   </body>
