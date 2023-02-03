@@ -36,7 +36,6 @@ setTheme('light', primer);
 ``` html
 <!-- Use it! -->
 <sl-button primary>My Cool Button</sl-button>
-<sl-input-text/>
 ```
 
 ## License

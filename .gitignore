@@ -1,5 +1,6 @@
 /.docs
 /components
+/coverage
 /node_modules
 /themes
 /types

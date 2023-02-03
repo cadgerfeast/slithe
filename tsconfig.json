@@ -5,8 +5,8 @@
     "useDefineForClassFields": true,
     "module": "ESNext",
     "resolveJsonModule": true,
-    "allowJs": true,
-    "checkJs": true,
+    "allowJs": false,
+    "checkJs": false,
     "isolatedModules": true
   },
   "include": [
@@ -16,8 +16,5 @@
 		"./src/**/*.svelte",
 		"./test",
 		"./types.d.ts"
-	],
-	"exclude": [
-		"./components"
 	]
 }

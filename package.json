@@ -3,21 +3,21 @@
 	"version": "0.0.2",
 	"type": "module",
 	"main": "./components/slithe.cjs",
-  "module": "./components/slithe.js",
-  "unpkg": "./components/slithe.umd.cjs",
+	"module": "./components/slithe.js",
+	"unpkg": "./components/slithe.umd.cjs",
 	"types": "./types/types.d.ts",
 	"exports": {
-    ".": {
-      "import": "./components/slithe.js",
-      "require": "./components/slithe.cjs",
-      "types": "./types/types.d.ts"
-    }
-  },
+		".": {
+			"import": "./components/slithe.js",
+			"require": "./components/slithe.cjs",
+			"types": "./types/types.d.ts"
+		}
+	},
 	"files": [
-    "components",
+		"components",
 		"themes",
 		"types"
-  ],
+	],
 	"keywords": [
 		"slithe",
 		"snake",
@@ -48,9 +48,9 @@
 		"build:docs": "madoc build",
 		"preview": "madoc preview",
 		"lint": "run-s lint:*",
-		"lint:svelte": "svelte-check --tsconfig ./tsconfig.json",
-		"lint:tsc": "eslint .",
-		"test": "vitest run"
+		"lint:svelte": "svelte-check --tsconfig ./tsconfig.svelte.json",
+		"lint:tsc": "eslint addons src test",
+		"test": "vitest run --coverage"
 	},
 	"dependencies": {
 		"svelte": "^3.54.0"
@@ -59,12 +59,15 @@
 		"@madoc/core": "^0.2.3",
 		"@primer/octicons": "^17.11.1",
 		"@sveltejs/vite-plugin-svelte": "^2.0.0",
-		"@types/primer__octicons": "^17.5.0",
+		"@testing-library/svelte": "^3.2.2",
 		"@tsconfig/svelte": "^3.0.0",
+		"@types/primer__octicons": "^17.5.0",
 		"@typescript-eslint/eslint-plugin": "^5.45.0",
 		"@typescript-eslint/parser": "^5.45.0",
+		"@vitest/coverage-c8": "^0.28.4",
 		"eslint": "^8.28.0",
 		"eslint-plugin-svelte3": "^4.0.0",
+		"jsdom": "^21.1.0",
 		"npm-run-all": "^4.1.5",
 		"sass": "^1.57.1",
 		"svelte-check": "^2.10.0",

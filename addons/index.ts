@@ -1,8 +1,11 @@
-// Components
-import Preview from './components/preview.vue';
-import '../themes/primer/global.css';
+// Helpers
 import { defineElements, setTheme, addNotification } from '../components/slithe';
 import primer from '../themes/primer';
+// Style
+import '../themes/primer/global.css';
+// Components
+import Preview from './components/preview.vue';
+import PlaygroundCard from './playground/card.vue';
 
 defineElements();
 setTheme('light', primer);
@@ -10,7 +13,8 @@ setTheme('light', primer);
 export default [
   {
     components: [
-      Preview
+      Preview,
+      PlaygroundCard
     ],
     globalProperties: {
       $notify (msg: string) {

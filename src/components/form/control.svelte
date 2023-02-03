@@ -1,0 +1,22 @@
+<!-- Metadata -->
+<script context="module">
+  export const tag = 'form-control';
+  export const style = {};
+</script>
+<!-- Options -->
+<svelte:options tag={null}/>
+<!-- Script -->
+<script lang="ts">
+  // Props
+  export const label = undefined;
+</script>
+<!-- Template -->
+<div class="sl-form-control">
+  <slot/>
+</div>
+<!-- Style -->
+<style lang="scss">
+  div {
+    margin-bottom: 8px;
+  }
+</style>

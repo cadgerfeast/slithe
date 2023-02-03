@@ -18,7 +18,7 @@
   // Data
   let root: HTMLButtonElement;
   // Methods
-  function onClick (e: MouseEvent) {
+  function onClick () {
     if (type === 'submit') {
       const form = closest(root, 'sl-form');
       if (form) {

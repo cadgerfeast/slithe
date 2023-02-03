@@ -1,18 +1,17 @@
-// Host
-:host([sl-theme=primer-light]) {
-  // Override
+// Light
+:host([sl-theme=light]) {
   --sl-keyboard-background-color: var(--pr-aqua-haze);
   --sl-keyboard-color: var(--pr-shuttle-gray);
   --sl-keyboard-border-color: rgba(27,31,36,0.15);
 }
-:host([sl-theme=primer-dark]) {
-  // Override
+// Dark
+:host([sl-theme=dark]) {
   --sl-keyboard-background-color: var(--pr-sibuya-game-reserve);
   --sl-keyboard-color: var(--pr-regent-gray);
   --sl-keyboard-border-color: var(--pr-regent-gray);
 }
 // Keyboard
-kbd.sl-kbd {
+kbd.sl-keyboard {
   font-family: var(--pr-font-family);
   border-radius: 4px;
   padding: 2px 4px;

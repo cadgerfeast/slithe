@@ -10,13 +10,13 @@ model:
       - name: Card
         path: /components/card
       - name: Form
-        path: /components/form/input/text
+        path: /components/form/input/checkbox
         children:
         - name: Input
-          path: /components/form/input/text
+          path: /components/form/input/checkbox
           children:
-          - name: Text
-            path: /components/form/input/text
+            - name: Checkbox
+              path: /components/form/input/checkbox
       - name: Icon
         path: /components/icon
       - name: Keyboard
