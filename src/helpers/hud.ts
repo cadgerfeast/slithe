@@ -6,7 +6,11 @@ function createHud () {
 }
 
 export interface Notification {
-  type: 'info'|'success'|'warning'|'error';
+  type: string;
+  icon: {
+    name: string;
+    size: string;
+  };
   message: string;
 }
 export function addNotification (notification: Notification) {

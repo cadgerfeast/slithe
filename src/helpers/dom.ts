@@ -67,28 +67,22 @@ export function observeRect (node: Element, callback: ObserverCallback) {
   };
 }
 
-export function dispatchEvent (node: Element, key: string, detail = null) {
-	node.dispatchEvent(new CustomEvent(key, { detail }));
-}
-
-export function dispatchHostEvent (node: HTMLElement, key: string, detail?: unknown) {
-  const wrapper = getRootElement(node);
-  dispatchEvent(wrapper, key, detail);
-}
-
 export function tooltip (node: HTMLElement, _title?: string): ActionReturn {
   let title = _title;
   let tooltipElement;
 	const handleMouseEnter = (e: MouseEvent) => {
     if (title) {
       tooltipElement = document.createElement('sl-tooltip');
+      tooltipElement.target = node;
       tooltipElement.pos = [e.clientX, e.clientY];
       tooltipElement.appendChild(document.createTextNode(title));
       document.body.appendChild(tooltipElement);
     }
 	};
   const handleMouseLeave = () => {
-		removeElement(tooltipElement);
+    if (tooltipElement) {
+      tooltipElement.hide();
+    }
 	};
 	node.addEventListener('mouseenter', handleMouseEnter);
   node.addEventListener('mouseleave', handleMouseLeave);
@@ -164,4 +158,18 @@ export function closest (node: Element, selector: string) {
     }
   }
   return null;
+}
+
+export function contains (parent: Element|ShadowRoot, child: Node) {
+  if (parent) {
+    const found = parent.contains(child);
+    if (found) {
+      return true;
+    } else {
+      if (parent instanceof Element && parent.shadowRoot) {
+        return contains(parent.shadowRoot, child);
+      }
+    }
+  }
+  return false;
 }

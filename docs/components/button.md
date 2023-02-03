@@ -57,14 +57,14 @@ When the button is inside a `<form>` element, use `type="submit"` in order to su
 
 <Preview>
   <sl-button type="button">Button</sl-button>
-  <sl-form>
+  <sl-form @submit="$notify('submit')">
     <sl-button type="submit">Submit</sl-button>
   </sl-form>
 </Preview>
 
 ``` html
 <sl-button type="button">Button</sl-button>
-<sl-form @submit="$notify('submit')">
+<sl-form>
   <sl-button type="submit">Submit</sl-button>
 </sl-form>
 ```

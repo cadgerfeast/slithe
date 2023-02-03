@@ -137,27 +137,41 @@
 /* Button */
 button.sl-button {
   font-family: var(--pr-font-family);
-  font-size: var(--sl-button-font-size, 14px);
-  font-weight: 500;
-  padding: var(--sl-button-padding, 5px 16px);
+  position: relative;
+  width: 100%;
+  background-color: var(--sl-button-background-color);
+  color: var(--sl-button-color);
+  border: 1px solid var(--sl-button-border-color);
   border-radius: 6px;
+  padding: var(--sl-button-padding, 5px 16px);
+  font-size: var(--sl-button-font-size, 14px);
+  user-select: none;
+  font-weight: 500;
   box-shadow: var(--sl-button-box-shadow);
   white-space: nowrap;
   vertical-align: middle;
   cursor: pointer;
-  user-select: none;
-}
-button.sl-button:hover {
-  color: var(--sl-button-hover-color, unset);
-  border-color: var(--sl-button-hover-border-color, unset);
-  box-shadow: var(--sl-button-hover-box-shadow, unset);
-}
-button.sl-button:active {
-  color: var(--sl-button-active-color, unset);
-  border-color: var(--sl-button-active-border-color, unset);
-  box-shadow: var(--sl-button-active-box-shadow, unset);
-}
-button.sl-button:focus-visible {
-  outline-color: var(--sl-button-outline-color);
-  box-shadow: var(--sl-button-focus-box-shadow, unset);
+  &:hover {
+    background-color: var(--sl-button-hover-background-color);
+    border-color: var(--sl-button-hover-border-color);
+    color: var(--sl-button-hover-color, unset);
+    border-color: var(--sl-button-hover-border-color, unset);
+    box-shadow: var(--sl-button-hover-box-shadow, unset);
+  }
+  &:active {
+    background-color: var(--sl-button-active-background-color);
+    border-color: var(--sl-button-active-border-color);
+    color: var(--sl-button-active-color, unset);
+    border-color: var(--sl-button-active-border-color, unset);
+    box-shadow: var(--sl-button-active-box-shadow, unset);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--sl-button-outline-color);
+    outline-offset: -2px;
+    box-shadow: var(--sl-button-focus-box-shadow, unset);
+  }
+  &[disabled] {
+    pointer-events: none;
+    opacity: 0.5;
+  }
 }

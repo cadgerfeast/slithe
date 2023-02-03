@@ -1,18 +1,22 @@
-// Host
+// Light
 :host([sl-theme=light]) {
-  // Override
   --sl-tooltip-background-color: var(--pr-shark);
   --sl-tooltip-color: var(--pr-white);
   --sl-tooltip-border-color: transparent;
 }
+// Dark
 :host([sl-theme=dark]) {
-  // Override
   --sl-tooltip-background-color: var(--pr-pale-sky);
   --sl-tooltip-color: var(--pr-white);
   --sl-tooltip-border-color: transparent;
 }
 // Tooltip
 div.sl-tooltip {
-  padding: .5em .75em;
+  display: inline-block;
+  background-color: var(--sl-tooltip-background-color);
+  color: var(--sl-tooltip-color);
+  border: 1px solid var(--sl-tooltip-border-color);
   border-radius: 6px;
+  padding: .5em .75em;
+  user-select: none;
 }

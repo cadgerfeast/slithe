@@ -16,6 +16,10 @@ export default [
       $notify (msg: string) {
         addNotification({
           type: 'info',
+          icon: {
+            name: 'info',
+            size: '16px'
+          },
           message: msg
         });
       }

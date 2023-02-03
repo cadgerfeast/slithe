@@ -10,7 +10,7 @@
   // Types
   import type { Notification } from '../../helpers/hud';
   // Data
-  let notifications = [];
+  let notifications: Notification[] = [];
   // Methods
   export async function addNotification (notification: Notification) {
     notifications = [...notifications, notification];
@@ -28,34 +28,14 @@
   <!-- Notifications -->
   <ul class="notifications">
     {#each notifications as notification}
-      <li class="notification">
-        <sl-icon name="color-outline-palette"/>
-        <span>{notification.message}</span>
+      <li class={`notification ${notification.type}`}>
+        <div class="icon">
+          <sl-icon name={notification.icon.name} size={notification.icon.size}/>
+        </div>
+        <div class="content">
+          <span>{notification.message}</span>
+        </div>
       </li>
     {/each}
   </ul>
 </div>
-<!-- Style -->
-<style lang="scss">
-  div.sl-hud {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 4;
-    pointer-events: none;
-    > ul.notifications {
-      position: fixed;
-      right: 15px;
-      bottom: 0;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      > li.notification {
-        pointer-events: all;
-        margin-bottom: 15px;
-      }
-    }
-  }
-</style>

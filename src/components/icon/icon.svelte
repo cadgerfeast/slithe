@@ -14,8 +14,6 @@
   import { onMount } from 'svelte';
   import { theme } from '../../helpers/style';
   import { tooltip } from '../../helpers/dom';
-  // Style
-  import globalCss from './icon.scss';
   // Props
   export let name: string = undefined;
   export let size: string = '16px';
@@ -29,10 +27,3 @@
 <i class='sl-icon' style:width={size} style:height={size} use:tooltip={title}>
   {@html svg}
 </i>
-<!-- Style -->
-<svelte:element this="style">{@html globalCss}</svelte:element>
-<style lang="scss">
-  i.sl-icon {
-    display: inline-flex;
-  }
-</style>

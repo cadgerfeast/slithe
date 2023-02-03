@@ -1,5 +1,8 @@
 i.sl-icon {
+  display: inline-flex;
   > svg {
+    width: inherit;
+    height: inherit;
     fill: currentColor;
   }
 }
