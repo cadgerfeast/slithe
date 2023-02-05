@@ -21,4 +21,6 @@ model:
         path: /components/icon
       - name: Keyboard
         path: /components/keyboard
+  - name: Themes
+    path: /themes
 ---

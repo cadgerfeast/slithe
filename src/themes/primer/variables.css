@@ -1,7 +1,6 @@
 :root {
   --pr-font-family: 'Fira Sans';
   --pr-font-family-mono: 'Fira Mono';
-  
   --pr-white: #FFFFFF;
   --pr-aqua-haze: #F6F8FA;
   --pr-athens-gray: #F3F4F6;
@@ -38,28 +37,4 @@
   --pr-pale-sky: #6E7681;
   --pr-eucalyptus: #2DA44E;
   --pr-pirate-gold: #BF8700;
-}
-
-*[sl-theme=primer-light] {
-  --sl-font-family: var(--pr-font-family);
-  --sl-font-family-mono: var(--pr-font-family-mono);
-  --sl-background-color: var(--pr-white);
-  --sl-background-color-subtle: var(--pr-aqua-haze);
-  --sl-text-color: var(--pr-shark);
-  --sl-text-color-subtle: var(--pr-shuttle-gray);
-  --sl-divider-color: var(--pr-geyser);
-  --sl-white: var(--pr-white);
-  --sl-primary: var(--pr-science-blue);
-}
-
-*[sl-theme=primer-dark] {
-  --sl-font-family: var(--pr-font-family);
-  --sl-font-family-mono: var(--pr-font-family-mono);
-  --sl-background-color: var(--pr-bunker);
-  --sl-background-color-subtle: var(--pr-dark-artifact);
-  --sl-text-color: var(--pr-karpa-kora);
-  --sl-text-color-subtle: var(--pr-regent-gray);
-  --sl-divider-color: var(--pr-bright-gray);
-  --sl-white: var(--pr-white);
-  --sl-primary: var(--pr-endeavour);
 }

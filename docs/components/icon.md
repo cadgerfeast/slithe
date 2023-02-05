@@ -5,6 +5,8 @@ title: Slithe - Components - Icon
 
 A `sl-icon` component provides a large set of glyphs to provide context for various use-cases.
 
+<Anchor href="https://primer.style/octicons/">Full list of icons can be found here.</Anchor>
+
 <Preview>
   <sl-icon name="bug"/>
   <sl-icon name="law" size="24px"/>
