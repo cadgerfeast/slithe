@@ -6,6 +6,7 @@ import '../themes/primer/global.css';
 // Components
 import Preview from './components/preview.vue';
 import PlaygroundCard from './playground/card.vue';
+import PlaygroundLayout from './playground/layout.vue';
 
 defineElements();
 setTheme('light', primer);
@@ -14,7 +15,8 @@ export default [
   {
     components: [
       Preview,
-      PlaygroundCard
+      PlaygroundCard,
+      PlaygroundLayout
     ],
     globalProperties: {
       $notify (msg: string) {

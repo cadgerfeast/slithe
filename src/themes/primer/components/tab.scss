@@ -1,0 +1,60 @@
+// Light
+:host([sl-theme=light]) {
+  --sl-tab-border-color: transparent;
+  --sl-tab-button-font-weight: 400;
+  --sl-tab-button-color: var(--pr-shark);
+  --sl-tab-button-hover-background-color: rgb(243, 244, 246);
+  --sl-tab-button-active-background-color: rgb(238, 239, 242);
+}
+// Active
+:host([sl-theme=light][active]) {
+  --sl-tab-border-color: var(--pr-salmon);
+  --sl-tab-button-font-weight: 500;
+}
+// Dark
+:host([sl-theme=dark]) {
+  --sl-tab-border-color: transparent;
+  --sl-tab-button-font-weight: 400;
+  --sl-tab-button-color: var(--pr-norborne);
+  --sl-tab-button-hover-background-color: rgb(68, 76, 86);
+  --sl-tab-button-active-background-color: rgb(45, 51, 59);
+}
+// Active
+:host([sl-theme=dark][active]) {
+  --sl-tab-border-color: var(--pr-tan-hide);
+  --sl-tab-button-font-weight: 500;
+}
+// Tab
+li.sl-tab {
+  padding: 8px 4px;
+  margin-bottom: -1px;
+  border-bottom: 2px solid var(--sl-tab-border-color);
+  > button {
+    font-family: var(--pr-font-family);
+    position: relative;
+    border: none;
+    background-color: transparent;
+    color: var(--sl-tab-button-color);
+    border-radius: 6px;
+    padding: 5px 16px;
+    font-weight: var(--sl-tab-button-font-weight);
+    font-size: 14px;
+    user-select: none;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    &:hover {
+      background-color: var(--sl-tab-button-hover-background-color);
+      box-shadow: var(--sl-tab-button-hover-box-shadow, unset);
+    }
+    &:active {
+      background-color: var(--sl-tab-button-active-background-color);
+      box-shadow: var(--sl-tab-button-active-box-shadow, unset);
+    }
+    &:focus-visible {
+      outline: 2px solid var(--sl-tab-button-outline-color);
+      outline-offset: -2px;
+      box-shadow: var(--sl-tab-button-focus-box-shadow, unset);
+    }
+  }
+}

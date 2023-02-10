@@ -9,8 +9,6 @@
   // Helpers
   import { onMount, onDestroy } from 'svelte';
   import { SlotManager } from '../../helpers/dom';
-  // Props
-  export let size = 'medium';
   // Data
   let root: HTMLElement;
   const slotManager = new SlotManager();
@@ -25,7 +23,7 @@
   });
 </script>
 <!-- Template -->
-<div bind:this={root} class={`sl-card ${size}`} class:has-header={$slots.header} class:has-default={$slots.default} class:has-footer={$slots.footer}>
+<div bind:this={root} class="sl-card" class:has-header={$slots.header} class:has-default={$slots.default} class:has-footer={$slots.footer}>
   <header>
     <slot name="header"/>
   </header>
