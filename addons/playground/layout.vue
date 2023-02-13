@@ -4,6 +4,7 @@
       <div slot="iframe">
         <iframe src="/pages/iframe.html"/>
       </div>
+      <div slot="view0">View 0 (Content)</div>
       <div slot="view1">View 1 (Content)</div>
       <div slot="view2">View 2 (Content)</div>
       <div slot="view3">View 3 (Content)</div>
@@ -26,9 +27,9 @@
               type: 'tabs',
               items: [
                 {
-                  name: 'Email',
+                  name: 'View 0',
                   type: 'view',
-                  viewSlot: 'email'
+                  viewSlot: 'view0'
                 }
               ]
             },

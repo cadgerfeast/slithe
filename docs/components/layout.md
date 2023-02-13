@@ -23,8 +23,9 @@ const model = {
       type: 'tabs',
       items: [
         {
+          name: 'View 0',
           type: 'view',
-          viewSlot: 'email'
+          viewSlot: 'view0'
         }
       ]
     },
@@ -68,6 +69,7 @@ const model = {
   <div slot="iframe">
     <iframe src="https://bing.com"/>
   </div>
+  <div slot="view0">View 0 (Content)</div>
   <div slot="view1">View 1 (Content)</div>
   <div slot="view2">View 2 (Content)</div>
   <div slot="view3">View 3 (Content)</div>

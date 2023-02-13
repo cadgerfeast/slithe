@@ -11,13 +11,12 @@
 <!-- Script -->
 <script lang="ts">
   // Helpers
-  import { onMount } from 'svelte';
+  import { onMount, tick } from 'svelte';
   import { flip } from 'svelte/animate';
-  import { draggable, droplist } from '../../helpers/dom';
+  import { draggable, droplist, getRootElement, querySelector } from '../../helpers/dom';
   import { uuid } from '../../helpers/string';
-  // TODO change active tabs
-  // TODO slots should be displayed at correct position (sl-rel)
-  // TODO Dispatch change events
+  // TODO keep only one tab-view (ignore the one currently dragged)
+  // TODO Dispatch change events (updated JSON from root)
   // TODO Dropzones
   // Types
   type TabModel = Model & {
@@ -48,11 +47,34 @@
     type: 'tabs',
     items: []
   };
+  export let child = false;
   // Data
+  let root: HTMLDivElement;
+  let wrapper: HTMLElement;
+  let slotRels = [];
   let curModel = computeModel(model);
   // Computed
   $: slots = getViewSlots(curModel);
+  $: {
+    slots;
+    computeSlotRels();
+  }
+  $: {
+    root;
+    if (root) {
+      wrapper = getRootElement(root);
+    }
+  }
   // Methods
+  async function computeSlotRels () {
+    await tick();
+    slotRels = slots.map((slot) => {
+      return {
+        name: slot,
+        target: getSlotContainer(slot)
+      };
+    });
+  }
   function computeModel <T extends TabModel|Model> (_model: T): T {
     const res = {..._model};
     res.id = res.id || uuid();
@@ -107,6 +129,28 @@
     tab.innerText = item.name;
     return tab;
   }
+  function setActiveTab (id: string) {
+    let asActive = false;
+    const items = [...curModel.items];
+    for (const item of items) {
+      item.active = item.id === id;
+      asActive = asActive || item.active;
+    }
+    if (!asActive) {
+      items[0].active = true;
+    }
+    updateTabItems(items);
+  }
+  function getSlotContainer (slot: string) {
+    return querySelector(root, `div.slot-container.${slot}`);
+  }
+  function updateTabItems (items: TabModel[]) {
+    curModel.items = items;
+    emitChange();
+  }
+  function emitChange () {
+    wrapper.dispatchEvent(new CustomEvent('change', { detail: curModel }));
+  }
   // Handlers
   function onDragStart ({ item }) {
     const items = [...curModel.items];
@@ -114,7 +158,7 @@
     if (index !== -1) {
       items.splice(index, 1);
     }
-    curModel.items = items;
+    updateTabItems(items);
   }
   function onDragLeave ({ item }) {
     const items = [...curModel.items];
@@ -122,7 +166,7 @@
     if (index !== -1) {
       items.splice(index, 1);
     }
-    curModel.items = items;
+    updateTabItems(items);
   }
   function onDragOver ({ item }, newIndex: number) {
     const items = [...curModel.items];
@@ -131,18 +175,24 @@
       items.splice(index, 1);
     }
     items.splice(newIndex, 0, { ...item, placeholder: true });
-    curModel.items = items;
+    updateTabItems(items);
   }
-  function onDrop ({ item, dragContainer, dropContainer }) {
+  function onDrop ({ item, startIndex, dropContainer }) {
     const items = [...curModel.items];
     if (!dropContainer) {
-      items.splice(item.startIndex, 0, item);
+      items.splice(startIndex, 0, item);
     }
-    curModel.items = items.map((i) => { return { ...i, placeholder: false }; });
+    updateTabItems(items.map((i) => { return { ...i, placeholder: false }; }));
+    setActiveTab(item.id);
   }
-  function onDropInside () {
+  function onDropInside ({ item }) {
     const items = [...curModel.items];
-    curModel.items = items.map((i) => { return { ...i, placeholder: false }; });
+    updateTabItems(items.map((i) => { return { ...i, placeholder: false }; }));
+    setActiveTab(item.id);
+  }
+  function handleChange () {
+    emitChange();
+    computeSlotRels();
   }
   // Lifecycle
   onMount(() => {
@@ -150,36 +200,43 @@
   });
 </script>
 <!-- Template -->
-<div class="sl-layout">
+<div bind:this={root} class="sl-layout">
   {#if curModel.type === 'tabs'}
     <!-- Tabs -->
     <nav class='sl-tabs'>
       <ul>
         <div class="droplist" use:droplist={{ onDragOver, onDragLeave, onDropInside }}>
-          {#each curModel.items as child (child.id)}
-            <div id={child.id} class="dragitem" class:placeholder={child.placeholder} use:draggable={{ item: child, generateClone, onDragStart, onDrop }} animate:flip={{ duration: 200 }}>
+          {#each curModel.items as child, index (child.id)}
+            <div id={child.id} class="dragitem" class:placeholder={child.placeholder} use:draggable={{ item: child, startIndex: index, generateClone, onDragStart, onDrop }} animate:flip={{ duration: 200 }}>
               <li class='sl-tab' class:active={child.active}>
-                <button>{child.name}</button>
+                <button on:click={() => setActiveTab(child.id)}>{child.name}</button>
               </li>
             </div>
           {/each}
         </div>
       </ul>
     </nav>
+    {#each curModel.items as child (child.id)}
+      <div class="tab-view" class:active={child.active}>
+        <sl-layout model={child} child={true} on:change={handleChange}/>
+      </div>
+    {/each}
   {:else if curModel.type === 'splitter'}
     <!-- Splitter -->
     <sl-splitter vertical={curModel.direction === 'vertical'}>
-      <sl-layout slot="blue" model={curModel.items[0]}/>
-      <sl-layout slot="green" model={curModel.items[1]}/>
+      <sl-layout slot="blue" child={true} model={curModel.items[0]} on:change={handleChange}/>
+      <sl-layout slot="green" child={true} model={curModel.items[1]} on:change={handleChange}/>
     </sl-splitter>
   {:else}
     <!-- View -->
-    <span>View {curModel.viewSlot}</span>
+    <div class={`slot-container ${curModel.viewSlot}`}/>
   {/if}
   <!-- Slots -->
-  {#each slots as slot}
-    <div class="slot-wrapper">
-      {@html `<slot name="${slot}"/>`}
-    </div>
-  {/each}
+  {#if !child}
+    {#each slotRels as slotRel}
+      <sl-rel for={slotRel.target}>
+        {@html `<slot name="${slotRel.name}"/>`}
+      </sl-rel>
+    {/each}
+  {/if}
 </div>

@@ -175,6 +175,37 @@ export function contains (parent: Element|ShadowRoot, child: Node) {
   return false;
 }
 
+export function querySelector (parent: HTMLElement|HTMLSlotElement|ShadowRoot, selector: string): HTMLElement {
+  if (parent) {
+    if (parent instanceof Element && parent.matches(selector)) {
+      return parent;
+    }
+    if (parent instanceof Element && parent.shadowRoot) {
+      const found = querySelector(parent.shadowRoot, selector);
+      if (found) {
+        return found;
+      }
+    }
+    if (parent instanceof HTMLSlotElement) {
+      for (const child of parent.assignedNodes()) {
+        const found = querySelector(child as HTMLElement, selector);
+        if (found) {
+          return found;
+        }
+      }
+    }
+    if (parent.children) {
+      for (const child of parent.children) {
+        const found = querySelector(child as HTMLElement, selector);
+        if (found) {
+          return found;
+        }
+      }
+    }
+  }
+  return null;
+}
+
 function isOnTop (el: HTMLElement, x: number, y: number) {
   const rect = el.getBoundingClientRect();
   return (
@@ -191,6 +222,7 @@ function isAtRight (el: HTMLElement, x: number) {
 
 interface DraggableOptions {
   item: any;
+  startIndex: number,
   generateClone: any;
   onDragStart: any;
   onDrop: any;
@@ -205,6 +237,7 @@ export function draggable (node: HTMLElement, options: DraggableOptions): Action
       dragItem = {
         dragContainer: node.parentElement,
         item: options.item,
+        startIndex: options.startIndex,
         startX: e.clientX,
         startY: e.clientY,
         offsetX: e.clientX - rect.left,
@@ -231,11 +264,13 @@ export function draggable (node: HTMLElement, options: DraggableOptions): Action
     }
 	}
   function handleMouseUp () {
-    if (dragItem.clone && dragItem.dropContainer) {
-      dragItem.dropContainer.dispatchEvent(new CustomEvent('drop'));
+    if (dragItem.clone) {
       options.onDrop(dragItem);
-      removeElement(dragItem.clone);
+      if (dragItem.dropContainer) {
+        dragItem.dropContainer.dispatchEvent(new CustomEvent('drop'));
+      }
     }
+    removeElement(dragItem.clone);
     dragItem = null;
     window.removeEventListener('mousemove', handleMouseMove);
     window.removeEventListener('mouseup', handleMouseUp);
