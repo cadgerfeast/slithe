@@ -20,8 +20,13 @@ const model = {
   direction: 'horizontal',
   items: [
     {
-      type: 'view',
-      viewSlot: 'email'
+      type: 'tabs',
+      items: [
+        {
+          type: 'view',
+          viewSlot: 'email'
+        }
+      ]
     },
     {
       type: 'splitter',
@@ -37,13 +42,13 @@ const model = {
             {
               name: 'Iframe',
               type: 'view',
-              viewSlot: 'iframe',
-              active: true
+              viewSlot: 'iframe'
             },
             {
               name: 'View 2',
               type: 'view',
-              viewSlot: 'view2'
+              viewSlot: 'view2',
+              active: true
             },
             {
               name: 'View 3',

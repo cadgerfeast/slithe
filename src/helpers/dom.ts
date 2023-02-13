@@ -1,5 +1,6 @@
 // Helpers
 import { get, writable } from 'svelte/store';
+import { MouseButton } from './browser';
 // Types
 import type { Writable } from 'svelte/store';
 import type { ActionReturn } from 'svelte/action';
@@ -172,4 +173,119 @@ export function contains (parent: Element|ShadowRoot, child: Node) {
     }
   }
   return false;
+}
+
+function isOnTop (el: HTMLElement, x: number, y: number) {
+  const rect = el.getBoundingClientRect();
+  return (
+    rect.left < x &&
+    rect.right > x &&
+    rect.top < y &&
+    rect.bottom > y
+  );
+}
+function isAtRight (el: HTMLElement, x: number) {
+  const rect = el.getBoundingClientRect();
+  return x > (rect.left + (rect.width / 2));
+}
+
+interface DraggableOptions {
+  item: any;
+  generateClone: any;
+  onDragStart: any;
+  onDrop: any;
+}
+let dragItem = null;
+export function draggable (node: HTMLElement, options: DraggableOptions): ActionReturn {
+  function handleMouseDown (e: MouseEvent) {
+    if (e.button === MouseButton.Left) {
+      window.addEventListener('mousemove', handleMouseMove);
+      window.addEventListener('mouseup', handleMouseUp);
+      const rect = node.getBoundingClientRect();
+      dragItem = {
+        dragContainer: node.parentElement,
+        item: options.item,
+        startX: e.clientX,
+        startY: e.clientY,
+        offsetX: e.clientX - rect.left,
+        offsetY: e.clientY - rect.top,
+        curX: e.clientX,
+        curY: e.clientY
+      };
+    }
+	}
+  function handleMouseMove (e: MouseEvent) {
+    if (!dragItem.clone && ((Math.abs(dragItem.startX - e.clientX) > 5) || (Math.abs(dragItem.startY - e.clientY) > 5))) {
+      dragItem.clone = node.cloneNode(false);
+      dragItem.clone.appendChild(options.generateClone(dragItem.item));
+      dragItem.clone.style.position = 'fixed';
+      dragItem.clone.firstChild.setAttribute('dragged', '');
+      document.body.appendChild(dragItem.clone);
+      options.onDragStart(dragItem);
+    }
+    if (dragItem.clone) {
+      dragItem.curX = e.clientX;
+      dragItem.curY = e.clientY;
+      dragItem.clone.style.top = `${dragItem.curY - dragItem.offsetY}px`;
+      dragItem.clone.style.left = `${dragItem.curX - dragItem.offsetX}px`;
+    }
+	}
+  function handleMouseUp () {
+    if (dragItem.clone && dragItem.dropContainer) {
+      dragItem.dropContainer.dispatchEvent(new CustomEvent('drop'));
+      options.onDrop(dragItem);
+      removeElement(dragItem.clone);
+    }
+    dragItem = null;
+    window.removeEventListener('mousemove', handleMouseMove);
+    window.removeEventListener('mouseup', handleMouseUp);
+	}
+	node.addEventListener('mousedown', handleMouseDown);
+	return {
+		destroy () {
+			node.removeEventListener('mousedown', handleMouseDown);
+		}
+	};
+}
+interface DroplistOptions {
+  onDragOver: any;
+  onDragLeave: any;
+  onDropInside: any;
+}
+export function droplist (node: HTMLElement, options: DroplistOptions): ActionReturn {
+  let hasLeft = false;
+  function handleDrop () {
+    options.onDropInside(dragItem);
+  }
+  function handleMouseMove () {
+    if (dragItem?.clone) {
+      if (isOnTop(node, dragItem.curX, dragItem.curY)) {
+        dragItem.dropContainer = node;
+        hasLeft = false;
+        let index = 0;
+        for (let i = 0; i < node.children.length; i++) {
+          if (node.id !== dragItem.item.id) {
+            if (isAtRight(node.children[i] as HTMLElement, dragItem.curX)) {
+              index = i + 1;
+            }
+          }
+        }
+        options.onDragOver(dragItem, index);
+      } else {
+        if (!hasLeft) {
+          dragItem.dropContainer = null;
+          hasLeft = true;
+          options.onDragLeave(dragItem);
+        }
+      }
+    }
+	}
+  node.addEventListener('drop', handleDrop);
+  window.addEventListener('mousemove', handleMouseMove);
+	return {
+		destroy () {
+      node.removeEventListener('drop', handleDrop);
+      window.removeEventListener('mousemove', handleMouseMove);
+		}
+	};
 }

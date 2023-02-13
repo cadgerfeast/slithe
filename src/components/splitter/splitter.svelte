@@ -1,5 +1,5 @@
 <!-- Metadata -->
-<script context="module">
+<script lang="ts" context="module">
   export const tag = 'splitter';
   export const style = {
     'display': 'block',
@@ -13,6 +13,7 @@
   // Helpers
   import { StyleObject } from '../../helpers/style';
   import { clamp } from '../../helpers/number';
+  import { MouseButton } from '../../helpers/browser';
   // Props
   export let horizontal = true;
   export let vertical = false;
@@ -44,10 +45,12 @@
   };
   // Handlers
   function onMouseDown (e: MouseEvent) {
-    e.stopPropagation();
-    this.resizing = true;
-    window.addEventListener('mousemove', onMouseMove);
-    window.addEventListener('mouseup', onMouseUp);
+    if (e.button === MouseButton.Left) {
+      e.stopPropagation();
+      this.resizing = true;
+      window.addEventListener('mousemove', onMouseMove);
+      window.addEventListener('mouseup', onMouseUp);
+    }
   }
   function onMouseMove (e: MouseEvent) {
     const rect = root.getBoundingClientRect();

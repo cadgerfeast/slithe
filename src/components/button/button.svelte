@@ -1,5 +1,5 @@
 <!-- Metadata -->
-<script context="module">
+<script lang="ts" context="module">
   export const tag = 'button';
   export const style = {
     'display': 'inline-block'
@@ -24,7 +24,7 @@
       if (form) {
         form.submit();
       } else {
-        console.warn('<sl-button> does not have a proper <sl-form> ancestor.');
+        throw new Error('<sl-button> does not have a proper <sl-form> ancestor.');
       }
     }
   }

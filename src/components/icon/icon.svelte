@@ -1,5 +1,5 @@
 <!-- Metadata -->
-<script context="module">
+<script lang="ts" context="module">
   export const tag = 'icon';
   export const style = {
     'display': 'inline-flex',

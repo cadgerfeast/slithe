@@ -1,7 +1,6 @@
 <!-- Metadata -->
-<script context="module">
+<script lang="ts" context="module">
   export const tag = 'hud';
-  export const style = {};
 </script>
 <!-- Script -->
 <script lang="ts">

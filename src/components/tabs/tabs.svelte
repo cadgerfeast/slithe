@@ -1,4 +1,4 @@
-<script context="module">
+<script lang="ts" context="module">
   export const tag = 'tabs';
   export const style = {
     'display': 'flex'

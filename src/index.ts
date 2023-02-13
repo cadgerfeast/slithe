@@ -24,6 +24,9 @@ export function defineElements () {
       // Lifecycle
       connectedCallback () {
         super.connectedCallback();
+        if (component.initialize) {
+          component.initialize(this as unknown as HTMLElement);
+        }
         if (component.style) {
           for (const property in component.style) {
             this.style[property] = component.style[property];

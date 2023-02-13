@@ -15,8 +15,9 @@ interface SlitheComponentConstructor {
 }
 declare interface SlitheComponent {
   public tag: string;
-  public style: Record<string, string>;
   public default: SlitheComponentConstructor;
+  public style?: Record<string, string>;
+  public initialize?: (el: HTMLElement) => void;
 }
 
 declare module '*.svelte' {

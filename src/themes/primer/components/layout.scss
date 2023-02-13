@@ -1,5 +1,24 @@
+@import './tabs.scss';
+@import './tab.scss';
+:host {
+  --sl-tab-padding: 4px 2px;
+  --sl-tab-button-padding: 3px 12px;
+  --sl-tab-button-font-size: 12px;
+}
 div.sl-layout {
   height: 100%;
+  > nav.sl-tabs {
+    > ul {
+      > div.droplist {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        > div.dragitem.placeholder {
+          visibility: hidden;
+        }
+      }
+    }
+  }
   > div.slot-wrapper {
     display: none;
   }

@@ -1,7 +1,6 @@
 <!-- Metadata -->
-<script context="module">
+<script lang="ts" context="module">
   export const tag = 'card';
-  export const style = {};
 </script>
 <!-- Options -->
 <svelte:options tag={null}/>
