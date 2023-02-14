@@ -1,12 +1,14 @@
 <script lang="ts" context="module">
-  export const tag = 'keyboard';
+  export const tag = 'tabs';
   export const style = {
-    'display': 'inline-flex'
+    'display': 'flex'
   };
 </script>
 <!-- Options -->
 <svelte:options tag={null}/>
 <!-- Template -->
-<kbd class='sl-keyboard'>
-  <slot/>
-</kbd>
+<nav class='sl-tabs'>
+  <ul>
+    <slot/>
+  </ul>
+</nav>

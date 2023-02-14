@@ -1,0 +1,8 @@
+div.sl-rel {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  > * {
+    pointer-events: all;
+  }
+}

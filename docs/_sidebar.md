@@ -21,6 +21,12 @@ model:
         path: /components/icon
       - name: Keyboard
         path: /components/keyboard
+      - name: Layout
+        path: /components/layout
+      - name: Splitter
+        path: /components/splitter
+      - name: Tabs
+        path: /components/tabs
   - name: Themes
     path: /themes
 ---

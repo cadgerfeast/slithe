@@ -2,7 +2,6 @@
 import { themeKey, theme } from './helpers/style';
 // Types
 import type { SlitheComponent } from '../types';
-
 // Constants
 const components = Object.values(import.meta.glob<SlitheComponent>('./components/**/*.svelte', { eager: true }));
 
@@ -21,9 +20,17 @@ export function defineElements () {
           }
         }, options);
       }
+      
       // Lifecycle
+      // attributeChangedCallback(attrName, oldValue, newValue) {
+      //   attrName = attrName.replace(/-([a-z])/g, (_, up) => up.toUpperCase());
+      //   super.attributeChangedCallback(attrName, oldValue, newValue);
+      // }
       connectedCallback () {
         super.connectedCallback();
+        if (component.initialize) {
+          component.initialize(this as unknown as HTMLElement);
+        }
         if (component.style) {
           for (const property in component.style) {
             this.style[property] = component.style[property];
@@ -43,6 +50,10 @@ export function defineElements () {
         super.disconnectedCallback();
         this.$destroy();
       }
+      // Static
+      // static get observedAttributes() {
+      //   return (super.observedAttributes || []).map(attr => attr.replace(/([a-zA-Z])(?=[A-Z])/g, '$1-').toLowerCase());
+      // }
     } as unknown as CustomElementConstructor);
   }
 }

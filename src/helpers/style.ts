@@ -23,7 +23,7 @@ export function setTheme (_key: string, _theme?: Theme) {
 
 export class StyleObject {
   private _attrs: Record<string, string>;
-  constructor (attrs: Record<string, string>) {
+  constructor (attrs: Record<string, string> = {}) {
     this._attrs = attrs;
   }
   public toString () {
