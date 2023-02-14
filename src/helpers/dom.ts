@@ -242,6 +242,7 @@ function computeDropPosition (el: HTMLElement, x: number, y: number): DropPositi
   return 'center';
 }
 
+const dropContainers = new Map<HTMLElement, () => void>([]);
 interface DraggableOptions {
   item: any;
   startIndex: number,
@@ -287,8 +288,16 @@ export function draggable (node: HTMLElement, options: DraggableOptions): Action
 	}
   function handleMouseUp () {
     if (dragItem.clone) {
-      if (dragItem.dropContainer) {
-        dragItem.dropContainer.dispatchEvent(new CustomEvent('drop'));
+      let hasDropped = false;
+      for (const [el, handleDrop] of Array.from(dropContainers)) {
+        if (isOnTop(el, dragItem.curX, dragItem.curY)) {
+          hasDropped = true;
+          dragItem.dropContainer = el;
+          handleDrop();
+        }
+      }
+      if (!hasDropped) {
+        dragItem.dropContainer = null;
       }
       options.onDrop(dragItem);
     }
@@ -319,7 +328,6 @@ export function droplist (node: HTMLElement, options: DroplistOptions): ActionRe
   function handleMouseMove () {
     if (dragItem?.clone) {
       if (isOnTop(node, dragItem.curX, dragItem.curY)) {
-        dragItem.dropContainer = node;
         hasLeft = false;
         let index = 0;
         for (let i = 0; i < node.children.length; i++) {
@@ -340,8 +348,10 @@ export function droplist (node: HTMLElement, options: DroplistOptions): ActionRe
 	}
   node.addEventListener('drop', handleDrop);
   window.addEventListener('mousemove', handleMouseMove);
+  dropContainers.set(node, handleDrop);
 	return {
 		destroy () {
+      dropContainers.delete(node);
       node.removeEventListener('drop', handleDrop);
       window.removeEventListener('mousemove', handleMouseMove);
 		}
@@ -351,22 +361,24 @@ interface DropzoneOptions {
   onDrop: any;
 }
 export function dropzone (node: HTMLElement, options: DropzoneOptions): ActionReturn {
-  function handleDrop () {
-    if (isOnTop(node, dragItem.curX, dragItem.curY)) {
-      const position = computeDropPosition(node, dragItem.curX, dragItem.curY);
-      console.info(position);
-      options.onDrop(dragItem, position);
-    }
-  }
-  function handleMouseMove () {
+  function cleanup () {
     node.style.top = '0';
     node.style.right = '0';
     node.style.bottom = '0';
     node.style.left = '0';
     node.style.backgroundColor = 'transparent';
+  }
+  function handleDrop () {
+    if (isOnTop(node, dragItem.curX, dragItem.curY)) {
+      const position = computeDropPosition(node, dragItem.curX, dragItem.curY);
+      options.onDrop(dragItem, position);
+    }
+    cleanup();
+  }
+  function handleMouseMove () {
+    cleanup();
     if (dragItem?.clone) {
       if (isOnTop(node, dragItem.curX, dragItem.curY)) {
-        dragItem.dropContainer = node;
         const position = computeDropPosition(node, dragItem.curX, dragItem.curY);
         switch (position) {
           case 'top': {
@@ -395,8 +407,10 @@ export function dropzone (node: HTMLElement, options: DropzoneOptions): ActionRe
 	}
   node.addEventListener('drop', handleDrop);
   window.addEventListener('mousemove', handleMouseMove);
+  dropContainers.set(node, handleDrop);
 	return {
 		destroy () {
+      dropContainers.delete(node);
       node.removeEventListener('drop', handleDrop);
       window.removeEventListener('mousemove', handleMouseMove);
 		}

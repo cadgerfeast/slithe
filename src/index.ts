@@ -20,7 +20,12 @@ export function defineElements () {
           }
         }, options);
       }
+      
       // Lifecycle
+      // attributeChangedCallback(attrName, oldValue, newValue) {
+      //   attrName = attrName.replace(/-([a-z])/g, (_, up) => up.toUpperCase());
+      //   super.attributeChangedCallback(attrName, oldValue, newValue);
+      // }
       connectedCallback () {
         super.connectedCallback();
         if (component.initialize) {
@@ -45,6 +50,10 @@ export function defineElements () {
         super.disconnectedCallback();
         this.$destroy();
       }
+      // Static
+      // static get observedAttributes() {
+      //   return (super.observedAttributes || []).map(attr => attr.replace(/([a-zA-Z])(?=[A-Z])/g, '$1-').toLowerCase());
+      // }
     } as unknown as CustomElementConstructor);
   }
 }

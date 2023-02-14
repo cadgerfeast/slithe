@@ -18,12 +18,13 @@
   // Props
   export let horizontal = true;
   export let vertical = false;
+  export let bluesize = 50;
   let root: HTMLDivElement;
   let wrapper: HTMLElement;
   let resizing = false;
-  let blueSize = 50;
   let blueStyle = '';
   let greenStyle = '';
+  let _bluesize = bluesize;
   // Reactive
   $: {
     root;
@@ -31,24 +32,28 @@
       wrapper = getRootElement(root);
     }
   }
+  $: {
+    bluesize;
+    _bluesize = bluesize;
+  }
   $: direction = vertical ? 'vertical' : 'horizontal';
   $: {
     const blueAttrs: Record<string, string> = {};
     const greenAttrs: Record<string, string> = {};
     if (direction === 'horizontal') {
       blueAttrs['min-width'] = '0px';
-      blueAttrs['width'] = `${blueSize}%`;
+      blueAttrs['width'] = `${_bluesize}%`;
       greenAttrs['min-width'] = '0px';
-      greenAttrs['width'] = `calc(100% - ${blueSize}%)`;
+      greenAttrs['width'] = `calc(100% - ${_bluesize}%)`;
     } else {
       blueAttrs['min-height'] = '0px';
-      blueAttrs['height'] = `${blueSize}%`;
+      blueAttrs['height'] = `${_bluesize}%`;
       greenAttrs['min-height'] = '0px';
-      greenAttrs['height'] = `calc(100% - ${blueSize}%)`;
+      greenAttrs['height'] = `calc(100% - ${_bluesize}%)`;
     }
     blueStyle = new StyleObject(blueAttrs).toString();
     greenStyle = new StyleObject(greenAttrs).toString();
-  };
+  }
   // Handlers
   function onMouseDown (e: MouseEvent) {
     if (e.button === MouseButton.Left) {
@@ -62,14 +67,14 @@
   function onMouseMove (e: MouseEvent) {
     const rect = root.getBoundingClientRect();
     if (direction === 'horizontal') {
-      blueSize = clamp(0, (e.clientX - rect.left) * 100 / rect.width, 100);
+      _bluesize = clamp(0, (e.clientX - rect.left) * 100 / rect.width, 100);
     } else {
-      blueSize = clamp(0, (e.clientY - rect.top) * 100 / rect.height, 100);
+      _bluesize = clamp(0, (e.clientY - rect.top) * 100 / rect.height, 100);
     }
   }
   function onMouseUp () {
     this.resizing = false;
-    wrapper.dispatchEvent(new CustomEvent('resize-end'));
+    wrapper.dispatchEvent(new CustomEvent('resize-end', { detail: _bluesize }));
     window.removeEventListener('mousemove', onMouseMove);
     window.removeEventListener('mouseup', onMouseUp);
   }

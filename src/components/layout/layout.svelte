@@ -15,9 +15,6 @@
   import { flip } from 'svelte/animate';
   import { draggable, droplist, dropzone, getRootElement, querySelector, type DropPosition } from '../../helpers/dom';
   import { uuid } from '../../helpers/string';
-  // TODO fix removed tabs
-  // TODO fix slot refs
-  // TODO send change event only on drop/change active tab
   // Types
   type TabModel = {
     id: string;
@@ -36,6 +33,7 @@
     type: 'splitter';
     direction: 'horizontal'|'vertical';
     items: [Model, Model];
+    blueSize: number;
   }
   type Model = TabsModel|SplitterModel;
   // Props
@@ -52,6 +50,7 @@
   let droplistElement: HTMLDivElement;
   let slotRels = [];
   let curModel = computeModel(model);
+  let lastId = curModel.id;
   // Reactive
   $: slots = getViewSlots(curModel);
   $: {
@@ -69,17 +68,23 @@
     emitDragState();
   }
   // Methods
+  function updateModel (newModel: Model) {
+    lastId = curModel.id;
+    curModel = JSON.parse(JSON.stringify(newModel));
+  }
   async function computeSlotRels () {
-    await tick();
-    slotRels = slots.map((slot) => {
-      return {
-        name: slot,
-        target: getSlotContainer(slot)
-      };
-    });
+    if (!parented) {
+      await tick();
+      slotRels = slots.map((slot) => {
+        return {
+          name: slot,
+          target: getSlotContainer(slot)
+        };
+      });
+    }
   }
   function computeModel <T extends Model> (_model: T): T {
-    const res = {..._model};
+    const res = JSON.parse(JSON.stringify(_model)) as T;
     res.id = res.id || uuid();
     switch (res.type) {
       case 'tabs': {
@@ -96,6 +101,7 @@
         break;
       }
       case 'splitter': {
+        res.blueSize = res.blueSize || 50;
         for (let i = 0; i < res.items.length; i++) {
           res.items[i] = computeModel(res.items[i]);
         }
@@ -105,8 +111,7 @@
     return res;
   }
   function computeChangedModel <T extends Model> (_model: T): T {
-    const res = {..._model};
-    return JSON.parse(JSON.stringify(res));
+    return JSON.parse(JSON.stringify(_model));
   }
   function getViewSlots (_model: Model) {
     const _slots: string[] = [];
@@ -149,19 +154,46 @@
     }
     updateTabItems(items);
   }
+  function ensureNonEmptySplitterChild () {
+    switch (curModel.type) {
+      case 'tabs': {
+        if (curModel.items.length === 0) {
+          wrapper.dispatchEvent(new CustomEvent('remove-tabs', { detail: curModel.id }));
+        } else {
+          ensureActiveTab();
+        }
+        break;
+      }
+      case 'splitter': {
+        if (curModel.items[0].items.length === 0) {
+          updateModel(curModel.items[1]);
+        } else if (curModel.items[1].items.length === 0) {
+          updateModel(curModel.items[0]);
+        }
+        break;
+      }
+    }
+  }
   function getSlotContainer (slot: string) {
     return querySelector(root, `div.slot-container.${slot}`);
   }
   function updateTabItems (items: TabModel[]) {
     curModel.items = items;
-    emitChange();
+    emitLayoutUpdate();
+  }
+  function emitLayoutUpdate () {
+    if (parented) {
+      wrapper.dispatchEvent(new CustomEvent('layout-update', { detail: { oldId: lastId, newModel: curModel} }));
+    }
+    computeSlotRels();
   }
   function emitChange () {
     if (parented) {
-      wrapper.dispatchEvent(new CustomEvent('_change', { detail: curModel }));
+      wrapper.dispatchEvent(new CustomEvent('change', { detail: { oldId: lastId, newModel: curModel} }));
     } else {
       wrapper.dispatchEvent(new CustomEvent('change', { detail: computeChangedModel(curModel) }));
     }
+    computeSlotRels();
   }
   function emitDragState () {
     if (parented) {
@@ -169,6 +201,10 @@
     }
   }
   // Handlers
+  function onTabClick (id: string) {
+    setActiveTab(id);
+    emitChange();
+  }
   function onDragStart (dragItem) {
     dragging = true;
     const items = [...curModel.items] as TabModel[];
@@ -203,27 +239,8 @@
     }
     updateTabItems(items.map((i) => { return { ...i, placeholder: false }; }));
     setActiveTab(item.id);
-    ensureNonEmptyTabs();
-  }
-  function ensureNonEmptyTabs () {
-    switch (curModel.type) {
-      case 'tabs': {
-        if (curModel.items.length === 0) {
-          wrapper.dispatchEvent(new CustomEvent('remove-tabs', { detail: curModel.id }));
-        } else {
-          ensureActiveTab();
-        }
-        break;
-      }
-      case 'splitter': {
-        if (curModel.items[0].items.length === 0) {
-          curModel = curModel.items[1];
-        } else if (curModel.items[1].items.length === 0) {
-          curModel = curModel.items[0];
-        }
-        break;
-      }
-    }
+    ensureNonEmptySplitterChild();
+    emitChange();
   }
   function onDropInsideDroplist ({ item }) {
     dragging = false;
@@ -243,12 +260,13 @@
           type: 'splitter',
           id: uuid(),
           direction: 'vertical',
+          blueSize: 50,
           items: [
             tabs,
             curModel
           ]
         };
-        curModel = splitter;
+        updateModel(splitter);
         break;
       }
       case 'right': {
@@ -261,12 +279,13 @@
           type: 'splitter',
           id: uuid(),
           direction: 'horizontal',
+          blueSize: 50,
           items: [
             curModel,
             tabs
           ]
         };
-        curModel = splitter;
+        updateModel(splitter);
         break;
       }
       case 'bottom': {
@@ -279,12 +298,13 @@
           type: 'splitter',
           id: uuid(),
           direction: 'vertical',
+          blueSize: 50,
           items: [
             curModel,
             tabs
           ]
         };
-        curModel = splitter;
+        updateModel(splitter);
         break;
       }
       case 'left': {
@@ -297,12 +317,13 @@
           type: 'splitter',
           id: uuid(),
           direction: 'horizontal',
+          blueSize: 50,
           items: [
             tabs,
             curModel
           ]
         };
-        curModel = splitter;
+        updateModel(splitter);
         break;
       }
       case 'center': {
@@ -313,15 +334,26 @@
         break;
       }
     }
-    ensureNonEmptyTabs();
-    emitChange();
-    computeSlotRels();
+    ensureNonEmptySplitterChild();
+    emitLayoutUpdate();
   }
   function handleChange (e: CustomEvent) {
-    const index = curModel.items.findIndex((i) => i.id === e.detail.id);
-    curModel.items[index] = e.detail;
+    const { oldId, newModel } = e.detail;
+    let index = curModel.items.findIndex((i) => i.id === newModel.id);
+    if (index === -1) {
+      index = curModel.items.findIndex((i) => i.id === oldId);
+    }
+    curModel.items[index] = newModel;
     emitChange();
-    computeSlotRels();
+  }
+  function handleLayoutUpdate (e: CustomEvent) {
+    const { oldId, newModel } = e.detail;
+    let index = curModel.items.findIndex((i) => i.id === newModel.id);
+    if (index === -1) {
+      index = curModel.items.findIndex((i) => i.id === oldId);
+    }
+    curModel.items[index] = newModel;
+    emitLayoutUpdate();
   }
   function handleDragState (e: CustomEvent) {
     dragging = e.detail;
@@ -331,18 +363,21 @@
     dragging = true;
     emitDragState();
   }
-  function handeResizeEnd () {
+  function handeResizeEnd (e: CustomEvent) {
     dragging = false;
     emitDragState();
+    (curModel as SplitterModel).blueSize = e.detail;
+    emitLayoutUpdate();
+    emitChange();
   }
   function handleRemoveTabs (e: CustomEvent) {
-    curModel = (curModel as SplitterModel).items.find((i) => i.id !== e.detail);
-    emitChange();
-    computeSlotRels();
+    const keep = (curModel as SplitterModel).items.find((i) => i.id !== e.detail);
+    updateModel(keep);
+    emitLayoutUpdate();
   }
   // Lifecycle
   onMount(() => {
-    curModel = computeModel(model);
+    updateModel(computeModel(model));
   });
 </script>
 <!-- Template -->
@@ -356,7 +391,7 @@
             {#each curModel.items as child, index (child.id)}
               <div id={child.id} class="dragitem" class:placeholder={child.placeholder} use:draggable={{ item: child, startIndex: index, generateClone, onDragStart, onDrop: onDropTab }} animate:flip={{ duration: 200 }}>
                 <li class='sl-tab' class:active={child.active}>
-                  <button on:click={() => setActiveTab(child.id)}>{child.name}</button>
+                  <button on:click={() => onTabClick(child.id)}>{child.name}</button>
                 </li>
               </div>
             {/each}
@@ -373,20 +408,20 @@
       </div>
     {:else if curModel.type === 'splitter'}
       <!-- Splitter -->
-      <sl-splitter vertical={curModel.direction === 'vertical'} on:resize-start={handeResizeStart} on:resize-end={handeResizeEnd}>
-        <sl-layout slot="blue" parented={true} model={curModel.items[0]} on:_change={handleChange} on:drag-state={handleDragState} on:remove-tabs={handleRemoveTabs}/>
-        <sl-layout slot="green" parented={true} model={curModel.items[1]} on:_change={handleChange} on:drag-state={handleDragState} on:remove-tabs={handleRemoveTabs}/>
+      <sl-splitter vertical={curModel.direction === 'vertical'} bluesize={curModel.blueSize} on:resize-start={handeResizeStart} on:resize-end={handeResizeEnd}>
+        <sl-layout slot="blue" parented={true} model={curModel.items[0]} on:change={handleChange} on:layout-update={handleLayoutUpdate} on:drag-state={handleDragState} on:remove-tabs={handleRemoveTabs}/>
+        <sl-layout slot="green" parented={true} model={curModel.items[1]} on:change={handleChange} on:layout-update={handleLayoutUpdate} on:drag-state={handleDragState} on:remove-tabs={handleRemoveTabs}/>
       </sl-splitter>
     {/if}
-    <!-- Slots -->
-    {#if !parented}
-      <div class="rels" class:dragging={dragging}>
-        {#each slotRels as slotRel}
-          <sl-rel for={slotRel.target}>
-            {@html `<slot name="${slotRel.name}"/>`}
-          </sl-rel>
-        {/each}
-      </div>
-    {/if}
   {/key}
+  <!-- Slots -->
+  {#if !parented}
+    <div class="rels" class:dragging={dragging}>
+      {#each slotRels as slotRel}
+        <sl-rel for={slotRel.target}>
+          {@html `<slot name="${slotRel.name}"/>`}
+        </sl-rel>
+      {/each}
+    </div>
+  {/if}
 </div>
