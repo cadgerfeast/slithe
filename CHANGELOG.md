@@ -1,7 +1,13 @@
 # Changelog
 
-## [0.1.1](https://github.com/cadgerfeast/slithe/compare/0.1.0...0.1.1)
+## [0.1.2](https://github.com/cadgerfeast/slithe/compare/0.1.1...0.1.2)
 
+- Add Layout Component [`#2`](https://github.com/cadgerfeast/slithe/pull/2)
+- minor fixes, add reference to pixel theme [`fdcae70`](https://github.com/cadgerfeast/slithe/commit/fdcae70c529b6c28b3eccf78bc6348275095a5b9)
+
+## [0.1.1](https://github.com/cadgerfeast/slithe/compare/0.1.0...0.1.1) (2023-02-03)
+
+- Release slithe@0.1.1 [`7c1d4ba`](https://github.com/cadgerfeast/slithe/commit/7c1d4baed0f2b93ea952e0ac46fd5fc8b3c558b2)
 - minor fixes [`bf5c753`](https://github.com/cadgerfeast/slithe/commit/bf5c75376800de09cb27d10a479f3de5f6d954ba)
 
 ## [0.1.0](https://github.com/cadgerfeast/slithe/compare/0.0.2...0.1.0) (2023-02-03)
