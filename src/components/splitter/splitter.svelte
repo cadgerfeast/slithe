@@ -14,17 +14,23 @@
   import { StyleObject } from '../../helpers/style';
   import { clamp } from '../../helpers/number';
   import { MouseButton } from '../../helpers/browser';
+  import { getRootElement } from '../../helpers/dom';
   // Props
   export let horizontal = true;
   export let vertical = false;
-  export let minBlue = 0;
-  export let minGreen = 0;
   let root: HTMLDivElement;
+  let wrapper: HTMLElement;
   let resizing = false;
   let blueSize = 50;
   let blueStyle = '';
   let greenStyle = '';
-  // Computed
+  // Reactive
+  $: {
+    root;
+    if (root) {
+      wrapper = getRootElement(root);
+    }
+  }
   $: direction = vertical ? 'vertical' : 'horizontal';
   $: {
     const blueAttrs: Record<string, string> = {};
@@ -48,6 +54,7 @@
     if (e.button === MouseButton.Left) {
       e.stopPropagation();
       this.resizing = true;
+      wrapper.dispatchEvent(new CustomEvent('resize-start'));
       window.addEventListener('mousemove', onMouseMove);
       window.addEventListener('mouseup', onMouseUp);
     }
@@ -62,6 +69,7 @@
   }
   function onMouseUp () {
     this.resizing = false;
+    wrapper.dispatchEvent(new CustomEvent('resize-end'));
     window.removeEventListener('mousemove', onMouseMove);
     window.removeEventListener('mouseup', onMouseUp);
   }

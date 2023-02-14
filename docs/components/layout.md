@@ -14,7 +14,7 @@ The component includes multiple slots to cover various layouts.
 </Preview>
 
 ``` javascript
-// Model
+// Initial Model - Then Saved to localStorage
 const model = {
   type: 'splitter',
   direction: 'horizontal',
@@ -24,7 +24,6 @@ const model = {
       items: [
         {
           name: 'View 0',
-          type: 'view',
           viewSlot: 'view0'
         }
       ]
@@ -34,27 +33,33 @@ const model = {
       direction: 'vertical',
       items: [
         {
-          type: 'view',
-          viewSlot: 'view1'
+          type: 'tabs',
+          items: [
+            {
+              name: 'View 1',
+              viewSlot: 'view1'
+            },
+            {
+              name: 'View 2',
+              viewSlot: 'view2'
+            }
+          ]
         },
         {
           type: 'tabs',
           items: [
             {
               name: 'Iframe',
-              type: 'view',
               viewSlot: 'iframe'
             },
             {
-              name: 'View 2',
-              type: 'view',
-              viewSlot: 'view2',
+              name: 'View 3',
+              viewSlot: 'view3',
               active: true
             },
             {
-              name: 'View 3',
-              type: 'view',
-              viewSlot: 'view3'
+              name: 'View 4',
+              viewSlot: 'view4'
             }
           ]
         }
@@ -73,5 +78,6 @@ const model = {
   <div slot="view1">View 1 (Content)</div>
   <div slot="view2">View 2 (Content)</div>
   <div slot="view3">View 3 (Content)</div>
+  <div slot="view4">View 4 (Content)</div>
 </sl-layout>
 ```

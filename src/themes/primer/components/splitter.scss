@@ -38,7 +38,7 @@ div.sl-splitter {
     width: 100%;
     flex-direction: row;
     > div.handle {
-      z-index: 1;
+      z-index: 3;
       width: 1px;
       padding: 0 3px;
       margin: 0 -3px;

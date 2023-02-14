@@ -1,16 +1,29 @@
+// Imports
 @import './tabs.scss';
 @import './tab.scss';
+// Override
 :host {
   --sl-tab-padding: 4px 2px;
   --sl-tab-button-padding: 3px 12px;
   --sl-tab-button-font-size: 12px;
 }
+// Light
+:host([sl-theme=light]) {
+  --sl-layout-dropzone-background-color: rgba(0, 0, 0, .25);
+}
+// Dark
+:host([sl-theme=dark]) {
+  --sl-layout-dropzone-background-color: rgba(255, 255, 255, .25);
+}
+// Layout
 div.sl-layout {
   height: 100%;
   display: flex;
   flex-direction: column;
   > nav.sl-tabs {
+    min-height: 30px;
     > ul {
+      height: 100%;
       > div.droplist {
         width: 100%;
         display: flex;
@@ -21,17 +34,33 @@ div.sl-layout {
       }
     }
   }
-  > div.tab-view {
+  > div.tab-content {
+    position: relative;
     height: 100%;
-    display: none;
-    &.active {
-      display: block;
+    > div.dropzone {
+      position: absolute;
+      inset: 0;
+      transition: all .1s ease-in-out;
+    }
+    > div.tab-view {
+      position: relative;
+      height: 100%;
+      display: none;
+      &.active {
+        display: block;
+      }
+      > div.slot-container {
+        height: 100%;
+      }
     }
   }
-  > div.slot-container {
-    height: 100%;
-  }
-  > div.slot-wrapper {
-    display: none;
+  > div.rels {
+    &.dragging {
+      > sl-rel {
+        > * {
+          pointer-events: none;
+        }
+      }
+    }
   }
 }

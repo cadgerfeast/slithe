@@ -2,7 +2,6 @@
 import { themeKey, theme } from './helpers/style';
 // Types
 import type { SlitheComponent } from '../types';
-
 // Constants
 const components = Object.values(import.meta.glob<SlitheComponent>('./components/**/*.svelte', { eager: true }));
 

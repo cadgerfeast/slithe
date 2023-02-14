@@ -34,7 +34,7 @@
   }
   // Events
   function onRectChange (rect: DOMRect) {
-    if (_for.offsetParent) {
+    if (_for && _for.offsetParent) {
       wrapper.style.display = 'block';
       wrapper.style.top = `${rect.top}px`;
       wrapper.style.left = `${rect.left}px`;
