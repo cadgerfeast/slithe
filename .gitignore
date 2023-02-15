@@ -1,6 +1,6 @@
 /.docs
-/components
 /coverage
+/dist
 /node_modules
-/themes
-/types
+/src/components.d.ts
+/primer

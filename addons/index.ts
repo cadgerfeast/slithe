@@ -1,14 +1,14 @@
 // Helpers
-import { defineElements, setTheme, addNotification } from '../components/slithe';
-import primer from '../themes/primer';
+import { defineCustomElements, setTheme, addNotification } from '../';
+import primer from '../primer';
 // Style
-import '../themes/primer/global.css';
+import '../primer/global.css';
 // Components
 import Preview from './components/preview.vue';
 import PlaygroundCard from './playground/card.vue';
 import PlaygroundLayout from './playground/layout.vue';
 
-defineElements();
+defineCustomElements();
 setTheme('light', primer);
 
 export default [

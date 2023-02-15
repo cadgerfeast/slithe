@@ -1,10 +1,3 @@
-let hud;
-function createHud () {
-  const element = document.createElement('sl-hud');
-  document.body.appendChild(element);
-  return element;
-}
-
 export interface Notification {
   type: string;
   icon: {
@@ -13,9 +6,11 @@ export interface Notification {
   };
   message: string;
 }
+let hud: HTMLSlHudElement;
 export function addNotification (notification: Notification) {
   if (!hud) {
-    hud = createHud();
+    hud = document.createElement('sl-hud');
+    document.body.appendChild(hud);
   }
   hud.addNotification(notification);
 }

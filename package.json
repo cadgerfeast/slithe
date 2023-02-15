@@ -1,79 +1,71 @@
 {
-	"name": "slithe",
-	"version": "0.1.2",
-	"type": "module",
-	"main": "./components/slithe.cjs",
-	"module": "./components/slithe.js",
-	"unpkg": "./components/slithe.umd.cjs",
-	"types": "./types/types.d.ts",
-	"exports": {
-		".": {
-			"import": "./components/slithe.js",
-			"require": "./components/slithe.cjs",
-			"types": "./types/types.d.ts"
-		}
-	},
-	"files": [
-		"components",
-		"themes",
-		"types"
-	],
-	"keywords": [
-		"slithe",
-		"snake",
-		"moult",
-		"svelte",
-		"web-components",
-		"custom-elements"
-	],
-	"author": "Jérémie Pichon <contact@cadgerfeast.com>",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/cadgerfeast/slithe.git"
-	},
-	"bugs": {
-		"url": "https://github.com/cadgerfeast/slithe/issues"
-	},
-	"license": "MIT",
-	"scripts": {
-		"dev": "run-p dev:*",
-		"dev:lib": "vite build -w",
-		"dev:themes": "vite build -w -c vite.themes.config.js",
-		"dev:dts": "tsc -w -p tsconfig.dts.json",
-		"dev:docs": "madoc dev",
-		"build": "run-s build:*",
-		"build:lib": "vite build",
-		"build:themes": "vite build -c vite.themes.config.js",
-		"build:dts": "tsc -p tsconfig.dts.json",
-		"build:docs": "madoc build",
-		"preview": "madoc preview",
-		"lint": "run-s lint:*",
-		"lint:svelte": "svelte-check --tsconfig ./tsconfig.svelte.json",
-		"lint:tsc": "eslint addons src test",
-		"test": "vitest run --coverage"
-	},
-	"dependencies": {
-		"svelte": "^3.54.0"
-	},
-	"devDependencies": {
-		"@madoc/core": "^0.2.3",
-		"@primer/octicons": "^17.11.1",
-		"@sveltejs/vite-plugin-svelte": "^2.0.0",
-		"@testing-library/svelte": "^3.2.2",
-		"@tsconfig/svelte": "^3.0.0",
-		"@types/primer__octicons": "^17.5.0",
-		"@typescript-eslint/eslint-plugin": "^5.45.0",
-		"@typescript-eslint/parser": "^5.45.0",
-		"@vitest/coverage-c8": "^0.28.4",
-		"eslint": "^8.28.0",
-		"eslint-plugin-svelte3": "^4.0.0",
-		"jsdom": "^21.1.0",
-		"npm-run-all": "^4.1.5",
-		"sass": "^1.57.1",
-		"svelte-check": "^2.10.0",
-		"tslib": "^2.4.1",
-		"typescript": "^4.9.3",
-		"vite": "^4.0.0",
-		"vitest": "^0.25.3"
-	}
+  "name": "slithe",
+  "version": "0.1.2",
+  "description": "Snaky web components that moults",
+  "type": "module",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.js",
+  "es2015": "dist/esm/index.mjs",
+  "es2017": "dist/esm/index.mjs",
+  "types": "dist/types/index.d.ts",
+  "collection": "dist/collection/collection-manifest.json",
+  "collection:main": "dist/collection/index.js",
+  "unpkg": "dist/slithe/slithe.esm.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cadgerfeast/slithe.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cadgerfeast/slithe/issues"
+  },
+  "keywords": [
+    "slithe",
+    "snake",
+    "moult",
+    "svelte",
+    "web-components",
+    "custom-elements"
+  ],
+  "author": "Jérémie Pichon <contact@cadgerfeast.com>",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "run-p dev:*",
+    "dev:lib": "stencil build --watch",
+    "dev:themes": "rollup --config ./themes/rollup.config.js --bundleConfigAsCjs --watch",
+    "dev:docs": "madoc dev",
+    "build": "run-s build:*",
+    "build:lib": "stencil build",
+    "build:themes": "rollup --config ./themes/rollup.config.js --bundleConfigAsCjs",
+    "build:docs": "madoc build",
+    "preview": "madoc preview",
+    "lint": "run-s lint:*",
+    "lint:svelte": "svelte-check --tsconfig ./tsconfig.svelte.json",
+    "lint:tsc": "eslint addons src test",
+    "test": "stencil test --spec --e2e"
+  },
+  "dependencies": {
+    "@stencil/core": "^3.0.0"
+  },
+  "devDependencies": {
+    "@madoc/core": "^0.2.3",
+    "@primer/octicons": "^17.11.1",
+    "@rollup/plugin-commonjs": "^24.0.1",
+    "@rollup/plugin-json": "^6.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@stencil/sass": "^2.0.3",
+    "@stencil/store": "^2.0.3",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.11",
+    "@types/primer__octicons": "^17.5.0",
+    "jest": "^27.5.1",
+    "jest-cli": "^27.5.1",
+    "npm-run-all": "^4.1.5",
+    "puppeteer": "^19.5.2",
+    "rollup": "^3.15.0",
+    "rollup-plugin-typescript2": "^0.34.1",
+    "tslib": "^2.5.0"
+  },
+  "license": "MIT"
 }
