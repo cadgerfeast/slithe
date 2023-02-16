@@ -53,16 +53,16 @@ Modifies the icon size, default to `1em`, that represents the current font-size.
 <sl-icon name="bug" size="2em"/>
 ```
 
-### Title
+### Tooltip
 
 Adds a tooltip text to provide more information.
 
 <Preview>
-  <sl-icon name="gift" title="Something awesome hides inside!"/>
+  <sl-icon name="gift" tooltip="Something awesome hides inside!"/>
 </Preview>
 
 <div class="prism-last"/>
 
 ``` html
-<sl-icon name="gift" title="Something awesome hides inside!"/>
+<sl-icon name="gift" tooltip="Something awesome hides inside!"/>
 ```

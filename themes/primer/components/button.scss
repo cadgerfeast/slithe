@@ -135,6 +135,12 @@
   --sl-button-font-size: 16px;
   --sl-button-padding: 9px 20px;
 }
+// Disabled
+:host([disabled]) {
+  pointer-events: none;
+  opacity: 0.5;
+  user-select: none;
+}
 // Button
 button.sl-button {
   font-family: var(--pr-font-family);
@@ -168,9 +174,5 @@ button.sl-button {
     outline: 2px solid var(--sl-button-outline-color);
     outline-offset: -2px;
     box-shadow: var(--sl-button-focus-box-shadow, unset);
-  }
-  &[disabled] {
-    pointer-events: none;
-    opacity: 0.5;
   }
 }

@@ -69,16 +69,16 @@ When the button is inside a `<form>` element, use `type="submit"` in order to su
 </sl-form>
 ```
 
-### Title
+### Tooltip
 
 Adds extra information about the element, displayed as a `tooltip` when being hovered.
 
 <Preview>
-  <sl-button title="Great Tooltip">Hover me!</sl-button>
+  <sl-button tooltip="Great Tooltip">Hover me!</sl-button>
 </Preview>
 
 ``` html
-<sl-button title="Great Tooltip">Hover me!</sl-button>
+<sl-button tooltip="Great Tooltip">Hover me!</sl-button>
 ```
 
 ### Disabled

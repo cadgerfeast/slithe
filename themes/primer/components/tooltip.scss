@@ -12,7 +12,8 @@
 }
 // Tooltip
 div.sl-tooltip {
-  display: inline-block;
+  z-index: 5;
+  display: inline-flex;
   background-color: var(--sl-tooltip-background-color);
   color: var(--sl-tooltip-color);
   border: 1px solid var(--sl-tooltip-border-color);

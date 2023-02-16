@@ -13,5 +13,11 @@ export const config: Config = {
   ],
   plugins: [
     sass()
-  ]
+  ],
+  testing: {
+    collectCoverage: true,
+    setupFiles: [
+      './devops/npm/test/setup.ts'
+    ]
+  }
 };

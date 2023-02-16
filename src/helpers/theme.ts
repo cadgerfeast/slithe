@@ -12,25 +12,34 @@ let model: Theme = {
   icons: {},
   fallbackIcon: ''
 };
-const { state } = createStore({
+const { state, onChange } = createStore({
   key: 'light'
 });
 
 export { state as theme };
 
 export function setTheme (newTheme: string, newModel?: Theme) {
-  state.key = newTheme;
   if (newModel) {
     model = newModel;
   }
+  state.key = newTheme;
 }
 
-export function addElementStylesheet (element: HTMLElement) {
-  console.info('SNETCH');
-  console.info(element);
-  console.info(model);
-  // element.shadowRoot.adoptedStyleSheets = [];
-  // if (_theme.components[component.tag]) {
-  //   element.shadowRoot.adoptedStyleSheets.push(_theme.components[component.tag]);
-  // }
+export function syncWithTheme (element: HTMLElement) {
+  // Initialize
+  element.setAttribute('sl-theme', state.key);
+  const tagName = element.tagName.toLowerCase().slice(3);
+  let stylesheet = model.components[tagName];
+  if (stylesheet) {
+    element.shadowRoot.adoptedStyleSheets = [stylesheet];
+  }
+  // Reactive
+  onChange('key', (newKey) => {
+    element.setAttribute('sl-theme', newKey);
+    const newStylesheet = model.components[tagName];
+    if (newStylesheet && (stylesheet !== newStylesheet)) {
+      stylesheet = newStylesheet;
+      element.shadowRoot.adoptedStyleSheets = [stylesheet];
+    }
+  });
 }

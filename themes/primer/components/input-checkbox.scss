@@ -1,3 +1,9 @@
+// Disabled
+:host([disabled]) {
+  pointer-events: none;
+  opacity: 0.5;
+  user-select: none;
+}
 // Checkbox
 div.sl-input-checkbox {
   display: inline-flex;
@@ -13,9 +19,5 @@ div.sl-input-checkbox {
     font-size: 14px;
     padding-left: 8px;
     cursor: pointer;
-  }
-  &.disabled {
-    pointer-events: none;
-    opacity: 0.5;
   }
 }

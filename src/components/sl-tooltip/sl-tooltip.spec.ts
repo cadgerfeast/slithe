@@ -1,12 +1,12 @@
 // Helpers
 import { newSpecPage } from '@stencil/core/testing';
-import { SlitheButton } from './sl-button';
+import { SlitheTooltip } from './sl-tooltip';
 
-describe('sl-button', () => {
+describe('sl-tooltip', () => {
   it('renders', async () => {
     const { root } = await newSpecPage({
-      components: [SlitheButton],
-      html: '<sl-button></sl-button>',
+      components: [SlitheTooltip],
+      html: '<sl-tooltip></sl-tooltip>',
     });
     expect(root).toBeTruthy();
   });

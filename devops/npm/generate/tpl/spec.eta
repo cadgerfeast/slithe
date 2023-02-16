@@ -1,0 +1,13 @@
+// Helpers
+import { newSpecPage } from '@stencil/core/testing';
+import { <%= it.className %> } from './<%= it.tagName %>';
+
+describe('<%= it.tagName %>', () => {
+  it('renders', async () => {
+    const { root } = await newSpecPage({
+      components: [<%= it.className %>],
+      html: '<<%= it.tagName %>></<%= it.tagName %>>',
+    });
+    expect(root).toBeTruthy();
+  });
+});

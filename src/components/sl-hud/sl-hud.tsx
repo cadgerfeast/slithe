@@ -1,6 +1,6 @@
 // Helpers
-import { Component, State, Method, h } from '@stencil/core';
-import { addElementStylesheet } from '../../helpers/theme';
+import { Component, State, Method, Element, h } from '@stencil/core';
+import { syncWithTheme } from '../../helpers/theme';
 import { delay } from '../../helpers/time';
 import { Notification } from '../../helpers/hud';
 
@@ -9,7 +9,8 @@ import { Notification } from '../../helpers/hud';
   styleUrl: 'sl-hud.scss',
   shadow: true
 })
-export class SlitheHUD {
+export class SlitheHud {
+  @Element() host!: HTMLSlHudElement;
   // State
   @State() notifications: Notification[] = [];
   // Methods
@@ -24,8 +25,8 @@ export class SlitheHUD {
     this.notifications = this.notifications.filter(n => n !== notification);
   }
   // Lifecycle
-  connectedCallback (this: HTMLElement) {
-    addElementStylesheet(this);
+  connectedCallback () {
+    syncWithTheme(this.host);
   }
   // Template
   render () {
