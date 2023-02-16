@@ -1,4 +1,3 @@
-/// <reference types="vite/client"/>
 // Helpers
 import octicons from '@primer/octicons';
 // Constants

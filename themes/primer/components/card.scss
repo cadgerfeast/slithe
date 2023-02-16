@@ -30,6 +30,7 @@
 }
 // Card
 div.sl-card {
+  width: 100%;
   font-family: var(--pr-font-family);
   color: var(--sl-card-color);
   &.has-header {

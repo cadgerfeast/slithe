@@ -4,8 +4,11 @@
   --sl-tab-button-color: var(--pr-shark);
   --sl-tab-button-hover-background-color: rgb(243, 244, 246);
   --sl-tab-button-active-background-color: rgb(238, 239, 242);
-  --sl-tab-active-border-color: var(--pr-salmon);
-  --sl-tab-active-button-font-weight: 500;
+}
+// Active
+:host([sl-theme=light][active]) {
+  --sl-tab-border-color: var(--pr-salmon);
+  --sl-tab-button-font-weight: 500;
 }
 // Dark
 :host([sl-theme=dark]) {
@@ -13,8 +16,11 @@
   --sl-tab-button-color: var(--pr-norborne);
   --sl-tab-button-hover-background-color: rgb(68, 76, 86);
   --sl-tab-button-active-background-color: rgb(45, 51, 59);
-  --sl-tab-active-border-color: var(--pr-tan-hide);
-  --sl-tab-active-button-font-weight: 500;
+}
+// Active
+:host([sl-theme=light][active]) {
+  --sl-tab-border-color: var(--pr-tan-hide);
+  --sl-tab-button-font-weight: 500;
 }
 // Small
 :host([small]) {
@@ -30,14 +36,8 @@
 li.sl-tab {
   padding: var(--sl-tab-padding, 8px 4px);
   margin-bottom: 0 0 -1px 0;
-  border-bottom: 2px solid transparent;
+  border-bottom: 2px solid var(--sl-tab-border-color, transparent);
   list-style: none;
-  &.active {
-    border-color: var(--sl-tab-active-border-color);
-    > button {
-      font-weight: var(--sl-tab-active-button-font-weight);
-    }
-  }
   > button {
     font-family: var(--pr-font-family);
     position: relative;
@@ -46,7 +46,7 @@ li.sl-tab {
     color: var(--sl-tab-button-color);
     border-radius: 6px;
     padding: var(--sl-tab-button-padding, 5px 16px);
-    font-weight: 400;
+    font-weight: var(--sl-tab-button-font-weight, 400);
     font-size: var(--sl-tab-button-font-size, 14px);
     user-select: none;
     white-space: nowrap;

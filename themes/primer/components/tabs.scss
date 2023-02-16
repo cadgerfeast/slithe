@@ -6,6 +6,12 @@
 :host([sl-theme=dark]) {
   --sl-tabs-border-color: var(--pr-bright-gray);
 }
+// Small
+:host([small]) {
+  --sl-tab-padding: 4px 2px;
+  --sl-tab-button-padding: 3px 12px;
+  --sl-tab-button-font-size: 12px;
+}
 // Tabs
 nav.sl-tabs {
   width: 100%;

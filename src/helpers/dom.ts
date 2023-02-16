@@ -59,3 +59,51 @@ export function attachTooltip (element: HTMLElement) {
   element.addEventListener('mouseenter', handleMouseEnter);
   element.addEventListener('mouseleave', handleMouseLeave);
 }
+
+type TabModel = {
+  id: string;
+  name: string;
+  viewSlot: string;
+  active: boolean;
+  placeholder?: boolean;
+}
+export type TabsModel = {
+  id: string;
+  type: 'tabs';
+  items: TabModel[];
+}
+export type SplitterModel = {
+  id: string;
+  type: 'splitter';
+  direction: 'horizontal'|'vertical';
+  items: [Model, Model];
+  blueSize: number;
+}
+export type Model = TabsModel|SplitterModel;
+export function computeModel <T extends Model> (_model: T): T {
+  const res = JSON.parse(JSON.stringify(_model)) as T;
+  res.id = res.id || crypto.randomUUID();
+  switch (res.type) {
+    case 'tabs': {
+      let hasActive = false;
+      if (res.items.length > 0) {
+        for (let i = 0; i < res.items.length; i++) {
+          res.items[i].id = res.items[i].id || crypto.randomUUID();
+          hasActive = hasActive || res.items[i].active;
+        }
+        if (!hasActive) {
+          res.items[0].active = true;
+        }
+      }
+      break;
+    }
+    case 'splitter': {
+      res.blueSize = res.blueSize || 50;
+      for (let i = 0; i < res.items.length; i++) {
+        res.items[i] = computeModel(res.items[i]);
+      }
+      break;
+    }
+  }
+  return res;
+}

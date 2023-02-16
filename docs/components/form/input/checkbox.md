@@ -9,17 +9,13 @@ This component reflects and extends the behavior of the standard `input` element
 
 <Preview>
   <sl-form>
-    <sl-form-control label="I want to receive marketing emails.">
-      <sl-input-checkbox/>
-    </sl-form-control>
+    <sl-input-checkbox label="I want to receive marketing emails."/>
   </sl-form>
 </Preview>
 
 ``` html
 <sl-form>
-  <sl-form-control label="I want to receive marketing emails.">
-    <sl-input-checkbox/>
-  </sl-form-control>
+  <sl-input-checkbox label="I want to receive marketing emails."/>
 </sl-form>
 ```
 
@@ -30,9 +26,7 @@ This component reflects and extends the behavior of the standard `input` element
 Makes the checkbox non-interactable.
 
 <Preview>
-  <sl-form-control label="I want to receive marketing emails.">
-    <sl-input-checkbox disabled @click="$notify('disabled')"/>
-  </sl-form-control>
+  <sl-input-checkbox label="I want to receive marketing emails." disabled @click="$notify('disabled')"/>
 </Preview>
 
 ``` html
@@ -46,9 +40,7 @@ Makes the checkbox non-interactable.
 Triggered when the user toggles the value.
 
 <Preview>
-  <sl-form-control label="I want to receive marketing emails.">
-    <sl-input-checkbox @input="$notify(`value: ${$event.target.value}`)"/>
-  </sl-form-control>
+  <sl-input-checkbox label="I want to receive marketing emails." @input="$notify(`value: ${$event.target.value}`)"/>
 </Preview>
 
 ``` html

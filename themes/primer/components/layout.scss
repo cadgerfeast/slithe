@@ -1,12 +1,3 @@
-// Imports
-@import './tabs.scss';
-@import './tab.scss';
-// Override
-:host {
-  --sl-tab-padding: 4px 2px;
-  --sl-tab-button-padding: 3px 12px;
-  --sl-tab-button-font-size: 12px;
-}
 // Light
 :host([sl-theme=light]) {
   --sl-layout-dropzone-background-color: rgba(0, 0, 0, .25);

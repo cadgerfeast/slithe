@@ -8,15 +8,9 @@
       </sl-card>
     </div>
     <sl-form>
-      <sl-form-control label="Header">
-        <sl-input-checkbox v-model="showHeaderSlot"/>
-      </sl-form-control>
-      <sl-form-control label="Default">
-        <sl-input-checkbox v-model="showDefaultSlot"/>
-      </sl-form-control>
-      <sl-form-control label="Footer">
-        <sl-input-checkbox v-model="showFooterSlot"/>
-      </sl-form-control>
+      <sl-input-checkbox v-model="showHeaderSlot" label="Header"/>
+      <sl-input-checkbox v-model="showDefaultSlot" label="Default"/>
+      <sl-input-checkbox v-model="showFooterSlot" label="Footer"/>
     </sl-form>
   </div>
 </template>
@@ -42,10 +36,16 @@
     flex-direction: row;
     > div.content {
       width: 60%;
+      > sl-card {
+        width: 100%;
+      }
     }
     > sl-form {
       width: 40%;
       padding-left: 2em;
+      > sl-input-checkbox {
+        display: flex;
+      }
     }
   }
 </style>
