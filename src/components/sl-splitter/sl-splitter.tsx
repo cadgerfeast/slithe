@@ -1,5 +1,5 @@
 // Helpers
-import { Component, Element, h, Prop, State, Listen } from '@stencil/core';
+import { Component, Element, h, Prop, State, Listen, Event, EventEmitter } from '@stencil/core';
 import { MouseButton } from '../../helpers/browser';
 import { syncWithTheme } from '../../helpers/theme';
 import { clamp } from '../../helpers/number';
@@ -16,11 +16,15 @@ export class SlitheSplitter {
   @Prop() vertical: boolean = false;
   @Prop() blueSize: number = 50;
   // State
-  @State() _blueSize: number = this.blueSize;
+  @State() _blueSize: number;
   @State() resizing: boolean = false;
+  // Events
+  @Event() resizeStart: EventEmitter<void>;
+  @Event() resizeEnd: EventEmitter<number>;
   // Lifecycle
   connectedCallback () {
     syncWithTheme(this.host);
+    this._blueSize = this.blueSize;
   }
   // Computed
   get direction () {
@@ -52,11 +56,20 @@ export class SlitheSplitter {
       };
     }
   }
+  // Methods
+  private setResizing (resizing: boolean) {
+    this.resizing = resizing;
+    if (this.resizing) {
+      this.resizeStart.emit();
+    } else {
+      this.resizeEnd.emit(this._blueSize);
+    }
+  }
   // Handlers
   private handleMouseDown (e: MouseEvent) {
     if (e.button === MouseButton.Left) {
       e.stopPropagation();
-      this.resizing = true;
+      this.setResizing(true);
     }
   }
   @Listen('mousemove', { target: 'window' })
@@ -72,7 +85,9 @@ export class SlitheSplitter {
   }
   @Listen('mouseup', { target: 'window' })
   handleMouseUp () {
-    this.resizing = false;
+    if (this.resizing) {
+      this.setResizing(false);
+    }
   }
   // Template
   render () {

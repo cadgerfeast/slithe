@@ -10,7 +10,7 @@ import { Deferred, delay } from '../../helpers/time';
 })
 export class SlitheTooltip {
   @Element() host!: HTMLSlTooltipElement;
-  ready = new Deferred();
+  private ready = new Deferred();
   // Props
   @Prop() target: HTMLElement;
   @Prop() position: [number, number] = [0, 0];

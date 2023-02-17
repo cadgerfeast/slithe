@@ -45,13 +45,12 @@ div.sl-layout {
       }
     }
   }
-  > div.rels {
+  > div.slots {
     &.dragging {
-      > sl-rel {
-        > * {
-          pointer-events: none;
-        }
-      }
+      pointer-events: none;
+    }
+    > div.slot-wrapper {
+      display: none;
     }
   }
 }

@@ -9,8 +9,8 @@ import { syncWithTheme } from '../../helpers/theme';
 })
 export class SlitheInputCheckbox {
   @Element() host!: HTMLSlInputCheckboxElement;
-  input!: HTMLInputElement;
-  id!: string;
+  private input!: HTMLInputElement;
+  private id!: string;
   // Props
   @Prop() value: boolean = false;
   @Prop({ reflect: true }) disabled: boolean = false;

@@ -22,18 +22,14 @@
   --sl-tab-border-color: var(--pr-tan-hide);
   --sl-tab-button-font-weight: 500;
 }
-// Small
-:host([small]) {
-  --sl-tab-padding: 4px 2px;
-  --sl-tab-button-padding: 3px 12px;
-  --sl-tab-button-font-size: 12px;
-}
 // Dragged
-:host([dragged]) {
+:host(.dragged) {
   --sl-tab-border-color: transparent !important;
+  --sl-tab-button-dragged-background-color: var(--sl-tab-button-hover-background-color);
 }
 // Tab
 li.sl-tab {
+  box-sizing: border-box;
   padding: var(--sl-tab-padding, 8px 4px);
   margin-bottom: 0 0 -1px 0;
   border-bottom: 2px solid var(--sl-tab-border-color, transparent);
@@ -42,7 +38,7 @@ li.sl-tab {
     font-family: var(--pr-font-family);
     position: relative;
     border: none;
-    background-color: transparent;
+    background-color: var(--sl-tab-button-dragged-background-color, transparent);
     color: var(--sl-tab-button-color);
     border-radius: 6px;
     padding: var(--sl-tab-button-padding, 5px 16px);

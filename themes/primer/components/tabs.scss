@@ -8,6 +8,7 @@
 }
 // Small
 :host([small]) {
+  --sl-tabs-height: 30px;
   --sl-tab-padding: 4px 2px;
   --sl-tab-button-padding: 3px 12px;
   --sl-tab-button-font-size: 12px;
@@ -16,6 +17,7 @@
 nav.sl-tabs {
   width: 100%;
   > ul {
+    height: var(--sl-tabs-height, 45px);
     list-style: none;
     padding: 0;
     margin: 0;
