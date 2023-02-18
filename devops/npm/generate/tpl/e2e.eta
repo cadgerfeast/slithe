@@ -1,0 +1,11 @@
+// Helpers
+import { newE2EPage } from '@stencil/core/testing';
+
+describe('<%= it.tagName %>', () => {
+  it('renders', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<<%= it.tagName %>></<%= it.tagName %>>');
+    const element = await page.find('<%= it.tagName %>');
+    expect(element).toHaveClass('hydrated');
+  });
+});

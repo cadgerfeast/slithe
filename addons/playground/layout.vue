@@ -3,7 +3,7 @@
     <sl-button class="reset" small borderless @click="reset">
       <sl-icon name="sync"/>
     </sl-button>
-    <sl-layout :key="render" :model.prop="model" @change="onChange">
+    <sl-layout :key="render" :model.prop="model" @update="onUpdate">
       <div class="slot-content" slot="iframe">
         <iframe src="/pages/iframe.html"/>
       </div>
@@ -89,7 +89,7 @@
         this.model = defaultModel;
         this.render++;
       },
-      onChange (e: CustomEvent) {
+      onUpdate (e: CustomEvent) {
         if (localStorage) {
           localStorage.setItem('slithe.playground.layout.model', JSON.stringify(e.detail));
         }

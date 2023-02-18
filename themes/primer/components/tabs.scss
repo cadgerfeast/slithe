@@ -1,0 +1,29 @@
+// Light
+:host([sl-theme=light]) {
+  --sl-tabs-border-color: var(--pr-geyser);
+}
+// Dark
+:host([sl-theme=dark]) {
+  --sl-tabs-border-color: var(--pr-bright-gray);
+}
+// Small
+:host([small]) {
+  --sl-tabs-height: 30px;
+  --sl-tab-padding: 4px 2px;
+  --sl-tab-button-padding: 3px 12px;
+  --sl-tab-button-font-size: 12px;
+}
+// Tabs
+nav.sl-tabs {
+  width: 100%;
+  > ul {
+    height: var(--sl-tabs-height, 45px);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid var(--sl-tabs-border-color);
+    margin-bottom: -1px;
+  }
+}

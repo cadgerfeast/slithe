@@ -10,7 +10,7 @@
 <script lang="ts">
   // Helpers
   import { defineComponent } from 'vue';
-  import { setTheme } from '../../components/slithe';
+  import { setTheme } from '../../';
   // Types
   import type { PropType } from 'vue';
   export default defineComponent({
