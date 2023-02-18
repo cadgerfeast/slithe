@@ -27,8 +27,8 @@ npm install slithe --save
 // Import
 import { defineElements, setTheme } from 'slithe';
 // Theme
-import 'slithe/themes/primer/global.css';
-import primer from 'slithe/themes/primer';
+import 'slithe/primer/global.css';
+import primer from 'slithe/primer';
 // Initialization
 defineElements();
 setTheme('light', primer);
