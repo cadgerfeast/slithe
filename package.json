@@ -28,7 +28,8 @@
   ],
   "author": "Jérémie Pichon <contact@cadgerfeast.com>",
   "files": [
-    "dist"
+    "dist",
+    "primer"
   ],
   "scripts": {
     "dev": "run-p dev:*",
@@ -49,7 +50,7 @@
     "sortablejs": "^1.15.0"
   },
   "devDependencies": {
-    "@madoc/core": "^0.2.3",
+    "@madoc/core": "^0.2.4",
     "@primer/octicons": "^17.11.1",
     "@stencil-community/eslint-plugin": "^0.5.0",
     "@stencil/sass": "^2.0.3",

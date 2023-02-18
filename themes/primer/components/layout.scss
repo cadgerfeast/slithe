@@ -6,6 +6,9 @@
 :host([sl-theme=dark]) {
   --sl-layout-dropzone-background-color: rgba(255, 255, 255, .25);
 }
+:host {
+  --sl-splitter-overflow: hidden;
+}
 // Layout
 div.sl-layout {
   height: 100%;
@@ -28,11 +31,6 @@ div.sl-layout {
   > div.tab-content {
     position: relative;
     height: 100%;
-    > div.dropzone {
-      position: absolute;
-      inset: 0;
-      transition: all .1s ease-in-out;
-    }
     > div.tab-view {
       position: relative;
       height: 100%;
@@ -44,13 +42,63 @@ div.sl-layout {
         height: 100%;
       }
     }
+    > div.dropzone {
+      display: none;
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      &::before {
+        position: absolute;
+        inset: 0;
+        content: '';
+        transition: all .1s ease-in-out;
+      }
+      &.active {
+        display: block;
+        &::before {
+          background-color: var(--sl-layout-dropzone-background-color);
+        }
+      }
+      &.dragover-top {
+        &::before {
+          bottom: 50%;
+        }
+      }
+      &.dragover-right {
+        &::before {
+          left: 50%;
+        }
+      }
+      &.dragover-bottom {
+        &::before {
+          top: 50%;
+        }
+      }
+      &.dragover-left {
+        &::before {
+          right: 50%;
+        }
+      }
+      &.dragover-left {
+        &::before {
+          right: 50%;
+        }
+      }
+      &.dragover-none {
+        &::before {
+          display: none;
+        }
+      }
+    }
   }
   > div.slots {
     &.dragging {
       pointer-events: none;
     }
     > div.slot-wrapper {
-      display: none;
+      position: absolute;
+      overflow: auto;
+      z-index: -1;
     }
   }
 }

@@ -18,7 +18,7 @@
   --sl-tab-button-active-background-color: rgb(45, 51, 59);
 }
 // Active
-:host([sl-theme=light][active]) {
+:host([sl-theme=dark][active]) {
   --sl-tab-border-color: var(--pr-tan-hide);
   --sl-tab-button-font-weight: 500;
 }

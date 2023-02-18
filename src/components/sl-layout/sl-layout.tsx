@@ -11,9 +11,11 @@ import {
   sortTabInModel,
   moveTabInModel,
   getChildModelIndexModel,
-  ensureValidModel
+  ensureValidModel,
+  isSlotVisibleInModel,
+  dropTabInModel
 } from '../../helpers/model';
-import { closest, querySelector, attachToElement } from '../../helpers/dom';
+import { closest, dnd, Position, querySelector, querySelectorAll } from '../../helpers/dom';
 import { clone } from '../../helpers/object';
 import { syncWithTheme } from '../../helpers/theme';
 import { Deferred } from '../../helpers/time';
@@ -29,6 +31,7 @@ export class SlitheLayout {
   private ready = new Deferred();
   private group!: string;
   private slotElements: Map<string, HTMLDivElement> = new Map();
+  private animationId: number;
   // Props
   @Prop() model: Model = {
     id: crypto.randomUUID(),
@@ -39,9 +42,17 @@ export class SlitheLayout {
   @State() root: boolean = false;
   @State() dragging: boolean = false;
   @State() _model: Model;
+  @State() dropzoneState: Position = 'none';
   // Computed
   get slots () {
     return this.getSlots(this._model);
+  }
+  get dropzoneClass () {
+    const classList = ['dropzone', `dragover-${this.dropzoneState}`];
+    if (this.dragging) {
+      classList.push('active');
+    }
+    return classList.join(' ');
   }
   // Events
   @Event() update: EventEmitter<Model>;
@@ -84,6 +95,23 @@ export class SlitheLayout {
     this._model = resizeSplitterInModel(this._model, id, size);
     this.emitUpdate();
   }
+  @Method()
+  async dropTab (tabId: string, containerId: string, position: Position) {
+    const tabModel = getChildModelIndexModel(this._model, tabId);
+    this._model = ensureValidModel(dropTabInModel(this._model, tabModel, containerId, position));
+    this.emitUpdate();
+  }
+  @Method()
+  async setRootDragging (dragging: boolean) {
+    const children = querySelectorAll<HTMLSlLayoutElement>(this.host, 'sl-layout');
+    for (const child of children) {
+      child.setDragging(dragging);
+    }
+  }
+  @Method()
+  async setDragging (dragging: boolean) {
+    this.dragging = dragging;
+  }
   private getSlots (model: Model) {
     const slots: string[] = [];
     switch (model.type) {
@@ -111,15 +139,30 @@ export class SlitheLayout {
   private emitUpdate () {
     this.update.emit(clone(this._model));
   }
-  private attachSlotContainers () {
+  private updateSlotPositions () {
     for (const [key, slotElement] of this.slotElements.entries()) {
-      const target = querySelector(this.host, `div.slot-container.${key}`);
-      attachToElement(slotElement, target);
-      // TODO should set position absolute, relative to layout
-      // TODO update when splitters are moving, trigger update
-      // TODO update on container resize also
-      // TODO update after render
+      if (slotElement) {
+        if (isSlotVisibleInModel(this._model, key)) {
+          const target = querySelector(this.host, `div.slot-container.${key}`);
+          if (target) {
+            const hostRect = this.host.getBoundingClientRect();
+            const targetRect = target.getBoundingClientRect();
+            slotElement.style.display = 'block';
+            slotElement.style.top = `${targetRect.top - hostRect.top}px`;
+            slotElement.style.right = `${hostRect.right - targetRect.right}px`;
+            slotElement.style.bottom = `${hostRect.bottom - targetRect.bottom}px`;
+            slotElement.style.left = `${targetRect.left - hostRect.left}px`;
+          }
+        } else {
+          slotElement.style.display = 'none';
+        }
+      }
     }
+    this.animationId = requestAnimationFrame(this.updateSlotPositions.bind(this));
+  }
+  private async _setDragging (dragging: boolean) {
+    const rootLayout = await this.getRootLayout();
+    await rootLayout.setRootDragging(dragging);
   }
   // Watchers
   @Watch('model')
@@ -128,14 +171,43 @@ export class SlitheLayout {
   }
   // Handlers
   private handleResizeStart () {
-    this.dragging = true;
+    this._setDragging(true);
   }
   private async handleResizeEnd (e: CustomEvent<number>) {
-    this.dragging = false;
+    e.stopPropagation();
+    this._setDragging(false);
     if (this._model.type === 'splitter') {
       const rootLayout = await this.getRootLayout();
       await rootLayout.resizeSplitter(this._model.id, e.detail);
     }
+  }
+  private handleDropzoneDragEnter () {
+    dnd.dropzone = true;
+  }
+  private handleDropzoneDragOver (e: DragEvent) {
+    const target = e.target as HTMLDivElement;
+    const pX = e.offsetX * 100 / target.offsetWidth;
+    const pY = e.offsetY * 100 / target.offsetHeight;
+    if (pX < 30) {
+      this.dropzoneState = 'left';
+    } else if (pX > 70) {
+      this.dropzoneState = 'right';
+    } else if (pY < 15) {
+      this.dropzoneState = 'top';
+    } else if (pY > 85) {
+      this.dropzoneState = 'bottom';
+    } else {
+      this.dropzoneState = 'center';
+    }
+    e.preventDefault();
+  }
+  private handleDropzoneDragLeave () {
+    dnd.dropzone = false;
+    this.dropzoneState = 'none';
+  }
+  private async handleDropzoneDrop () {
+    const rootLayout = await this.getRootLayout();
+    await rootLayout.dropTab(dnd.item.id, this._model.id, this.dropzoneState);
   }
   // Lifecycle
   async connectedCallback () {
@@ -147,7 +219,9 @@ export class SlitheLayout {
   }
   async componentDidLoad () {
     await this.ready.promise;
-    this.attachSlotContainers();
+    if (this.root) {
+      this.animationId = requestAnimationFrame(this.updateSlotPositions.bind(this));
+    }
     if (this._model.type === 'tabs') {
       Sortable.create(this.tabsContainer, {
         animation: 150,
@@ -155,10 +229,13 @@ export class SlitheLayout {
         ghostClass: 'placeholder',
         chosenClass: 'picked',
         dragClass: 'dragged',
+        dragoverBubble: true,
         onAdd: async (e) => {
           if (this._model.type === 'tabs') {
-            const rootLayout = await this.getRootLayout();
-            await rootLayout.moveTab(e);
+            if (!dnd.dropzone) {
+              const rootLayout = await this.getRootLayout();
+              await rootLayout.moveTab(e);
+            }
           }
         },
         onRemove: ({ item }) => {
@@ -166,22 +243,39 @@ export class SlitheLayout {
         },
         onUpdate: async (e) => {
           if (this._model.type === 'tabs') {
-            const rootLayout = await this.getRootLayout();
-            await rootLayout.sortTab(e);
+            if (!dnd.dropzone) {
+              const rootLayout = await this.getRootLayout();
+              await rootLayout.sortTab(e);
+            }
           }
         },
-        onStart: () => {
-          this.dragging = true;
+        onStart: ({ item }) => {
+          dnd.item = item;
+          this._setDragging(true);
         },
         onEnd: () => {
-          this.dragging = false;
+          dnd.item = null;
+          this._setDragging(false);
+          this.dropzoneState = 'none';
         }
       });
     }
   }
+  componentDidRender () {
+    if (this.root) {
+      if (Array.from(this.slotElements.values()).includes(null)) {
+        const elements = querySelectorAll<HTMLDivElement>(this.host, 'div.slot-wrapper');
+        for (const element of elements) {
+          this.slotElements.set(element.dataset.slot, element);
+        }
+      }
+    }
+  }
+  disconnectedCallback () {
+    cancelAnimationFrame(this.animationId);
+  }
   // Template
   private renderTabs (tabs: TabsModel) {
-    // TODO dropzones
     return (
       <Fragment>
         <sl-tabs id={tabs.id} ref={(el) => this.tabsContainer = el} small>
@@ -195,6 +289,13 @@ export class SlitheLayout {
               <div class={`slot-container ${item.viewSlot}`}/>
             </div>
           ))}
+          <div
+            class={this.dropzoneClass}
+            onDragEnter={() => this.handleDropzoneDragEnter()}
+            onDragOver={(e) => this.handleDropzoneDragOver(e)}
+            onDragLeave={() => this.handleDropzoneDragLeave()}
+            onDrop={() => this.handleDropzoneDrop()}
+          />
         </div>
       </Fragment>
     );
@@ -211,7 +312,7 @@ export class SlitheLayout {
     return (
       <div class={{ 'slots': true, 'dragging': this.dragging }}>
         {this.slots.map((slot) => (
-          <div ref={(el) => this.slotElements.set(slot, el)} class='slot-wrapper'>
+          <div data-slot={slot} ref={(el) => this.slotElements.set(slot, el)} class='slot-wrapper'>
             <slot name={slot}/>
           </div>
         ))}

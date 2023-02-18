@@ -1,6 +1,7 @@
 // Helpers
 import { clone } from './object';
 import { switchPosition } from './array';
+import { Position } from './dom';
 
 export type TabModel = {
   id: string;
@@ -135,6 +136,121 @@ export function moveTabInModel (model: Model, tab: TabModel, fromId: string, fro
   }
   return res;
 }
+export function dropTabInModel (model: Model, tab: TabModel, containerId: string, position: Position): Model {
+  let res = clone(model);
+  switch (res.type) {
+    case 'tabs': {
+      const oldIndex = res.items.findIndex((item) => item.id === tab.id);
+      if (oldIndex !== -1) {
+        if (res.id === containerId && position === 'center') {
+          res.items = res.items.map((item) => ({
+            ...item,
+            active: item.id === tab.id
+          }));
+        } else {
+          res.items.splice(oldIndex, 1);
+          if (!res.items.some((newItem) => newItem.active) && res.items.length > 0) {
+            res.items[0].active = true;
+          }
+        }
+      }
+      if (res.id === containerId) {
+        const newTab = {
+          ...tab,
+          active: true
+        };
+        switch (position) {
+          case 'top': {
+            res = {
+              id: crypto.randomUUID(),
+              type: 'splitter',
+              direction: 'vertical',
+              blueSize: 50,
+              items: [
+                {
+                  id: crypto.randomUUID(),
+                  type: 'tabs',
+                  items: [newTab]
+                },
+                res
+              ]
+            };
+            break;
+          }
+          case 'right': {
+            res = {
+              id: crypto.randomUUID(),
+              type: 'splitter',
+              direction: 'horizontal',
+              blueSize: 50,
+              items: [
+                res,
+                {
+                  id: crypto.randomUUID(),
+                  type: 'tabs',
+                  items: [newTab]
+                }
+              ]
+            };
+            break;
+          }
+          case 'bottom': {
+            res = {
+              id: crypto.randomUUID(),
+              type: 'splitter',
+              direction: 'vertical',
+              blueSize: 50,
+              items: [
+                res,
+                {
+                  id: crypto.randomUUID(),
+                  type: 'tabs',
+                  items: [newTab]
+                }
+              ]
+            };
+            break;
+          }
+          case 'left': {
+            res = {
+              id: crypto.randomUUID(),
+              type: 'splitter',
+              direction: 'horizontal',
+              blueSize: 50,
+              items: [
+                {
+                  id: crypto.randomUUID(),
+                  type: 'tabs',
+                  items: [newTab]
+                },
+                res
+              ]
+            };
+            break;
+          }
+          case 'center': {
+            if (oldIndex === -1) {
+              res.items.push(newTab);
+              res.items = res.items.map((item) => ({
+                ...item,
+                active: item.id === tab.id
+              }));
+            }
+            break;
+          }
+        }
+      }
+      break;
+    }
+    case 'splitter': {
+      for (let i = 0; i < res.items.length; i++) {
+        res.items[i] = dropTabInModel(res.items[i], tab, containerId, position);
+      }
+      break;
+    }
+  }
+  return res;
+}
 export function getChildModelIndexModel (model: Model, id: string) {
   if (model.id === id) {
     return model;
@@ -167,13 +283,17 @@ export function ensureValidModel (model: Model) {
         res = res.items[1];
       } else if (isEmptyModel(res.items[1])) {
         res = res.items[0];
+      } else {
+        for (let i = 0; i < res.items.length; i++) {
+          res.items[i] = ensureValidModel(res.items[i]);
+        }
       }
       break;
     }
   }
   return res;
 }
-export function isEmptyModel (model: Model): boolean {
+function isEmptyModel (model: Model): boolean {
   switch (model.type) {
     case 'tabs': {
       return model.items.length === 0;
@@ -182,4 +302,26 @@ export function isEmptyModel (model: Model): boolean {
       return isEmptyModel(model.items[0]) && isEmptyModel(model.items[1]);
     }
   }
+}
+export function isSlotVisibleInModel (model: Model, slot: string) {
+  switch (model.type) {
+    case 'tabs': {
+      for (const child of model.items) {
+        if (child.viewSlot === slot && child.active) {
+          return true;
+        }
+      }
+      break;
+    }
+    case 'splitter': {
+      for (const child of model.items) {
+        const isVisible = isSlotVisibleInModel(child, slot);
+        if (isVisible) {
+          return true;
+        }
+      }
+      break;
+    }
+  }
+  return false;
 }

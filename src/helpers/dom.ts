@@ -1,3 +1,13 @@
+// Helpers
+import { createStore } from '@stencil/store';
+
+const { state } = createStore({
+  item: null,
+  dropzone: false
+});
+
+export { state as dnd };
+
 export function closest <T extends HTMLElement> (node: Element, selector: string): T {
   if (node) {
     const found = node.closest(selector);
@@ -58,6 +68,31 @@ export function querySelector (parent: HTMLElement|HTMLSlotElement|ShadowRoot, s
   }
   return null;
 }
+export function querySelectorAll <T = HTMLElement> (parent: HTMLElement|HTMLSlotElement|ShadowRoot, selector: string): T[] {
+  return [...new Set(_querySelectorAll<T>(parent, selector))];
+} 
+function _querySelectorAll <T = HTMLElement> (parent: HTMLElement|HTMLSlotElement|ShadowRoot, selector: string): T[] {
+  const res: T[] = [];
+  if (parent) {
+    if (parent instanceof Element && parent.matches(selector)) {
+      res.push(parent as T);
+    }
+    if (parent instanceof Element && parent.shadowRoot) {
+      res.push(...querySelectorAll<T>(parent.shadowRoot, selector));
+    }
+    if (parent instanceof HTMLSlotElement) {
+      for (const child of parent.assignedNodes()) {
+        res.push(...querySelectorAll<T>(child as HTMLElement, selector));
+      }
+    }
+    if (parent.children) {
+      for (const child of Array.from(parent.children)) {
+        res.push(...querySelectorAll<T>(child as HTMLElement, selector));
+      }
+    }
+  }
+  return res;
+}
 
 export function attachTooltip (element: HTMLElement) {
   let tooltipText: string|null = element.getAttribute('tooltip');
@@ -91,9 +126,4 @@ export function attachTooltip (element: HTMLElement) {
   element.addEventListener('mouseleave', handleMouseLeave);
 }
 
-export function attachToElement (parent: HTMLElement, target: HTMLElement) {
-  console.info('SNETCH: attachToElement');
-  console.info(parent);
-  console.info(target);
-  // TODO attach to keep position
-}
+export type Position = 'top'|'right'|'bottom'|'left'|'center'|'none';
