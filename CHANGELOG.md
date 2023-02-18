@@ -1,9 +1,16 @@
 # Changelog
 
-## [0.1.2](https://github.com/cadgerfeast/slithe/compare/0.1.1...0.1.2)
+## [0.2.0](https://github.com/cadgerfeast/slithe/compare/0.1.2...0.2.0)
+
+- Stencil migration [`#3`](https://github.com/cadgerfeast/slithe/pull/3)
+- fix readme [`d9171e2`](https://github.com/cadgerfeast/slithe/commit/d9171e27de9e0490236aa61913ec11caeb415d27)
+- fix release workflow [`3fc74aa`](https://github.com/cadgerfeast/slithe/commit/3fc74aa95e0a07c8ae8e4802c5b9627e35e93f99)
+
+## [0.1.2](https://github.com/cadgerfeast/slithe/compare/0.1.1...0.1.2) (2023-02-14)
 
 - Add Layout Component [`#2`](https://github.com/cadgerfeast/slithe/pull/2)
 - minor fixes, add reference to pixel theme [`fdcae70`](https://github.com/cadgerfeast/slithe/commit/fdcae70c529b6c28b3eccf78bc6348275095a5b9)
+- Release slithe@0.1.2 [`c3cfc88`](https://github.com/cadgerfeast/slithe/commit/c3cfc888995bf52cfccdb46efacb03a70c0688ab)
 
 ## [0.1.1](https://github.com/cadgerfeast/slithe/compare/0.1.0...0.1.1) (2023-02-03)
 
