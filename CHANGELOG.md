@@ -1,8 +1,13 @@
 # Changelog
 
-## [0.2.0](https://github.com/cadgerfeast/slithe/compare/0.1.2...0.2.0)
+## [0.2.1](https://github.com/cadgerfeast/slithe/compare/0.2.0...0.2.1)
+
+- minor fixes [`6f92321`](https://github.com/cadgerfeast/slithe/commit/6f92321a3914a1fbbaae1745ac3f024227f4b732)
+
+## [0.2.0](https://github.com/cadgerfeast/slithe/compare/0.1.2...0.2.0) (2023-02-18)
 
 - Stencil migration [`#3`](https://github.com/cadgerfeast/slithe/pull/3)
+- Release slithe@0.2.0 [`9487911`](https://github.com/cadgerfeast/slithe/commit/9487911e2ad24ee23c43d6e93dbe603155bf11fe)
 - fix readme [`d9171e2`](https://github.com/cadgerfeast/slithe/commit/d9171e27de9e0490236aa61913ec11caeb415d27)
 - fix release workflow [`3fc74aa`](https://github.com/cadgerfeast/slithe/commit/3fc74aa95e0a07c8ae8e4802c5b9627e35e93f99)
 
