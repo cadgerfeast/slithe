@@ -111,6 +111,7 @@ export class SlitheLayout {
   @Method()
   async setDragging (dragging: boolean) {
     this.dragging = dragging;
+    this.dropzoneState = 'none';
   }
   private getSlots (model: Model) {
     const slots: string[] = [];
