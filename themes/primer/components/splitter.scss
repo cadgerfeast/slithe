@@ -55,6 +55,7 @@ div.sl-splitter {
     > div.handle {
       height: 1px;
       padding: 3px 0;
+      margin: -3px 0;
       cursor: row-resize;
       > div.divider {
         height: 1px;
