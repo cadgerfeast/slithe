@@ -165,6 +165,46 @@ export class SlitheLayout {
     const rootLayout = await this.getRootLayout();
     await rootLayout.setRootDragging(dragging);
   }
+  private createSortableTabs () {
+    if (this._model.type === 'tabs') {
+      Sortable.create(this.tabsContainer, {
+        animation: 150,
+        group: this.group,
+        ghostClass: 'placeholder',
+        chosenClass: 'picked',
+        dragClass: 'dragged',
+        dragoverBubble: true,
+        onAdd: async (e) => {
+          if (this._model.type === 'tabs') {
+            if (!dnd.dropzone) {
+              const rootLayout = await this.getRootLayout();
+              await rootLayout.moveTab(e);
+            }
+          }
+        },
+        onRemove: ({ item }) => {
+          item.remove();
+        },
+        onUpdate: async (e) => {
+          if (this._model.type === 'tabs') {
+            if (!dnd.dropzone) {
+              const rootLayout = await this.getRootLayout();
+              await rootLayout.sortTab(e);
+            }
+          }
+        },
+        onStart: ({ item }) => {
+          dnd.item = item;
+          this._setDragging(true);
+        },
+        onEnd: () => {
+          dnd.item = null;
+          this._setDragging(false);
+          this.dropzoneState = 'none';
+        }
+      });
+    }
+  }
   // Watchers
   @Watch('model')
   onModelChanged(newModel: Model) {
@@ -223,44 +263,10 @@ export class SlitheLayout {
     if (this.root) {
       this.animationId = requestAnimationFrame(this.updateSlotPositions.bind(this));
     }
-    if (this._model.type === 'tabs') {
-      Sortable.create(this.tabsContainer, {
-        animation: 150,
-        group: this.group,
-        ghostClass: 'placeholder',
-        chosenClass: 'picked',
-        dragClass: 'dragged',
-        dragoverBubble: true,
-        onAdd: async (e) => {
-          if (this._model.type === 'tabs') {
-            if (!dnd.dropzone) {
-              const rootLayout = await this.getRootLayout();
-              await rootLayout.moveTab(e);
-            }
-          }
-        },
-        onRemove: ({ item }) => {
-          item.remove();
-        },
-        onUpdate: async (e) => {
-          if (this._model.type === 'tabs') {
-            if (!dnd.dropzone) {
-              const rootLayout = await this.getRootLayout();
-              await rootLayout.sortTab(e);
-            }
-          }
-        },
-        onStart: ({ item }) => {
-          dnd.item = item;
-          this._setDragging(true);
-        },
-        onEnd: () => {
-          dnd.item = null;
-          this._setDragging(false);
-          this.dropzoneState = 'none';
-        }
-      });
-    }
+    this.createSortableTabs();
+  }
+  componentDidUpdate () {
+    this.createSortableTabs();
   }
   componentDidRender () {
     if (this.root) {
