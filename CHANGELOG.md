@@ -1,7 +1,12 @@
 # Changelog
 
-## [0.2.2](https://github.com/cadgerfeast/slithe/compare/0.2.1...0.2.2)
+## [0.2.3](https://github.com/cadgerfeast/slithe/compare/0.2.2...0.2.3)
 
+- remove margin from vertical splitter [`3661b3d`](https://github.com/cadgerfeast/slithe/commit/3661b3dae4a5436ab9d71ca421d0125cc47773c3)
+
+## [0.2.2](https://github.com/cadgerfeast/slithe/compare/0.2.1...0.2.2) (2023-02-21)
+
+- Release slithe@0.2.2 [`9e0bee5`](https://github.com/cadgerfeast/slithe/commit/9e0bee557a6f51381e7671ce452c2d7489f8df57)
 - layout and splitter fixes [`61c7b74`](https://github.com/cadgerfeast/slithe/commit/61c7b7448f662c1117a6e0c396055306051bc86a)
 
 ## [0.2.1](https://github.com/cadgerfeast/slithe/compare/0.2.0...0.2.1) (2023-02-20)
