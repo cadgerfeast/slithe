@@ -1,7 +1,12 @@
 # Changelog
 
-## [0.2.1](https://github.com/cadgerfeast/slithe/compare/0.2.0...0.2.1)
+## [0.2.2](https://github.com/cadgerfeast/slithe/compare/0.2.1...0.2.2)
 
+- layout and splitter fixes [`61c7b74`](https://github.com/cadgerfeast/slithe/commit/61c7b7448f662c1117a6e0c396055306051bc86a)
+
+## [0.2.1](https://github.com/cadgerfeast/slithe/compare/0.2.0...0.2.1) (2023-02-20)
+
+- Release slithe@0.2.1 [`e14e441`](https://github.com/cadgerfeast/slithe/commit/e14e441f2619487dd51b44bdc0f5758935955878)
 - minor fixes [`6f92321`](https://github.com/cadgerfeast/slithe/commit/6f92321a3914a1fbbaae1745ac3f024227f4b732)
 
 ## [0.2.0](https://github.com/cadgerfeast/slithe/compare/0.1.2...0.2.0) (2023-02-18)
