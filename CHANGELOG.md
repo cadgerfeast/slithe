@@ -1,7 +1,12 @@
 # Changelog
 
-## [0.2.4](https://github.com/cadgerfeast/slithe/compare/0.2.3...0.2.4)
+## [0.2.5](https://github.com/cadgerfeast/slithe/compare/0.2.4...0.2.5)
 
+- create sortable on update [`f465537`](https://github.com/cadgerfeast/slithe/commit/f465537a61ab4851eda2cfd6be186515566d3756)
+
+## [0.2.4](https://github.com/cadgerfeast/slithe/compare/0.2.3...0.2.4) (2023-02-21)
+
+- Release slithe@0.2.4 [`3ae6ad9`](https://github.com/cadgerfeast/slithe/commit/3ae6ad90d0ed917a308be42566812ffbfe73c736)
 - fix horizontal splitter handle [`46a9cdb`](https://github.com/cadgerfeast/slithe/commit/46a9cdba6bc9e2786f1b0c322b0172357130329b)
 
 ## [0.2.3](https://github.com/cadgerfeast/slithe/compare/0.2.2...0.2.3) (2023-02-21)
