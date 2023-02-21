@@ -22,6 +22,7 @@ div.sl-splitter {
     }
   }
   > div.handle {
+    z-index: 3;
     user-select: none;
     > div.divider {
       background-color: var(--sl-splitter-divider-border-color);
@@ -39,7 +40,6 @@ div.sl-splitter {
     width: 100%;
     flex-direction: row;
     > div.handle {
-      z-index: 3;
       width: 1px;
       padding: 0 3px;
       margin: 0 -3px;
