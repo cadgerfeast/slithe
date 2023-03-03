@@ -17,8 +17,8 @@ export class SlitheIcon {
   // Computed
   get style () {
     return {
-      'width': this.size,
-      'height': this.size
+      'width': `var(--sl-icon-size, ${this.size})`,
+      'height': `var(--sl-icon-size, ${this.size})`
     };
   }
   get svg () {

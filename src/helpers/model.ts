@@ -9,6 +9,7 @@ export type TabModel = {
   viewSlot: string;
   active: boolean;
   placeholder?: boolean;
+  closable?: boolean;
 }
 export type TabsModel = {
   id: string;
@@ -80,6 +81,28 @@ export function setActiveTabInModel (model: Model, id: string): Model {
     case 'splitter': {
       for (let i = 0; i < res.items.length; i++) {
         res.items[i] = setActiveTabInModel(res.items[i], id);
+      }
+      break;
+    }
+  }
+  return res;
+}
+export function removeTabInModel (model: Model, id: string): Model {
+  const res = clone(model);
+  switch (res.type) {
+    case 'tabs': {
+      const index = res.items.findIndex((item) => item.id === id);
+      if (index !== -1) {
+        res.items.splice(index, 1);
+        if (!res.items.some((item) => item.active) && res.items.length > 0) {
+          res.items[0].active = true;
+        }
+      }
+      break;
+    }
+    case 'splitter': {
+      for (let i = 0; i < res.items.length; i++) {
+        res.items[i] = removeTabInModel(res.items[i], id);
       }
       break;
     }

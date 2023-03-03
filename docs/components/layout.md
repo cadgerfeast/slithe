@@ -24,7 +24,8 @@ const model = {
       items: [
         {
           name: 'View 0',
-          viewSlot: 'view0'
+          viewSlot: 'view0',
+          closable: true
         }
       ]
     },
@@ -55,11 +56,13 @@ const model = {
             {
               name: 'View 3',
               viewSlot: 'view3',
-              active: true
+              active: true,
+              closable: true
             },
             {
               name: 'View 4',
-              viewSlot: 'view4'
+              viewSlot: 'view4',
+              closable: true
             }
           ]
         }

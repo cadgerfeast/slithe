@@ -4,6 +4,7 @@
   --sl-tab-button-color: var(--pr-shark);
   --sl-tab-button-hover-background-color: rgb(243, 244, 246);
   --sl-tab-button-active-background-color: rgb(238, 239, 242);
+  --sl-tab-button-close-background-color: rgba(0, 0, 0, .1);
 }
 // Active
 :host([sl-theme=light][active]) {
@@ -29,12 +30,16 @@
 }
 // Tab
 li.sl-tab {
+  position: relative;
   box-sizing: border-box;
   padding: var(--sl-tab-padding, 8px 4px);
   margin-bottom: 0 0 -1px 0;
   border-bottom: 2px solid var(--sl-tab-border-color, transparent);
   list-style: none;
   > button {
+    display: inline-flex;
+    align-items: center;
+    flex-direction: row;
     font-family: var(--pr-font-family);
     position: relative;
     border: none;
@@ -47,7 +52,6 @@ li.sl-tab {
     user-select: none;
     white-space: nowrap;
     vertical-align: middle;
-    cursor: pointer;
     &:hover {
       background-color: var(--sl-tab-button-hover-background-color);
       box-shadow: var(--sl-tab-button-hover-box-shadow, unset);
@@ -60,6 +64,16 @@ li.sl-tab {
       outline: 2px solid var(--sl-tab-button-outline-color);
       outline-offset: -2px;
       box-shadow: var(--sl-tab-button-focus-box-shadow, unset);
+    }
+    > sl-icon {
+      cursor: pointer;
+      --sl-icon-size: var(--sl-tab-button-close-icon-size, 14px);
+      background: transparent;
+      border-radius: 4px;
+      margin-left: 4px;
+      &:hover {
+        background-color: var(--sl-tab-button-close-background-color);
+      }
     }
   }
 }

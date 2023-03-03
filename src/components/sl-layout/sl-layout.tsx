@@ -8,6 +8,7 @@ import {
   TabsModel,
   resizeSplitterInModel,
   setActiveTabInModel,
+  removeTabInModel,
   sortTabInModel,
   moveTabInModel,
   getChildModelIndexModel,
@@ -19,6 +20,7 @@ import { closest, dnd, Position, querySelector, querySelectorAll } from '../../h
 import { clone } from '../../helpers/object';
 import { syncWithTheme } from '../../helpers/theme';
 import { Deferred } from '../../helpers/time';
+
 
 @Component({
   tag: 'sl-layout',
@@ -91,6 +93,11 @@ export class SlitheLayout {
     this.emitUpdate();
   }
   @Method()
+  async removeTab (id: string) {
+    this._model = ensureValidModel(removeTabInModel(this._model, id));
+    this.emitUpdate();
+  }
+  @Method()
   async resizeSplitter (id: string, size: number) {
     this._model = resizeSplitterInModel(this._model, id, size);
     this.emitUpdate();
@@ -137,10 +144,27 @@ export class SlitheLayout {
       await rootLayout.selectTab(id);
     }
   }
+  private async _removeTab (id: string) {
+    if (this._model.type === 'tabs') {
+      const rootLayout = await this.getRootLayout();
+      await rootLayout.removeTab(id);
+    }
+  }
   private emitUpdate () {
     this.update.emit(clone(this._model));
   }
+  private computeSlotElements () {
+    if (this.root) {
+      if (Array.from(this.slotElements.values()).includes(null)) {
+        const elements = querySelectorAll<HTMLDivElement>(this.host, 'div.slot-wrapper');
+        for (const element of elements) {
+          this.slotElements.set(element.dataset.slot, element);
+        }
+      }
+    }
+  }
   private updateSlotPositions () {
+    this.computeSlotElements();
     for (const [key, slotElement] of this.slotElements.entries()) {
       if (slotElement) {
         if (isSlotVisibleInModel(this._model, key)) {
@@ -175,23 +199,29 @@ export class SlitheLayout {
         dragClass: 'dragged',
         dragoverBubble: true,
         onAdd: async (e) => {
-          if (this._model.type === 'tabs') {
-            if (!dnd.dropzone) {
-              const rootLayout = await this.getRootLayout();
-              await rootLayout.moveTab(e);
+          if (!dnd.dropping) {
+            if (this._model.type === 'tabs') {
+              if (!dnd.dropzone) {
+                const rootLayout = await this.getRootLayout();
+                await rootLayout.moveTab(e);
+              }
             }
           }
+          dnd.dropping = false;
         },
         onRemove: ({ item }) => {
           item.remove();
         },
         onUpdate: async (e) => {
-          if (this._model.type === 'tabs') {
-            if (!dnd.dropzone) {
-              const rootLayout = await this.getRootLayout();
-              await rootLayout.sortTab(e);
+          if (!dnd.dropping) {
+            if (this._model.type === 'tabs') {
+              if (!dnd.dropzone) {
+                const rootLayout = await this.getRootLayout();
+                await rootLayout.sortTab(e);
+              }
             }
           }
+          dnd.dropping = false;
         },
         onStart: ({ item }) => {
           dnd.item = item;
@@ -247,8 +277,11 @@ export class SlitheLayout {
     this.dropzoneState = 'none';
   }
   private async handleDropzoneDrop () {
+    dnd.dropping = true;
     const rootLayout = await this.getRootLayout();
     await rootLayout.dropTab(dnd.item.id, this._model.id, this.dropzoneState);
+    dnd.dropzone = false;
+    this.dropzoneState = 'none';
   }
   // Lifecycle
   async connectedCallback () {
@@ -270,12 +303,7 @@ export class SlitheLayout {
   }
   componentDidRender () {
     if (this.root) {
-      if (Array.from(this.slotElements.values()).includes(null)) {
-        const elements = querySelectorAll<HTMLDivElement>(this.host, 'div.slot-wrapper');
-        for (const element of elements) {
-          this.slotElements.set(element.dataset.slot, element);
-        }
-      }
+      dnd.dropping = false;
     }
   }
   disconnectedCallback () {
@@ -287,7 +315,16 @@ export class SlitheLayout {
       <Fragment>
         <sl-tabs id={tabs.id} ref={(el) => this.tabsContainer = el} small>
           {tabs.items.map((item) => (
-            <sl-tab id={item.id} key={item.id} active={item.active} onClick={() => this._selectTab(item.id)}>{item.name}</sl-tab>
+            <sl-tab
+              id={item.id}
+              key={item.id}
+              active={item.active}
+              closable={item.closable}
+              onClick={() => this._selectTab(item.id)}
+              onClose={() => this._removeTab(item.id)}
+            >
+              {item.name}
+            </sl-tab>
           ))}
         </sl-tabs>
         <div class="tab-content">

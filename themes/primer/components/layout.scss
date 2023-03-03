@@ -14,20 +14,6 @@ div.sl-layout {
   height: 100%;
   display: flex;
   flex-direction: column;
-  > nav.sl-tabs {
-    min-height: 30px;
-    > ul {
-      height: 100%;
-      > div.droplist {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        > div.dragitem.placeholder {
-          visibility: hidden;
-        }
-      }
-    }
-  }
   > div.tab-content {
     position: relative;
     height: 100%;

@@ -3,7 +3,8 @@ import { createStore } from '@stencil/store';
 
 const { state } = createStore({
   item: null,
-  dropzone: false
+  dropzone: false,
+  dropping: false
 });
 
 export { state as dnd };
