@@ -1,8 +1,13 @@
 # Changelog
 
-## [0.2.5](https://github.com/cadgerfeast/slithe/compare/0.2.4...0.2.5)
+## [0.2.6](https://github.com/cadgerfeast/slithe/compare/0.2.5...0.2.6)
+
+- add config, closable behavior [`38e02e3`](https://github.com/cadgerfeast/slithe/commit/38e02e39a8fb9323a32e99d6849e558afee0f887)
+
+## [0.2.5](https://github.com/cadgerfeast/slithe/compare/0.2.4...0.2.5) (2023-02-21)
 
 - create sortable on update [`f465537`](https://github.com/cadgerfeast/slithe/commit/f465537a61ab4851eda2cfd6be186515566d3756)
+- Release slithe@0.2.5 [`b4a4458`](https://github.com/cadgerfeast/slithe/commit/b4a4458efa1cb8d5527ef4a73fc3280b251c1998)
 
 ## [0.2.4](https://github.com/cadgerfeast/slithe/compare/0.2.3...0.2.4) (2023-02-21)
 
