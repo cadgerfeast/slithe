@@ -12,9 +12,14 @@ import { clamp } from '../../helpers/number';
 export class SlitheSplitter {
   @Element() host!: HTMLSlSplitterElement;
   // Props
+  @Prop() disabled: boolean = false;
   @Prop() horizontal: boolean = true;
   @Prop() vertical: boolean = false;
   @Prop() blueSize: number = 50;
+  @Prop() minBlue: number = 0;
+  @Prop() maxBlue: number = 100;
+  @Prop() minGreen: number = 0;
+  @Prop() maxGreen: number = 100;
   // State
   @State() _blueSize: number;
   @State() resizing: boolean = false;
@@ -77,9 +82,9 @@ export class SlitheSplitter {
     if (this.resizing) {
       const rect = this.host.getBoundingClientRect();
       if (this.direction === 'horizontal') {
-        this._blueSize = clamp(0, (e.clientX - rect.left) * 100 / rect.width, 100);
+        this._blueSize = clamp(this.minBlue, (e.clientX - rect.left) * 100 / rect.width, this.maxBlue);
       } else {
-        this._blueSize = clamp(0, (e.clientY - rect.top) * 100 / rect.height, 100);
+        this._blueSize = clamp(this.minBlue, (e.clientY - rect.top) * 100 / rect.height, this.maxBlue);
       }
     }
   }
@@ -97,7 +102,7 @@ export class SlitheSplitter {
             {this.resizing && <div class="catcher"/>}
           <slot name="blue"/>
         </div>
-        <div class="handle" onMouseDown={(e) => this.handleMouseDown(e)}>
+        <div class={{ handle: true, disabled: this.disabled }} onMouseDown={(e) => this.handleMouseDown(e)}>
           <div class="divider"/>
         </div>
         <div class="pane" style={this.greenStyle}>

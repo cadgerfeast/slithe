@@ -13,7 +13,6 @@ export class SlitheIcon {
   // Props
   @Prop() name: string;
   @Prop() size: string = '16px';
-  @Prop() tooltip: string = '';
   // Computed
   get style () {
     return {

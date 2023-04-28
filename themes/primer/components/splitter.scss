@@ -24,6 +24,9 @@ div.sl-splitter {
   > div.handle {
     z-index: 3;
     user-select: none;
+    &.disabled {
+      pointer-events: none;
+    }
     > div.divider {
       background-color: var(--sl-splitter-divider-border-color);
       transition: all ease-in-out .25s;

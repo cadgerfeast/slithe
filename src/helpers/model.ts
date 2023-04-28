@@ -10,18 +10,24 @@ export type TabModel = {
   active: boolean;
   placeholder?: boolean;
   closable?: boolean;
+  draggable?: boolean;
 }
 export type TabsModel = {
   id: string;
   type: 'tabs';
   items: TabModel[];
+  splittable?: boolean;
+  droppable?: boolean;
 }
 export type SplitterModel = {
   id: string;
   type: 'splitter';
   direction: 'horizontal'|'vertical';
   items: [Model, Model];
-  blueSize: number;
+  blueSize?: number;
+  minBlue?: number;
+  maxBlue?: number;
+  disabled?: boolean;
 }
 export type Model = TabsModel|SplitterModel;
 export function computeModel <T extends Model> (model: T): T {
@@ -42,7 +48,6 @@ export function computeModel <T extends Model> (model: T): T {
       break;
     }
     case 'splitter': {
-      res.blueSize = res.blueSize || 50;
       for (let i = 0; i < res.items.length; i++) {
         res.items[i] = computeModel(res.items[i]);
       }

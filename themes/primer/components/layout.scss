@@ -24,9 +24,6 @@ div.sl-layout {
       &.active {
         display: block;
       }
-      > div.slot-container {
-        height: 100%;
-      }
     }
     > div.dropzone {
       display: none;
@@ -75,15 +72,6 @@ div.sl-layout {
           display: none;
         }
       }
-    }
-  }
-  > div.slots {
-    &.dragging {
-      pointer-events: none;
-    }
-    > div.slot-wrapper {
-      position: absolute;
-      overflow: auto;
     }
   }
 }

@@ -21,12 +21,15 @@
   import { defineComponent } from 'vue';
   // Constants
   const defaultModel = {
-    id: window.crypto.randomUUID(),
     type: 'splitter',
     direction: 'horizontal',
+    blueSize: 30,
+    minBlue: 20,
     items: [
       {
         type: 'tabs',
+        splittable: false,
+        droppable: false,
         items: [
           {
             name: 'View 0',
@@ -57,7 +60,8 @@
             items: [
               {
                 name: 'Iframe',
-                viewSlot: 'iframe'
+                viewSlot: 'iframe',
+                draggable: false
               },
               {
                 name: 'View 3',

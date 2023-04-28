@@ -13,14 +13,12 @@ import {
   moveTabInModel,
   getChildModelIndexModel,
   ensureValidModel,
-  isSlotVisibleInModel,
   dropTabInModel
 } from '../../helpers/model';
-import { closest, dnd, Position, querySelector, querySelectorAll } from '../../helpers/dom';
+import { closest, dnd, Position, querySelectorAll } from '../../helpers/dom';
 import { clone } from '../../helpers/object';
 import { syncWithTheme } from '../../helpers/theme';
 import { Deferred } from '../../helpers/time';
-
 
 @Component({
   tag: 'sl-layout',
@@ -32,8 +30,6 @@ export class SlitheLayout {
   private tabsContainer!: HTMLSlTabsElement;
   private ready = new Deferred();
   private group!: string;
-  private slotElements: Map<string, HTMLDivElement> = new Map();
-  private animationId: number;
   // Props
   @Prop() model: Model = {
     id: crypto.randomUUID(),
@@ -45,10 +41,8 @@ export class SlitheLayout {
   @State() dragging: boolean = false;
   @State() _model: Model;
   @State() dropzoneState: Position = 'none';
+  @State() renderIndex: number = 0;
   // Computed
-  get slots () {
-    return this.getSlots(this._model);
-  }
   get dropzoneClass () {
     const classList = ['dropzone', `dragover-${this.dropzoneState}`];
     if (this.dragging) {
@@ -57,7 +51,7 @@ export class SlitheLayout {
     return classList.join(' ');
   }
   // Events
-  @Event() update: EventEmitter<Model>;
+  @Event({ bubbles: false }) update: EventEmitter<Model>;
   // Methods
   @Method()
   async getGroup () {
@@ -152,38 +146,7 @@ export class SlitheLayout {
   }
   private emitUpdate () {
     this.update.emit(clone(this._model));
-  }
-  private computeSlotElements () {
-    if (this.root) {
-      if (Array.from(this.slotElements.values()).includes(null)) {
-        const elements = querySelectorAll<HTMLDivElement>(this.host, 'div.slot-wrapper');
-        for (const element of elements) {
-          this.slotElements.set(element.dataset.slot, element);
-        }
-      }
-    }
-  }
-  private updateSlotPositions () {
-    this.computeSlotElements();
-    for (const [key, slotElement] of this.slotElements.entries()) {
-      if (slotElement) {
-        if (isSlotVisibleInModel(this._model, key)) {
-          const target = querySelector(this.host, `div.slot-container.${key}`);
-          if (target) {
-            const hostRect = this.host.getBoundingClientRect();
-            const targetRect = target.getBoundingClientRect();
-            slotElement.style.display = 'block';
-            slotElement.style.top = `${targetRect.top - hostRect.top}px`;
-            slotElement.style.right = `${hostRect.right - targetRect.right}px`;
-            slotElement.style.bottom = `${hostRect.bottom - targetRect.bottom}px`;
-            slotElement.style.left = `${targetRect.left - hostRect.left}px`;
-          }
-        } else {
-          slotElement.style.display = 'none';
-        }
-      }
-    }
-    this.animationId = requestAnimationFrame(this.updateSlotPositions.bind(this));
+    this.renderIndex++;
   }
   private async _setDragging (dragging: boolean) {
     const rootLayout = await this.getRootLayout();
@@ -253,24 +216,28 @@ export class SlitheLayout {
     }
   }
   private handleDropzoneDragEnter () {
-    dnd.dropzone = true;
+    if (this._model.type === 'tabs' && (this._model.splittable !== false)) {
+      dnd.dropzone = true;
+    }
   }
   private handleDropzoneDragOver (e: DragEvent) {
-    const target = e.target as HTMLDivElement;
-    const pX = e.offsetX * 100 / target.offsetWidth;
-    const pY = e.offsetY * 100 / target.offsetHeight;
-    if (pX < 30) {
-      this.dropzoneState = 'left';
-    } else if (pX > 70) {
-      this.dropzoneState = 'right';
-    } else if (pY < 15) {
-      this.dropzoneState = 'top';
-    } else if (pY > 85) {
-      this.dropzoneState = 'bottom';
-    } else {
-      this.dropzoneState = 'center';
+    if (this._model.type === 'tabs' && (this._model.splittable !== false)) {
+      const target = e.target as HTMLDivElement;
+      const pX = e.offsetX * 100 / target.offsetWidth;
+      const pY = e.offsetY * 100 / target.offsetHeight;
+      if (pX < 30) {
+        this.dropzoneState = 'left';
+      } else if (pX > 70) {
+        this.dropzoneState = 'right';
+      } else if (pY < 15) {
+        this.dropzoneState = 'top';
+      } else if (pY > 85) {
+        this.dropzoneState = 'bottom';
+      } else {
+        this.dropzoneState = 'center';
+      }
+      e.preventDefault();
     }
-    e.preventDefault();
   }
   private handleDropzoneDragLeave () {
     dnd.dropzone = false;
@@ -293,9 +260,6 @@ export class SlitheLayout {
   }
   async componentDidLoad () {
     await this.ready.promise;
-    if (this.root) {
-      this.animationId = requestAnimationFrame(this.updateSlotPositions.bind(this));
-    }
     this.createSortableTabs();
   }
   componentDidUpdate () {
@@ -306,9 +270,6 @@ export class SlitheLayout {
       dnd.dropping = false;
     }
   }
-  disconnectedCallback () {
-    cancelAnimationFrame(this.animationId);
-  }
   // Template
   private renderTabs (tabs: TabsModel) {
     return (
@@ -316,6 +277,7 @@ export class SlitheLayout {
         <sl-tabs id={tabs.id} ref={(el) => this.tabsContainer = el} small>
           {tabs.items.map((item) => (
             <sl-tab
+              class={{ disabled: item.draggable === false }}
               id={item.id}
               key={item.id}
               active={item.active}
@@ -330,7 +292,7 @@ export class SlitheLayout {
         <div class="tab-content">
           {tabs.items.map((item) => (
             <div class={{ 'tab-view': true, 'active': item.active && !item.placeholder }}>
-              <div class={`slot-container ${item.viewSlot}`}/>
+              <slot name={item.viewSlot}/>
             </div>
           ))}
           <div
@@ -346,29 +308,35 @@ export class SlitheLayout {
   }
   private renderSplitter (splitter: SplitterModel) {
     return (
-      <sl-splitter vertical={splitter.direction === 'vertical'} blueSize={splitter.blueSize} onResizeStart={() => this.handleResizeStart()} onResizeEnd={(e) => this.handleResizeEnd(e)}>
-        <sl-layout slot="blue" model={splitter.items[0]}/>
-        <sl-layout slot="green" model={splitter.items[1]}/>
+      <sl-splitter
+        vertical={splitter.direction === 'vertical'}
+        blueSize={splitter.blueSize}
+        minBlue={splitter.minBlue}
+        maxBlue={splitter.maxBlue}
+        disabled={splitter.disabled}
+        onResizeStart={() => this.handleResizeStart()} onResizeEnd={(e) => this.handleResizeEnd(e)}
+      >
+        <sl-layout slot="blue" model={splitter.items[0]}>
+          {this.getSlots(splitter.items[0]).map((slot) => (
+            <slot name={slot} slot={slot}/>
+          ))}
+        </sl-layout>
+        <sl-layout slot="green" model={splitter.items[1]}>
+          {this.getSlots(splitter.items[1]).map((slot) => (
+            <slot name={slot} slot={slot}/>
+          ))}
+        </sl-layout>
       </sl-splitter>
-    );
-  }
-  private renderSlots () {
-    return (
-      <div class={{ 'slots': true, 'dragging': this.dragging }}>
-        {this.slots.map((slot) => (
-          <div data-slot={slot} ref={(el) => this.slotElements.set(slot, el)} class='slot-wrapper'>
-            <slot name={slot}/>
-          </div>
-        ))}
-      </div>
     );
   }
   render () {
     return (
-      <div key={this._model.id} class='sl-layout'>
+      <div key={this._model.id + this.renderIndex} class='sl-layout'>
         {this._model.type === 'tabs' && this.renderTabs(this._model)}
         {this._model.type === 'splitter' && this.renderSplitter(this._model)}
-        {this.root && this.renderSlots()}
+        {this._model.type !== 'splitter' && this.getSlots(this._model).map((slot) => (
+          <slot name={slot} slot={slot}/>
+        ))}
       </div>
     );
   }

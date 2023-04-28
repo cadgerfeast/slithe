@@ -13,8 +13,8 @@ The component includes a `blue`, and a `green` slot.
 - **Vertical**: `blue=top` - `green=bottom`
 
 <Preview title="Horizontal">
-  <sl-splitter horizontal>
-    <div slot="blue" style="height:200px">Blue</div>
+  <sl-splitter horizontal style="height:200px">
+    <div slot="blue" >Blue</div>
     <div slot="green">Green</div>
   </sl-splitter>
 </Preview>
@@ -33,6 +33,74 @@ The component includes a `blue`, and a `green` slot.
 </sl-splitter>
 <!-- Vertical -->
 <sl-splitter vertical>
+  <div slot="blue">Blue</div>
+  <div slot="green">Green</div>
+</sl-splitter>
+```
+
+## Attributes
+
+### BlueSize
+
+The initial `blue` splitter size.
+
+BlueSize defaults to `50`.
+
+<Preview>
+  <sl-splitter blueSize="75" style="height:200px">
+    <div slot="blue">Blue</div>
+    <div slot="green">Green</div>
+  </sl-splitter>
+</Preview>
+
+<div class="prism-last"/>
+
+``` html
+<sl-splitter blueSize="75">
+  <div slot="blue">Blue</div>
+  <div slot="green">Green</div>
+</sl-splitter>
+```
+
+### MinBlue - MaxBlue
+
+The minimum and maximum `blue` splitter size.
+
+MinBlue defaults to `0`.
+
+MaxBlue defaults to `100`.
+
+<Preview>
+  <sl-splitter minBlue="25" maxBlue="75" style="height:200px">
+    <div slot="blue">Blue</div>
+    <div slot="green">Green</div>
+  </sl-splitter>
+</Preview>
+
+<div class="prism-last"/>
+
+``` html
+<sl-splitter minBlue="25" maxBlue="75">
+  <div slot="blue">Blue</div>
+  <div slot="green">Green</div>
+</sl-splitter>
+```
+
+### Disabled
+
+Makes the splitter non-interactable.
+
+<Preview>
+  <sl-splitter disabled style="height:200px">
+    <div slot="blue">Blue</div>
+    <div slot="green">Green</div>
+  </sl-splitter>
+</Preview>
+
+<div class="prism-last"/>
+
+``` html
+<sl-splitter disabled>
   <div slot="blue">Blue</div>
   <div slot="green">Green</div>
 </sl-splitter>
