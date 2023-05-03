@@ -1,6 +1,6 @@
 // Helpers
 import { Component, Element, h, Prop, State, Fragment, Method, Event, EventEmitter, Watch } from '@stencil/core';
-import Sortable, { SortableEvent } from 'sortablejs';
+// import Sortable, { SortableEvent } from 'sortablejs';
 import {
   Model,
   computeModel,
@@ -15,14 +15,14 @@ import {
   ensureValidModel,
   dropTabInModel
 } from '../../helpers/model';
-import { closest, dnd, Position, querySelectorAll } from '../../helpers/dom';
+import { closest, createDraggableList, dnd, Position, querySelectorAll } from '../../helpers/dom';
 import { clone } from '../../helpers/object';
 import { syncWithTheme } from '../../helpers/theme';
 import { Deferred } from '../../helpers/time';
+import { config } from '../../helpers/config';
 
 @Component({
   tag: 'sl-layout',
-  styleUrl: 'sl-layout.scss',
   shadow: true
 })
 export class SlitheLayout {
@@ -70,17 +70,17 @@ export class SlitheLayout {
       return closest<HTMLSlLayoutElement>(this.host.parentElement, 'sl-layout').getRootLayout();
     }
   }
-  @Method()
-  async moveTab ({ item, from, to, oldIndex, newIndex }: SortableEvent) {
-    const tabModel = getChildModelIndexModel(this._model, item.id);
-    this._model = ensureValidModel(moveTabInModel(this._model, tabModel, from.id, oldIndex, to.id, newIndex));
-    this.emitUpdate();
-  }
-  @Method()
-  async sortTab ({ item, oldIndex, newIndex }: SortableEvent) {
-    this._model = sortTabInModel(this._model, item.id, oldIndex, newIndex);
-    this.emitUpdate();
-  }
+  // @Method()
+  // async moveTab ({ item, from, to, oldIndex, newIndex }: SortableEvent) {
+  //   const tabModel = getChildModelIndexModel(this._model, item.id);
+  //   this._model = ensureValidModel(moveTabInModel(this._model, tabModel, from.id, oldIndex, to.id, newIndex));
+  //   this.emitUpdate();
+  // }
+  // @Method()
+  // async sortTab ({ item, oldIndex, newIndex }: SortableEvent) {
+  //   this._model = sortTabInModel(this._model, item.id, oldIndex, newIndex);
+  //   this.emitUpdate();
+  // }
   @Method()
   async selectTab (id: string) {
     this._model = setActiveTabInModel(this._model, id);
@@ -138,7 +138,8 @@ export class SlitheLayout {
       await rootLayout.selectTab(id);
     }
   }
-  private async _removeTab (id: string) {
+  private async _removeTab (e: MouseEvent, id: string) {
+    e.stopPropagation();
     if (this._model.type === 'tabs') {
       const rootLayout = await this.getRootLayout();
       await rootLayout.removeTab(id);
@@ -154,39 +155,11 @@ export class SlitheLayout {
   }
   private createSortableTabs () {
     if (this._model.type === 'tabs') {
-      Sortable.create(this.tabsContainer, {
-        animation: 150,
+      createDraggableList({
+        container: this.tabsContainer,
         group: this.group,
-        ghostClass: 'placeholder',
-        chosenClass: 'picked',
-        dragClass: 'dragged',
-        dragoverBubble: true,
-        onAdd: async (e) => {
-          if (!dnd.dropping) {
-            if (this._model.type === 'tabs') {
-              if (!dnd.dropzone) {
-                const rootLayout = await this.getRootLayout();
-                await rootLayout.moveTab(e);
-              }
-            }
-          }
-          dnd.dropping = false;
-        },
-        onRemove: ({ item }) => {
-          item.remove();
-        },
-        onUpdate: async (e) => {
-          if (!dnd.dropping) {
-            if (this._model.type === 'tabs') {
-              if (!dnd.dropzone) {
-                const rootLayout = await this.getRootLayout();
-                await rootLayout.sortTab(e);
-              }
-            }
-          }
-          dnd.dropping = false;
-        },
-        onStart: ({ item }) => {
+        items: 'sl-tab.draggable',
+        onStart: (item) => {
           dnd.item = item;
           this._setDragging(true);
         },
@@ -196,6 +169,48 @@ export class SlitheLayout {
           this.dropzoneState = 'none';
         }
       });
+      // Sortable.create(this.tabsContainer, {
+      //   animation: 150,
+      //   group: this.group,
+      //   ghostClass: 'placeholder',
+      //   chosenClass: 'picked',
+      //   dragClass: 'dragged',
+      //   dragoverBubble: true,
+      //   onAdd: async (e) => {
+      //     if (!dnd.dropping) {
+      //       if (this._model.type === 'tabs') {
+      //         if (!dnd.dropzone) {
+      //           const rootLayout = await this.getRootLayout();
+      //           await rootLayout.moveTab(e);
+      //         }
+      //       }
+      //     }
+      //     dnd.dropping = false;
+      //   },
+      //   onRemove: ({ item }) => {
+      //     item.remove();
+      //   },
+      //   onUpdate: async (e) => {
+      //     if (!dnd.dropping) {
+      //       if (this._model.type === 'tabs') {
+      //         if (!dnd.dropzone) {
+      //           const rootLayout = await this.getRootLayout();
+      //           await rootLayout.sortTab(e);
+      //         }
+      //       }
+      //     }
+      //     dnd.dropping = false;
+      //   },
+      //   onStart: ({ item }) => {
+      //     dnd.item = item;
+      //     this._setDragging(true);
+      //   },
+      //   onEnd: () => {
+      //     dnd.item = null;
+      //     this._setDragging(false);
+      //     this.dropzoneState = 'none';
+      //   }
+      // });
     }
   }
   // Watchers
@@ -252,7 +267,11 @@ export class SlitheLayout {
   }
   // Lifecycle
   async connectedCallback () {
-    syncWithTheme(this.host);
+    syncWithTheme(this.host, {
+      'display': 'block',
+      'position': 'relative',
+      'height': '100%'
+    });
     this._model = computeModel(this.model);
     this.root = !closest<HTMLSlLayoutElement>(this.host.parentElement, 'sl-layout');
     this.group = await this.getGroup();
@@ -277,15 +296,14 @@ export class SlitheLayout {
         <sl-tabs id={tabs.id} ref={(el) => this.tabsContainer = el} small>
           {tabs.items.map((item) => (
             <sl-tab
-              class={{ disabled: item.draggable === false }}
+              class={{ draggable: item.draggable !== false }}
               id={item.id}
               key={item.id}
               active={item.active}
-              closable={item.closable}
               onClick={() => this._selectTab(item.id)}
-              onClose={() => this._removeTab(item.id)}
             >
               {item.name}
+              {item.closable && <sl-icon class='close-btn' name={config.closeIcon} onClick={(e) => this._removeTab(e, item.id)}/>}
             </sl-tab>
           ))}
         </sl-tabs>

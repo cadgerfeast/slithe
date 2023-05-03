@@ -4,7 +4,6 @@ import { syncWithTheme } from '../../helpers/theme';
 
 @Component({
   tag: 'sl-form',
-  styleUrl: 'sl-form.scss',
   shadow: true
 })
 export class SlitheForm {
@@ -16,7 +15,9 @@ export class SlitheForm {
   }
   // Lifecycle
   connectedCallback () {
-    syncWithTheme(this.host);
+    syncWithTheme(this.host, {
+      'display': 'inline-flex'
+    });
   }
   // Template
   render () {

@@ -6,7 +6,6 @@ import { Notification } from '../../helpers/hud';
 
 @Component({
   tag: 'sl-hud',
-  styleUrl: 'sl-hud.scss',
   shadow: true
 })
 export class SlitheHud {
@@ -26,7 +25,9 @@ export class SlitheHud {
   }
   // Lifecycle
   connectedCallback () {
-    syncWithTheme(this.host);
+    syncWithTheme(this.host, {
+      'display': 'inline-flex'
+    });
   }
   // Template
   render () {

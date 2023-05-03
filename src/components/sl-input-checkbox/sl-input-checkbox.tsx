@@ -4,7 +4,6 @@ import { syncWithTheme } from '../../helpers/theme';
 
 @Component({
   tag: 'sl-input-checkbox',
-  styleUrl: 'sl-input-checkbox.scss',
   shadow: true
 })
 export class SlitheInputCheckbox {
@@ -25,7 +24,9 @@ export class SlitheInputCheckbox {
   // Lifecycle
   connectedCallback () {
     this.id = crypto.randomUUID();
-    syncWithTheme(this.host);
+    syncWithTheme(this.host, {
+      'display': 'flex'
+    });
   }
   // Template
   render () {

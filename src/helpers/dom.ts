@@ -1,13 +1,82 @@
 // Helpers
 import { createStore } from '@stencil/store';
 
-const { state } = createStore({
+interface DND {
+  item: HTMLElement|null;
+  dropzone: boolean;
+  dropping: boolean;
+}
+
+const { state } = createStore<DND>({
   item: null,
   dropzone: false,
   dropping: false
 });
 
 export { state as dnd };
+
+interface DNDEvent {
+  item: HTMLElement;
+  event: PointerEvent;
+  group: string;
+  offsetX: number;
+  offsetY: number;
+}
+interface CreateDraggableListOptions {
+  container: HTMLElement;
+  items: string;
+  group: string;
+  onStart: (item: HTMLElement) => void;
+  onEnd: () => void;
+}
+export function createDraggableList ({ container, items, group, onStart, onEnd }: CreateDraggableListOptions) {
+  let dndEvent: DNDEvent|null = null;
+  let clone: HTMLElement|null = null;
+  // TODO Check if dnd.item is set, and if clone is not (then check group) - Container
+  // TODO Placeholder creation
+  // TODO onAdd, onRemove, onSort events
+  // TODO createDropzoneBpx to replace custom made one
+  // Handlers
+  function handlePointerDown (e: PointerEvent) {
+    const item = closest(e.target as HTMLElement, items);
+    if (item) {
+      const rect = item.getBoundingClientRect();
+      dndEvent = { item, event: e, group, offsetX: e.pageX - rect.left, offsetY: e.pageY - rect.top };
+      window.addEventListener('pointermove', handlePointerMove);
+      window.addEventListener('pointerup', handlePointerUp);
+    }
+  }
+  function handlePointerMove (e: PointerEvent) {
+    if (clone) {
+      clone.style.top = `${e.pageY - dndEvent.offsetY}px`;
+      clone.style.left = `${e.pageX - dndEvent.offsetX}px`;
+    } else if (Math.abs(e.pageX - dndEvent.event.pageX) > 5 || Math.abs(e.pageY - dndEvent.event.pageY) > 5) {
+      clone = dndEvent.item.cloneNode(true) as HTMLElement;
+      clone.classList.add('dragged');
+      clone.style.zIndex = '1';
+      clone.style.pointerEvents = 'none';
+      clone.style.position = 'fixed';
+      clone.style.top = `${e.pageY - dndEvent.offsetY}px`;
+      clone.style.left = `${e.pageX - dndEvent.offsetX}px`;
+      container.appendChild(clone);
+      onStart(dndEvent.item);
+    }
+  }
+  function handlePointerUp () {
+    if (clone) {
+      onEnd();
+      removeElement(clone);
+      clone = null;
+    }
+    window.removeEventListener('pointermove', handlePointerMove);
+    window.removeEventListener('pointerup', handlePointerUp);
+  }
+  container.addEventListener('pointerdown', handlePointerDown);
+}
+
+export function removeElement (node: Element) {
+  node.parentNode.removeChild(node);
+}
 
 export function closest <T extends HTMLElement> (node: Element, selector: string): T {
   if (node) {

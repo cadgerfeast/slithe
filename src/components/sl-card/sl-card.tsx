@@ -4,7 +4,6 @@ import { syncWithTheme } from '../../helpers/theme';
 
 @Component({
   tag: 'sl-card',
-  styleUrl: 'sl-card.scss',
   shadow: true
 })
 export class SlitheCard {
@@ -35,7 +34,9 @@ export class SlitheCard {
   }
   // Lifecycle
   connectedCallback () {
-    syncWithTheme(this.host);
+    syncWithTheme(this.host, {
+      'display': 'flex'
+    });
   }
   // Template
   render () {

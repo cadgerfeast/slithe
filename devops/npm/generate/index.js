@@ -17,7 +17,6 @@ const htmlName = `HTMLSl${pascalName}Element`;
 const context = { tagName, className, htmlName };
 
 const componentTemplate = fs.readFileSync(path.resolve(__dirname, './tpl/component.eta'), 'utf8');
-const styleTemplate = fs.readFileSync(path.resolve(__dirname, './tpl/style.eta'), 'utf8');
 const specTemplate = fs.readFileSync(path.resolve(__dirname, './tpl/spec.eta'), 'utf8');
 const e2eTemplate = fs.readFileSync(path.resolve(__dirname, './tpl/e2e.eta'), 'utf8');
 
@@ -28,7 +27,6 @@ if (fs.existsSync(distPath)) {
 } else {
   fs.mkdirSync(distPath);
   fs.writeFileSync(path.resolve(distPath, `${tagName}.tsx`), eta.render(componentTemplate, context));
-  fs.writeFileSync(path.resolve(distPath, `${tagName}.scss`), eta.render(styleTemplate, context));
   fs.writeFileSync(path.resolve(distPath, `${tagName}.spec.ts`), eta.render(specTemplate, context));
   fs.writeFileSync(path.resolve(distPath, `${tagName}.e2e.ts`), eta.render(e2eTemplate, context));
   console.info(c.green(`Component ${c.yellow(tagName)} created with success.`));

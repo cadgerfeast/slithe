@@ -14,6 +14,23 @@ div.sl-layout {
   height: 100%;
   display: flex;
   flex-direction: column;
+  sl-tab {
+    sl-icon.close-btn {
+      cursor: pointer;
+      --sl-icon-size: var(--sl-tab-button-close-icon-size, 14px);
+      background: transparent;
+      border-radius: 4px;
+      margin-left: 4px;
+      &:hover {
+        background-color: rgba(0, 0, 0, .1);
+      }
+    }
+    &.dragged {
+      sl-icon.close-btn {
+        display: none;
+      }
+    }
+  }
   > div.tab-content {
     position: relative;
     height: 100%;

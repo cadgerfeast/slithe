@@ -4,14 +4,15 @@ import { syncWithTheme } from '../../helpers/theme';
 
 @Component({
   tag: '<%= it.tagName %>',
-  styleUrl: '<%= it.tagName %>.scss',
   shadow: true
 })
 export class <%= it.className %> {
   @Element() host!: <%= it.htmlName %>;
   // Lifecycle
   connectedCallback () {
-    syncWithTheme(this.host);
+    syncWithTheme(this.host, {
+      'display': 'inline-flex'
+    });
   }
   // Template
   render () {

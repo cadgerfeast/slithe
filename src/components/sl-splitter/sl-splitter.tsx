@@ -6,7 +6,6 @@ import { clamp } from '../../helpers/number';
 
 @Component({
   tag: 'sl-splitter',
-  styleUrl: 'sl-splitter.scss',
   shadow: true
 })
 export class SlitheSplitter {
@@ -26,11 +25,6 @@ export class SlitheSplitter {
   // Events
   @Event() resizeStart: EventEmitter<void>;
   @Event() resizeEnd: EventEmitter<number>;
-  // Lifecycle
-  connectedCallback () {
-    syncWithTheme(this.host);
-    this._blueSize = this.blueSize;
-  }
   // Computed
   get direction () {
     return this.vertical ? 'vertical' : 'horizontal';
@@ -93,6 +87,14 @@ export class SlitheSplitter {
     if (this.resizing) {
       this.setResizing(false);
     }
+  }
+  // Lifecycle
+  connectedCallback () {
+    syncWithTheme(this.host, {
+      'display': 'block',
+      'height': '100%'
+    });
+    this._blueSize = this.blueSize;
   }
   // Template
   render () {
