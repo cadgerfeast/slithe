@@ -1,6 +1,5 @@
 // Helpers
 import { Component, Element, h, Prop, State, Fragment, Method, Event, EventEmitter, Watch } from '@stencil/core';
-// import Sortable, { SortableEvent } from 'sortablejs';
 import {
   Model,
   computeModel,
@@ -15,7 +14,7 @@ import {
   ensureValidModel,
   dropTabInModel
 } from '../../helpers/model';
-import { closest, createDraggableList, dnd, Position, querySelectorAll } from '../../helpers/dom';
+import { closest, createDraggableList, createDropzoneBox, Position, querySelectorAll } from '../../helpers/dom';
 import { clone } from '../../helpers/object';
 import { syncWithTheme } from '../../helpers/theme';
 import { Deferred } from '../../helpers/time';
@@ -28,6 +27,7 @@ import { config } from '../../helpers/config';
 export class SlitheLayout {
   @Element() host!: HTMLSlLayoutElement;
   private tabsContainer!: HTMLSlTabsElement;
+  private tabsContent!: HTMLDivElement;
   private ready = new Deferred();
   private group!: string;
   // Props
@@ -40,16 +40,7 @@ export class SlitheLayout {
   @State() root: boolean = false;
   @State() dragging: boolean = false;
   @State() _model: Model;
-  @State() dropzoneState: Position = 'none';
   @State() renderIndex: number = 0;
-  // Computed
-  get dropzoneClass () {
-    const classList = ['dropzone', `dragover-${this.dropzoneState}`];
-    if (this.dragging) {
-      classList.push('active');
-    }
-    return classList.join(' ');
-  }
   // Events
   @Event({ bubbles: false }) update: EventEmitter<Model>;
   // Methods
@@ -70,17 +61,17 @@ export class SlitheLayout {
       return closest<HTMLSlLayoutElement>(this.host.parentElement, 'sl-layout').getRootLayout();
     }
   }
-  // @Method()
-  // async moveTab ({ item, from, to, oldIndex, newIndex }: SortableEvent) {
-  //   const tabModel = getChildModelIndexModel(this._model, item.id);
-  //   this._model = ensureValidModel(moveTabInModel(this._model, tabModel, from.id, oldIndex, to.id, newIndex));
-  //   this.emitUpdate();
-  // }
-  // @Method()
-  // async sortTab ({ item, oldIndex, newIndex }: SortableEvent) {
-  //   this._model = sortTabInModel(this._model, item.id, oldIndex, newIndex);
-  //   this.emitUpdate();
-  // }
+  @Method()
+  async moveTab (id: string, from: string, oldIndex: number, to: string, newIndex: number) {
+    const tabModel = getChildModelIndexModel(this._model, id);
+    this._model = ensureValidModel(moveTabInModel(this._model, tabModel, from, oldIndex, to, newIndex));
+    this.emitUpdate();
+  }
+  @Method()
+  async sortTab (id: string, oldIndex: number, newIndex: number) {
+    this._model = sortTabInModel(this._model, id, oldIndex, newIndex);
+    this.emitUpdate();
+  }
   @Method()
   async selectTab (id: string) {
     this._model = setActiveTabInModel(this._model, id);
@@ -112,7 +103,6 @@ export class SlitheLayout {
   @Method()
   async setDragging (dragging: boolean) {
     this.dragging = dragging;
-    this.dropzoneState = 'none';
   }
   private getSlots (model: Model) {
     const slots: string[] = [];
@@ -157,60 +147,34 @@ export class SlitheLayout {
     if (this._model.type === 'tabs') {
       createDraggableList({
         container: this.tabsContainer,
+        disabled: this._model.droppable === false,
         group: this.group,
-        items: 'sl-tab.draggable',
-        onStart: (item) => {
-          dnd.item = item;
+        items: 'sl-tab',
+        filter: '.draggable',
+        onStart: () => {
           this._setDragging(true);
         },
+        onSort: async (id, from, to) => {
+          if (from.id === to.id) {
+            const rootLayout = await this.getRootLayout();
+            await rootLayout.sortTab(id, from.index, to.index);
+          } else {
+            const rootLayout = await this.getRootLayout();
+            await rootLayout.moveTab(id, from.id, from.index, to.id, to.index);
+          }
+        },
         onEnd: () => {
-          dnd.item = null;
           this._setDragging(false);
-          this.dropzoneState = 'none';
         }
       });
-      // Sortable.create(this.tabsContainer, {
-      //   animation: 150,
-      //   group: this.group,
-      //   ghostClass: 'placeholder',
-      //   chosenClass: 'picked',
-      //   dragClass: 'dragged',
-      //   dragoverBubble: true,
-      //   onAdd: async (e) => {
-      //     if (!dnd.dropping) {
-      //       if (this._model.type === 'tabs') {
-      //         if (!dnd.dropzone) {
-      //           const rootLayout = await this.getRootLayout();
-      //           await rootLayout.moveTab(e);
-      //         }
-      //       }
-      //     }
-      //     dnd.dropping = false;
-      //   },
-      //   onRemove: ({ item }) => {
-      //     item.remove();
-      //   },
-      //   onUpdate: async (e) => {
-      //     if (!dnd.dropping) {
-      //       if (this._model.type === 'tabs') {
-      //         if (!dnd.dropzone) {
-      //           const rootLayout = await this.getRootLayout();
-      //           await rootLayout.sortTab(e);
-      //         }
-      //       }
-      //     }
-      //     dnd.dropping = false;
-      //   },
-      //   onStart: ({ item }) => {
-      //     dnd.item = item;
-      //     this._setDragging(true);
-      //   },
-      //   onEnd: () => {
-      //     dnd.item = null;
-      //     this._setDragging(false);
-      //     this.dropzoneState = 'none';
-      //   }
-      // });
+      createDropzoneBox({
+        container: this.tabsContent,
+        disabled: this._model.splittable === false,
+        onDrop: async (item, position) => {
+          const rootLayout = await this.getRootLayout();
+          await rootLayout.dropTab(item.id, this._model.id, position);
+        }
+      });
     }
   }
   // Watchers
@@ -229,41 +193,6 @@ export class SlitheLayout {
       const rootLayout = await this.getRootLayout();
       await rootLayout.resizeSplitter(this._model.id, e.detail);
     }
-  }
-  private handleDropzoneDragEnter () {
-    if (this._model.type === 'tabs' && (this._model.splittable !== false)) {
-      dnd.dropzone = true;
-    }
-  }
-  private handleDropzoneDragOver (e: DragEvent) {
-    if (this._model.type === 'tabs' && (this._model.splittable !== false)) {
-      const target = e.target as HTMLDivElement;
-      const pX = e.offsetX * 100 / target.offsetWidth;
-      const pY = e.offsetY * 100 / target.offsetHeight;
-      if (pX < 30) {
-        this.dropzoneState = 'left';
-      } else if (pX > 70) {
-        this.dropzoneState = 'right';
-      } else if (pY < 15) {
-        this.dropzoneState = 'top';
-      } else if (pY > 85) {
-        this.dropzoneState = 'bottom';
-      } else {
-        this.dropzoneState = 'center';
-      }
-      e.preventDefault();
-    }
-  }
-  private handleDropzoneDragLeave () {
-    dnd.dropzone = false;
-    this.dropzoneState = 'none';
-  }
-  private async handleDropzoneDrop () {
-    dnd.dropping = true;
-    const rootLayout = await this.getRootLayout();
-    await rootLayout.dropTab(dnd.item.id, this._model.id, this.dropzoneState);
-    dnd.dropzone = false;
-    this.dropzoneState = 'none';
   }
   // Lifecycle
   async connectedCallback () {
@@ -284,11 +213,6 @@ export class SlitheLayout {
   componentDidUpdate () {
     this.createSortableTabs();
   }
-  componentDidRender () {
-    if (this.root) {
-      dnd.dropping = false;
-    }
-  }
   // Template
   private renderTabs (tabs: TabsModel) {
     return (
@@ -307,19 +231,12 @@ export class SlitheLayout {
             </sl-tab>
           ))}
         </sl-tabs>
-        <div class="tab-content">
+        <div class="tab-content" ref={(el) => this.tabsContent = el}>
           {tabs.items.map((item) => (
             <div class={{ 'tab-view': true, 'active': item.active && !item.placeholder }}>
               <slot name={item.viewSlot}/>
             </div>
           ))}
-          <div
-            class={this.dropzoneClass}
-            onDragEnter={() => this.handleDropzoneDragEnter()}
-            onDragOver={(e) => this.handleDropzoneDragOver(e)}
-            onDragLeave={() => this.handleDropzoneDragLeave()}
-            onDrop={() => this.handleDropzoneDrop()}
-          />
         </div>
       </Fragment>
     );

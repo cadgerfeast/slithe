@@ -18,9 +18,13 @@ The component includes multiple slots to cover various layouts.
 const model = {
   type: 'splitter',
   direction: 'horizontal',
+  blueSize: 30,
+  minBlue: 20,
   items: [
     {
       type: 'tabs',
+      splittable: false,
+      droppable: false,
       items: [
         {
           name: 'View 0',
@@ -51,7 +55,8 @@ const model = {
           items: [
             {
               name: 'Iframe',
-              viewSlot: 'iframe'
+              viewSlot: 'iframe',
+              draggable: false
             },
             {
               name: 'View 3',
