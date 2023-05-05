@@ -5,13 +5,12 @@ import { syncWithTheme, theme } from '../../helpers/theme';
 
 @Component({
   tag: 'sl-icon',
-  styleUrl: 'sl-icon.scss',
   shadow: true
 })
 export class SlitheIcon {
   @Element() host!: HTMLSlIconElement;
   // Props
-  @Prop() name: string;
+  @Prop({ reflect: true }) name: string;
   @Prop() size: string = '16px';
   // Computed
   get style () {
@@ -25,7 +24,10 @@ export class SlitheIcon {
   }
   // Lifecycle
   connectedCallback () {
-    syncWithTheme(this.host);
+    syncWithTheme(this.host, {
+      'display': 'inline-flex',
+      'align-items': 'center'
+    });
     attachTooltip(this.host);
   }
   // Template

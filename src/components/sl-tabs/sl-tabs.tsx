@@ -4,7 +4,6 @@ import { syncWithTheme } from '../../helpers/theme';
 
 @Component({
   tag: 'sl-tabs',
-  styleUrl: 'sl-tabs.scss',
   shadow: true
 })
 export class SlitheTabs {
@@ -13,7 +12,9 @@ export class SlitheTabs {
   @Prop({ reflect: true }) small: boolean = false;
   // Lifecycle
   connectedCallback () {
-    syncWithTheme(this.host);
+    syncWithTheme(this.host, {
+      'display': 'flex'
+    });
   }
   // Template
   render () {

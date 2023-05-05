@@ -11,12 +11,12 @@ It is used with `sl-tab` children elements.
   <sl-tabs>
     <sl-tab active>Dashboard</sl-tab>
     <sl-tab>Messages</sl-tab>
-    <sl-tab closable>Settings</sl-tab>
+    <sl-tab>Settings</sl-tab>
   </sl-tabs>
   <sl-tabs small>
     <sl-tab active>Dashboard</sl-tab>
     <sl-tab>Messages</sl-tab>
-    <sl-tab closable>Settings</sl-tab>
+    <sl-tab>Settings</sl-tab>
   </sl-tabs>
 </Preview>
 
@@ -24,11 +24,11 @@ It is used with `sl-tab` children elements.
 <sl-tabs>
   <sl-tab active>Dashboard</sl-tab>
   <sl-tab>Messages</sl-tab>
-  <sl-tab closable>Settings</sl-tab>
+  <sl-tab>Settings</sl-tab>
 </sl-tabs>
 <sl-tabs small>
   <sl-tab active>Dashboard</sl-tab>
   <sl-tab>Messages</sl-tab>
-  <sl-tab closable>Settings</sl-tab>
+  <sl-tab>Settings</sl-tab>
 </sl-tabs>
 ```

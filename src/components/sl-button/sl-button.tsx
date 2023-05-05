@@ -5,7 +5,6 @@ import { syncWithTheme } from '../../helpers/theme';
 
 @Component({
   tag: 'sl-button',
-  styleUrl: 'sl-button.scss',
   shadow: true
 })
 export class SlitheButton {
@@ -24,7 +23,9 @@ export class SlitheButton {
   }
   // Lifecycle
   connectedCallback () {
-    syncWithTheme(this.host);
+    syncWithTheme(this.host, {
+      'display': 'inline-flex'
+    });
     attachTooltip(this.host);
   }
   // Template

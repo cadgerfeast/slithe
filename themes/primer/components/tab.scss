@@ -4,7 +4,6 @@
   --sl-tab-button-color: var(--pr-shark);
   --sl-tab-button-hover-background-color: rgb(243, 244, 246);
   --sl-tab-button-active-background-color: rgb(238, 239, 242);
-  --sl-tab-button-close-background-color: rgba(0, 0, 0, .1);
 }
 // Active
 :host([sl-theme=light][active]) {
@@ -64,16 +63,6 @@ li.sl-tab {
       outline: 2px solid var(--sl-tab-button-outline-color);
       outline-offset: -2px;
       box-shadow: var(--sl-tab-button-focus-box-shadow, unset);
-    }
-    > sl-icon {
-      cursor: pointer;
-      --sl-icon-size: var(--sl-tab-button-close-icon-size, 14px);
-      background: transparent;
-      border-radius: 4px;
-      margin-left: 4px;
-      &:hover {
-        background-color: var(--sl-tab-button-close-background-color);
-      }
     }
   }
 }
