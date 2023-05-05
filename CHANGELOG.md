@@ -1,8 +1,14 @@
 # Changelog
 
-## [0.2.6](https://github.com/cadgerfeast/slithe/compare/0.2.5...0.2.6)
+## [0.2.7](https://github.com/cadgerfeast/slithe/compare/0.2.6...0.2.7)
+
+- Remove Sortable Dependency [`#4`](https://github.com/cadgerfeast/slithe/pull/4)
+- better splitter and layout, minor fixes [`336a5f7`](https://github.com/cadgerfeast/slithe/commit/336a5f7dd230c3ef2ae57aeeaf3c5d9ef4ce6236)
+
+## [0.2.6](https://github.com/cadgerfeast/slithe/compare/0.2.5...0.2.6) (2023-03-03)
 
 - add config, closable behavior [`38e02e3`](https://github.com/cadgerfeast/slithe/commit/38e02e39a8fb9323a32e99d6849e558afee0f887)
+- Release slithe@0.2.6 [`3f04539`](https://github.com/cadgerfeast/slithe/commit/3f0453936027cf6356f70696abc3dbf09d19bb62)
 
 ## [0.2.5](https://github.com/cadgerfeast/slithe/compare/0.2.4...0.2.5) (2023-02-21)
 
