@@ -1,9 +1,14 @@
 # Changelog
 
-## [0.2.7](https://github.com/cadgerfeast/slithe/compare/0.2.6...0.2.7)
+## [0.2.8](https://github.com/cadgerfeast/slithe/compare/0.2.7...0.2.8)
+
+- adjust tab content height for primer style [`7003b8f`](https://github.com/cadgerfeast/slithe/commit/7003b8ffba1ac23741d4a6f96b4e96a053791721)
+
+## [0.2.7](https://github.com/cadgerfeast/slithe/compare/0.2.6...0.2.7) (2023-05-05)
 
 - Remove Sortable Dependency [`#4`](https://github.com/cadgerfeast/slithe/pull/4)
 - better splitter and layout, minor fixes [`336a5f7`](https://github.com/cadgerfeast/slithe/commit/336a5f7dd230c3ef2ae57aeeaf3c5d9ef4ce6236)
+- Release slithe@0.2.7 [`6b74ef1`](https://github.com/cadgerfeast/slithe/commit/6b74ef1ef9986580726628e073a89f19d57404b0)
 
 ## [0.2.6](https://github.com/cadgerfeast/slithe/compare/0.2.5...0.2.6) (2023-03-03)
 
