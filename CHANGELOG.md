@@ -1,7 +1,12 @@
 # Changelog
 
-## [0.2.8](https://github.com/cadgerfeast/slithe/compare/0.2.7...0.2.8)
+## [0.2.9](https://github.com/cadgerfeast/slithe/compare/0.2.8...0.2.9)
 
+- export models, emit close event [`5fe6840`](https://github.com/cadgerfeast/slithe/commit/5fe6840b650e3e581fa5d7c48358660a0189cece)
+
+## [0.2.8](https://github.com/cadgerfeast/slithe/compare/0.2.7...0.2.8) (2023-05-11)
+
+- Release slithe@0.2.8 [`79bf0f4`](https://github.com/cadgerfeast/slithe/commit/79bf0f4f0b52ece131f524f69a619f24c204b9ae)
 - adjust tab content height for primer style [`7003b8f`](https://github.com/cadgerfeast/slithe/commit/7003b8ffba1ac23741d4a6f96b4e96a053791721)
 
 ## [0.2.7](https://github.com/cadgerfeast/slithe/compare/0.2.6...0.2.7) (2023-05-05)
