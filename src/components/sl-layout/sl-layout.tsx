@@ -43,6 +43,7 @@ export class SlitheLayout {
   @State() renderIndex: number = 0;
   // Events
   @Event({ bubbles: false }) update: EventEmitter<Model>;
+  @Event({ bubbles: false }) close: EventEmitter<string>;
   // Methods
   @Method()
   async getGroup () {
@@ -80,6 +81,7 @@ export class SlitheLayout {
   @Method()
   async removeTab (id: string) {
     this._model = ensureValidModel(removeTabInModel(this._model, id));
+    this.emitClose(id);
     this.emitUpdate();
   }
   @Method()
@@ -134,6 +136,9 @@ export class SlitheLayout {
       const rootLayout = await this.getRootLayout();
       await rootLayout.removeTab(id);
     }
+  }
+  private emitClose (id: string) {
+    this.close.emit(id);
   }
   private emitUpdate () {
     this.update.emit(clone(this._model));

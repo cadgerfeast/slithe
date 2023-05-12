@@ -4,10 +4,10 @@ import { switchPosition } from './array';
 import { Position } from './dom';
 
 export type TabModel = {
-  id: string;
+  id?: string;
   name: string;
   viewSlot: string;
-  active: boolean;
+  active?: boolean;
   placeholder?: boolean;
   closable?: boolean;
   draggable?: boolean;
@@ -20,7 +20,7 @@ export type TabsModel = {
   droppable?: boolean;
 }
 export type SplitterModel = {
-  id: string;
+  id?: string;
   type: 'splitter';
   direction: 'horizontal'|'vertical';
   items: [Model, Model];
