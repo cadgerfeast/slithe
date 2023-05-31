@@ -1,7 +1,12 @@
 # Changelog
 
-## [0.2.9](https://github.com/cadgerfeast/slithe/compare/0.2.8...0.2.9)
+## [0.2.10](https://github.com/cadgerfeast/slithe/compare/0.2.9...0.2.10)
 
+- minor style fixes, add blankslate component [`69bae30`](https://github.com/cadgerfeast/slithe/commit/69bae30fa964adbeb5a79812d6a418805ae2c258)
+
+## [0.2.9](https://github.com/cadgerfeast/slithe/compare/0.2.8...0.2.9) (2023-05-12)
+
+- Release slithe@0.2.9 [`2fb40bc`](https://github.com/cadgerfeast/slithe/commit/2fb40bc9ec3b046346c49538873b5a46f4465f09)
 - export models, emit close event [`5fe6840`](https://github.com/cadgerfeast/slithe/commit/5fe6840b650e3e581fa5d7c48358660a0189cece)
 
 ## [0.2.8](https://github.com/cadgerfeast/slithe/compare/0.2.7...0.2.8) (2023-05-11)
