@@ -1,9 +1,13 @@
 // Light
 :host([sl-theme=light]) {
+  --sl-tabs-background-color: var(--pr-white);
+  --sl-tabs-color: var(--pr-shark);
   --sl-tabs-border-color: var(--pr-geyser);
 }
 // Dark
 :host([sl-theme=dark]) {
+  --sl-tabs-background-color: var(--pr-bunker);
+  --sl-tabs-color: var(--pr-karpa-kora);
   --sl-tabs-border-color: var(--pr-bright-gray);
 }
 // Small
@@ -18,6 +22,8 @@
 // Tabs
 nav.sl-tabs {
   width: 100%;
+  background-color: var(--sl-tabs-background-color);
+  color: var(--sl-tabs-color);
   > ul {
     height: var(--sl-tabs-height, 45px);
     list-style: none;

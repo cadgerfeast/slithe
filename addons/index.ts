@@ -5,6 +5,7 @@ import primer from '../primer';
 import '../primer/global.css';
 // Components
 import Preview from './components/preview.vue';
+import PlaygroundBlankslate from './playground/blankslate.vue';
 import PlaygroundCard from './playground/card.vue';
 import PlaygroundLayout from './playground/layout.vue';
 
@@ -15,6 +16,7 @@ export default [
   {
     components: [
       Preview,
+      PlaygroundBlankslate,
       PlaygroundCard,
       PlaygroundLayout
     ],

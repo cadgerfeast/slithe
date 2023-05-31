@@ -109,6 +109,7 @@
   div.playground-layout {
     position: relative;
     height: 400px;
+    padding-top: 15px;
     > sl-button.reset {
       position: absolute;
       top: -1.5em;

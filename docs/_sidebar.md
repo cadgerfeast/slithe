@@ -7,6 +7,8 @@ model:
     children:
       - name: Button
         path: /components/button
+      - name: Blankslate
+        path: /components/blankslate
       - name: Card
         path: /components/card
       - name: Form

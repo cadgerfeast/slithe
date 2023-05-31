@@ -63,7 +63,6 @@
 }
 // Dark
 :host([sl-theme=dark]) {
-  --sl-button-border-radius: 6px;
   --sl-button-background-color: var(--pr-sibuya-game-reserve);
   --sl-button-color: var(--pr-karpa-kora);
   --sl-button-border-color: rgba(205,217,229,0.1);
