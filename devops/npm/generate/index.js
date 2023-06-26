@@ -7,6 +7,11 @@ import c from 'ansi-colors';
 // Constants
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
+if (!process.argv[2]) {
+  console.error(c.red(`Missing component name, should be used as: ${c.white('"npm run generate my-component"')}`));
+  process.exit();
+}
+
 const name = process.argv[2].toLowerCase();
 
 const tagName = `sl-${name}`;

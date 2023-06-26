@@ -30,7 +30,7 @@ Makes the checkbox non-interactable.
 </Preview>
 
 ``` html
-<sl-input-checkbox disabled/>
+<sl-input-checkbox label="I want to receive marketing emails." disabled/>
 ```
 
 ## Events
@@ -44,5 +44,5 @@ Triggered when the user toggles the value.
 </Preview>
 
 ``` html
-<sl-input-checkbox/>
+<sl-input-checkbox label="I want to receive marketing emails."/>
 ```

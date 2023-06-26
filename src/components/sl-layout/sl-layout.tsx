@@ -148,8 +148,16 @@ export class SlitheLayout {
     const rootLayout = await this.getRootLayout();
     await rootLayout.setRootDragging(dragging);
   }
+  private _setTabsRef (el: HTMLSlTabsElement) {
+    this.tabsContainer = el;
+    this.createSortableTabs();
+  }
+  private _setContentRef (el: HTMLDivElement) {
+    this.tabsContent = el;
+    this.createSortableTabs();
+  }
   private createSortableTabs () {
-    if (this._model.type === 'tabs') {
+    if (this._model.type === 'tabs' && this.tabsContainer && this.tabsContent) {
       createDraggableList({
         container: this.tabsContainer,
         disabled: this._model.droppable === false,
@@ -213,16 +221,12 @@ export class SlitheLayout {
   }
   async componentDidLoad () {
     await this.ready.promise;
-    this.createSortableTabs();
-  }
-  componentDidUpdate () {
-    this.createSortableTabs();
   }
   // Template
   private renderTabs (tabs: TabsModel) {
     return (
       <Fragment>
-        <sl-tabs id={tabs.id} ref={(el) => this.tabsContainer = el} small>
+        <sl-tabs id={tabs.id} ref={(el) => this._setTabsRef(el)} small>
           {tabs.items.map((item) => (
             <sl-tab
               class={{ draggable: item.draggable !== false }}
@@ -236,7 +240,7 @@ export class SlitheLayout {
             </sl-tab>
           ))}
         </sl-tabs>
-        <div class="tab-content" ref={(el) => this.tabsContent = el}>
+        <div class="tab-content" ref={(el) => this._setContentRef(el)}>
           {tabs.items.map((item) => (
             <div class={{ 'tab-view': true, 'active': item.active && !item.placeholder }}>
               <slot name={item.viewSlot}/>

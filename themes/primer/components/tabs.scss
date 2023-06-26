@@ -12,7 +12,6 @@
 }
 // Small
 :host([small]) {
-  --sl-tabs-height: 30px;
   --sl-tab-padding: 4px 2px;
   --sl-tab-button-padding-x: 12px;
   --sl-tab-button-padding-y: 3px;
@@ -25,13 +24,11 @@ nav.sl-tabs {
   background-color: var(--sl-tabs-background-color);
   color: var(--sl-tabs-color);
   > ul {
-    height: var(--sl-tabs-height, 45px);
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     flex-direction: row;
     border-bottom: 1px solid var(--sl-tabs-border-color);
-    margin-bottom: -1px;
   }
 }

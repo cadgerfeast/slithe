@@ -19,6 +19,8 @@ model:
           children:
             - name: Checkbox
               path: /components/form/input/checkbox
+            - name: Text
+              path: /components/form/input/text
       - name: Icon
         path: /components/icon
       - name: Keyboard
