@@ -31,6 +31,11 @@ div.sl-input-text {
   flex-direction: row;
   align-items: center;
   user-select: none;
+	> label {
+    font-weight: 600;
+    font-size: 14px;
+    padding-right: 8px;
+  }
   > input {
 		padding: var(--sl-input-text-padding, 5px 12px);
 		font-size: var(--sl-input-text-font-size, 14px);
@@ -45,10 +50,5 @@ div.sl-input-text {
 			outline: none;
 			box-shadow: inset 0 0 0 1px var(--sl-input-text-focus-border-color);
 		}
-  }
-  > label {
-    font-weight: 600;
-    font-size: 14px;
-    padding-left: 8px;
   }
 }

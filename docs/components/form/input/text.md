@@ -47,7 +47,7 @@ Size defaults to `medium`.
 
 ### Disabled
 
-Makes the text non-interactable.
+Makes the input non-interactable.
 
 <Preview>
   <sl-input-text label="Fullname" placeholder="John Doe" disabled @click="$notify('disabled')"/>

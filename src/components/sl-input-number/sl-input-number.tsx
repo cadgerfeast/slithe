@@ -3,23 +3,26 @@ import { Component, Element, Prop, h } from '@stencil/core';
 import { syncWithTheme } from '../../helpers/theme';
 
 @Component({
-  tag: 'sl-input-text',
+  tag: 'sl-input-number',
   shadow: true
 })
-export class SlitheInputText {
-  @Element() host!: HTMLSlInputTextElement;
+export class SlitheInputNumber {
+  @Element() host!: HTMLSlInputNumberElement;
   private input!: HTMLInputElement;
   private id!: string;
   // Props
-  @Prop() value: string = '';
+  @Prop() value: number = 0;
   @Prop() placeholder: string = '';
   @Prop({ reflect: true }) disabled: boolean = false;
-  @Prop() type: 'text'|'password' = 'text';
   @Prop() label: string = '';
+  // TODO min
+  // TODO max
+  // TODO step
+  // TODO decimal
   // TODO options
   // Handlers
   private handleInput () {
-    this.value = this.input.value;
+    this.value = +this.input.value;
   }
   private handleClick () {
     this.input.click();
@@ -34,14 +37,13 @@ export class SlitheInputText {
   // Template
   render () {
     return (
-      <div class='sl-input-text'>
+      <div class='sl-input-number'>
         <label htmlFor={this.id} onClick={() => this.handleClick()}>{this.label}</label>
         <input
           ref={(el) => this.input = el}
-          type={this.type}
+          type='number'
           name={this.id}
           value={this.value}
-          size={Math.max(this.value.length, this.placeholder.length)}
           placeholder={this.placeholder}
           disabled={this.disabled}
           onInput={() => this.handleInput()}
