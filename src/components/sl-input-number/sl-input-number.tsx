@@ -15,10 +15,9 @@ export class SlitheInputNumber {
   @Prop() placeholder: string = '';
   @Prop({ reflect: true }) disabled: boolean = false;
   @Prop() label: string = '';
-  // TODO min
-  // TODO max
-  // TODO step
-  // TODO decimal
+  @Prop() min: number;
+  @Prop() max: number;
+  @Prop() step: number;
   // TODO options
   // Handlers
   private handleInput () {
@@ -44,6 +43,9 @@ export class SlitheInputNumber {
           type='number'
           name={this.id}
           value={this.value}
+          min={this.min}
+          max={this.max}
+          step={this.step}
           placeholder={this.placeholder}
           disabled={this.disabled}
           onInput={() => this.handleInput()}

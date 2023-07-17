@@ -33,6 +33,42 @@ Makes the input non-interactable.
 <sl-input-number label="Age" placeholder="21" disabled/>
 ```
 
+### Min
+
+Makes the input minimum value.
+
+<Preview>
+  <sl-input-number label="Age" placeholder="18+" value="18" min="18"/>
+</Preview>
+
+``` html
+<sl-input-number label="Age" placeholder="18+" value="18" min="18"/>
+```
+
+### Max
+
+Makes the input maximum value.
+
+<Preview>
+  <sl-input-number label="Age" placeholder="25+" value="25" min="25"/>
+</Preview>
+
+``` html
+<sl-input-number label="Age" placeholder="25+" value="25" min="25"/>
+```
+
+### Step
+
+Makes the input step when incrementing or decrementing.
+
+<Preview>
+  <sl-input-number label="Rating" placeholder="10" step="0.5"/>
+</Preview>
+
+``` html
+<sl-input-number label="Rating" placeholder="10" step="0.5"/>
+```
+
 ## Events
 
 ### Change
