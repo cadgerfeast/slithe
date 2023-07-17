@@ -1,8 +1,15 @@
 # Changelog
 
-## [0.2.10](https://github.com/cadgerfeast/slithe/compare/0.2.9...0.2.10)
+## [0.2.11](https://github.com/cadgerfeast/slithe/compare/0.2.10...0.2.11)
+
+- input text startup [`64f5ec2`](https://github.com/cadgerfeast/slithe/commit/64f5ec280e3898403c24f75d72ef6e29f5b07e82)
+- add input number component [`7415a7b`](https://github.com/cadgerfeast/slithe/commit/7415a7b571dcc9a1c9cd4413484ca12298ab7a56)
+- add number min, max and step attributes [`72574db`](https://github.com/cadgerfeast/slithe/commit/72574db29f9f4b680fdbbf30e54669319563200e)
+
+## [0.2.10](https://github.com/cadgerfeast/slithe/compare/0.2.9...0.2.10) (2023-05-31)
 
 - minor style fixes, add blankslate component [`69bae30`](https://github.com/cadgerfeast/slithe/commit/69bae30fa964adbeb5a79812d6a418805ae2c258)
+- Release slithe@0.2.10 [`a3f8eed`](https://github.com/cadgerfeast/slithe/commit/a3f8eed26f188938c04c0497c8334a81d3dd2f99)
 
 ## [0.2.9](https://github.com/cadgerfeast/slithe/compare/0.2.8...0.2.9) (2023-05-12)
 
