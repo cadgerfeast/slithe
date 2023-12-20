@@ -13,5 +13,8 @@ module.exports = {
     '/node_modules',
     '/www',
     '/stencil.config.ts'
-  ]
+  ],
+  rules: {
+    '@stencil-community/ban-exported-const-enums': 'off'
+  }
 }
