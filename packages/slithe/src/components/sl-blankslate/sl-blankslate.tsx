@@ -9,6 +9,9 @@ import { syncWithTheme } from '../../helpers/theme';
 export class SlitheBlankslate {
   @Element() host!: HTMLSlBlankslateElement;
   // Props
+  /**
+   * The blankslate heading level
+   */
   @Prop() heading: 'h1'|'h2'|'h3'|'h4'|'h5'|'h6' = 'h3';
   // State
   @State() slots = {
@@ -33,7 +36,7 @@ export class SlitheBlankslate {
     const slotName = slot.getAttribute('name') || 'default';
     this.slots = {
       ...this.slots,
-      [slotName]: !!slot.assignedNodes().length
+      [slotName]: slot.assignedNodes().length !== 0
     };
   }
   // Lifecycle
@@ -49,16 +52,16 @@ export class SlitheBlankslate {
     return (
       <div class={this.class}>
         <div class="graphic">
-          <slot name='graphic' onSlotchange={(e) => this.handleSlotChange(e)}/>
+          <slot name='graphic' onSlotchange={this.handleSlotChange}/>
         </div>
         <this.heading>
-          <slot name='heading' onSlotchange={(e) => this.handleSlotChange(e)}/>
+          <slot name='heading' onSlotchange={this.handleSlotChange}/>
         </this.heading>
         <p>
-          <slot onSlotchange={(e) => this.handleSlotChange(e)}/>
+          <slot onSlotchange={this.handleSlotChange}/>
         </p>
         <div class="actions">
-          <slot name='actions' onSlotchange={(e) => this.handleSlotChange(e)}/>
+          <slot name='actions' onSlotchange={this.handleSlotChange}/>
         </div>
       </div>
     );
