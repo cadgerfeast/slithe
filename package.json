@@ -23,6 +23,7 @@
     "@commitlint/config-conventional": "^17.7.0",
     "husky": "^8.0.3",
     "lerna": "^7.3.0",
-    "nx": "^16.9.1"
+    "nx": "^16.9.1",
+    "vertis": "^0.1.2"
   }
 }
