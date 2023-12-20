@@ -1,0 +1,7 @@
+import{D as h,o as p,c as k,I as a,w as n,k as s,a as i,R as E,m as e,a4 as d,Y as r}from"./chunks/framework.xdav9VQu.js";import{P as g}from"./chunks/preview.jIJDwvm5.js";const y=s("h1",{id:"layout",tabindex:"-1"},[i("Layout "),s("a",{class:"header-anchor",href:"#layout","aria-label":'Permalink to "Layout"'},"​")],-1),o=s("p",null,[i("A "),s("code",null,"sl-layout"),i(" component provides a way to create a fully customizable app layout.")],-1),c=s("h2",{id:"slots",tabindex:"-1"},[i("Slots "),s("a",{class:"header-anchor",href:"#slots","aria-label":'Permalink to "Slots"'},"​")],-1),F=s("p",null,"The component includes multiple slots to cover various layouts.",-1),C=E("",2),b=JSON.parse('{"title":"Layout","description":"","frontmatter":{},"headers":[],"relativePath":"guide/components/layout.md","filePath":"guide/components/layout.md"}'),u={name:"guide/components/layout.md"},A=Object.assign(u,{setup(v){const l=d(()=>r(()=>import("./chunks/layout.eAJxqnwm.js"),__vite__mapDeps([0,1,2,3])));return(m,B)=>{const t=h("ClientOnly");return p(),k("div",null,[y,o,c,F,a(g,{title:"Playground"},{default:n(()=>[a(t,null,{default:n(()=>[a(e(l))]),_:1})]),_:1}),C])}}});export{b as __pageData,A as default};
+function __vite__mapDeps(indexes) {
+  if (!__vite__mapDeps.viteFileDeps) {
+    __vite__mapDeps.viteFileDeps = ["assets/chunks/layout.eAJxqnwm.js","assets/chunks/components.90l5skZ_.js","assets/chunks/framework.xdav9VQu.js","assets/chunks/sl-layout.oki_j8Kt.js"]
+  }
+  return indexes.map((i) => __vite__mapDeps.viteFileDeps[i])
+}
