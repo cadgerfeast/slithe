@@ -1,0 +1,21 @@
+{
+  "$schema": "./node_modules/lerna/schemas/lerna-schema.json",
+  "version": "0.2.11",
+  "command": {
+    "version": {
+      "allowBranch": [
+        "main"
+      ],
+      "conventionalCommits": true,
+      "message": "chore: release",
+      "tagVersionPrefix": "slithe@",
+      "changelog": false,
+      "private": false,
+      "yes": true
+    },
+    "publish": {
+      "private": false,
+      "yes": true
+    }
+  }
+}

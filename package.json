@@ -1,0 +1,28 @@
+{
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "docs",
+    "packages/*"
+  ],
+  "scripts": {
+    "prepare": "husky install",
+    "commitlint": "commitlint --edit",
+    "dev": "nx run-many -t dev --output-style=stream",
+    "build": "nx run-many -t build --output-style=stream",
+    "test": "nx run-many -t test --output-style=stream",
+    "lint": "nx run-many -t lint --output-style=stream",
+    "preview": "nx preview docs",
+    "version": "lerna version",
+    "changelog": "vertis generate",
+    "publish": "lerna publish from-package",
+    "release": "vertis release"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.7.1",
+    "@commitlint/config-conventional": "^17.7.0",
+    "husky": "^8.0.3",
+    "lerna": "^7.3.0",
+    "nx": "^16.9.1"
+  }
+}

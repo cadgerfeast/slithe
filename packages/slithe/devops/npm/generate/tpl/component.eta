@@ -1,0 +1,23 @@
+// Helpers
+import { Component, Element, h } from '@stencil/core';
+import { syncWithTheme } from '../../helpers/theme';
+
+@Component({
+  tag: '<%= it.tagName %>',
+  shadow: true
+})
+export class <%= it.className %> {
+  @Element() host!: <%= it.htmlName %>;
+  // Lifecycle
+  connectedCallback () {
+    syncWithTheme(this.host, {
+      'display': 'inline-flex'
+    });
+  }
+  // Template
+  render () {
+    return (
+      <div class='<%= it.tagName %>'><%= it.className %></div>
+    );
+  }
+}

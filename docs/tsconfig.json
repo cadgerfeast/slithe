@@ -1,0 +1,14 @@
+{
+	"compilerOptions": {
+		"module": "node16",
+		"types": ["vite/client"],
+		"paths": {
+			"slithe": ["../packages/slithe/src/index.ts"],
+			"slithe/primer": ["../packages/slithe/themes/primer/index.ts"]
+		}
+	},
+	"include": [
+		".vitepress/**/*",
+		"src/**/*"
+	]
+}

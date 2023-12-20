@@ -1,0 +1,42 @@
+// Light
+:host([sl-theme=light]) {
+  --sl-blankslate-heading-color: var(--pr-shark);
+  --sl-blankslate-color: var(--pr-nevada);
+}
+// Dark
+:host([sl-theme=dark]) {
+  --sl-blankslate-heading-color: var(--pr-karpa-kora);
+  --sl-blankslate-color: var(--pr-nevada);
+}
+// Button
+div.sl-blankslate {
+  font-family: var(--pr-font-family);
+  color: var(--sl-blankslate-color);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  > h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    color: var(--sl-blankslate-heading-color);
+  }
+  > p {
+    margin: 0;
+  }
+  &.has-heading {
+    > h1, h2, h3, h4, h5, h6 {
+      margin: 5px 0;
+    }
+  }
+  &.has-default {
+    > p {
+      margin: 5px 0;
+    }
+  }
+  &.has-actions {
+    > div.actions {
+      margin-top: 5px;
+    }
+  }
+}

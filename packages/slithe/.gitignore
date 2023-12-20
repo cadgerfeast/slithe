@@ -1,0 +1,8 @@
+/.stencil
+/coverage
+/dist
+/node_modules
+/src/components.d.ts
+/primer
+/vue/exports
+/www
