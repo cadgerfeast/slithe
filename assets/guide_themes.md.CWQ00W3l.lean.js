@@ -1,1 +1,0 @@
-import{_ as s,o as i,c as e,R as a}from"./chunks/framework.xdav9VQu.js";const E=JSON.parse('{"title":"Themes","description":"","frontmatter":{},"headers":[],"relativePath":"guide/themes.md","filePath":"guide/themes.md"}'),t={name:"guide/themes.md"},h=a("",8),n=[h];function l(p,r,k,o,d,c){return i(),e("div",null,n)}const g=s(t,[["render",l]]);export{E as __pageData,g as default};
