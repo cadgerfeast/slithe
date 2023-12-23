@@ -20,7 +20,7 @@ npm install slithe --save
 
 ## 🚀 Usage
 
-``` javascript
+``` typescript
 // Import
 import { defineElements, setTheme } from 'slithe';
 // Theme

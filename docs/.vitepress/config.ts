@@ -73,7 +73,24 @@ export default defineConfig({
 						{ text: 'Tabs', link: '/guide/components/tabs' }
 					]
 				},
-				{ text: 'Themes', link: '/guide/themes' }
+				{
+					text: 'API',
+					collapsed: false,
+					items: [
+						{ text: 'addNotification', link: '/guide/api/add-notification' },
+						{ text: 'attachTooltip', link: '/guide/api/attach-tooltip' },
+						{ text: 'setConfig', link: '/guide/api/set-config' },
+						{ text: 'setTheme', link: '/guide/api/set-theme' }
+					]
+				},
+				{
+					text: 'Themes',
+					collapsed: false,
+					items: [
+						{ text: 'Primer', link: '/guide/themes/primer' },
+						{ text: 'Pixel', link: '/guide/themes/pixel' }
+					]
+				}
 			]
 		},
 		search: {

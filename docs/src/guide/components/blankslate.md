@@ -27,11 +27,9 @@ A `sl-blankslate` component is a placeholder element that should be displayed wh
 
 The component includes multiple slots to cover various layouts.
 
-<ClientOnly>
-  <Preview title="Playground">
-      <PlaygroundBlankslate/>
-  </Preview>
-</ClientOnly>
+<Preview title="Playground">
+  <PlaygroundBlankslate/>
+</Preview>
 
 ``` html
 <sl-blankslate>

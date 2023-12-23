@@ -28,9 +28,7 @@ A `sl-card` component is a simple rounded box that contains various other compon
 The component includes multiple slots to cover various layouts.
 
 <Preview title="Playground">
-  <ClientOnly>
-    <PlaygroundCard/>
-  </ClientOnly>
+  <PlaygroundCard/>
 </Preview>
 
 ``` html

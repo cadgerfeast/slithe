@@ -16,12 +16,10 @@ A `sl-layout` component provides a way to create a fully customizable app layout
 The component includes multiple slots to cover various layouts.
 
 <Preview title="Playground">
-  <ClientOnly>
-    <PlaygroundLayout/>
-  </ClientOnly>
+  <PlaygroundLayout/>
 </Preview>
 
-``` javascript
+``` typescript
 // Initial Model - Then Saved to localStorage
 const model = {
   type: 'splitter',
