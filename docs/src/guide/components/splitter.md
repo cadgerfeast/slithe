@@ -54,8 +54,6 @@ BlueSize defaults to `50`.
   </sl-splitter>
 </Preview>
 
-<div class="prism-last"/>
-
 ``` html
 <sl-splitter blueSize="75">
   <div slot="blue">Blue</div>
@@ -78,8 +76,6 @@ MaxBlue defaults to `100`.
   </sl-splitter>
 </Preview>
 
-<div class="prism-last"/>
-
 ``` html
 <sl-splitter minBlue="25" maxBlue="75">
   <div slot="blue">Blue</div>
@@ -97,8 +93,6 @@ Makes the splitter non-interactable.
     <div slot="green">Green</div>
   </sl-splitter>
 </Preview>
-
-<div class="prism-last"/>
 
 ``` html
 <sl-splitter disabled>

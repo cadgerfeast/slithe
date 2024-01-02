@@ -1,0 +1,26 @@
+// Light
+:host([sl-theme=light]) {
+  --sl-avatar-background-color: var(--pr-karpa-kora);
+}
+// Dark
+:host([sl-theme=dark]) {
+  --sl-avatar-background-color: var(--pr-shark);
+}
+// Square
+:host([square]) {
+  --sl-avatar-border-radius: 4px;
+}
+// Avatar
+div.sl-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  border-radius: var(--sl-avatar-border-radius, 50%);
+  > img {
+    height: inherit;
+    width: inherit;
+    box-sizing: border-box;
+    padding: 4px;
+  }
+}
