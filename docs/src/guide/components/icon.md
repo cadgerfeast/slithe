@@ -6,7 +6,7 @@
 
 A `sl-icon` component provides a large set of glyphs to provide context for various use-cases.
 
-<Anchor href="https://primer.style/octicons/">Full list of icons can be found here.</Anchor>
+[Full list of icons can be found here.](https://primer.style/octicons/)
 
 <Preview>
   <sl-icon name="bug"/>
@@ -33,8 +33,6 @@ The icon name, should be part of icon list from current theme.
   <sl-icon name="does-not-exist"/>
 </Preview>
 
-<div class="prism-last"/>
-
 ``` html
 <sl-icon name="bug"/>
 <sl-icon name="does-not-exist"/>
@@ -48,8 +46,6 @@ Modifies the icon size, default to `1em`, that represents the current font-size.
   <sl-icon name="bug" size="2em"/>
 </Preview>
 
-<div class="prism-last"/>
-
 ``` html
 <sl-icon name="bug" size="2em"/>
 ```
@@ -61,8 +57,6 @@ Adds a tooltip text to provide more information.
 <Preview>
   <sl-icon name="gift" tooltip="Something awesome hides inside!"/>
 </Preview>
-
-<div class="prism-last"/>
 
 ``` html
 <sl-icon name="gift" tooltip="Something awesome hides inside!"/>

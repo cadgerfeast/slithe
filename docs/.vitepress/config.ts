@@ -46,8 +46,9 @@ export default defineConfig({
 					text: 'Components',
 					collapsed: false,
 					items: [
-						{ text: 'Button', link: '/guide/components/button' },
+						{ text: 'Avatar', link: '/guide/components/avatar' },
 						{ text: 'Blankslate', link: '/guide/components/blankslate' },
+						{ text: 'Button', link: '/guide/components/button' },
 						{ text: 'Card', link: '/guide/components/card' },
 						{
 							text: 'Form',
