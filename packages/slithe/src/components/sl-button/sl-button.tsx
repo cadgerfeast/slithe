@@ -12,6 +12,7 @@ export class SlitheButton {
   // Props
   @Prop() type: 'button'|'submit' = 'button';
   @Prop({ reflect: true }) disabled: boolean = false;
+  @Prop({ reflect: true }) link: boolean = false;
   // Handlers
   private handleClick () {
     if (this.type === 'submit') {

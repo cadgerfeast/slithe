@@ -61,6 +61,21 @@
   --sl-button-active-color: var(--pr-science-blue);
   --sl-button-active-border-color: transparent;
 }
+// Link
+:host([sl-theme=light][link]) {
+  --sl-button-background-color: transparent;
+  --sl-button-color: var(--pr-science-blue);
+  --sl-button-border-color: transparent;
+  --sl-button-box-shadow: 0 0 transparent, 0 0 transparent;
+  --sl-button-hover-background-color: transparent;
+  --sl-button-hover-color: var(--pr-science-blue);
+  --sl-button-hover-border-color: transparent;
+  --sl-button-hover-text-decoration: underline;
+  --sl-button-active-background-color: transparent;
+  --sl-button-active-color: var(--pr-science-blue);
+  --sl-button-active-border-color: transparent;
+  --sl-button-active-text-decoration: underline;
+}
 // Dark
 :host([sl-theme=dark]) {
   --sl-button-background-color: var(--pr-sibuya-game-reserve);
@@ -124,6 +139,21 @@
   --sl-button-active-color: var(--pr-cornflower-blue);
   --sl-button-active-border-color: transparent;
 }
+// Link
+:host([sl-theme=dark][link]) {
+  --sl-button-background-color: transparent;
+  --sl-button-color: var(--pr-cornflower-blue);
+  --sl-button-border-color: transparent;
+  --sl-button-box-shadow: 0 0 transparent, 0 0 transparent;
+  --sl-button-hover-background-color: transparent;
+  --sl-button-hover-color: var(--pr-cornflower-blue);
+  --sl-button-hover-border-color: transparent;
+  --sl-button-hover-text-decoration: underline;
+  --sl-button-active-background-color: transparent;
+  --sl-button-active-color: var(--pr-cornflower-blue);
+  --sl-button-active-border-color: transparent;
+  --sl-button-active-text-decoration: underline;
+}
 // Small
 :host([small]) {
   --sl-button-font-size: 12px;
@@ -137,7 +167,7 @@
 // Disabled
 :host([disabled]) {
   pointer-events: none;
-  opacity: 0.5;
+  opacity: var(--sl-button-disabled-opacity, 0.5);
   user-select: none;
 }
 // Button
@@ -146,7 +176,7 @@ button.sl-button {
   position: relative;
   width: 100%;
   background-color: var(--sl-button-background-color);
-  color: var(--sl-button-color);
+  color: var(--sl-button-color-override, var(--sl-button-color));
   border: 1px solid var(--sl-button-border-color);
   border-radius: 6px;
   padding: var(--sl-button-padding, 5px 16px);
@@ -162,12 +192,14 @@ button.sl-button {
     border-color: var(--sl-button-hover-border-color);
     color: var(--sl-button-hover-color, unset);
     box-shadow: var(--sl-button-hover-box-shadow, unset);
+    text-decoration: var(--sl-button-hover-text-decoration, none);
   }
   &:active {
     background-color: var(--sl-button-active-background-color);
     border-color: var(--sl-button-active-border-color);
     color: var(--sl-button-active-color, unset);
     box-shadow: var(--sl-button-active-box-shadow, unset);
+    text-decoration: var(--sl-button-active-text-decoration, none);
   }
   &:focus-visible {
     outline: 2px solid var(--sl-button-outline-color);

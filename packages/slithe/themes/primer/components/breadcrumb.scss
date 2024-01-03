@@ -1,0 +1,27 @@
+:host {
+	--sl-button-padding: 0px;
+}
+:host(:not(:last-of-type)) {
+	--sl-breadcrumb-divider: '/';
+}
+// Light
+:host([sl-theme=light]) {
+	--sl-breadcrumb-divider-color: rgb(101, 109, 118);
+}
+// Dark
+:host([sl-theme=dark]) {
+	--sl-breadcrumb-divider-color: rgb(118, 131, 144);
+}
+// Active
+:host([active]) {
+	--sl-button-disabled-opacity: 1;
+	--sl-button-color-override: currentColor;
+}
+// Breadcrumb
+li.sl-breadcrumb {
+	&::after {
+		padding: 0.5em;
+    color: var(--sl-breadcrumb-divider-color);
+		content: var(--sl-breadcrumb-divider, none);
+	}
+}

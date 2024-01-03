@@ -29,6 +29,7 @@ Size defaults to `medium`.
   <sl-button outline>Outline</sl-button>
   <sl-button danger>Danger</sl-button>
   <sl-button borderless>Borderless</sl-button>
+  <sl-button link>Link</sl-button>
 </Preview>
 <Preview title="Sizes">
   <sl-button small>Small</sl-button>
