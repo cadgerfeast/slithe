@@ -48,6 +48,7 @@ export default defineConfig({
 					items: [
 						{ text: 'Avatar', link: '/guide/components/avatar' },
 						{ text: 'Blankslate', link: '/guide/components/blankslate' },
+						{ text: 'Breadcrumbs', link: '/guide/components/breadcrumbs' },
 						{ text: 'Button', link: '/guide/components/button' },
 						{ text: 'Card', link: '/guide/components/card' },
 						{

@@ -1,14 +1,13 @@
 // Helpers
-import { Component, Element, h, Prop } from '@stencil/core';
+import { Component, Element, h } from '@stencil/core';
 import { syncWithTheme } from '../../helpers/theme';
+
 @Component({
-  tag: 'sl-tab',
+  tag: 'sl-breadcrumbs',
   shadow: true
 })
-export class SlitheTab {
-  @Element() host!: HTMLSlTabElement;
-  // Props
-  @Prop({ reflect: true }) active: boolean = false;
+export class SlitheBreadcrumbs {
+  @Element() host!: HTMLSlBreadcrumbsElement;
   // Lifecycle
   connectedCallback () {
     syncWithTheme(this.host, {
@@ -18,11 +17,11 @@ export class SlitheTab {
   // Template
   render () {
     return (
-      <li class='sl-tab'>
-        <button>
+      <nav class='sl-breadcrumbs'>
+        <ul>
           <slot/>
-        </button>
-      </li>
+        </ul>
+      </nav>
     );
   }
 }
