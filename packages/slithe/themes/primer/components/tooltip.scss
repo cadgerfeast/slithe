@@ -12,6 +12,7 @@
 }
 // Tooltip
 div.sl-tooltip {
+  position: fixed;
   z-index: 5;
   display: inline-flex;
   background-color: var(--sl-tooltip-background-color);

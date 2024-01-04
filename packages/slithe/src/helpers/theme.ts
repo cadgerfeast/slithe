@@ -44,15 +44,20 @@ export function syncWithTheme (element: HTMLElement, style?: Record<string, stri
     }
   }
   // Reactive
-  onChange('key', (newKey) => {
+  function onThemeUpdate () {
     for (const key in style) {
       element.style[key] = style[key];
     }
-    element.setAttribute('sl-theme', newKey);
+    element.setAttribute('sl-theme', state.key);
     const newStylesheet = state.model.components[tagName];
     if (newStylesheet && (stylesheet !== newStylesheet)) {
       stylesheet = newStylesheet;
       element.shadowRoot.adoptedStyleSheets = [stylesheet];
+      if (hostStylesheets.has(element.tagName)) {
+        element.shadowRoot.adoptedStyleSheets.push(hostStylesheets.get(element.tagName));
+      }
     }
-  });
+  }
+  onChange('key', onThemeUpdate);
+  onChange('model', onThemeUpdate);
 }

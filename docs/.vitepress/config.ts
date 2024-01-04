@@ -71,6 +71,7 @@ export default defineConfig({
 						{ text: 'Icon', link: '/guide/components/icon' },
 						{ text: 'Keyboard', link: '/guide/components/keyboard' },
 						{ text: 'Layout', link: '/guide/components/layout' },
+						{ text: 'Popover', link: '/guide/components/popover' },
 						{ text: 'Splitter', link: '/guide/components/splitter' },
 						{ text: 'Tabs', link: '/guide/components/tabs' }
 					]

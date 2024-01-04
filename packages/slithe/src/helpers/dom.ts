@@ -315,3 +315,5 @@ export function attachTooltip (element: HTMLElement) {
 }
 
 export type Position = 'top'|'right'|'bottom'|'left'|'center'|'none';
+
+export type Alignment = 'start'|'center'|'end'|'justify';

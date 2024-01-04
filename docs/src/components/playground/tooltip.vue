@@ -1,6 +1,6 @@
 <script lang="ts" setup>
   // Helpers
-  import { ref, onMounted } from 'vue';
+  import { onMounted } from 'vue';
 	import { attachTooltip } from 'slithe';
   // Lifecycle
 	onMounted(() => {

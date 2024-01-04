@@ -1,0 +1,85 @@
+// Light
+:host([sl-theme=light]) {
+  --sl-popover-background-color: rgb(255, 255, 255);
+  --sl-popover-box-shadow: rgba(31, 35, 40, 0.12) 0px 1px 3px, rgba(66, 74, 83, 0.12) 0px 8px 24px;
+}
+// Dark
+:host([sl-theme=dark]) {
+  --sl-popover-background-color: rgb(45, 51, 59);
+  --sl-popover-box-shadow: rgb(68, 76, 86) 0px 0px 0px 1px, rgba(28, 33, 40, 0.85) 0px 16px 32px;
+}
+// Popover
+div.sl-popover {
+  position: fixed;
+  z-index: 30;
+  transition: opacity 0.25s ease-in-out;
+  opacity: 0;
+  pointer-events: none;
+  display: flex;
+  &.opened {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  &.top {
+    > div.popover-wrapper {
+      bottom: 0;
+    }
+    &.start {
+      justify-content: flex-start;
+    }
+    &.center {
+      justify-content: center;
+    }
+    &.end {
+      justify-content: flex-end;
+    }
+  }
+  &.right {
+    &.start {
+      align-items: flex-start;
+    }
+    &.center {
+      align-items: center;
+    }
+    &.end {
+      align-items: flex-end;
+    }
+  }
+  &.bottom {
+    &.start {
+      justify-content: flex-start;
+    }
+    &.center {
+      justify-content: center;
+    }
+    &.end {
+      justify-content: flex-end;
+    }
+  }
+  &.left {
+    > div.popover-wrapper {
+      right: 0;
+    }
+    &.start {
+      align-items: flex-start;
+    }
+    &.center {
+      align-items: center;
+    }
+    &.end {
+      align-items: flex-end;
+    }
+  }
+  > div.popover-wrapper {
+    position: absolute;
+    height: inherit;
+    width: inherit;
+    overflow: auto;
+    background-color: var(--sl-popover-background-color);
+    box-shadow: var(--sl-popover-box-shadow);
+    border-radius: 12px;
+    > div.popover-container {
+      padding: 8px;
+    }
+  }
+}

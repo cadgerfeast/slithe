@@ -172,6 +172,8 @@
 }
 // Button
 button.sl-button {
+  display: inline-flex;
+  align-items: center;
   font-family: var(--pr-font-family);
   position: relative;
   width: 100%;
@@ -187,6 +189,9 @@ button.sl-button {
   white-space: nowrap;
   vertical-align: middle;
   cursor: pointer;
+  &.icon-only {
+    padding: 6px;
+  }
   &:hover {
     background-color: var(--sl-button-hover-background-color);
     border-color: var(--sl-button-hover-border-color);
