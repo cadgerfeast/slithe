@@ -20,7 +20,6 @@ export class SlitheTooltip {
   // Computed
   get style () {
     const res: Record<string, string> = {
-      'position': 'fixed',
       'opacity': this.opacity.toString(),
       'transition': `opacity ${this.debounce}s ease-in-out`
     };

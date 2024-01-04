@@ -1,5 +1,5 @@
 // Helpers
-import { Component, Prop, Element, h } from '@stencil/core';
+import { Component, Prop, Element, h, State } from '@stencil/core';
 import { closest, attachTooltip } from '../../helpers/dom';
 import { syncWithTheme } from '../../helpers/theme';
 
@@ -13,6 +13,15 @@ export class SlitheButton {
   @Prop() type: 'button'|'submit' = 'button';
   @Prop({ reflect: true }) disabled: boolean = false;
   @Prop({ reflect: true }) link: boolean = false;
+  // State
+  @State() iconOnly = false;
+  // Computed
+  get class () {
+    return {
+      'sl-button': true,
+      'icon-only': this.iconOnly
+    };
+  }
   // Handlers
   private handleClick () {
     if (this.type === 'submit') {
@@ -21,6 +30,12 @@ export class SlitheButton {
         form.submit();
       }
     }
+  }
+  // Handlers
+  private handleSlotChange (e: Event) {
+    const slot = e.target as HTMLSlotElement;
+    const children = slot.assignedNodes() as HTMLElement[];
+    this.iconOnly = children.length === 1 && children[0].tagName === 'SL-ICON';
   }
   // Lifecycle
   connectedCallback () {
@@ -32,8 +47,8 @@ export class SlitheButton {
   // Template
   render () {
     return (
-      <button class='sl-button' type={this.type} disabled={this.disabled} onClick={() => this.handleClick()}>
-        <slot/>
+      <button class={this.class} type={this.type} disabled={this.disabled} onClick={() => this.handleClick()}>
+        <slot onSlotchange={(e) => this.handleSlotChange(e)}/>
       </button>
     );
   }
