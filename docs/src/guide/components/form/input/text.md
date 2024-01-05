@@ -10,15 +10,11 @@ A `sl-input-text` component is an interactive element that allows the user to in
 This component reflects and extends the behavior of the standard `input` element, with `text` type.
 
 <Preview>
-  <sl-form>
-    <sl-input-text label="Fullname" placeholder="John Doe"/>
-  </sl-form>
+  <sl-input-text placeholder="John Doe"/>
 </Preview>
 
 ``` html
-<sl-form>
-  <sl-input-text label="Fullname" placeholder="John Doe"/>
-</sl-form>
+<sl-input-text placeholder="John Doe"/>
 ```
 
 ## Modifiers
@@ -52,11 +48,11 @@ Size defaults to `medium`.
 Makes the input non-interactable.
 
 <Preview>
-  <sl-input-text label="Fullname" placeholder="John Doe" disabled @click="notify('disabled')"/>
+  <sl-input-text placeholder="John Doe" disabled @click="notify('disabled')"/>
 </Preview>
 
 ``` html
-<sl-input-text label="Fullname" placeholder="John Doe" disabled/>
+<sl-input-text placeholder="John Doe" disabled/>
 ```
 
 ## Events
@@ -66,9 +62,9 @@ Makes the input non-interactable.
 Triggered when the user toggles the value.
 
 <Preview>
-  <sl-input-text label="Fullname" placeholder="John Doe" @input="notify(`value: ${$event.target.value}`)"/>
+  <sl-input-text placeholder="John Doe" @input="notify(`value: ${$event.target.value}`)"/>
 </Preview>
 
 ``` html
-<sl-input-text label="Fullname" placeholder="John Doe"/>
+<sl-input-text placeholder="John Doe"/>
 ```

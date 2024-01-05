@@ -1,6 +1,7 @@
 // Helpers
 import { Component, Element, Prop, h } from '@stencil/core';
 import { syncWithTheme } from '../../helpers/theme';
+import { closest } from '../../helpers/dom';
 
 @Component({
   tag: 'sl-input-text',
@@ -9,39 +10,48 @@ import { syncWithTheme } from '../../helpers/theme';
 export class SlitheInputText {
   @Element() host!: HTMLSlInputTextElement;
   private input!: HTMLInputElement;
-  private id!: string;
+  private control: HTMLSlFormControlElement|null;
   // Props
-  @Prop() value: string = '';
+  @Prop() value?: string;
   @Prop() placeholder: string = '';
   @Prop({ reflect: true }) disabled: boolean = false;
   @Prop() type: 'text'|'password' = 'text';
-  @Prop() label: string = '';
   // TODO options
+  // State
+  private controlLabelClickListener: () => void;
   // Handlers
   private handleInput () {
     this.value = this.input.value;
   }
-  private handleClick () {
-    this.input.click();
+  private onControlLabelClick () {
+    this.input.focus();
   }
   // Lifecycle
   connectedCallback () {
-    this.id = crypto.randomUUID();
+    this.control = closest(this.host, 'sl-form-control');
+    if (this.control) {
+      this.controlLabelClickListener = this.onControlLabelClick.bind(this);
+      this.control.addEventListener('labelClick', this.controlLabelClickListener);
+    }
     syncWithTheme(this.host, {
       'display': 'flex'
     });
+  }
+  disconnectedCallback () {
+    if (this.control && this.controlLabelClickListener) {
+      this.control.removeEventListener('labelClick', this.controlLabelClickListener);
+    }
   }
   // Template
   render () {
     return (
       <div class='sl-input-text'>
-        <label htmlFor={this.id} onClick={() => this.handleClick()}>{this.label}</label>
         <input
           ref={(el) => this.input = el}
           type={this.type}
-          name={this.id}
+          name={this.control?.name}
           value={this.value}
-          size={Math.max(this.value.length, this.placeholder.length)}
+          size={Math.max(this.value?.length || 0, this.placeholder.length)}
           placeholder={this.placeholder}
           disabled={this.disabled}
           onInput={() => this.handleInput()}

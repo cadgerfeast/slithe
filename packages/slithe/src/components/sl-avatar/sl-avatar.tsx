@@ -35,7 +35,8 @@ export class SlitheAvatar {
   // Lifecycle
   connectedCallback () {
     syncWithTheme(this.host, {
-      'display': 'inline-flex'
+      'display': 'inline-flex',
+      'vertical-align': 'middle'
     });
     attachTooltip(this.host);
   }

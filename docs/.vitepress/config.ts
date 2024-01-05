@@ -53,12 +53,11 @@ export default defineConfig({
 						{ text: 'Card', link: '/guide/components/card' },
 						{
 							text: 'Form',
-							link: '/guide/components/form/input/checkbox',
+							link: '/guide/components/form',
 							collapsed: false,
 							items: [
 								{
 									text: 'Input',
-									link: '/guide/components/form/input/checkbox',
 									collapsed: false,
 									items: [
 										{ text: 'Checkbox', link: '/guide/components/form/input/checkbox' },
