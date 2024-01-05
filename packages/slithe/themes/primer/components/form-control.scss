@@ -1,0 +1,22 @@
+// Light
+:host([sl-theme=light]) {
+	--sl-caption-color: rgb(101, 109, 118);
+}
+// Dark
+:host([sl-theme=dark]) {
+	--sl-caption-color: rgb(118, 131, 144);
+}
+// Form Control
+div.sl-form-control {
+	display: flex;
+	flex-direction: column;
+	margin: 8px 0;
+	> sl-label {
+		padding-bottom: 6px;
+	}
+	> span.caption {
+		display: block;
+		font-size: 12px;
+		color: rgb(101, 109, 118);
+	}
+}

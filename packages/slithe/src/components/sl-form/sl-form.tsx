@@ -15,9 +15,7 @@ export class SlitheForm {
   }
   // Lifecycle
   connectedCallback () {
-    syncWithTheme(this.host, {
-      'display': 'inline-flex'
-    });
+    syncWithTheme(this.host);
   }
   // Template
   render () {

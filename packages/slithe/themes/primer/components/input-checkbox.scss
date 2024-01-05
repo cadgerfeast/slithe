@@ -13,9 +13,7 @@ div.sl-input-checkbox {
   > input {
     margin: 3px 0;
   }
-  > label {
-    font-weight: 600;
-    font-size: 14px;
-    padding-left: 8px;
-  }
+  > sl-label {
+		padding-left: 6px;
+	}
 }

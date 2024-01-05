@@ -1,6 +1,7 @@
 // Helpers
 import { Component, Element, Prop, h } from '@stencil/core';
 import { syncWithTheme } from '../../helpers/theme';
+import { closest } from '../../helpers/dom';
 
 @Component({
   tag: 'sl-input-number',
@@ -9,39 +10,48 @@ import { syncWithTheme } from '../../helpers/theme';
 export class SlitheInputNumber {
   @Element() host!: HTMLSlInputNumberElement;
   private input!: HTMLInputElement;
-  private id!: string;
+  private control: HTMLSlFormControlElement|null;
   // Props
-  @Prop() value: number = 0;
+  @Prop() value?: number;
   @Prop() placeholder: string = '';
   @Prop({ reflect: true }) disabled: boolean = false;
-  @Prop() label: string = '';
   @Prop() min: number;
   @Prop() max: number;
   @Prop() step: number;
   // TODO options
+  // State
+  private controlLabelClickListener: () => void;
   // Handlers
   private handleInput () {
     this.value = +this.input.value;
   }
-  private handleClick () {
-    this.input.click();
+  private onControlLabelClick () {
+    this.input.focus();
   }
   // Lifecycle
   connectedCallback () {
-    this.id = crypto.randomUUID();
+    this.control = closest(this.host, 'sl-form-control');
+    if (this.control) {
+      this.controlLabelClickListener = this.onControlLabelClick.bind(this);
+      this.control.addEventListener('labelClick', this.controlLabelClickListener);
+    }
     syncWithTheme(this.host, {
       'display': 'flex'
     });
+  }
+  disconnectedCallback () {
+    if (this.control && this.controlLabelClickListener) {
+      this.control.removeEventListener('labelClick', this.controlLabelClickListener);
+    }
   }
   // Template
   render () {
     return (
       <div class='sl-input-number'>
-        <label htmlFor={this.id} onClick={() => this.handleClick()}>{this.label}</label>
         <input
           ref={(el) => this.input = el}
           type='number'
-          name={this.id}
+          name={this.control?.name}
           value={this.value}
           min={this.min}
           max={this.max}

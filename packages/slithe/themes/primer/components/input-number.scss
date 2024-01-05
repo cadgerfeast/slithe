@@ -31,11 +31,6 @@ div.sl-input-number {
   flex-direction: row;
   align-items: center;
   user-select: none;
-	> label {
-    font-weight: 600;
-    font-size: 14px;
-    padding-right: 8px;
-  }
   > input {
 		padding: var(--sl-input-number-padding, 5px 12px);
 		font-size: var(--sl-input-number-font-size, 14px);

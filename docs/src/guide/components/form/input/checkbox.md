@@ -10,15 +10,11 @@ A `sl-input-checkbox` component is an interactive element that allows the user t
 This component reflects and extends the behavior of the standard `input` element, with `checkbox` type.
 
 <Preview>
-  <sl-form>
-    <sl-input-checkbox label="I want to receive marketing emails."/>
-  </sl-form>
+  <sl-input-checkbox label="I want to receive marketing emails."/>
 </Preview>
 
 ``` html
-<sl-form>
-  <sl-input-checkbox label="I want to receive marketing emails."/>
-</sl-form>
+<sl-input-checkbox label="I want to receive marketing emails."/>
 ```
 
 ## Attributes

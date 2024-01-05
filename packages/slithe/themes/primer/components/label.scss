@@ -1,0 +1,11 @@
+// Label
+label.sl-label {
+	font-weight: 600;
+	font-size: 14px;
+	&.required {
+		&::after {
+			content: '*';
+			padding-left: 4px;
+		}
+	}
+}

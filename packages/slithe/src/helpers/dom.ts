@@ -196,7 +196,7 @@ export function removeElement (node: Element) {
   }
 }
 
-export function closest <T extends HTMLElement> (node: Element, selector: string): T {
+export function closest <T extends HTMLElement> (node: Element, selector: string): T|null {
   if (node) {
     const found = node.closest(selector);
     if (found) {
