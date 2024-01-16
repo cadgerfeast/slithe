@@ -1,6 +1,6 @@
 // Helpers
 import { Component, Prop, Element, h, State } from '@stencil/core';
-import { closest, attachTooltip } from '../../helpers/dom';
+import { closest, attachTooltip, getValidSlotChildren } from '../../helpers/dom';
 import { syncWithTheme } from '../../helpers/theme';
 
 @Component({
@@ -34,13 +34,14 @@ export class SlitheButton {
   // Handlers
   private handleSlotChange (e: Event) {
     const slot = e.target as HTMLSlotElement;
-    const children = slot.assignedNodes() as HTMLElement[];
-    this.iconOnly = children.length === 1 && children[0].tagName === 'SL-ICON';
+    const children = getValidSlotChildren(slot);
+    this.iconOnly = children.length === 1 && children[0].nodeName === 'SL-ICON';
   }
   // Lifecycle
   connectedCallback () {
     syncWithTheme(this.host, {
-      'display': 'inline-flex'
+      'display': 'inline-flex',
+      'vertical-align': 'middle'
     });
     attachTooltip(this.host);
   }

@@ -18,22 +18,20 @@ export default defineConfig({
   publicDir: false,
   build: {
     lib: {
-      entry: path.resolve(__dirname, './primer/index.ts'),
-      name: 'Primer',
+      entry: path.resolve(__dirname, './src/index.ts'),
       formats: ['es'],
       fileName: () => 'index.js'
     },
-    emptyOutDir: false,
-    outDir: path.resolve(__dirname, '../primer')
+    emptyOutDir: false
   },
   plugins: [
     {
       name: 'copy',
       generateBundle () {
-        copySync(path.resolve(__dirname, './primer/index.d.ts'), path.resolve(__dirname, '../primer/index.d.ts'));
-        copySync(path.resolve(__dirname, './primer/global.css'), path.resolve(__dirname, '../primer/global.css'));
-        copySync(path.resolve(__dirname, './primer/variables.css'), path.resolve(__dirname, '../primer/variables.css'));
-        copySync(path.resolve(__dirname, './primer/fonts'), path.resolve(__dirname, '../primer/fonts'));
+        copySync(path.resolve(__dirname, './src/index.d.ts'), path.resolve(__dirname, './dist/index.d.ts'));
+        copySync(path.resolve(__dirname, './src/global.css'), path.resolve(__dirname, './dist/global.css'));
+        copySync(path.resolve(__dirname, './src/variables.css'), path.resolve(__dirname, './dist/variables.css'));
+        copySync(path.resolve(__dirname, './src/fonts'), path.resolve(__dirname, './dist/fonts'));
       }
     }
   ]

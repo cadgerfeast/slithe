@@ -1,0 +1,9 @@
+<% it.wrappers.forEach((wrapper) => { %>
+import <%= wrapper.pascalName %> from './wrappers/<%= wrapper.name %>.vue';
+<% }) %>
+
+export {
+<% it.wrappers.forEach((wrapper) => { %>
+  <%= wrapper.pascalName %>,
+<% }) %>
+};

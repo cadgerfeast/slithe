@@ -31,11 +31,7 @@ export class SlitheLayout {
   private ready = new Deferred();
   private group!: string;
   // Props
-  @Prop() model: Model = {
-    id: crypto.randomUUID(),
-    type: 'tabs',
-    items: []
-  };
+  @Prop() model: Model = { id: crypto.randomUUID(), type: 'tabs', items: [] };
   // State
   @State() root: boolean = false;
   @State() dragging: boolean = false;

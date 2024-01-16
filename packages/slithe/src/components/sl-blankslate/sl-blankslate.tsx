@@ -1,7 +1,14 @@
 // Helpers
 import { Component, Element, Prop, State, h } from '@stencil/core';
 import { syncWithTheme } from '../../helpers/theme';
+import { isEmptySlot } from '../../helpers/dom';
 
+/**
+ * @slot graphic - Slot for the blankslate icon
+ * @slot heading - Slot for the blankslate title
+ * @slot default - Slot for the blankslate default message
+ * @slot actions - Slot for the blankslate actions
+ */
 @Component({
   tag: 'sl-blankslate',
   shadow: true
@@ -36,7 +43,7 @@ export class SlitheBlankslate {
     const slotName = slot.getAttribute('name') || 'default';
     this.slots = {
       ...this.slots,
-      [slotName]: slot.assignedNodes().length !== 0
+      [slotName]: !isEmptySlot(slot)
     };
   }
   // Lifecycle

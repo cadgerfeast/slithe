@@ -1,5 +1,5 @@
 // Helpers
-import { Component, Element, Prop, h } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Prop, h } from '@stencil/core';
 import { syncWithTheme } from '../../helpers/theme';
 import { closest } from '../../helpers/dom';
 
@@ -12,18 +12,24 @@ export class SlitheInputNumber {
   private input!: HTMLInputElement;
   private control: HTMLSlFormControlElement|null;
   // Props
-  @Prop() value?: number;
+  /**
+   * @binding slInput
+   */
+  @Prop({ reflect: true }) value?: number;
   @Prop() placeholder: string = '';
   @Prop({ reflect: true }) disabled: boolean = false;
   @Prop() min: number;
   @Prop() max: number;
   @Prop() step: number;
+  // Events
+  @Event() slInput: EventEmitter<number>;
   // TODO options
   // State
   private controlLabelClickListener: () => void;
   // Handlers
   private handleInput () {
     this.value = +this.input.value;
+    this.slInput.emit(this.value);
   }
   private onControlLabelClick () {
     this.input.focus();

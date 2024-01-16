@@ -1,0 +1,43 @@
+{
+  "name": "@slithe/vue",
+  "version": "0.0.1",
+  "description": "Slithe Vue Wrapper",
+  "type": "module",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cadgerfeast/slithe.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cadgerfeast/slithe/issues"
+  },
+  "keywords": [
+    "slithe",
+    "vue"
+  ],
+  "author": "Jérémie Pichon <contact@cadgerfeast.com>",
+  "homepage": "https://slithe.cadgerfeast.dev",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite build -w",
+    "build": "vite build"
+  },
+  "peerDependencies": {
+    "slithe": "*",
+    "vue": "^3.4.13"
+  },
+  "devDependencies": {
+    "@types/eslint": "^8.56.0",
+    "@types/node": "^20.11.2",
+    "@vitejs/plugin-vue": "^5.0.3",
+    "chokidar": "^3.5.3",
+    "eslint": "^8.56.0",
+    "eta": "^2.0.0",
+    "vite": "^5.0.11",
+    "vite-plugin-dts": "^3.7.1"
+  },
+  "license": "MIT"
+}

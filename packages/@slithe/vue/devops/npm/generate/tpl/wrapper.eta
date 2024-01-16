@@ -1,0 +1,49 @@
+<script lang="ts" setup>
+<% if (it.wrapper.imports.length > 0) { %>
+	// Imports
+  import type { <%= it.wrapper.imports.join(', ') %> } from 'slithe';
+<% } %>
+<% if (it.wrapper.props.length > 0) { %>
+	// Props
+<% if (it.wrapper.props.filter((prop) => prop.default).length > 0) { %>
+	const props = withDefaults(defineProps<{
+<% it.wrapper.props.forEach((prop) => { %>
+		<%= prop.name %><% if (!prop.required) { %>?<% } %>: <%~ prop.type %>;
+<% }) %>
+	}>(), {
+<% it.wrapper.props.forEach((prop) => { %>
+<% if (prop.default) { %>
+		<%= prop.name %>: <%~ prop.default %>,
+<% } %>
+<% }) %>
+	});
+<% } else {%>
+	const props = defineProps<{
+<% it.wrapper.props.forEach((prop) => { %>
+		<%= prop.name %><% if (!prop.required) { %>?<% } %>: <%= prop.type %>;
+<% }) %>
+	}>();
+<% } %>
+<% } %>
+<% if (it.wrapper.bindings.length > 0) { %>
+  // Bindings
+	const emit = defineEmits<{
+<% it.wrapper.bindings.forEach((event) => { %>
+		'update:<%= event.prop %>': [value: <%= event.type %>];
+<% }) %>
+	}>();
+	const bindings = {
+<% it.wrapper.bindings.forEach((event) => { %>
+		'<%= event.event %>': ({ detail }: CustomEvent<<%= event.type %>>) => {
+			emit('update:<%= event.prop %>', detail);
+		},
+<% }) %>
+  };
+<% } %>
+</script>
+
+<template>
+	<<%= it.wrapper.tagName %><% if (it.wrapper.props.length > 0) { %> v-bind.prop="props"<% } %><% if (it.wrapper.bindings.length > 0) { %> v-on="bindings"<% } %>>
+		<slot/>
+	</<%= it.wrapper.tagName %>>
+</template>

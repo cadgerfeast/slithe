@@ -11,10 +11,16 @@ This component reflects and extends the behavior of the standard `button` elemen
 
 <Preview>
   <sl-button>Button</sl-button>
+  <sl-button>
+    <sl-icon name="paper-airplane"/>
+  </sl-button>
 </Preview>
 
 ``` html
 <sl-button>Button</sl-button>
+<sl-button>
+  <sl-icon name="paper-airplane"/>
+</sl-button>
 ```
 
 ## Modifiers

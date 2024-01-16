@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/lerna/schemas/lerna-schema.json",
-  "version": "0.2.12",
+  "version": "independent",
   "command": {
     "version": {
       "allowBranch": [
@@ -8,7 +8,6 @@
       ],
       "conventionalCommits": true,
       "message": "chore: release",
-      "tagVersionPrefix": "slithe@",
       "changelog": false,
       "private": false,
       "yes": true

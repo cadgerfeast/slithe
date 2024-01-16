@@ -1,13 +1,12 @@
 <script lang="ts" setup>
   // Helpers
   import { ref } from 'vue';
-  import { SlInputCheckbox, SlForm, SlCard } from 'slithe/vue';
+  import { SlInputCheckbox, SlForm, SlCard } from '@slithe/vue';
   // State
   const showHeaderSlot = ref(true);
   const showDefaultSlot = ref(true);
   const showFooterSlot = ref(true);
 </script>
-
 
 <template>
   <div class="playground-card">
@@ -19,9 +18,9 @@
       </SlCard>
     </div>
     <SlForm>
-      <SlInputCheckbox v-model="showHeaderSlot" label="Header"/>
-      <SlInputCheckbox v-model="showDefaultSlot" label="Default"/>
-      <SlInputCheckbox v-model="showFooterSlot" label="Footer"/>
+      <SlInputCheckbox v-model:value="showHeaderSlot" label="Header"/>
+      <SlInputCheckbox v-model:value="showDefaultSlot" label="Default"/>
+      <SlInputCheckbox v-model:value="showFooterSlot" label="Footer"/>
     </SlForm>
   </div>
 </template>

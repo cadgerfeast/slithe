@@ -1,7 +1,7 @@
 <script lang="ts" setup>
   // Helpers
   import { ref } from 'vue';
-  import { SlBlankslate, SlIcon, SlButton, SlInputCheckbox, SlForm } from 'slithe/vue';
+  import { SlBlankslate, SlIcon, SlButton, SlInputCheckbox, SlForm } from '@slithe/vue';
   // State
   const showGraphicSlot = ref(true);
   const showHeadingSlot = ref(true);
@@ -24,10 +24,10 @@
       </SlBlankslate>
     </div>
     <SlForm>
-      <SlInputCheckbox v-model="showGraphicSlot" label="Graphic"/>
-      <SlInputCheckbox v-model="showHeadingSlot" label="Heading"/>
-      <SlInputCheckbox v-model="showDefaultSlot" label="Default"/>
-      <SlInputCheckbox v-model="showActionsSlot" label="Actions"/>
+      <SlInputCheckbox v-model:value="showGraphicSlot" label="Graphic"/>
+      <SlInputCheckbox v-model:value="showHeadingSlot" label="Heading"/>
+      <SlInputCheckbox v-model:value="showDefaultSlot" label="Default"/>
+      <SlInputCheckbox v-model:value="showActionsSlot" label="Actions"/>
     </SlForm>
   </div>
 </template>
