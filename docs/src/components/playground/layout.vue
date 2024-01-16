@@ -1,7 +1,7 @@
 <script lang="ts" setup>
   // Helpers
   import { ref } from 'vue';
-  import { SlButton, SlIcon, SlLayout } from 'slithe/vue';
+  import { SlButton, SlIcon, SlLayout } from '@slithe/vue';
   // Constants
   const storedModel = localStorage?.getItem('slithe.playground.layout.model');
   const defaultModel = {

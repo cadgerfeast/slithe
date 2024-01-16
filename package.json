@@ -3,7 +3,8 @@
   "type": "module",
   "workspaces": [
     "docs",
-    "packages/*"
+    "packages/*",
+    "packages/@slithe/*"
   ],
   "scripts": {
     "prepare": "husky install",

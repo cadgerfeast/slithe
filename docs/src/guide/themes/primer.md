@@ -2,6 +2,10 @@
 
 [Primer](https://primer.style/) is `Github`'s design system.
 
+## Icons
+
+[Full list of icons can be found here.](https://primer.style/octicons/)
+
 ## Usage
 
 ``` typescript

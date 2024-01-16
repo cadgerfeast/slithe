@@ -3,6 +3,6 @@
 /dist
 /node_modules
 /src/components.d.ts
+/src/components.json
 /primer
-/vue/exports
 /www

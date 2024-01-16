@@ -1,5 +1,5 @@
 // Helpers
-import { Component, Element, Prop, h } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Prop, h } from '@stencil/core';
 import { syncWithTheme } from '../../helpers/theme';
 import { closest } from '../../helpers/dom';
 
@@ -12,9 +12,14 @@ export class SlitheInputCheckbox {
   private input!: HTMLInputElement;
   private control: HTMLSlFormControlElement|null;
   // Props
-  @Prop() value: boolean = false;
+  /**
+   * @binding slInput
+   */
+  @Prop({ mutable: true }) value: boolean = false;
   @Prop({ reflect: true }) disabled: boolean = false;
   @Prop() label: string = '';
+  // Events
+  @Event() slInput: EventEmitter<boolean>;
   // Computed
   get effectiveName () {
     return this.control?.name || crypto.randomUUID();
@@ -22,6 +27,7 @@ export class SlitheInputCheckbox {
   // Handlers
   private handleInput () {
     this.value = this.input.checked;
+    this.slInput.emit(this.value);
   }
   private handleClick () {
     this.input.click();

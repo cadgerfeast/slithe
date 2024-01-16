@@ -317,3 +317,11 @@ export function attachTooltip (element: HTMLElement) {
 export type Position = 'top'|'right'|'bottom'|'left'|'center'|'none';
 
 export type Alignment = 'start'|'center'|'end'|'justify';
+
+export function getValidSlotChildren (slot: HTMLSlotElement) {
+  return slot.assignedNodes().filter((node) => (node.nodeName !== '#text') || node.textContent.length > 0);
+}
+
+export function isEmptySlot (slot: HTMLSlotElement) {
+  return getValidSlotChildren(slot).length === 0;
+}

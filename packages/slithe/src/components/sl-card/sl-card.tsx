@@ -1,6 +1,7 @@
 // Helpers
 import { Component, Element, h, State } from '@stencil/core';
 import { syncWithTheme } from '../../helpers/theme';
+import { isEmptySlot } from '../../helpers/dom';
 
 @Component({
   tag: 'sl-card',
@@ -29,7 +30,7 @@ export class SlitheCard {
     const slotName = slot.getAttribute('name') || 'default';
     this.slots = {
       ...this.slots,
-      [slotName]: !!slot.assignedNodes().length
+      [slotName]: !isEmptySlot(slot)
     };
   }
   // Lifecycle

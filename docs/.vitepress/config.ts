@@ -99,6 +99,11 @@ export default defineConfig({
 			provider: 'local'
 		}
 	},
+	vite: {
+		resolve: {
+			dedupe: ['vue']
+		}
+	},
 	vue: {
 		template: {
 			compilerOptions: {

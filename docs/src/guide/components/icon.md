@@ -6,8 +6,6 @@
 
 A `sl-icon` component provides a large set of glyphs to provide context for various use-cases.
 
-[Full list of icons can be found here.](https://primer.style/octicons/)
-
 <Preview>
   <sl-icon name="bug"/>
   <sl-icon name="law" size="24px"/>

@@ -4,7 +4,8 @@
 		"types": ["vite/client"],
 		"paths": {
 			"slithe": ["../packages/slithe/src/index.ts"],
-			"slithe/primer": ["../packages/slithe/themes/primer/index.ts"]
+			"@slithe/primer": ["../packages/@slithe/primer/src/index.ts"],
+			"@slithe/vue": ["../packages/@slithe/vue/src/index.ts"]
 		}
 	},
 	"include": [

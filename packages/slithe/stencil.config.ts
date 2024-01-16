@@ -1,7 +1,5 @@
 // Helpers
 import { Config } from '@stencil/core';
-import { sass } from '@stencil/sass';
-import { vueOutputTarget } from '@stencil/vue-output-target';
 
 export const config: Config = {
   namespace: 'slithe',
@@ -12,20 +10,10 @@ export const config: Config = {
       customElementsExportBehavior: 'bundle',
       generateTypeDeclarations: true
     },
-    vueOutputTarget({
-      componentCorePackage: 'slithe',
-      proxiesFile: './vue/exports/components.ts',
-      componentModels: [
-        {
-          elements: ['sl-input-checkbox', 'sl-input-number', 'sl-input-text'],
-          event: 'input',
-          targetAttr: 'value'
-        }
-      ]
-    })
-  ],
-  plugins: [
-    sass()
+    {
+      type: 'docs-json',
+      file: './dist/components.json'
+    }
   ],
   testing: {
     collectCoverage: true,
