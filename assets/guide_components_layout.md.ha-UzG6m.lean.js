@@ -1,7 +1,0 @@
-import{o as l,c as t,I as a,w as h,k as s,a as i,R as p,m as k,a4 as E,Y as e}from"./chunks/framework.tKHdXlNu.js";import{P as d}from"./chunks/preview.WWaFASLg.js";const r=s("h1",{id:"layout",tabindex:"-1"},[i("Layout "),s("a",{class:"header-anchor",href:"#layout","aria-label":'Permalink to "Layout"'},"​")],-1),g=s("p",null,[i("A "),s("code",null,"sl-layout"),i(" component provides a way to create a fully customizable app layout.")],-1),y=s("h2",{id:"slots",tabindex:"-1"},[i("Slots "),s("a",{class:"header-anchor",href:"#slots","aria-label":'Permalink to "Slots"'},"​")],-1),o=s("p",null,"The component includes multiple slots to cover various layouts.",-1),c=p("",2),_=JSON.parse('{"title":"Layout","description":"","frontmatter":{},"headers":[],"relativePath":"guide/components/layout.md","filePath":"guide/components/layout.md"}'),F={name:"guide/components/layout.md"},w=Object.assign(F,{setup(u){const n=E(()=>e(()=>import("./chunks/layout.FDGujA7Q.js"),__vite__mapDeps([0,1,2,3])));return(C,v)=>(l(),t("div",null,[r,g,y,o,a(d,{title:"Playground"},{default:h(()=>[a(k(n))]),_:1}),c]))}});export{_ as __pageData,w as default};
-function __vite__mapDeps(indexes) {
-  if (!__vite__mapDeps.viteFileDeps) {
-    __vite__mapDeps.viteFileDeps = ["assets/chunks/layout.FDGujA7Q.js","assets/chunks/components.uZGJTzHq.js","assets/chunks/framework.tKHdXlNu.js","assets/chunks/sl-layout.666-oSe7.js"]
-  }
-  return indexes.map((i) => __vite__mapDeps.viteFileDeps[i])
-}
