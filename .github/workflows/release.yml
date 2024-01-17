@@ -28,7 +28,7 @@ jobs:
     - name: Install
       run: npm ci
     - name: Build
-      run: npm run build -- --projects slithe
+      run: npm run build -- --exclude docs
     - name: Version
       run: npm run version
     - name: Changelog
