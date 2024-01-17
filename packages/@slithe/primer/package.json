@@ -1,6 +1,6 @@
 {
   "name": "@slithe/primer",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Slithe Primer Theme",
   "type": "module",
   "module": "dist/index.js",

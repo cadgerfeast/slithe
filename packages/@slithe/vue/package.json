@@ -1,6 +1,6 @@
 {
   "name": "@slithe/vue",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Slithe Vue Wrapper",
   "type": "module",
   "module": "dist/index.js",
