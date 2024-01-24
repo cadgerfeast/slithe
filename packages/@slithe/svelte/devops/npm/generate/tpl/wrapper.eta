@@ -1,0 +1,41 @@
+<script lang="ts">
+  // Imports
+	import { onMount, onDestroy } from 'svelte';
+<% if (Object.keys(it.wrapper.imports).length > 0) { %>
+<% Object.keys(it.wrapper.imports).forEach((_import) => { %>
+  import type { <% it.wrapper.imports[_import].forEach((type) => { %><%= type %>, <% })%> } from '<%= _import %>';
+<% }) %>
+<% } %>
+  let ref: <%= it.wrapper.typeName %>;
+<% if (it.wrapper.props.length > 0) { %>
+	// Props
+<% it.wrapper.props.forEach((prop) => { %>
+	export let <%= prop.name %>: <%~ prop.type %><% if (!prop.default) { %>|undefined<% } %> = <%~ (prop.default || 'undefined') %>;
+<% }) %>
+<% } %>
+<% if (it.wrapper.bindings.length > 0) { %>
+  // Bindings
+	const bindings = {
+<% it.wrapper.bindings.forEach((binding) => { %>
+		'<%= binding.event %>': ({ detail }: CustomEvent<<%= binding.type %>>) => {
+			<%= binding.prop %> = detail;
+		},
+<% }) %>
+  };
+	// Lifecycle
+	onMount(() => {
+<% it.wrapper.bindings.forEach((binding) => { %>
+		ref.addEventListener('<%= binding.event %>', bindings.<%= binding.event %>);
+<% }) %>
+	});
+	onDestroy(() => {
+<% it.wrapper.bindings.forEach((binding) => { %>
+		ref.removeEventListener('<%= binding.event %>', bindings.<%= binding.event %>);
+<% }) %>
+	});
+<% } %>
+</script>
+
+<<%= it.wrapper.tagName %> bind:this={ref}<% it.wrapper.props.forEach((prop) => { %> {<%= prop.name %>}<% }) %>>
+	<slot/>
+</<%= it.wrapper.tagName %>>

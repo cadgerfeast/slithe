@@ -1,5 +1,5 @@
 // Helpers
-import { Component, Element, h, State } from '@stencil/core';
+import { Component, Element, h, Prop, State } from '@stencil/core';
 import { syncWithTheme } from '../../helpers/theme';
 import { isEmptySlot } from '../../helpers/dom';
 
@@ -9,6 +9,10 @@ import { isEmptySlot } from '../../helpers/dom';
 })
 export class SlitheCard {
   @Element() host!: HTMLSlCardElement;
+  // Modifiers
+  @Prop({ reflect: true }) danger: boolean;
+  @Prop({ reflect: true }) small: boolean;
+  @Prop({ reflect: true }) medium: boolean;
   // State
   @State() slots = {
     header: false,

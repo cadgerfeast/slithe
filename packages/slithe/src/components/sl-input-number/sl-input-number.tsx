@@ -15,12 +15,15 @@ export class SlitheInputNumber {
   /**
    * @binding slInput
    */
-  @Prop({ reflect: true }) value?: number;
+  @Prop({ mutable: true }) value?: number;
   @Prop() placeholder: string = '';
   @Prop({ reflect: true }) disabled: boolean = false;
   @Prop() min: number;
   @Prop() max: number;
   @Prop() step: number;
+  // Modifiers
+  @Prop({ reflect: true }) small: boolean;
+  @Prop({ reflect: true }) medium: boolean;
   // Events
   @Event() slInput: EventEmitter<number>;
   // TODO options

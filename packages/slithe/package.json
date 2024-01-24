@@ -20,6 +20,9 @@
     "web-components",
     "custom-elements"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "Jérémie Pichon <contact@cadgerfeast.com>",
   "homepage": "https://slithe.cadgerfeast.dev",
   "files": [

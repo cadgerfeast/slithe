@@ -17,6 +17,23 @@ This component reflects and extends the behavior of the standard `input` element
 <sl-input-number placeholder="21"/>
 ```
 
+## Modifiers
+
+Adding those `boolean` attributes allows to modify the input styling.
+
+Size defaults to `medium`.
+
+<Preview title="Sizes">
+  <sl-input-number label="Small" placeholder="Small" small/>
+  <sl-input-number label="Medium" placeholder="Medium" medium/>
+</Preview>
+
+``` html
+<!-- Size -->
+<sl-input-number label="Small" placeholder="Small" small/>
+<sl-input-number label="Medium" placeholder="Medium" medium/>
+```
+
 ## Attributes
 
 ### Disabled

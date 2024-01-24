@@ -31,6 +31,9 @@ export class SlitheLayout {
   private ready = new Deferred();
   private group!: string;
   // Props
+  /**
+   * @import slithe
+   */
   @Prop() model: Model = { id: crypto.randomUUID(), type: 'tabs', items: [] };
   // State
   @State() root: boolean = false;

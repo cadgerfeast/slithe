@@ -1,7 +1,9 @@
 <script lang="ts" setup>
-<% if (it.wrapper.imports.length > 0) { %>
+<% if (Object.keys(it.wrapper.imports).length > 0) { %>
 	// Imports
-  import type { <%= it.wrapper.imports.join(', ') %> } from 'slithe';
+<% Object.keys(it.wrapper.imports).forEach((_import) => { %>
+  import type { <% it.wrapper.imports[_import].forEach((type) => { %><%= type %>, <% })%> } from '<%= _import %>';
+<% }) %>
 <% } %>
 <% if (it.wrapper.props.length > 0) { %>
 	// Props
@@ -28,14 +30,14 @@
 <% if (it.wrapper.bindings.length > 0) { %>
   // Bindings
 	const emit = defineEmits<{
-<% it.wrapper.bindings.forEach((event) => { %>
-		'update:<%= event.prop %>': [value: <%= event.type %>];
+<% it.wrapper.bindings.forEach((binding) => { %>
+		'update:<%= binding.prop %>': [value: <%= binding.type %>];
 <% }) %>
 	}>();
 	const bindings = {
-<% it.wrapper.bindings.forEach((event) => { %>
-		'<%= event.event %>': ({ detail }: CustomEvent<<%= event.type %>>) => {
-			emit('update:<%= event.prop %>', detail);
+<% it.wrapper.bindings.forEach((binding) => { %>
+		'<%= binding.event %>': ({ detail }: CustomEvent<<%= binding.type %>>) => {
+			emit('update:<%= binding.prop %>', detail);
 		},
 <% }) %>
   };

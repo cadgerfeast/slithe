@@ -12,6 +12,9 @@ export class SlithePopover {
   // Props
   @Prop() target?: HTMLElement;
   @Prop() position: 'top'|'right'|'bottom'|'left' = 'bottom';
+  /**
+   * @import slithe
+   */
   @Prop() align: Alignment = 'start';
   // State
   @State() opened: boolean = false;

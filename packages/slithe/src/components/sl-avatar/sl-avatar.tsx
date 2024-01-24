@@ -14,6 +14,9 @@ export class SlitheAvatar {
   @Prop() src: string|null = null;
   @Prop() size: string = '32px';
   @Prop() background: string = 'var(--sl-avatar-background-color)';
+  // Modifiers
+  @Prop({ reflect: true }) circle: boolean;
+  @Prop({ reflect: true }) square: boolean;
   // Computed
   get style () {
     return {

@@ -15,10 +15,17 @@ export class SlitheInputText {
   /**
    * @binding slInput
    */
-  @Prop({ reflect: true }) value?: string;
+  @Prop({ mutable: true }) value?: string;
   @Prop() placeholder: string = '';
   @Prop({ reflect: true }) disabled: boolean = false;
   @Prop() type: 'text'|'password' = 'text';
+  // Modifiers
+  @Prop({ reflect: true }) small: boolean;
+  @Prop({ reflect: true }) medium: boolean;
+  // Computed
+  get size () {
+    return Math.max(this.value ? this.value.length : 0, this.placeholder.length);
+  }
   // Events
   @Event() slInput: EventEmitter<string>;
   // TODO options
@@ -57,7 +64,7 @@ export class SlitheInputText {
           type={this.type}
           name={this.control?.name}
           value={this.value}
-          size={Math.max(this.value?.length || 0, this.placeholder.length)}
+          size={this.size}
           placeholder={this.placeholder}
           disabled={this.disabled}
           onInput={() => this.handleInput()}
