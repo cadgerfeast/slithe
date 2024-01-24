@@ -1,5 +1,23 @@
 # Changelog
 
+## [24/01/2024 - 09:40](https://github.com/cadgerfeast/slithe/compare/slithe@0.3.0...slithe@0.3.1)
+
+### 🚀 Releases
+
+- `slithe`: *0.3.0* -> **0.3.1**
+
+- `@slithe/vue`: *0.0.2* -> **0.0.3**
+
+- `@slithe/svelte`: **0.0.2**
+
+- `@slithe/primer`: *0.0.2* -> **0.0.3**
+
+### 🏗 Chores
+
+- add svelte wrapper package ([cf84947](https://github.com/cadgerfeast/slithe/commit/cf84947ce054c3c2532d132fbc632cadfcc304af))
+
+- changelog ([ef82fef](https://github.com/cadgerfeast/slithe/commit/ef82fef6c3ba0cd353771372d6c752315079650a))
+
 ## [17/01/2024 - 13:23](https://github.com/cadgerfeast/slithe/compare/slithe@0.2.12...slithe@0.3.0)
 
 ### 🚀 Releases
