@@ -13,8 +13,8 @@ export class SlitheTooltip {
   private ready = new Deferred();
   // Props
   @Prop() target: HTMLElement;
-  @Prop() position: [number, number] = [0, 0];
-  @Prop() debounce: number = 0.25;
+  @Prop() position?: [number, number] = [0, 0];
+  @Prop() debounce?: number = 0.25;
   // State
   @State() opacity: number = 0;
   // Computed

@@ -8,7 +8,7 @@ import { syncWithTheme } from '../../helpers/theme';
 export class SlitheTab {
   @Element() host!: HTMLSlTabElement;
   // Props
-  @Prop({ reflect: true }) active: boolean = false;
+  @Prop({ reflect: true }) active?: boolean = false;
   // Lifecycle
   connectedCallback () {
     syncWithTheme(this.host, {

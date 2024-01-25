@@ -10,9 +10,9 @@ import { isEmptySlot } from '../../helpers/dom';
 export class SlitheCard {
   @Element() host!: HTMLSlCardElement;
   // Modifiers
-  @Prop({ reflect: true }) danger: boolean;
-  @Prop({ reflect: true }) small: boolean;
-  @Prop({ reflect: true }) medium: boolean;
+  @Prop({ reflect: true }) danger?: boolean;
+  @Prop({ reflect: true }) small?: boolean;
+  @Prop({ reflect: true }) medium?: boolean;
   // State
   @State() slots = {
     header: false,

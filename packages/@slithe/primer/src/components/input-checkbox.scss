@@ -1,3 +1,21 @@
+// Light
+:host([sl-theme=light]) {
+  --sl-input-checkbox-background-color: rgb(255, 255, 255);
+  --sl-input-checkbox-border-color: rgb(110, 119, 129);
+  --sl-input-checkbox-checked-background-color: rgb(9, 105, 218);
+  --sl-input-checkbox-checked-border-color: rgb(9, 105, 218);
+	--sl-input-checkbox-status-success-color: rgb(26, 127, 55);
+	--sl-input-checkbox-status-failure-color: rgb(209, 36, 47);
+}
+// Dark
+:host([sl-theme=dark]) {
+  --sl-input-checkbox-background-color: rgb(34, 39, 46);
+  --sl-input-checkbox-border-color: rgb(99, 110, 123);
+  --sl-input-checkbox-checked-background-color: rgb(83, 155, 245);
+  --sl-input-checkbox-checked-border-color: rgb(83, 155, 245);
+	--sl-input-checkbox-status-success-color: rgb(87, 171, 90);
+	--sl-input-checkbox-status-failure-color: rgb(229, 83, 75);
+}
 // Disabled
 :host([disabled]) {
   pointer-events: none;
@@ -10,8 +28,50 @@ div.sl-input-checkbox {
   flex-direction: row;
   align-items: center;
   user-select: none;
-  > input {
+  &.success {
+		> input {
+      &::after {
+			  border-color: var(--sl-input-checkbox-status-success-color);
+      }
+		}
+	}
+	&.failure {
+		> input {
+      &::after {
+			  border-color: var(--sl-input-checkbox-status-failure-color);
+      }
+		}
+	}
+  > div.checkbox-wrapper {
+    position: relative;
     margin: 3px 0;
+    display: flex;
+    > input {
+      margin: 0;
+      &::after {
+        pointer-events: none;
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-color: var(--sl-input-checkbox-background-color);
+        border-radius: 2px;
+        border: 1px solid var(--sl-input-checkbox-border-color);
+      }
+      &:checked {
+        &::after {
+          background-color: var(--sl-input-checkbox-checked-background-color);
+          border-color: var(--sl-input-checkbox-checked-border-color);
+        }
+      }
+    }
+    > sl-icon {
+      pointer-events: none;
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
   > sl-label {
 		padding-left: 6px;

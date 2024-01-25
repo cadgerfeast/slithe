@@ -11,7 +11,7 @@ export class SlitheIcon {
   @Element() host!: HTMLSlIconElement;
   // Props
   @Prop({ reflect: true }) name: string;
-  @Prop() size: string = '16px';
+  @Prop() size?: string = '16px';
   // Computed
   get style () {
     return {

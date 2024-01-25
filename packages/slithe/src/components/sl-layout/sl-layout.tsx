@@ -32,17 +32,17 @@ export class SlitheLayout {
   private group!: string;
   // Props
   /**
-   * @import slithe
+   * @import Model,slithe
    */
-  @Prop() model: Model = { id: crypto.randomUUID(), type: 'tabs', items: [] };
+  @Prop() model?: Model = { id: crypto.randomUUID(), type: 'tabs', items: [] };
   // State
   @State() root: boolean = false;
   @State() dragging: boolean = false;
   @State() _model: Model;
   @State() renderIndex: number = 0;
   // Events
-  @Event({ bubbles: false }) update: EventEmitter<Model>;
-  @Event({ bubbles: false }) close: EventEmitter<string>;
+  @Event({ eventName: 'update', bubbles: false }) updateEvent: EventEmitter<Model>;
+  @Event({ eventName: 'close', bubbles: false }) closeEvent: EventEmitter<string>;
   // Methods
   @Method()
   async getGroup () {
@@ -137,10 +137,10 @@ export class SlitheLayout {
     }
   }
   private emitClose (id: string) {
-    this.close.emit(id);
+    this.closeEvent.emit(id);
   }
   private emitUpdate () {
-    this.update.emit(clone(this._model));
+    this.updateEvent.emit(clone(this._model));
     this.renderIndex++;
   }
   private async _setDragging (dragging: boolean) {
@@ -257,7 +257,8 @@ export class SlitheLayout {
         minBlue={splitter.minBlue}
         maxBlue={splitter.maxBlue}
         disabled={splitter.disabled}
-        onResizeStart={() => this.handleResizeStart()} onResizeEnd={(e) => this.handleResizeEnd(e)}
+        onResizeStart={() => this.handleResizeStart()}
+        onResizeEnd={(e) => this.handleResizeEnd(e)}
       >
         <sl-layout slot="blue" model={splitter.items[0]}>
           {this.getSlots(splitter.items[0]).map((slot) => (

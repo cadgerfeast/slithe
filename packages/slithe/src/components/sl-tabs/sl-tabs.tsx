@@ -8,8 +8,8 @@ import { syncWithTheme } from '../../helpers/theme';
 })
 export class SlitheTabs {
   @Element() host!: HTMLSlTabsElement;
-  // Props
-  @Prop({ reflect: true }) small: boolean = false;
+  // Modifiers
+  @Prop({ reflect: true }) small?: boolean = false;
   // Lifecycle
   connectedCallback () {
     syncWithTheme(this.host, {

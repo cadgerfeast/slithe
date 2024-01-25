@@ -1,10 +1,14 @@
 // Light
 :host([sl-theme=light]) {
-	--sl-caption-color: rgb(101, 109, 118);
+	--sl-form-control-status-success-color: rgb(26, 127, 55);
+	--sl-form-control-status-failure-color: rgb(209, 36, 47);
+	--sl-form-control-caption-color: rgb(101, 109, 118);
 }
 // Dark
 :host([sl-theme=dark]) {
-	--sl-caption-color: rgb(118, 131, 144);
+	--sl-form-control-status-success-color: rgb(87, 171, 90);
+	--sl-form-control-status-failure-color: rgb(229, 83, 75);
+	--sl-form-control-caption-color: rgb(118, 131, 144);
 }
 // Form Control
 div.sl-form-control {
@@ -14,9 +18,24 @@ div.sl-form-control {
 	> sl-label {
 		padding-bottom: 6px;
 	}
+	> div.status {
+		display: flex;
+    align-items: center;
+		&.success {
+			color: var(--sl-form-control-status-success-color);
+		}
+		&.failure {
+			color: var(--sl-form-control-status-failure-color);
+		}
+		> span {
+			font-size: 12px;
+			font-weight: 600;
+			margin-left: 4px;
+		}
+	}
 	> span.caption {
 		display: block;
 		font-size: 12px;
-		color: rgb(101, 109, 118);
+		color: var(--sl-form-control-caption-color);
 	}
 }

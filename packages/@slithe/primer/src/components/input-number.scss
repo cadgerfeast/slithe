@@ -5,6 +5,8 @@
 	--sl-input-number-border-color: var(--pr-geyser);
 	--sl-input-number-box-shadow: inset 0 1px 0 rgba(208, 215, 222, 0.2);
 	--sl-input-number-focus-border-color: var(--pr-science-blue);
+	--sl-input-number-status-success-color: rgb(26, 127, 55);
+	--sl-input-number-status-failure-color: rgb(209, 36, 47);
 }
 // Dark
 :host([sl-theme=dark]) {
@@ -13,6 +15,8 @@
 	--sl-input-number-border-color: var(--pr-outer-space);
 	--sl-input-number-box-shadow: 0 0 transparent;
 	--sl-input-number-focus-border-color: var(--pr-dodger-blue);
+	--sl-input-number-status-success-color: rgb(87, 171, 90);
+	--sl-input-number-status-failure-color: rgb(229, 83, 75);
 }
 // Small
 :host([small]) {
@@ -31,6 +35,16 @@ div.sl-input-number {
   flex-direction: row;
   align-items: center;
   user-select: none;
+	&.success {
+		> input {
+			border-color: var(--sl-input-number-status-success-color);
+		}
+	}
+	&.failure {
+		> input {
+			border-color: var(--sl-input-number-status-failure-color);
+		}
+	}
   > input {
 		padding: var(--sl-input-number-padding, 5px 12px);
 		font-size: var(--sl-input-number-font-size, 14px);

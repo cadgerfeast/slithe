@@ -7,25 +7,11 @@
 <% } %>
 <% if (it.wrapper.props.length > 0) { %>
 	// Props
-<% if (it.wrapper.props.filter((prop) => prop.default).length > 0) { %>
-	const props = withDefaults(defineProps<{
+	const props = defineProps<{
 <% it.wrapper.props.forEach((prop) => { %>
 		<%= prop.name %><% if (!prop.required) { %>?<% } %>: <%~ prop.type %>;
 <% }) %>
-	}>(), {
-<% it.wrapper.props.forEach((prop) => { %>
-<% if (prop.default) { %>
-		<%= prop.name %>: <%~ prop.default %>,
-<% } %>
-<% }) %>
-	});
-<% } else {%>
-	const props = defineProps<{
-<% it.wrapper.props.forEach((prop) => { %>
-		<%= prop.name %><% if (!prop.required) { %>?<% } %>: <%= prop.type %>;
-<% }) %>
 	}>();
-<% } %>
 <% } %>
 <% if (it.wrapper.bindings.length > 0) { %>
   // Bindings

@@ -21,12 +21,12 @@ async function generateSourceFiles () {
     const props = [];
     const imports = {};
     const bindings = [];
+    const slots = component.slots.map(({ name }) => name).filter((slot) => slot !== 'default');
     for (const _prop of component.props) {
       const prop = {
         name: _prop.name,
         type: _prop.complexType.original,
-        required: !_prop.default,
-        default: _prop.default
+        required: !_prop.optional
       };
       props.push(prop);
       for (const docsTag of _prop.docsTags) {
@@ -41,11 +41,9 @@ async function generateSourceFiles () {
             break;
           }
           case 'import': {
-            if (_prop.complexType.references[prop.type]) {
-              const lib = docsTag.text.trim();
-              imports[lib] = imports[lib] || [];
-              imports[lib].push(prop.type);
-            }
+            const [type, lib] = docsTag.text.trim().split(',');
+            imports[lib] = imports[lib] || [];
+            imports[lib].push(type);
             break;
           }
         }
@@ -59,7 +57,8 @@ async function generateSourceFiles () {
       pascalName,
       props,
       imports,
-      bindings
+      bindings,
+      slots
     };
     wrappers.push(wrapper);
   }

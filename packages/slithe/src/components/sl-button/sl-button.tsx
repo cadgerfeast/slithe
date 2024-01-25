@@ -10,17 +10,17 @@ import { syncWithTheme } from '../../helpers/theme';
 export class SlitheButton {
   @Element() host!: HTMLSlButtonElement;
   // Props
-  @Prop() type: 'button'|'submit' = 'button';
-  @Prop({ reflect: true }) disabled: boolean = false;
-  @Prop({ reflect: true }) link: boolean = false;
+  @Prop() type?: 'button'|'submit' = 'button';
+  @Prop({ reflect: true }) disabled?: boolean = false;
+  @Prop({ reflect: true }) link?: boolean = false;
   // Modifiers
-  @Prop({ reflect: true }) primary: boolean;
-  @Prop({ reflect: true }) outline: boolean;
-  @Prop({ reflect: true }) danger: boolean;
-  @Prop({ reflect: true }) borderless: boolean;
-  @Prop({ reflect: true }) small: boolean;
-  @Prop({ reflect: true }) medium: boolean;
-  @Prop({ reflect: true }) large: boolean;
+  @Prop({ reflect: true }) primary?: boolean;
+  @Prop({ reflect: true }) outline?: boolean;
+  @Prop({ reflect: true }) danger?: boolean;
+  @Prop({ reflect: true }) borderless?: boolean;
+  @Prop({ reflect: true }) small?: boolean;
+  @Prop({ reflect: true }) medium?: boolean;
+  @Prop({ reflect: true }) large?: boolean;
   // State
   @State() iconOnly = false;
   // Computed

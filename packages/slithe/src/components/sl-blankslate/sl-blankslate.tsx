@@ -19,7 +19,7 @@ export class SlitheBlankslate {
   /**
    * The blankslate heading level
    */
-  @Prop() heading: 'h1'|'h2'|'h3'|'h4'|'h5'|'h6' = 'h3';
+  @Prop() heading?: 'h1'|'h2'|'h3'|'h4'|'h5'|'h6';
   // State
   @State() slots = {
     graphic: false,
@@ -28,6 +28,9 @@ export class SlitheBlankslate {
     actions: false
   };
   // Computed
+  get _heading () {
+    return this.heading || 'h3';
+  }
   get class () {
     return {
       'sl-blankslate': true,
@@ -61,9 +64,9 @@ export class SlitheBlankslate {
         <div class="graphic">
           <slot name='graphic' onSlotchange={this.handleSlotChange}/>
         </div>
-        <this.heading>
+        <this._heading>
           <slot name='heading' onSlotchange={this.handleSlotChange}/>
-        </this.heading>
+        </this._heading>
         <p>
           <slot onSlotchange={this.handleSlotChange}/>
         </p>

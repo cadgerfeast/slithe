@@ -2,6 +2,7 @@
 import { Component, Element, Event, EventEmitter, Prop, h } from '@stencil/core';
 import { syncWithTheme } from '../../helpers/theme';
 import { closest } from '../../helpers/dom';
+import { TextAutocomplete, ValidationLevel } from '../../helpers/form';
 
 @Component({
   tag: 'sl-input-text',
@@ -13,28 +14,51 @@ export class SlitheInputText {
   private control: HTMLSlFormControlElement|null;
   // Props
   /**
-   * @binding slInput
+   * @binding input
    */
   @Prop({ mutable: true }) value?: string;
-  @Prop() placeholder: string = '';
-  @Prop({ reflect: true }) disabled: boolean = false;
-  @Prop() type: 'text'|'password' = 'text';
+  @Prop() placeholder?: string = '';
+  @Prop({ reflect: true }) disabled?: boolean = false;
+  @Prop() type?: 'text'|'password' = 'text';
+  /**
+   * @import ValidationLevel,slithe
+   */
+  @Prop() status?: ValidationLevel|null = null;
+  /**
+   * @import TextAutocomplete,slithe
+   */
+  @Prop() autocomplete?: TextAutocomplete = 'off';
   // Modifiers
-  @Prop({ reflect: true }) small: boolean;
-  @Prop({ reflect: true }) medium: boolean;
+  @Prop({ reflect: true }) small?: boolean;
+  @Prop({ reflect: true }) medium?: boolean;
   // Computed
+  get class () {
+    return {
+      'sl-input-text': true,
+      [this.status]: !!this.status
+    };
+  }
   get size () {
     return Math.max(this.value ? this.value.length : 0, this.placeholder.length);
   }
   // Events
-  @Event() slInput: EventEmitter<string>;
+  @Event({ eventName: 'input' }) inputEvent: EventEmitter<string>;
+  @Event({ eventName: 'change' }) changeEvent: EventEmitter<string>;
   // TODO options
   // State
   private controlLabelClickListener: () => void;
   // Handlers
-  private handleInput () {
+  private handleInput (e: InputEvent) {
+    e.stopPropagation();
     this.value = this.input.value;
-    this.slInput.emit(this.value);
+    this.inputEvent.emit(this.value);
+  }
+  private async handleChange (e: Event) {
+    e.stopPropagation();
+    this.changeEvent.emit(this.value);
+    if (this.control) {
+      await this.control.validate();
+    }
   }
   private onControlLabelClick () {
     this.input.focus();
@@ -58,16 +82,18 @@ export class SlitheInputText {
   // Template
   render () {
     return (
-      <div class='sl-input-text'>
+      <div class={this.class}>
         <input
           ref={(el) => this.input = el}
           type={this.type}
+          autocomplete={this.autocomplete}
           name={this.control?.name}
           value={this.value}
           size={this.size}
           placeholder={this.placeholder}
           disabled={this.disabled}
-          onInput={() => this.handleInput()}
+          onInput={(e) => this.handleInput(e)}
+          onChange={(e) => this.handleChange(e)}
         />
       </div>
     );

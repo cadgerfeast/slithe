@@ -9,7 +9,7 @@ import { syncWithTheme } from '../../helpers/theme';
 export class SlitheBreadcrumb {
   @Element() host!: HTMLSlBreadcrumbElement;
   // Props
-  @Prop({ reflect: true }) active: boolean = false;
+  @Prop({ reflect: true }) active?: boolean = false;
   // Computed
   get class () {
     return {

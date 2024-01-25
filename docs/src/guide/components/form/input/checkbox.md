@@ -38,7 +38,7 @@ Makes the checkbox non-interactable.
 Triggered when the user toggles the value.
 
 <Preview>
-  <sl-input-checkbox label="I want to receive marketing emails." @input="notify(`value: ${$event.target.value}`)"/>
+  <sl-input-checkbox label="I want to receive marketing emails." @change="notify(`value: ${$event.target.value}`)"/>
 </Preview>
 
 ``` html

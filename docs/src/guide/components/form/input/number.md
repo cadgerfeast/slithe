@@ -86,12 +86,24 @@ Makes the input step when incrementing or decrementing.
 
 ## Events
 
-### Change
+### Input
 
-Triggered when the user toggles the value.
+Triggered when the user updates the value.
 
 <Preview>
   <sl-input-number placeholder="21" @input="notify(`value: ${$event.target.value}`)"/>
+</Preview>
+
+``` html
+<sl-input-number placeholder="21"/>
+```
+
+### Change
+
+Triggered when the user is done with updating the value.
+
+<Preview>
+  <sl-input-number placeholder="21" @change="notify(`value: ${$event.target.value}`)"/>
 </Preview>
 
 ``` html

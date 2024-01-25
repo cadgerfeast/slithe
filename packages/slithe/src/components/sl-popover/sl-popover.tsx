@@ -11,11 +11,11 @@ export class SlithePopover {
   @Element() host!: HTMLSlPopoverElement;
   // Props
   @Prop() target?: HTMLElement;
-  @Prop() position: 'top'|'right'|'bottom'|'left' = 'bottom';
+  @Prop() position?: 'top'|'right'|'bottom'|'left' = 'bottom';
   /**
-   * @import slithe
+   * @import Alignment,slithe
    */
-  @Prop() align: Alignment = 'start';
+  @Prop() align?: Alignment = 'start';
   // State
   @State() opened: boolean = false;
   private targetClickListener: () => void;

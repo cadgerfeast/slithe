@@ -57,12 +57,24 @@ Makes the input non-interactable.
 
 ## Events
 
-### Change
+### Input
 
-Triggered when the user toggles the value.
+Triggered when the user updates the value.
 
 <Preview>
   <sl-input-text placeholder="John Doe" @input="notify(`value: ${$event.target.value}`)"/>
+</Preview>
+
+``` html
+<sl-input-text placeholder="John Doe"/>
+```
+
+### Change
+
+Triggered when the user is done with updating the value.
+
+<Preview>
+  <sl-input-text placeholder="John Doe" @change="notify(`value: ${$event.target.value}`)"/>
 </Preview>
 
 ``` html

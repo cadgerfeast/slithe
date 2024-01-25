@@ -11,20 +11,20 @@ import { clamp } from '../../helpers/number';
 export class SlitheSplitter {
   @Element() host!: HTMLSlSplitterElement;
   // Props
-  @Prop() disabled: boolean = false;
-  @Prop() horizontal: boolean = true;
-  @Prop() vertical: boolean = false;
-  @Prop() blueSize: number = 50;
-  @Prop() minBlue: number = 0;
-  @Prop() maxBlue: number = 100;
-  @Prop() minGreen: number = 0;
-  @Prop() maxGreen: number = 100;
+  @Prop() disabled?: boolean = false;
+  @Prop() horizontal?: boolean = true;
+  @Prop() vertical?: boolean = false;
+  @Prop() blueSize?: number = 50;
+  @Prop() minBlue?: number = 0;
+  @Prop() maxBlue?: number = 100;
+  @Prop() minGreen?: number = 0;
+  @Prop() maxGreen?: number = 100;
   // State
   @State() _blueSize: number;
   @State() resizing: boolean = false;
   // Events
-  @Event() resizeStart: EventEmitter<void>;
-  @Event() resizeEnd: EventEmitter<number>;
+  @Event({ eventName: 'resizeStart' }) resizeStartEvent: EventEmitter<void>;
+  @Event({ eventName: 'resizeEnd' }) resizeEndEvent: EventEmitter<number>;
   // Computed
   get direction () {
     return this.vertical ? 'vertical' : 'horizontal';
@@ -59,9 +59,9 @@ export class SlitheSplitter {
   private setResizing (resizing: boolean) {
     this.resizing = resizing;
     if (this.resizing) {
-      this.resizeStart.emit();
+      this.resizeStartEvent.emit();
     } else {
-      this.resizeEnd.emit(this._blueSize);
+      this.resizeEndEvent.emit(this._blueSize);
     }
   }
   // Handlers

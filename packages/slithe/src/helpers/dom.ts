@@ -226,22 +226,22 @@ export function contains (parent: Element|ShadowRoot, child: Node) {
   return false;
 }
 
-export function querySelector (parent: HTMLElement|HTMLSlotElement|ShadowRoot, selector: string): HTMLElement {
+export function querySelector <T = HTMLElement> (parent: HTMLElement|HTMLSlotElement|ShadowRoot, selector: string): T {
   if (parent) {
     if (parent instanceof Element && parent.matches(selector)) {
-      return parent;
+      return parent as T;
     }
     if (parent instanceof Element && parent.shadowRoot) {
       const found = querySelector(parent.shadowRoot, selector);
       if (found) {
-        return found;
+        return found as T;
       }
     }
     if (parent instanceof HTMLSlotElement) {
       for (const child of parent.assignedNodes()) {
         const found = querySelector(child as HTMLElement, selector);
         if (found) {
-          return found;
+          return found as T;
         }
       }
     }
@@ -249,7 +249,7 @@ export function querySelector (parent: HTMLElement|HTMLSlotElement|ShadowRoot, s
       for (const child of Array.from(parent.children)) {
         const found = querySelector(child as HTMLElement, selector);
         if (found) {
-          return found;
+          return found as T;
         }
       }
     }
