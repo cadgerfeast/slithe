@@ -40,6 +40,9 @@ export class SlitheInputNumber {
   // State
   private controlLabelClickListener: () => void;
   // Computed
+  get _placeholder () {
+    return this.placeholder || '';
+  }
   get class () {
     return {
       'sl-input-number': true,
@@ -91,7 +94,7 @@ export class SlitheInputNumber {
           min={this.min}
           max={this.max}
           step={this.step}
-          placeholder={this.placeholder}
+          placeholder={this._placeholder}
           disabled={this.disabled}
           onInput={(e) => this.handleInput(e)}
           onChange={(e) => this.handleChange(e)}

@@ -32,6 +32,9 @@ export class SlitheInputText {
   @Prop({ reflect: true }) small?: boolean;
   @Prop({ reflect: true }) medium?: boolean;
   // Computed
+  get _placeholder () {
+    return this.placeholder || '';
+  }
   get class () {
     return {
       'sl-input-text': true,
@@ -39,7 +42,7 @@ export class SlitheInputText {
     };
   }
   get size () {
-    return Math.max(this.value ? this.value.length : 0, this.placeholder.length);
+    return Math.max(this.value ? this.value.length : 0, this._placeholder.length);
   }
   // Events
   @Event({ eventName: 'input' }) inputEvent: EventEmitter<string>;
@@ -90,7 +93,7 @@ export class SlitheInputText {
           name={this.control?.name}
           value={this.value}
           size={this.size}
-          placeholder={this.placeholder}
+          placeholder={this._placeholder}
           disabled={this.disabled}
           onInput={(e) => this.handleInput(e)}
           onChange={(e) => this.handleChange(e)}

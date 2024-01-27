@@ -10,7 +10,7 @@
 <% if (it.wrapper.props.length > 0) { %>
 	// Props
 <% it.wrapper.props.forEach((prop) => { %>
-	export let <%= prop.name %>: <%~ prop.type %><% if (!prop.required) { %>|undefined<% } %>;
+	export let <%= prop.name %>: <%~ prop.type %><% if (!prop.required) { %>|undefined = undefined<% } %>;
 <% }) %>
 <% } %>
 <% if (it.wrapper.bindings.length > 0) { %>
