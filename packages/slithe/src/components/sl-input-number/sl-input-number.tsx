@@ -4,6 +4,10 @@ import { syncWithTheme } from '../../helpers/theme';
 import { closest } from '../../helpers/dom';
 import { NumberAutocomplete, ValidationLevel } from '../../helpers/form';
 
+/**
+ * @import NumberAutocomplete,slithe
+ * @import ValidationLevel,slithe
+ */
 @Component({
   tag: 'sl-input-number',
   shadow: true
@@ -22,13 +26,7 @@ export class SlitheInputNumber {
   @Prop() min?: number;
   @Prop() max?: number;
   @Prop() step?: number;
-  /**
-   * @import NumberAutocomplete,slithe
-   */
   @Prop() autocomplete?: NumberAutocomplete = 'off';
-  /**
-   * @import ValidationLevel,slithe
-   */
   @Prop() status?: ValidationLevel|null = null;
   // Modifiers
   @Prop({ reflect: true }) small?: boolean;

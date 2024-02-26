@@ -1,0 +1,8 @@
+{
+	"name": "@shared/utils",
+	"private": true,
+	"type": "module",
+	"exports": {
+		"./docs": "./docs.js"
+	}
+}

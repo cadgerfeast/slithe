@@ -44,6 +44,7 @@
     "svelte": "^4.2.9"
   },
   "devDependencies": {
+    "@shared/utils": "*",
     "@sveltejs/adapter-auto": "^3.1.1",
     "@sveltejs/kit": "^2.4.3",
     "@sveltejs/package": "^2.2.6",

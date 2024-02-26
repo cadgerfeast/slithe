@@ -5,6 +5,9 @@ import { closest } from '../../helpers/dom';
 import { ValidationLevel } from '../../helpers/form';
 import { config } from '../../helpers/config';
 
+/**
+ * @import ValidationLevel,slithe
+ */
 @Component({
   tag: 'sl-input-checkbox',
   shadow: true
@@ -20,9 +23,6 @@ export class SlitheInputCheckbox {
   @Prop({ mutable: true }) value: boolean = false;
   @Prop({ reflect: true }) disabled?: boolean = false;
   @Prop() label?: string = '';
-  /**
-   * @import ValidationLevel,slithe
-   */
   @Prop() status?: ValidationLevel|null = null;
   // Events
   @Event({ eventName: 'input' }) inputEvent: EventEmitter<boolean>;

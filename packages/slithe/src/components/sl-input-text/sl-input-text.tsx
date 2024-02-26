@@ -4,6 +4,10 @@ import { syncWithTheme } from '../../helpers/theme';
 import { closest } from '../../helpers/dom';
 import { TextAutocomplete, ValidationLevel } from '../../helpers/form';
 
+/**
+ * @import TextAutocomplete,slithe
+ * @import ValidationLevel,slithe
+ */
 @Component({
   tag: 'sl-input-text',
   shadow: true
@@ -20,13 +24,7 @@ export class SlitheInputText {
   @Prop() placeholder?: string = '';
   @Prop({ reflect: true }) disabled?: boolean = false;
   @Prop() type?: 'text'|'password' = 'text';
-  /**
-   * @import ValidationLevel,slithe
-   */
   @Prop() status?: ValidationLevel|null = null;
-  /**
-   * @import TextAutocomplete,slithe
-   */
   @Prop() autocomplete?: TextAutocomplete = 'off';
   // Modifiers
   @Prop({ reflect: true }) small?: boolean;

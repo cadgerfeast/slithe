@@ -3,6 +3,9 @@ import { Component, Element, Method, Prop, State, Watch, h } from '@stencil/core
 import { syncWithTheme } from '../../helpers/theme';
 import { Alignment, contains } from '../../helpers/dom';
 
+/**
+ * @import Alignment,slithe
+ */
 @Component({
   tag: 'sl-popover',
   shadow: true
@@ -12,9 +15,6 @@ export class SlithePopover {
   // Props
   @Prop() target?: HTMLElement;
   @Prop() position?: 'top'|'right'|'bottom'|'left' = 'bottom';
-  /**
-   * @import Alignment,slithe
-   */
   @Prop() align?: Alignment = 'start';
   // State
   @State() opened: boolean = false;

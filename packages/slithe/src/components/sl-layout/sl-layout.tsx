@@ -20,6 +20,9 @@ import { syncWithTheme } from '../../helpers/theme';
 import { Deferred } from '../../helpers/time';
 import { config } from '../../helpers/config';
 
+/**
+ * @import Model,slithe
+ */
 @Component({
   tag: 'sl-layout',
   shadow: true
@@ -31,9 +34,6 @@ export class SlitheLayout {
   private ready = new Deferred();
   private group!: string;
   // Props
-  /**
-   * @import Model,slithe
-   */
   @Prop() model?: Model = { id: crypto.randomUUID(), type: 'tabs', items: [] };
   // State
   @State() root: boolean = false;

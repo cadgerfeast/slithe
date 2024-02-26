@@ -5,6 +5,9 @@ import { Validation, ValidationHandler, noValidation } from '../../helpers/form'
 import { config } from '../../helpers/config';
 import { querySelector } from '../../helpers/dom';
 
+/**
+ * @import ValidationHandler,slithe
+ */
 @Component({
   tag: 'sl-form-control',
   shadow: true
@@ -16,9 +19,6 @@ export class SlitheFormControl {
   @Prop() caption?: string = '';
   @Prop() name?: string = crypto.randomUUID();
   @Prop({ reflect: true }) required?: boolean = false;
-  /**
-   * @import ValidationHandler,slithe
-   */
   @Prop() validation?: ValidationHandler = noValidation;
   // State
   @State() status: Validation|null = null;

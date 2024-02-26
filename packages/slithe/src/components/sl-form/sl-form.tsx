@@ -4,6 +4,9 @@ import { syncWithTheme } from '../../helpers/theme';
 import { ValidationLevel } from '../../helpers/form';
 import { querySelectorAll } from '../../helpers/dom';
 
+/**
+ * @import ValidationLevel,slithe
+ */
 @Component({
   tag: 'sl-form',
   shadow: true
