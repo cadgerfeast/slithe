@@ -10,11 +10,12 @@
   "scripts": {
     "prepare": "husky install",
     "commitlint": "commitlint --edit",
+    "generate": "nx run slithe:generate",
     "dev": "nx run-many -t dev --output-style=stream",
     "build": "nx run-many -t build --output-style=stream",
     "test": "nx run-many -t test --output-style=stream",
     "lint": "nx run-many -t lint --output-style=stream",
-    "preview": "nx preview docs",
+    "preview": "nx run docs:preview",
     "version": "lerna version",
     "changelog": "vertis generate",
     "publish": "lerna publish from-package",

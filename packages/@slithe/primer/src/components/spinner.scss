@@ -1,0 +1,10 @@
+div.sl-spinner {
+	> svg {
+		animation: 1s linear 0s infinite normal none running infinite-rotation;
+	}
+}
+@keyframes infinite-rotation {
+	100% {
+		transform: rotate(360deg);
+	}
+}
