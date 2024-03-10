@@ -21,6 +21,7 @@ export class SlitheButton {
   @Prop({ reflect: true }) small?: boolean;
   @Prop({ reflect: true }) medium?: boolean;
   @Prop({ reflect: true }) large?: boolean;
+  @Prop({ reflect: true }) block?: boolean = false;
   // State
   @State() iconOnly = false;
   // Computed
@@ -48,7 +49,7 @@ export class SlitheButton {
   // Lifecycle
   connectedCallback () {
     syncWithTheme(this.host, {
-      'display': 'inline-flex',
+      'display': this.block ? 'flex' : 'inline-flex',
       'vertical-align': 'middle'
     });
     attachTooltip(this.host);

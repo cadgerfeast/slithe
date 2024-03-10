@@ -3,6 +3,11 @@ import { Component, Element, h, Prop, State } from '@stencil/core';
 import { syncWithTheme } from '../../helpers/theme';
 import { isEmptySlot } from '../../helpers/dom';
 
+/**
+ * @slot header - Slot for the card header
+ * @slot default - Slot for the card default content
+ * @slot footer - Slot for the card footer
+ */
 @Component({
   tag: 'sl-card',
   shadow: true

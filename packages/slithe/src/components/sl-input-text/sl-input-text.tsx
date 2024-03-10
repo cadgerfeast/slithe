@@ -29,6 +29,7 @@ export class SlitheInputText {
   // Modifiers
   @Prop({ reflect: true }) small?: boolean;
   @Prop({ reflect: true }) medium?: boolean;
+  @Prop({ reflect: true }) block?: boolean = false;
   // Computed
   get _placeholder () {
     return this.placeholder || '';

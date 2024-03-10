@@ -61,4 +61,9 @@
 
 <<%= it.wrapper.tagName %> bind:this={ref}<% it.wrapper.props.forEach((prop) => { %> {<%= prop.name %>}<% }) %>>
 	<slot/>
+<% if (it.wrapper.slots.length > 0) { %>
+<% it.wrapper.slots.forEach((slot) => { %>
+	<slot name='<%= slot %>' slot='<%= slot %>'/>
+<% }) %>
+<% } %>
 </<%= it.wrapper.tagName %>>

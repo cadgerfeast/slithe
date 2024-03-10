@@ -23,6 +23,10 @@
   --sl-input-number-font-size: 12px;
   --sl-input-number-padding: 3px 12px;
 }
+// Block
+:host([block]) {
+  --sl-input-number-width: 100%;
+}
 // Disabled
 :host([disabled]) {
   pointer-events: none;
@@ -35,6 +39,7 @@ div.sl-input-number {
   flex-direction: row;
   align-items: center;
   user-select: none;
+	width: var(--sl-input-number-width, auto);
 	&.success {
 		> input {
 			border-color: var(--sl-input-number-status-success-color);
@@ -46,6 +51,7 @@ div.sl-input-number {
 		}
 	}
   > input {
+		width: inherit;
 		padding: var(--sl-input-number-padding, 5px 12px);
 		font-size: var(--sl-input-number-font-size, 14px);
 		line-height: 20px;

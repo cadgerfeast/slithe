@@ -31,6 +31,7 @@ export class SlitheInputNumber {
   // Modifiers
   @Prop({ reflect: true }) small?: boolean;
   @Prop({ reflect: true }) medium?: boolean;
+  @Prop({ reflect: true }) block?: boolean = false;
   // Events
   @Event({ eventName: 'input' }) inputEvent: EventEmitter<number>;
   @Event({ eventName: 'change' }) changeEvent: EventEmitter<number>;
