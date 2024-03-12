@@ -1,7 +1,7 @@
 // Helpers
 import octicons from '@primer/octicons';
 // Constants
-const styles = import.meta.glob<{ default: string }>('./components/**/*.scss', { as: 'inline', eager: true });
+const styles = import.meta.glob<{ default: string }>('./components/**/*.scss', { query: '?inline', eager: true });
 const components: Record<string, CSSStyleSheet> = {};
 const icons: Record<string, string> = {};
 
