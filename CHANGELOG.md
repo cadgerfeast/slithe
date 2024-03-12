@@ -1,5 +1,41 @@
 # Changelog
 
+## [12/03/2024 - 10:51](https://github.com/cadgerfeast/slithe/compare/slithe@0.3.1...slithe@0.4.0)
+
+### 🚀 Releases
+
+- `slithe`: *0.3.1* -> **0.4.0**
+
+- `@slithe/vue`: *0.0.3* -> **0.1.0**
+
+- `@slithe/svelte`: *0.0.2* -> **0.1.0**
+
+- `@slithe/primer`: *0.0.3* -> **0.1.0**
+
+### ✨ New Features
+
+- add spinner component ([e813c48](https://github.com/cadgerfeast/slithe/commit/e813c480f21d0c1551a8dbf1f6d61e79c69fe339))
+
+- add form validation capability ([1631ebb](https://github.com/cadgerfeast/slithe/commit/1631ebb5debaacc7d292e39c35cdff90efa06912))
+
+### 🐛 Bug Fixes
+
+- add shared utils, add events to svelte wrappers ([c0df7c5](https://github.com/cadgerfeast/slithe/commit/c0df7c5a552c00010a199a9170be8a8f9dac6c7a))
+
+- add undefined default for svelte props ([05acf74](https://github.com/cadgerfeast/slithe/commit/05acf7432f0750c8487930bcad136bd0050d4b71))
+
+### 🎨 Style
+
+- add block styles to input components ([6697ac0](https://github.com/cadgerfeast/slithe/commit/6697ac0f69ecbe004b8924bb798ac7e13c0fc94c))
+
+### 📦 Builds
+
+- upgrade dependencies ([ca68ed0](https://github.com/cadgerfeast/slithe/commit/ca68ed0f66b1e92da38161e0ec2aa14650ae4f39))
+
+### 🏗 Chores
+
+- changelog ([03189ac](https://github.com/cadgerfeast/slithe/commit/03189acc438063736e3e8beb9804ab6ea2a3ae4d))
+
 ## [24/01/2024 - 09:40](https://github.com/cadgerfeast/slithe/compare/slithe@0.3.0...slithe@0.3.1)
 
 ### 🚀 Releases
