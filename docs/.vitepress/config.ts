@@ -72,6 +72,7 @@ export default defineConfig({
 								}
 							]
 						},
+						{ text: 'Flash', link: '/guide/components/flash' },
 						{ text: 'Icon', link: '/guide/components/icon' },
 						{ text: 'Keyboard', link: '/guide/components/keyboard' },
 						{ text: 'Layout', link: '/guide/components/layout' },

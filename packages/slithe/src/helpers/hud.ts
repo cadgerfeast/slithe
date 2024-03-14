@@ -1,12 +1,16 @@
+import { AlertLevel } from './types';
+
 export interface Notification {
-  type: string;
+  type: AlertLevel;
   icon: {
     name: string;
     size: string;
   };
   message: string;
 }
+
 let hud: HTMLSlHudElement;
+
 export function addNotification (notification: Notification) {
   if (!hud) {
     hud = document.createElement('sl-hud');
