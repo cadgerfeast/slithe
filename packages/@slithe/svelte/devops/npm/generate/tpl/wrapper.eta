@@ -39,6 +39,14 @@
 <% }) %>
   };
 <% } %>
+<% if (it.wrapper.methods.length > 0) { %>
+  // Methods
+<% it.wrapper.methods.forEach((method) => { %>
+  export async function <%= method.name %> (<% method.parameters.forEach((parameter) => { %><%= parameter.name %>: <%~ parameter.type %>, <% }) %>): <%~ method.return %> {
+	  return ref.<%= method.name %>(<% method.parameters.forEach((parameter) => { %><%= parameter.name %>, <% }) %>);
+	}
+<% }) %>
+<% } %>
 	// Lifecycle
 	onMount(() => {
 <% it.wrapper.bindings.forEach((binding) => { %>

@@ -7,6 +7,7 @@ import { querySelector } from '../../helpers/dom';
 
 /**
  * @import ValidationHandler,slithe
+ * @import Validation,slithe
  */
 @Component({
   tag: 'sl-form-control',

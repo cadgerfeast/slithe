@@ -15,12 +15,16 @@ export class SlitheForm {
   @Element() host!: HTMLSlFormElement;
   // Events
   @Event({ eventName: 'submit' }) submitEvent: EventEmitter<ValidationLevel>;
+  @Event({ eventName: 'input' }) inputEvent: EventEmitter<void>;
   // Methods
   @Method()
   async submit () {
     const formControls = querySelectorAll<HTMLSlFormControlElement>(this.host, 'sl-form-control');
     const res = await Promise.all(formControls.map((formControl) => formControl.validate()));
     this.submitEvent.emit(res.find((validation) => validation?.type === 'failure') ? 'failure' : 'success');
+  }
+  private handleInput () {
+    this.inputEvent.emit();
   }
   // Lifecycle
   connectedCallback () {
@@ -29,7 +33,7 @@ export class SlitheForm {
   // Template
   render () {
     return (
-      <form class='sl-form'>
+      <form class='sl-form' onInput={() => this.handleInput()}>
         <slot/>
       </form>
     );

@@ -13,6 +13,7 @@ export function computeComponentWrappers () {
     const bindings = [];
 		const events = component.events.map(({ event, complexType }) => ({ name: event, type: complexType.original }));
     const slots = component.slots.map(({ name }) => name).filter((slot) => slot !== 'default');
+    const methods = component.methods.map(({ name, complexType }) => ({ name, parameters: complexType.parameters, return: complexType.return }));
 		for (const docsTag of component.docsTags) {
 			switch (docsTag.name) {
 				case 'import': {
@@ -53,6 +54,7 @@ export function computeComponentWrappers () {
       props,
       imports,
       bindings,
+      methods,
       slots,
 			events
     };
