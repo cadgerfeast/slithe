@@ -9,9 +9,9 @@ export type Validation = {
 
 export type ValidationHandler = (value: Primitive) => Validation|void;
 
-export function noValidation () { return; }
+export const noValidation: ValidationHandler = () => { return; };
 
-export function emailValidation (value: string): Validation {
+export const emailValidation: ValidationHandler = (value: string) => {
 	const isValid = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(value);
 	if (isValid) {
 		return { type: 'success', message: 'Email is valid.' };
