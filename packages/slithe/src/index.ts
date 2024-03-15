@@ -8,3 +8,4 @@ export { attachTooltip } from './helpers/dom';
 export { addNotification, Notification } from './helpers/hud';
 export { Model, SplitterModel, TabModel, TabsModel } from './helpers/model';
 export { Validation, ValidationLevel, ValidationHandler, noValidation, emailValidation, TextAutocomplete, NumberAutocomplete } from './helpers/form';
+export { AlertLevel } from './helpers/types';

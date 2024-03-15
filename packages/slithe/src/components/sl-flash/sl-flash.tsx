@@ -3,6 +3,9 @@ import { Component, Element, Prop, h } from '@stencil/core';
 import { syncWithTheme, updateStyle } from '../../helpers/theme';
 import { AlertLevel } from '../../helpers/types';
 
+/**
+ * @import AlertLevel,slithe
+ */
 @Component({
   tag: 'sl-flash',
   shadow: true
