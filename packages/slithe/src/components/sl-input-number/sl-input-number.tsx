@@ -1,6 +1,6 @@
 // Helpers
 import { Component, Element, Event, EventEmitter, Prop, h } from '@stencil/core';
-import { syncWithTheme } from '../../helpers/theme';
+import { syncWithTheme, updateStyle } from '../../helpers/theme';
 import { closest } from '../../helpers/dom';
 import { NumberAutocomplete, ValidationLevel } from '../../helpers/form';
 
@@ -71,7 +71,8 @@ export class SlitheInputNumber {
       this.controlLabelClickListener = this.onControlLabelClick.bind(this);
       this.control.addEventListener('labelClick', this.controlLabelClickListener);
     }
-    syncWithTheme(this.host, {
+    syncWithTheme(this.host);
+    updateStyle(this.host, {
       'display': 'flex'
     });
   }

@@ -1,6 +1,6 @@
 // Helpers
 import { Component, Element, h, Prop, State } from '@stencil/core';
-import { syncWithTheme } from '../../helpers/theme';
+import { syncWithTheme, updateStyle } from '../../helpers/theme';
 import { isEmptySlot } from '../../helpers/dom';
 
 /**
@@ -44,7 +44,8 @@ export class SlitheCard {
   }
   // Lifecycle
   connectedCallback () {
-    syncWithTheme(this.host, {
+    syncWithTheme(this.host);
+    updateStyle(this.host, {
       'display': 'flex'
     });
   }

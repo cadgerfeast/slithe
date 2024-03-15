@@ -1,6 +1,6 @@
 // Helpers
 import { Component, Element, Event, EventEmitter, Prop, h } from '@stencil/core';
-import { syncWithTheme } from '../../helpers/theme';
+import { syncWithTheme, updateStyle } from '../../helpers/theme';
 import { closest } from '../../helpers/dom';
 import { ValidationLevel } from '../../helpers/form';
 import { config } from '../../helpers/config';
@@ -56,7 +56,8 @@ export class SlitheInputCheckbox {
   // Lifecycle
   connectedCallback () {
     this.control = closest(this.host, 'sl-form-control');
-    syncWithTheme(this.host, {
+    syncWithTheme(this.host);
+    updateStyle(this.host, {
       'display': 'flex'
     });
   }

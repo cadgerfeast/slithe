@@ -1,6 +1,6 @@
 // Helpers
 import { Component, Element, Prop, h } from '@stencil/core';
-import { syncWithTheme } from '../../helpers/theme';
+import { syncWithTheme, updateStyle } from '../../helpers/theme';
 import { AlertLevel } from '../../helpers/types';
 
 @Component({
@@ -14,7 +14,8 @@ export class SlitheFlash {
   @Prop() icon?: string;
   // Lifecycle
   connectedCallback () {
-    syncWithTheme(this.host, {
+    syncWithTheme(this.host);
+    updateStyle(this.host, {
       'display': 'block'
     });
   }

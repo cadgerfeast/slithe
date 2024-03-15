@@ -16,7 +16,7 @@ import {
 } from '../../helpers/model';
 import { closest, createDraggableList, createDropzoneBox, Position, querySelectorAll } from '../../helpers/dom';
 import { clone } from '../../helpers/object';
-import { syncWithTheme } from '../../helpers/theme';
+import { syncWithTheme, updateStyle } from '../../helpers/theme';
 import { Deferred } from '../../helpers/time';
 import { config } from '../../helpers/config';
 
@@ -208,7 +208,8 @@ export class SlitheLayout {
   }
   // Lifecycle
   async connectedCallback () {
-    syncWithTheme(this.host, {
+    syncWithTheme(this.host);
+    updateStyle(this.host, {
       'display': 'block',
       'position': 'relative',
       'height': '100%'

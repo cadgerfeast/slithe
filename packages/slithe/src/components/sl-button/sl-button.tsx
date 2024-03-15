@@ -1,7 +1,7 @@
 // Helpers
-import { Component, Prop, Element, h, State } from '@stencil/core';
+import { Component, Prop, Element, h, State, Watch } from '@stencil/core';
 import { closest, attachTooltip, getValidSlotChildren } from '../../helpers/dom';
-import { syncWithTheme } from '../../helpers/theme';
+import { syncWithTheme, updateStyle } from '../../helpers/theme';
 
 @Component({
   tag: 'sl-button',
@@ -31,6 +31,13 @@ export class SlitheButton {
       'icon-only': this.iconOnly
     };
   }
+  // Methods
+  private updateHostStyle () {
+    updateStyle(this.host, {
+      'display': this.block ? 'flex' : 'inline-flex',
+      'vertical-align': 'middle'
+    });
+  }
   // Handlers
   private handleClick () {
     if (this.type === 'submit') {
@@ -40,18 +47,19 @@ export class SlitheButton {
       }
     }
   }
-  // Handlers
   private handleSlotChange (e: Event) {
     const slot = e.target as HTMLSlotElement;
     const children = getValidSlotChildren(slot);
     this.iconOnly = children.length === 1 && children[0].nodeName === 'SL-ICON';
   }
+  @Watch('block')
+  onBlockChange () {
+    this.updateHostStyle();
+  }
   // Lifecycle
   connectedCallback () {
-    syncWithTheme(this.host, {
-      'display': this.block ? 'flex' : 'inline-flex',
-      'vertical-align': 'middle'
-    });
+    syncWithTheme(this.host);
+    this.updateHostStyle();
     attachTooltip(this.host);
   }
   // Template

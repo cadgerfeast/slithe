@@ -1,7 +1,7 @@
 // Helpers
 import { Component, Element, h, Prop, State, Listen, Event, EventEmitter } from '@stencil/core';
 import { MouseButton } from '../../helpers/browser';
-import { syncWithTheme } from '../../helpers/theme';
+import { syncWithTheme, updateStyle } from '../../helpers/theme';
 import { clamp } from '../../helpers/number';
 
 @Component({
@@ -90,7 +90,8 @@ export class SlitheSplitter {
   }
   // Lifecycle
   connectedCallback () {
-    syncWithTheme(this.host, {
+    syncWithTheme(this.host);
+    updateStyle(this.host, {
       'display': 'block',
       'height': '100%'
     });

@@ -1,6 +1,6 @@
 // Helpers
 import { Component, Element, Method, Prop, State, Watch, h } from '@stencil/core';
-import { syncWithTheme } from '../../helpers/theme';
+import { syncWithTheme, updateStyle } from '../../helpers/theme';
 import { Alignment, contains } from '../../helpers/dom';
 
 /**
@@ -188,7 +188,8 @@ export class SlithePopover {
   }
   // Lifecycle
   connectedCallback () {
-    syncWithTheme(this.host, {
+    syncWithTheme(this.host);
+    updateStyle(this.host, {
       'display': 'inline-flex'
     });
     this.updateTargetListener(this.currentTarget);

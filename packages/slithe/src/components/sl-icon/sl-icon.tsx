@@ -1,7 +1,7 @@
 // Helpers
 import { Component, Element, h, Prop } from '@stencil/core';
 import { attachTooltip } from '../../helpers/dom';
-import { syncWithTheme, theme } from '../../helpers/theme';
+import { syncWithTheme, updateStyle, theme } from '../../helpers/theme';
 
 @Component({
   tag: 'sl-icon',
@@ -15,6 +15,8 @@ export class SlitheIcon {
   // Computed
   get style () {
     return {
+      'display': 'inline-flex',
+      'align-items': 'center',
       'width': `var(--sl-icon-size, ${this.size})`,
       'height': `var(--sl-icon-size, ${this.size})`
     };
@@ -24,7 +26,8 @@ export class SlitheIcon {
   }
   // Lifecycle
   connectedCallback () {
-    syncWithTheme(this.host, {
+    syncWithTheme(this.host);
+    updateStyle(this.host, {
       'display': 'inline-flex',
       'align-items': 'center'
     });

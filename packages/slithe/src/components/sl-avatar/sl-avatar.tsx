@@ -1,6 +1,6 @@
 // Helpers
 import { Component, Element, Prop, h } from '@stencil/core';
-import { syncWithTheme } from '../../helpers/theme';
+import { syncWithTheme, updateStyle } from '../../helpers/theme';
 import { attachTooltip } from '../../helpers/dom';
 
 @Component({
@@ -37,7 +37,8 @@ export class SlitheAvatar {
   }
   // Lifecycle
   connectedCallback () {
-    syncWithTheme(this.host, {
+    syncWithTheme(this.host);
+    updateStyle(this.host, {
       'display': 'inline-flex',
       'vertical-align': 'middle'
     });

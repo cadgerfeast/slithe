@@ -42,6 +42,9 @@ Size defaults to `medium`.
   <sl-button medium>Medium</sl-button>
   <sl-button large>Large</sl-button>
 </Preview>
+<Preview title="Block">
+  <sl-button block>Block</sl-button>
+</Preview>
 
 ``` html
 <!-- Variants -->
@@ -54,6 +57,8 @@ Size defaults to `medium`.
 <sl-button small>Small</sl-button>
 <sl-button medium>Medium</sl-button>
 <sl-button large>Large</sl-button>
+<!-- Block -->
+<sl-button block>Block</sl-button>
 ```
 
 ## Attributes

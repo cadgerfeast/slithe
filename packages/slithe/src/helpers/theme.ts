@@ -7,7 +7,7 @@ interface Theme {
   fallbackIcon: string;
 }
 
-const { state, onChange } = createStore({
+const themeStore = createStore({
   key: 'light',
   model: {
     components: {},
@@ -16,48 +16,51 @@ const { state, onChange } = createStore({
   }
 });
 
-export { state as theme };
+export const theme = themeStore.state;
 
 export function setTheme (newTheme: string, newModel?: Theme) {
   if (newModel) {
-    state.model = newModel;
+    themeStore.state.model = newModel;
   }
-  state.key = newTheme;
+  themeStore.state.key = newTheme;
 }
 
-export const hostStylesheets: Map<string, CSSStyleSheet> = new Map();
+const styleStore = createStore({
+  stylesheets: new Map<HTMLElement, CSSStyleSheet>()
+});
 
-export function syncWithTheme (element: HTMLElement, style?: Record<string, string>) {
-  if (style && !hostStylesheets.has(element.tagName)) {
-    const hostStylesheet = new CSSStyleSheet();
-    hostStylesheet.replaceSync(`:host { ${Object.entries(style).map(([key, value]) => `${key}: ${value};`).join(' ')} }`);
-    hostStylesheets.set(element.tagName, hostStylesheet);
-  }
-  // Initialize
-  element.setAttribute('sl-theme', state.key);
+export function syncWithTheme (element: HTMLElement) {
   const tagName = element.tagName.toLowerCase().slice(3);
-  let stylesheet = state.model.components[tagName];
+  // Initialize
+  element.setAttribute('sl-theme', themeStore.state.key);
+  let stylesheet = themeStore.state.model.components[tagName];
   if (stylesheet) {
     element.shadowRoot.adoptedStyleSheets = [stylesheet];
-    if (hostStylesheets.has(element.tagName)) {
-      element.shadowRoot.adoptedStyleSheets.push(hostStylesheets.get(element.tagName));
+    if (styleStore.get('stylesheets').has(element)) {
+      element.shadowRoot.adoptedStyleSheets.push(styleStore.get('stylesheets').get(element));
     }
   }
   // Reactive
   function onThemeUpdate () {
-    for (const key in style) {
-      element.style[key] = style[key];
-    }
-    element.setAttribute('sl-theme', state.key);
-    const newStylesheet = state.model.components[tagName];
+    element.setAttribute('sl-theme', themeStore.state.key);
+    const newStylesheet = themeStore.state.model.components[tagName];
     if (newStylesheet && (stylesheet !== newStylesheet)) {
       stylesheet = newStylesheet;
       element.shadowRoot.adoptedStyleSheets = [stylesheet];
-      if (hostStylesheets.has(element.tagName)) {
-        element.shadowRoot.adoptedStyleSheets.push(hostStylesheets.get(element.tagName));
+      if (styleStore.get('stylesheets').has(element)) {
+        element.shadowRoot.adoptedStyleSheets.push(styleStore.get('stylesheets').get(element));
       }
     }
   }
-  onChange('key', onThemeUpdate);
-  onChange('model', onThemeUpdate);
+  themeStore.onChange('key', onThemeUpdate);
+  themeStore.onChange('model', onThemeUpdate);
+  styleStore.onChange('stylesheets', onThemeUpdate);
+}
+
+export function updateStyle (element: HTMLElement, style: Record<string, string>) {
+  const hostStylesheets = new Map(styleStore.get('stylesheets'));
+  const hostStylesheet = new CSSStyleSheet();
+  hostStylesheet.replaceSync(`:host { ${Object.entries(style).map(([key, value]) => `${key}: ${value};`).join(' ')} }`);
+  hostStylesheets.set(element, hostStylesheet);
+  styleStore.set('stylesheets', hostStylesheets)
 }

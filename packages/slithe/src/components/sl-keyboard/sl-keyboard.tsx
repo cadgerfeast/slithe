@@ -1,6 +1,6 @@
 // Helpers
 import { Component, Element, h } from '@stencil/core';
-import { syncWithTheme } from '../../helpers/theme';
+import { syncWithTheme, updateStyle } from '../../helpers/theme';
 
 @Component({
   tag: 'sl-keyboard',
@@ -10,7 +10,8 @@ export class SlitheKeyboard {
   @Element() host!: HTMLSlKeyboardElement;
   // Lifecycle
   connectedCallback () {
-    syncWithTheme(this.host, {
+    syncWithTheme(this.host);
+    updateStyle(this.host, {
       'display': 'inline-flex'
     });
   }

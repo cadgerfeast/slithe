@@ -1,6 +1,6 @@
 // Helpers
 import { Component, Element, h, Prop } from '@stencil/core';
-import { syncWithTheme } from '../../helpers/theme';
+import { syncWithTheme, updateStyle } from '../../helpers/theme';
 
 @Component({
   tag: 'sl-tabs',
@@ -12,7 +12,8 @@ export class SlitheTabs {
   @Prop({ reflect: true }) small?: boolean = false;
   // Lifecycle
   connectedCallback () {
-    syncWithTheme(this.host, {
+    syncWithTheme(this.host);
+    updateStyle(this.host, {
       'display': 'flex'
     });
   }
