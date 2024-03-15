@@ -1,9 +1,9 @@
 // Helpers
 import { Component, Element, Event, EventEmitter, Method, Prop, State, h } from '@stencil/core';
 import { syncWithTheme } from '../../helpers/theme';
-import { Validation, ValidationHandler, noValidation } from '../../helpers/form';
+import { Validation, ValidationHandler, formStore, noValidation, updateFormControlStatus } from '../../helpers/form';
 import { config } from '../../helpers/config';
-import { querySelector } from '../../helpers/dom';
+import { closest, querySelector } from '../../helpers/dom';
 
 /**
  * @import ValidationHandler,slithe
@@ -15,13 +15,15 @@ import { querySelector } from '../../helpers/dom';
 })
 export class SlitheFormControl {
   @Element() host!: HTMLSlFormControlElement;
+  private form: HTMLSlFormElement|null;
   // Props
   @Prop() label?: string = '';
   @Prop() caption?: string = '';
   @Prop() name?: string = crypto.randomUUID();
   @Prop({ reflect: true }) required?: boolean = false;
-  @Prop() validation?: ValidationHandler = noValidation;
+  @Prop() validator?: ValidationHandler = noValidation;
   // State
+  @State() isValidating: boolean = false;
   @State() status: Validation|null = null;
   // Computed
   get statusIcon () {
@@ -40,8 +42,8 @@ export class SlitheFormControl {
   }
   // Methods
   @Method()
-  public async validate (): Promise<Validation|null> {
-    this.status = null;
+  public async validate (shouldDisplay: boolean): Promise<Validation|null> {
+    let status: Validation|null = null;
     const field = (
       querySelector<HTMLSlInputTextElement>(this.host, 'sl-input-text') ||
       querySelector<HTMLSlInputNumberElement>(this.host, 'sl-input-number') ||
@@ -49,19 +51,33 @@ export class SlitheFormControl {
     );
     if (field) {
       if (this.required && (!field.value || !field.value.toString().trim())) {
-        this.status = { type: 'failure', message: 'Field cannot be left empty.' };
-      } else if (this.validation) {
-        this.status = this.validation(field.value) || null;
+        status = { type: 'failure', message: 'Field cannot be left empty.' };
+      } else if (this.validator) {
+        if (shouldDisplay) {
+          this.isValidating = true;
+        }
+        status = await this.validator(field.value) || null;
+        this.isValidating = false;
       } else if (this.required) {
-        this.status = { type: 'success' };
+        status = { type: 'success' };
       }
-      field.status = this.status ? this.status.type : null;
     }
-    return this.status;
+    if (this.form) {
+      updateFormControlStatus(this.form, this.host, status, shouldDisplay);
+    }
+    return status;
   }
   // Lifecycle
   connectedCallback () {
+    this.form = closest(this.host, 'sl-form');
     syncWithTheme(this.host);
+    formStore.onChange('forms', (forms) => {
+      const form = forms.get(this.form);
+      if (form) {
+        const validation = form.validations.get(this.host);
+        this.status = (validation && validation.shouldDisplay) ? validation.status : null;
+      }
+    });
   }
   // Template
   render () {
@@ -69,7 +85,8 @@ export class SlitheFormControl {
       <div class='sl-form-control'>
         {this.label && <sl-label name={this.name} required={this.required} onClick={() => this.handleLabelClick()}>{this.label}</sl-label>}
         <slot/>
-        {this.status?.message && <div class={`status ${this.status.type}`}><sl-icon name={this.statusIcon} size='12px'/><span>{this.status.message}</span></div>}
+        {this.isValidating && <sl-spinner small/>}
+        {!this.isValidating && this.status?.message && <div class={`status ${this.status.type}`}><sl-icon name={this.statusIcon} size='12px'/><span>{this.status.message}</span></div>}
         {this.caption && <span class='caption'>{this.caption}</span>}
       </div>
     );

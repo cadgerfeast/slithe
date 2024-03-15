@@ -51,7 +51,7 @@ The avatar name, used as a way to display initials as default or fallback when n
 
 ### Size
 
-Modifies the avatar size, default to `32px`.
+Modifies the avatar size, defaults to `32px`.
 
 <Preview>
   <sl-avatar name="John Doe" size="64px"/>

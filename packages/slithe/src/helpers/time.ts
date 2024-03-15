@@ -26,3 +26,24 @@ export class Deferred<T = void> {
     this._reject(err);
   }
 }
+
+export function debounce<T extends (...args: Parameters<T>) => ReturnType<T>>(callback: T, delay: number) {
+  const deferreds = new Set<Deferred<ReturnType<T>>>();
+	let timer: number;
+	return (...args: Parameters<T>) => {
+    const deferred = new Deferred<ReturnType<T>>();
+		window.clearTimeout(timer);
+    timer = window.setTimeout(() => {
+      try {
+        const output = callback(...args);
+        for (const deferred of deferreds) {
+          deferred.resolve(output);
+        }
+      } catch (err) {
+        deferred.reject(err);
+      }
+    }, delay);
+    deferreds.add(deferred);
+		return deferred.promise;
+	};
+}

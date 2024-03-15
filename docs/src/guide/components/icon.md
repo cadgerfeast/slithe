@@ -38,7 +38,7 @@ The icon name, should be part of icon list from current theme.
 
 ### Size
 
-Modifies the icon size, default to `1em`, that represents the current font-size.
+Modifies the icon size, defaults to `1em`, that represents the current font-size.
 
 <Preview>
   <sl-icon name="bug" size="2em"/>

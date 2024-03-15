@@ -13,25 +13,36 @@
 <% }) %>
 	}>();
 <% } %>
-<% if (it.wrapper.bindings.length > 0) { %>
   // Bindings
 	const emit = defineEmits<{
 <% it.wrapper.bindings.forEach((binding) => { %>
 		'update:<%= binding.prop %>': [value: <%= binding.type %>];
 <% }) %>
+<% it.wrapper.events.forEach((event) => { %>
+		'<%= event.name %>': [detail: <%~ event.type %>];
+<% }) %>
 	}>();
-	const bindings = {
+	const events = {
 <% it.wrapper.bindings.forEach((binding) => { %>
 		'<%= binding.event %>': ({ detail }: CustomEvent<<%= binding.type %>>) => {
+<% if (it.wrapper.events.find((event) => event.name === binding.event)) { %>
+			emit('<%= it.wrapper.events.find((event) => event.name === binding.event).name %>', detail);
+<% } %>
 			emit('update:<%= binding.prop %>', detail);
 		},
 <% }) %>
-  };
+<% it.wrapper.events.forEach((event) => { %>
+<% if (!it.wrapper.bindings.find((binding) => binding.event === event.name)) { %>
+		'<%= event.name %>': ({ detail }: CustomEvent<<%= event.type %>>) => {
+			emit('<%= event.name %>', detail);
+		},
 <% } %>
+<% }) %>
+  };
 </script>
 
 <template>
-	<<%= it.wrapper.tagName %><% if (it.wrapper.props.length > 0) { %> v-bind.prop="props"<% } %><% if (it.wrapper.bindings.length > 0) { %> v-on="bindings"<% } %>>
+	<<%= it.wrapper.tagName %><% if (it.wrapper.props.length > 0) { %> v-bind.prop="props"<% } %><% if (it.wrapper.events.length > 0) { %> v-on="events"<% } %>>
 		<slot/>
 	</<%= it.wrapper.tagName %>>
 </template>

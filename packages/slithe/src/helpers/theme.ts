@@ -52,9 +52,15 @@ export function syncWithTheme (element: HTMLElement) {
       }
     }
   }
+  function onStyleUpdate () {
+    element.shadowRoot.adoptedStyleSheets = stylesheet ? [stylesheet] : [];
+    if (styleStore.get('stylesheets').has(element)) {
+      element.shadowRoot.adoptedStyleSheets.push(styleStore.get('stylesheets').get(element));
+    }
+  }
   themeStore.onChange('key', onThemeUpdate);
   themeStore.onChange('model', onThemeUpdate);
-  styleStore.onChange('stylesheets', onThemeUpdate);
+  styleStore.onChange('stylesheets', onStyleUpdate);
 }
 
 export function updateStyle (element: HTMLElement, style: Record<string, string>) {
@@ -62,5 +68,5 @@ export function updateStyle (element: HTMLElement, style: Record<string, string>
   const hostStylesheet = new CSSStyleSheet();
   hostStylesheet.replaceSync(`:host { ${Object.entries(style).map(([key, value]) => `${key}: ${value};`).join(' ')} }`);
   hostStylesheets.set(element, hostStylesheet);
-  styleStore.set('stylesheets', hostStylesheets)
+  styleStore.set('stylesheets', hostStylesheets);
 }

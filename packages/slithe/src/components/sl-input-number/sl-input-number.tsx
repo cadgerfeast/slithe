@@ -2,7 +2,7 @@
 import { Component, Element, Event, EventEmitter, Prop, h } from '@stencil/core';
 import { syncWithTheme, updateStyle } from '../../helpers/theme';
 import { closest } from '../../helpers/dom';
-import { NumberAutocomplete, ValidationLevel } from '../../helpers/form';
+import { NumberAutocomplete, ValidationLevel, formStore } from '../../helpers/form';
 
 /**
  * @import NumberAutocomplete,slithe
@@ -15,7 +15,8 @@ import { NumberAutocomplete, ValidationLevel } from '../../helpers/form';
 export class SlitheInputNumber {
   @Element() host!: HTMLSlInputNumberElement;
   private input!: HTMLInputElement;
-  private control: HTMLSlFormControlElement|null;
+  private form: HTMLSlFormElement|null;
+  private formControl: HTMLSlFormControlElement|null;
   // Props
   /**
    * @binding input
@@ -53,12 +54,28 @@ export class SlitheInputNumber {
     e.stopPropagation();
     this.value = +this.input.value;
     this.inputEvent.emit(this.value);
+    if (this.form && this.formControl) {
+      this.status = null;
+      if (this.form.validation === 'input') {
+        this.formControl.validate(true);
+      }
+    }
   }
   private async handleChange (e: Event) {
     e.stopPropagation();
     this.changeEvent.emit(this.value);
-    if (this.control) {
-      await this.control.validate();
+  }
+  private async handleBlur () {
+    if (this.form && this.formControl) {
+      if (this.form.validation === 'input') {
+        const { validations } = formStore.get('forms').get(this.form);
+        if (!validations.get(this.formControl).shouldDisplay) {
+          this.status = null;
+          if (this.form.validation === 'input') {
+            this.formControl.validate(true);
+          }
+        }
+      }
     }
   }
   private onControlLabelClick () {
@@ -66,19 +83,27 @@ export class SlitheInputNumber {
   }
   // Lifecycle
   connectedCallback () {
-    this.control = closest(this.host, 'sl-form-control');
-    if (this.control) {
+    this.form = closest(this.host, 'sl-form');
+    this.formControl = closest(this.host, 'sl-form-control');
+    if (this.formControl) {
       this.controlLabelClickListener = this.onControlLabelClick.bind(this);
-      this.control.addEventListener('labelClick', this.controlLabelClickListener);
+      this.formControl.addEventListener('labelClick', this.controlLabelClickListener);
     }
     syncWithTheme(this.host);
     updateStyle(this.host, {
       'display': 'flex'
     });
+    formStore.onChange('forms', (forms) => {
+      const form = forms.get(this.form);
+      if (form) {
+        const validation = form.validations.get(this.formControl);
+        this.status = (validation && validation.shouldDisplay) ? (validation.status ? validation.status.type : null) : null;
+      }
+    });
   }
   disconnectedCallback () {
-    if (this.control && this.controlLabelClickListener) {
-      this.control.removeEventListener('labelClick', this.controlLabelClickListener);
+    if (this.formControl && this.controlLabelClickListener) {
+      this.formControl.removeEventListener('labelClick', this.controlLabelClickListener);
     }
   }
   // Template
@@ -89,7 +114,7 @@ export class SlitheInputNumber {
           ref={(el) => this.input = el}
           type='number'
           autocomplete={this.autocomplete}
-          name={this.control?.name}
+          name={this.formControl?.name}
           value={this.value}
           min={this.min}
           max={this.max}
@@ -98,6 +123,7 @@ export class SlitheInputNumber {
           disabled={this.disabled}
           onInput={(e) => this.handleInput(e)}
           onChange={(e) => this.handleChange(e)}
+          onBlur={() => this.handleBlur()}
         />
       </div>
     );
