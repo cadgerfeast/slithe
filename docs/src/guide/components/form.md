@@ -56,26 +56,28 @@ It usually contains `sl-form-control` elements that helps with description and v
 
 ## Validation
 
-Triggered when the user submits the form.
+Validation of a form can be scheduled on `submit` or `input`, defaults to `input`.
 
 <Preview>
 	<PlaygroundForm/>
 </Preview>
 
 ``` html
-<sl-form-control label="Email" autocomplete="email" :validation="emailValidation" required>
-	<sl-input-text v-model:value="email" placeholder="Enter your Email..."/>
-</sl-form-control>
-<sl-form-control label="Confirm Email" autocomplete="email" :validation="isSameEmail" required>
-	<sl-input-text v-model:value="confirmEmail" placeholder="Confirm your Email..."/>
-</sl-form-control>
-<sl-form-control label="Password" required>
-	<sl-input-text v-model:value="password" type="password" placeholder="Enter your Password..."/>
-</sl-form-control>
-<sl-form-control label="Confirm Password" autocomplete="new-password" :validation="isSamePassword" required>
-	<sl-input-text v-model:value="confirmPassword" type="password" placeholder="Confirm your Password..."/>
-</sl-form-control>
-<sl-button type="submit">Submit</sl-button>
+<sl-form>
+	<sl-form-control label="Email" autocomplete="email" :validation="debounce(emailValidation, 2000)" required>
+		<sl-input-text v-model:value="email" placeholder="Enter your Email..."/>
+	</sl-form-control>
+	<sl-form-control label="Confirm Email" autocomplete="email" :validation="debounce(isSameEmail, 2000)" required>
+		<sl-input-text v-model:value="confirmEmail" placeholder="Confirm your Email..."/>
+	</sl-form-control>
+	<sl-form-control label="Password" required>
+		<sl-input-text v-model:value="password" type="password" placeholder="Enter your Password..."/>
+	</sl-form-control>
+	<sl-form-control label="Confirm Password" autocomplete="new-password" :validation="debounce(isSamePassword, 2000)" required>
+		<sl-input-text v-model:value="confirmPassword" type="password" placeholder="Confirm your Password..."/>
+	</sl-form-control>
+	<sl-button type="submit">Submit</sl-button>
+</sl-form>
 ```
 
 ## Events

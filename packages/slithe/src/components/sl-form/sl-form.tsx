@@ -1,7 +1,7 @@
 // Helpers
-import { Component, Element, Event, EventEmitter, Method, h } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Method, Prop, h } from '@stencil/core';
 import { syncWithTheme } from '../../helpers/theme';
-import { ValidationLevel } from '../../helpers/form';
+import { ValidationLevel, addForm, removeForm } from '../../helpers/form';
 import { querySelectorAll } from '../../helpers/dom';
 
 /**
@@ -13,27 +13,33 @@ import { querySelectorAll } from '../../helpers/dom';
 })
 export class SlitheForm {
   @Element() host!: HTMLSlFormElement;
+  // Props
+  @Prop() validation?: 'submit'|'input' = 'input';
   // Events
   @Event({ eventName: 'submit' }) submitEvent: EventEmitter<ValidationLevel>;
-  @Event({ eventName: 'input' }) inputEvent: EventEmitter<void>;
   // Methods
   @Method()
   async submit () {
     const formControls = querySelectorAll<HTMLSlFormControlElement>(this.host, 'sl-form-control');
-    const res = await Promise.all(formControls.map((formControl) => formControl.validate()));
+    const res = await Promise.all(formControls.map((formControl) => formControl.validate(true)));
     this.submitEvent.emit(res.find((validation) => validation?.type === 'failure') ? 'failure' : 'success');
-  }
-  private handleInput () {
-    this.inputEvent.emit();
   }
   // Lifecycle
   connectedCallback () {
     syncWithTheme(this.host);
+    addForm(this.host);
+  }
+  async componentDidRender () {
+    const formControls = querySelectorAll<HTMLSlFormControlElement>(this.host, 'sl-form-control');
+    Promise.all(formControls.map((formControl) => formControl.validate(false)));
+  }
+  disconnectedCallback () {
+    removeForm(this.host);
   }
   // Template
   render () {
     return (
-      <form class='sl-form' onInput={() => this.handleInput()}>
+      <form class='sl-form'>
         <slot/>
       </form>
     );

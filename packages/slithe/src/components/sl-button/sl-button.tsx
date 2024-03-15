@@ -2,6 +2,7 @@
 import { Component, Prop, Element, h, State, Watch } from '@stencil/core';
 import { closest, attachTooltip, getValidSlotChildren } from '../../helpers/dom';
 import { syncWithTheme, updateStyle } from '../../helpers/theme';
+import { formStore } from '../../helpers/form';
 
 @Component({
   tag: 'sl-button',
@@ -9,9 +10,10 @@ import { syncWithTheme, updateStyle } from '../../helpers/theme';
 })
 export class SlitheButton {
   @Element() host!: HTMLSlButtonElement;
+  private form: HTMLSlFormElement|null;
   // Props
   @Prop() type?: 'button'|'submit' = 'button';
-  @Prop({ reflect: true }) disabled?: boolean = false;
+  @Prop({ reflect: true, mutable: true }) disabled?: boolean = false;
   @Prop({ reflect: true }) link?: boolean = false;
   // Modifiers
   @Prop({ reflect: true }) primary?: boolean;
@@ -33,6 +35,7 @@ export class SlitheButton {
   }
   // Methods
   private updateHostStyle () {
+    
     updateStyle(this.host, {
       'display': this.block ? 'flex' : 'inline-flex',
       'vertical-align': 'middle'
@@ -41,9 +44,8 @@ export class SlitheButton {
   // Handlers
   private handleClick () {
     if (this.type === 'submit') {
-      const form = closest<HTMLSlFormElement>(this.host, 'sl-form');
-      if (form) {
-        form.submit();
+      if (this.form) {
+        this.form.submit();
       }
     }
   }
@@ -58,6 +60,15 @@ export class SlitheButton {
   }
   // Lifecycle
   connectedCallback () {
+    this.form = closest(this.host, 'sl-form');
+    if (this.form) {
+      formStore.onChange('forms', (forms) => {
+        const form = forms.get(this.form);
+        if (form && form.event === 'input') {
+          this.disabled = [...form.validations.values()].some(({ status }) => status.type === 'failure')
+        }
+      });
+    }
     syncWithTheme(this.host);
     this.updateHostStyle();
     attachTooltip(this.host);
