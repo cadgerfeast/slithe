@@ -1,0 +1,7 @@
+function __vite__mapDeps(indexes) {
+  if (!__vite__mapDeps.viteFileDeps) {
+    __vite__mapDeps.viteFileDeps = ["assets/chunks/layout.gdeYE0VX.js","assets/chunks/index.zHLhZG46.js","assets/chunks/index.US6p8f3F.js","assets/chunks/sl-splitter2.aw9Z64sQ.js","assets/chunks/framework.bINXxMeB.js"]
+  }
+  return indexes.map((i) => __vite__mapDeps.viteFileDeps[i])
+}
+import{c as l,I as a,w as t,m as s,a as i,U as h,o as p,p as k,a3 as E,X as e}from"./chunks/framework.bINXxMeB.js";import{P as d}from"./chunks/preview.mXy2Ojj_.js";const r=s("h1",{id:"layout",tabindex:"-1"},[i("Layout "),s("a",{class:"header-anchor",href:"#layout","aria-label":'Permalink to "Layout"'},"​")],-1),g=s("p",null,[i("A "),s("code",null,"sl-layout"),i(" component provides a way to create a fully customizable app layout.")],-1),y=s("h2",{id:"slots",tabindex:"-1"},[i("Slots "),s("a",{class:"header-anchor",href:"#slots","aria-label":'Permalink to "Slots"'},"​")],-1),o=s("p",null,"The component includes multiple slots to cover various layouts.",-1),c=h("",2),_=JSON.parse('{"title":"Layout","description":"","frontmatter":{},"headers":[],"relativePath":"guide/components/layout.md","filePath":"guide/components/layout.md"}'),F={name:"guide/components/layout.md"},w=Object.assign(F,{setup(u){const n=E(()=>e(()=>import("./chunks/layout.gdeYE0VX.js"),__vite__mapDeps([0,1,2,3,4])));return(C,v)=>(p(),l("div",null,[r,g,y,o,a(d,{title:"Playground"},{default:t(()=>[a(k(n))]),_:1}),c]))}});export{_ as __pageData,w as default};
