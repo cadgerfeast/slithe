@@ -44,6 +44,9 @@ export class SlitheLayout {
   @Event({ eventName: 'update', bubbles: false }) updateEvent: EventEmitter<Model>;
   @Event({ eventName: 'close', bubbles: false }) closeEvent: EventEmitter<string>;
   // Methods
+  /**
+   * @private
+   */
   @Method()
   async getGroup () {
     if (this.group) {
@@ -53,6 +56,9 @@ export class SlitheLayout {
       return !parentLayout ? crypto.randomUUID() : await parentLayout.getGroup();
     }
   }
+  /**
+   * @private
+   */
   @Method()
   async getRootLayout (): Promise<HTMLSlLayoutElement> {
     if (this.root) {
@@ -61,39 +67,60 @@ export class SlitheLayout {
       return closest<HTMLSlLayoutElement>(this.host.parentElement, 'sl-layout').getRootLayout();
     }
   }
+  /**
+   * @private
+   */
   @Method()
   async moveTab (id: string, from: string, oldIndex: number, to: string, newIndex: number) {
     const tabModel = getChildModelIndexModel(this._model, id);
     this._model = ensureValidModel(moveTabInModel(this._model, tabModel, from, oldIndex, to, newIndex));
     this.emitUpdate();
   }
+  /**
+   * @private
+   */
   @Method()
   async sortTab (id: string, oldIndex: number, newIndex: number) {
     this._model = sortTabInModel(this._model, id, oldIndex, newIndex);
     this.emitUpdate();
   }
+  /**
+   * @private
+   */
   @Method()
   async selectTab (id: string) {
     this._model = setActiveTabInModel(this._model, id);
     this.emitUpdate();
   }
+  /**
+   * @private
+   */
   @Method()
   async removeTab (id: string) {
     this._model = ensureValidModel(removeTabInModel(this._model, id));
     this.emitClose(id);
     this.emitUpdate();
   }
+  /**
+   * @private
+   */
   @Method()
   async resizeSplitter (id: string, size: number) {
     this._model = resizeSplitterInModel(this._model, id, size);
     this.emitUpdate();
   }
+  /**
+   * @private
+   */
   @Method()
   async dropTab (tabId: string, containerId: string, position: Position) {
     const tabModel = getChildModelIndexModel(this._model, tabId);
     this._model = ensureValidModel(dropTabInModel(this._model, tabModel, containerId, position));
     this.emitUpdate();
   }
+  /**
+   * @private
+   */
   @Method()
   async setRootDragging (dragging: boolean) {
     const children = querySelectorAll<HTMLSlLayoutElement>(this.host, 'sl-layout');
@@ -101,6 +128,9 @@ export class SlitheLayout {
       child.setDragging(dragging);
     }
   }
+  /**
+   * @private
+   */
   @Method()
   async setDragging (dragging: boolean) {
     this.dragging = dragging;
