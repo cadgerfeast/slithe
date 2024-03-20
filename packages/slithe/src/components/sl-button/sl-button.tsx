@@ -1,5 +1,5 @@
 // Helpers
-import { Component, Prop, Element, h, State, Watch } from '@stencil/core';
+import { Component, Prop, Element, h, State, Watch, Event, EventEmitter } from '@stencil/core';
 import { closest, attachTooltip, getValidSlotChildren } from '../../helpers/dom';
 import { syncWithTheme, updateStyle } from '../../helpers/theme';
 import { formStore } from '../../helpers/form';
@@ -24,6 +24,8 @@ export class SlitheButton {
   @Prop({ reflect: true }) medium?: boolean;
   @Prop({ reflect: true }) large?: boolean;
   @Prop({ reflect: true }) block?: boolean = false;
+  // Events
+  @Event({ eventName: 'click' }) clickEvent: EventEmitter<void>;
   // State
   @State() iconOnly = false;
   // Computed
@@ -42,7 +44,9 @@ export class SlitheButton {
     });
   }
   // Handlers
-  private handleClick () {
+  private handleClick (e: MouseEvent) {
+    e.stopPropagation();
+    this.clickEvent.emit();
     if (this.type === 'submit') {
       if (this.form) {
         this.form.submit();
@@ -76,7 +80,7 @@ export class SlitheButton {
   // Template
   render () {
     return (
-      <button class={this.class} type={this.type} disabled={this.disabled} onClick={() => this.handleClick()}>
+      <button class={this.class} type={this.type} disabled={this.disabled} onClick={(e) => this.handleClick(e)}>
         <slot onSlotchange={(e) => this.handleSlotChange(e)}/>
       </button>
     );
