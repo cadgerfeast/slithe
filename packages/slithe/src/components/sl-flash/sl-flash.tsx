@@ -8,7 +8,7 @@ import { AlertLevel } from '../../helpers/types';
  */
 @Component({
   tag: 'sl-flash',
-  shadow: true
+  shadow: { delegatesFocus: true }
 })
 export class SlitheFlash {
   @Element() host!: HTMLSlFlashElement;

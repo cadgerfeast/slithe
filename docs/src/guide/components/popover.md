@@ -17,8 +17,10 @@ It's often used as a way to display action menus for buttons.
     <sl-icon name="kebab-horizontal"/>
   </sl-button>
   <sl-popover ref="popover">
-    <div>Hello There!</div>
-    <sl-button primary @click="popover.close()">Close</sl-button>
+    <div :style="{ padding: '8px' }">
+      <div>Hello There!</div>
+      <sl-button primary @click="popover.close()">Close</sl-button>
+    </div>
   </sl-popover>
 </Preview>
 

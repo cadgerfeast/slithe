@@ -51,6 +51,7 @@ export default defineConfig({
 					text: 'Components',
 					collapsed: false,
 					items: [
+						{ text: 'Actions', link: '/guide/components/actions' },
 						{ text: 'Avatar', link: '/guide/components/avatar' },
 						{ text: 'Blankslate', link: '/guide/components/blankslate' },
 						{ text: 'Breadcrumbs', link: '/guide/components/breadcrumbs' },

@@ -25,7 +25,7 @@ import { config } from '../../helpers/config';
  */
 @Component({
   tag: 'sl-layout',
-  shadow: true
+  shadow: { delegatesFocus: true }
 })
 export class SlitheLayout {
   @Element() host!: HTMLSlLayoutElement;

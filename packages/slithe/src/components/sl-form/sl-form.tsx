@@ -9,7 +9,7 @@ import { querySelectorAll } from '../../helpers/dom';
  */
 @Component({
   tag: 'sl-form',
-  shadow: true
+  shadow: { delegatesFocus: true }
 })
 export class SlitheForm {
   @Element() host!: HTMLSlFormElement;

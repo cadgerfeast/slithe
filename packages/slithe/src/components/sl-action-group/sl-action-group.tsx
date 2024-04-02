@@ -3,34 +3,28 @@ import { Component, Element, Prop, h } from '@stencil/core';
 import { syncWithTheme, updateStyle } from '../../helpers/theme';
 
 @Component({
-  tag: 'sl-breadcrumb',
+  tag: 'sl-action-group',
   shadow: { delegatesFocus: true }
 })
-export class SlitheBreadcrumb {
-  @Element() host!: HTMLSlBreadcrumbElement;
+export class SlitheActionGroup {
+  @Element() host!: HTMLSlActionGroupElement;
   // Props
-  @Prop({ reflect: true }) active?: boolean = false;
-  // Computed
-  get class () {
-    return {
-      'sl-breadcrumb': true,
-      'active': this.active
-    };
-  }
+  @Prop() label: string;
   // Lifecycle
   connectedCallback () {
     syncWithTheme(this.host);
     updateStyle(this.host, {
-      'display': 'inline-flex'
+      'display': 'flex'
     });
   }
   // Template
   render () {
     return (
-      <li class={this.class}>
-        <sl-button link disabled={this.active}>
+      <li class='sl-action-group'>
+        <span class='label'>{this.label}</span>
+        <sl-actions>
           <slot/>
-        </sl-button>
+        </sl-actions>
       </li>
     );
   }

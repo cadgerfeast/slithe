@@ -1,0 +1,58 @@
+// Light
+:host([sl-theme=light]) {
+  --sl-action-color: var(--pr-shark);
+  --sl-action-hover-background-color: rgb(243, 244, 246);
+  --sl-action-active-background-color: rgb(238, 239, 242);
+	--sl-action-outline-color: var(--pr-science-blue);
+}
+// Danger
+:host([sl-theme=light][danger]) {
+	--sl-action-color: rgb(209, 36, 47);
+	--sl-action-hover-color: rgb(209, 36, 47);
+  --sl-action-hover-background-color: rgba(255, 235, 233, 0.64);
+	--sl-action-active-color: rgb(209, 36, 47);
+  --sl-action-active-background-color: rgb(255, 235, 233);
+}
+// Dark
+:host([sl-theme=dark]) {
+  --sl-action-color: var(--pr-karpa-kora);
+  --sl-action-hover-background-color: rgb(68, 76, 86);
+  --sl-action-active-background-color: rgb(45, 51, 59);
+	--sl-action-outline-color: var(--pr-cornflower-blue);
+}
+// Danger
+:host([sl-theme=dark][danger]) {
+	--sl-action-color: rgb(244, 112, 103);
+	--sl-action-hover-color: rgb(244, 112, 103);
+  --sl-action-hover-background-color: rgba(229, 83, 75, 0.16);
+	--sl-action-active-color: rgb(244, 112, 103);
+  --sl-action-active-background-color: rgba(229, 83, 75, 0.24);
+}
+
+// Action
+li.sl-action {
+	width: 100%;
+	display: flex;
+	padding: 6px 8px;
+	font-size: 14px;
+	line-height: 20px;
+	min-height: 5px;
+	margin: 0 8px;
+	border-radius: 6px;
+  color: var(--sl-action-color);
+	cursor: pointer;
+	background-color: transparent;
+	user-select: none;
+	&:hover {
+    background-color: var(--sl-action-hover-background-color);
+    color: var(--sl-action-hover-color, unset);
+  }
+  &:active {
+    background-color: var(--sl-action-active-background-color);
+    color: var(--sl-action-active-color, unset);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--sl-action-outline-color);
+    outline-offset: -2px;
+  }
+}

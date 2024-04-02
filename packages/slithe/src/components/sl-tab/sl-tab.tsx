@@ -3,7 +3,7 @@ import { Component, Element, h, Prop } from '@stencil/core';
 import { syncWithTheme, updateStyle } from '../../helpers/theme';
 @Component({
   tag: 'sl-tab',
-  shadow: true
+  shadow: { delegatesFocus: true }
 })
 export class SlitheTab {
   @Element() host!: HTMLSlTabElement;

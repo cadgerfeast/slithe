@@ -4,14 +4,14 @@ import { syncWithTheme, updateStyle } from '../../helpers/theme';
 
 @Component({
   tag: '<%= it.tagName %>',
-  shadow: true
+  shadow: { delegatesFocus: true }
 })
 export class <%= it.className %> {
   @Element() host!: <%= it.htmlName %>;
   // Lifecycle
   connectedCallback () {
     syncWithTheme(this.host);
-    updateStyle({ 'display': 'inline-flex' });
+    updateStyle(this.host, { 'display': 'inline-flex' });
   }
   // Template
   render () {

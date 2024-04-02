@@ -1,16 +1,18 @@
 // Helpers
-import { Component, Element, Event, EventEmitter, Prop, h } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Prop, State, h } from '@stencil/core';
 import { syncWithTheme, updateStyle } from '../../helpers/theme';
-import { closest } from '../../helpers/dom';
-import { NumberAutocomplete, ValidationLevel, formStore } from '../../helpers/form';
+import { closest, contains } from '../../helpers/dom';
+import { NumberAutocomplete, NumberOption, ValidationLevel, formStore } from '../../helpers/form';
+import { fullTextMatch } from '../../helpers/text';
 
 /**
  * @import NumberAutocomplete,slithe
  * @import ValidationLevel,slithe
+ * @import NumberOption,slithe
  */
 @Component({
   tag: 'sl-input-number',
-  shadow: true
+  shadow: { delegatesFocus: true }
 })
 export class SlitheInputNumber {
   @Element() host!: HTMLSlInputNumberElement;
@@ -29,6 +31,7 @@ export class SlitheInputNumber {
   @Prop() step?: number;
   @Prop() autocomplete?: NumberAutocomplete = 'off';
   @Prop() status?: ValidationLevel|null = null;
+  @Prop() options?: NumberOption[] = [];
   // Modifiers
   @Prop({ reflect: true }) small?: boolean;
   @Prop({ reflect: true }) medium?: boolean;
@@ -36,8 +39,11 @@ export class SlitheInputNumber {
   // Events
   @Event({ eventName: 'input' }) inputEvent: EventEmitter<number>;
   @Event({ eventName: 'change' }) changeEvent: EventEmitter<number>;
-  // TODO options
   // State
+  @State() focused: boolean = false;
+  @State() dirty: boolean = true;
+  @State() actionFocusIndex: number = -1;
+  private optionRefs: HTMLSlActionElement[] = [];
   private controlLabelClickListener: () => void;
   // Computed
   get _placeholder () {
@@ -46,26 +52,41 @@ export class SlitheInputNumber {
   get class () {
     return {
       'sl-input-number': true,
+      'focused': this.focused,
       [this.status]: !!this.status
     };
   }
-  // Handlers
-  private handleInput (e: InputEvent) {
-    e.stopPropagation();
-    this.value = +this.input.value;
-    this.inputEvent.emit(this.value);
-    if (this.form && this.formControl) {
-      this.status = null;
-      if (this.form.validation === 'input') {
-        this.formControl.validate(true);
-      }
-    }
+  get actionsOpened () {
+    return this.focused && this.dirty;
   }
-  private async handleChange (e: Event) {
+  get filteredOptions () {
+    return (this.options || []).filter((option) => {
+      if (this.value) {
+        return fullTextMatch(option.name || option.value.toString(), this.value.toString());
+      }
+      return true;
+    });
+  }
+  // Handlers
+  private handleChange (e: Event) {
     e.stopPropagation();
     this.changeEvent.emit(this.value);
   }
-  private async handleBlur () {
+  private handleInput (e: InputEvent) {
+    this.dirty = true;
+    e.stopPropagation();
+    this.value = +this.input.value;
+    this.emitAndValidate();
+  }
+  private handleFocus () {
+    this.dirty = true;
+    this.focused = true;
+  }
+  private handleBlur (e: FocusEvent) {
+    if (!contains(this.input, e.relatedTarget as HTMLElement) && !contains(this.host, e.relatedTarget as HTMLElement)) {
+      this.focused = false;
+      this.actionFocusIndex = -1;
+    }
     if (this.form && this.formControl) {
       if (this.form.validation === 'input') {
         const { validations } = formStore.get('forms').get(this.form);
@@ -75,6 +96,90 @@ export class SlitheInputNumber {
             this.formControl.validate(true);
           }
         }
+      }
+    }
+  }
+  private handleKeyDown (e: KeyboardEvent) {
+    switch (e.key) {
+      case 'ArrowUp': {
+        if (this.optionRefs.length) {
+          e.preventDefault();
+          this.optionRefs[this.optionRefs.length - 1].focus();
+        }
+        break;
+      }
+      case 'ArrowDown': {
+        if (this.optionRefs.length) {
+          e.preventDefault();
+          this.optionRefs[0].focus();
+        }
+        break;
+      }
+      case 'Escape': {
+        this.dirty = false;
+        break;
+      }
+    }
+  }
+  private handleActionsFocus (index: number) {
+    this.actionFocusIndex = index;
+    this.focused = true;
+  }
+  private handleActionsBlur (e: FocusEvent) {
+    if (!contains(this.input, e.relatedTarget as HTMLElement) && !contains(this.host, e.relatedTarget as HTMLElement)) {
+      this.focused = false;
+      this.actionFocusIndex = -1;
+    }
+  }
+  private handleActionsKeyDown (e: KeyboardEvent, option: NumberOption) {
+    switch (e.key) {
+      case 'ArrowUp': {
+        e.preventDefault();
+        if (this.optionRefs[this.actionFocusIndex - 1]) {
+          this.optionRefs[this.actionFocusIndex - 1].focus();
+        } else {
+          this.optionRefs[this.optionRefs.length - 1].focus();
+        }
+        break;
+      }
+      case 'ArrowDown': {
+        e.preventDefault();
+        if (this.optionRefs[this.actionFocusIndex + 1]) {
+          this.optionRefs[this.actionFocusIndex + 1].focus();
+        } else {
+          this.optionRefs[0].focus();
+        }
+        break;
+      }
+      case 'Escape': {
+        e.preventDefault();
+        this.closeOptionsAndFocusInput();
+        break;
+      }
+      case ' ':
+      case 'Enter': {
+        e.preventDefault();
+        this.selectOption(option);
+        this.closeOptionsAndFocusInput();
+        break;
+      }
+    }
+  }
+  private selectOption ({ value }: NumberOption) {
+    this.value = value;
+    this.emitAndValidate();
+    this.dirty = false;
+  }
+  private closeOptionsAndFocusInput () {
+    this.input.focus();
+    this.dirty = false;
+  }
+  private emitAndValidate () {
+    this.inputEvent.emit(this.value);
+    if (this.form && this.formControl) {
+      this.status = null;
+      if (this.form.validation === 'input') {
+        this.formControl.validate(true);
       }
     }
   }
@@ -112,6 +217,7 @@ export class SlitheInputNumber {
       <div class={this.class}>
         <input
           ref={(el) => this.input = el}
+          class={{ 'focused': this.focused }}
           type='number'
           autocomplete={this.autocomplete}
           name={this.formControl?.name}
@@ -123,8 +229,28 @@ export class SlitheInputNumber {
           disabled={this.disabled}
           onInput={(e) => this.handleInput(e)}
           onChange={(e) => this.handleChange(e)}
-          onBlur={() => this.handleBlur()}
+          onFocus={() => this.handleFocus()}
+          onBlur={(e) => this.handleBlur(e)}
+          onKeyDown={(e) => this.handleKeyDown(e)}
         />
+        {this.filteredOptions.length > 0 &&
+          <sl-popover opened={this.actionsOpened} manual align='justify'>
+            <sl-actions>
+              {this.filteredOptions.map((option, index) => (
+                <sl-action
+                  ref={(el) => el ? (this.optionRefs[index] = el) : this.optionRefs.splice(index, 1)}
+                  focusIndex={this.actionFocusIndex === index ? 0 : -1}
+                  onFocus={() => this.handleActionsFocus(index)}
+                  onBlur={(e) => this.handleActionsBlur(e)}
+                  onKeyDown={(e) => this.handleActionsKeyDown(e, option)}
+                  onClick={() => this.selectOption(option)}
+                >
+                  {option.name || option.value}
+                </sl-action>
+              ))}
+            </sl-actions>
+          </sl-popover>
+        }
       </div>
     );
   }

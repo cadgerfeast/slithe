@@ -4,7 +4,7 @@ import { syncWithTheme, updateStyle } from '../../helpers/theme';
 
 @Component({
   tag: 'sl-keyboard',
-  shadow: true
+  shadow: { delegatesFocus: true }
 })
 export class SlitheKeyboard {
   @Element() host!: HTMLSlKeyboardElement;

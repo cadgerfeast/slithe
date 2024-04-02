@@ -1,5 +1,5 @@
 // Helpers
-import { Component, Element, Method, Prop, State, Watch, h } from '@stencil/core';
+import { Component, Element, Method, Prop, Watch, h } from '@stencil/core';
 import { syncWithTheme, updateStyle } from '../../helpers/theme';
 import { Alignment, contains } from '../../helpers/dom';
 
@@ -8,7 +8,7 @@ import { Alignment, contains } from '../../helpers/dom';
  */
 @Component({
   tag: 'sl-popover',
-  shadow: true
+  shadow: { delegatesFocus: true }
 })
 export class SlithePopover {
   @Element() host!: HTMLSlPopoverElement;
@@ -16,13 +16,18 @@ export class SlithePopover {
   @Prop() target?: HTMLElement;
   @Prop() position?: 'top'|'right'|'bottom'|'left' = 'bottom';
   @Prop() align?: Alignment = 'start';
+  @Prop() manual?: boolean = false;
+  @Prop({ mutable: true }) opened?: boolean = false;
+  @Prop() offset?: number = 0;
   // State
-  @State() opened: boolean = false;
   private targetClickListener: () => void;
   private windowClickListener: () => void;
   // Computed
   get currentTarget () {
     return this.target || this.host.previousElementSibling as HTMLElement;
+  }
+  get effectiveOffset () {
+    return (!isNaN(this.offset) ? this.offset : 8) + 1;
   }
   get class () {
     return {
@@ -36,13 +41,13 @@ export class SlithePopover {
     const res: Record<string, string> = {};
     const targetRect = this.currentTarget.getBoundingClientRect();
     const hostRect = this.host.getBoundingClientRect();
-    let top = targetRect.top + targetRect.height + 15;
+    let top = targetRect.top + targetRect.height + ((this.effectiveOffset * 2) - 1);
     let left = targetRect.left;
     let height = 'max-content';
     let width = 'max-content';
     switch (this.position) {
       case 'top': {
-        top = targetRect.top - 15;
+        top = targetRect.top - ((this.effectiveOffset * 2) - 1);
         switch (this.align) {
           case 'start': {
             left = targetRect.left;
@@ -65,7 +70,7 @@ export class SlithePopover {
         break;
       }
       case 'right': {
-        left = targetRect.right + 15;
+        left = targetRect.right + ((this.effectiveOffset * 2) - 1);
         switch (this.align) {
           case 'start': {
             top = targetRect.top;
@@ -88,7 +93,7 @@ export class SlithePopover {
         break;
       }
       case 'bottom': {
-        top = targetRect.top + targetRect.height + 15;
+        top = targetRect.top + targetRect.height + ((this.effectiveOffset * 2) - 1);
         switch (this.align) {
           case 'start': {
             left = targetRect.left;
@@ -111,7 +116,7 @@ export class SlithePopover {
         break;
       }
       case 'left': {
-        left = targetRect.left - 15;
+        left = targetRect.left - ((this.effectiveOffset * 2) - 1);
         switch (this.align) {
           case 'start': {
             top = targetRect.top;
@@ -137,12 +142,12 @@ export class SlithePopover {
     res['height'] = height;
     res['width'] = width;
     if ((top + hostRect.height) >= window.innerHeight) {
-      res['bottom'] = `${8}px`;
+      res['bottom'] = `${this.effectiveOffset}px`;
     } else {
       res['top'] = `${top}px`;
     }
     if ((left + hostRect.width) >= window.innerWidth) {
-      res['right'] = `${8}px`;
+      res['right'] = `${this.effectiveOffset}px`;
     } else {
       res['left'] = `${left}px`;
     }
@@ -163,11 +168,13 @@ export class SlithePopover {
     }
   }
   private updateTargetListener (newTarget: HTMLElement, oldTarget?: HTMLElement) {
-    if (oldTarget && this.targetClickListener) {
-      oldTarget.removeEventListener('click', this.targetClickListener);
+    if (!this.manual) {
+      if (oldTarget && this.targetClickListener) {
+        oldTarget.removeEventListener('click', this.targetClickListener);
+      }
+      this.targetClickListener = this.onTargetClick.bind(this);
+      newTarget.addEventListener('click', this.targetClickListener);
     }
-    this.targetClickListener = this.onTargetClick.bind(this);
-    newTarget.addEventListener('click', this.targetClickListener);
   }
   // Handlers
   private onTargetClick () {

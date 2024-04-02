@@ -3,34 +3,27 @@ import { Component, Element, Prop, h } from '@stencil/core';
 import { syncWithTheme, updateStyle } from '../../helpers/theme';
 
 @Component({
-  tag: 'sl-label',
+  tag: 'sl-action',
   shadow: { delegatesFocus: true }
 })
-export class SlitheLabel {
-  @Element() host!: HTMLSlLabelElement;
+export class SlitheAction {
+  @Element() host!: HTMLSlActionElement;
   // Props
-  @Prop() name: string;
-  @Prop({ reflect: true }) required: boolean = false;
-  // Computed
-  get class () {
-    return {
-      'sl-label': true,
-      'required': this.required
-    };
-  }
+  @Prop() focusIndex?: number = 0;
+  @Prop({ reflect: true }) danger?: boolean;
   // Lifecycle
   connectedCallback () {
     syncWithTheme(this.host);
     updateStyle(this.host, {
-      'display': 'inline-flex'
+      'display': 'flex'
     });
   }
   // Template
   render () {
     return (
-      <label class={this.class} htmlFor={this.name}>
+      <li class='sl-action' tabIndex={this.focusIndex}>
         <slot/>
-      </label>
+      </li>
     );
   }
 }

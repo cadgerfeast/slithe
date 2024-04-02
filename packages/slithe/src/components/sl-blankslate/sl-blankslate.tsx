@@ -11,7 +11,7 @@ import { isEmptySlot } from '../../helpers/dom';
  */
 @Component({
   tag: 'sl-blankslate',
-  shadow: true
+  shadow: { delegatesFocus: true }
 })
 export class SlitheBlankslate {
   @Element() host!: HTMLSlBlankslateElement;
@@ -63,16 +63,16 @@ export class SlitheBlankslate {
     return (
       <div class={this.class}>
         <div class="graphic">
-          <slot name='graphic' onSlotchange={this.handleSlotChange}/>
+          <slot name='graphic' onSlotchange={(e) => this.handleSlotChange(e)}/>
         </div>
         <this._heading>
-          <slot name='heading' onSlotchange={this.handleSlotChange}/>
+          <slot name='heading' onSlotchange={(e) => this.handleSlotChange(e)}/>
         </this._heading>
         <p>
-          <slot onSlotchange={this.handleSlotChange}/>
+          <slot onSlotchange={(e) => this.handleSlotChange(e)}/>
         </p>
         <div class="actions">
-          <slot name='actions' onSlotchange={this.handleSlotChange}/>
+          <slot name='actions' onSlotchange={(e) => this.handleSlotChange(e)}/>
         </div>
       </div>
     );

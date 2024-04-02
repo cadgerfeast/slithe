@@ -168,7 +168,6 @@
 :host([disabled]) {
   pointer-events: none;
   opacity: var(--sl-button-disabled-opacity, 0.5);
-  user-select: none;
 }
 // Button
 button.sl-button {

@@ -5,7 +5,7 @@ import { syncWithTheme, updateStyle, theme } from '../../helpers/theme';
 
 @Component({
   tag: 'sl-icon',
-  shadow: true
+  shadow: { delegatesFocus: true }
 })
 export class SlitheIcon {
   @Element() host!: HTMLSlIconElement;

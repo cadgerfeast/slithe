@@ -11,7 +11,7 @@ import { closest, querySelector } from '../../helpers/dom';
  */
 @Component({
   tag: 'sl-form-control',
-  shadow: true
+  shadow: { delegatesFocus: true }
 })
 export class SlitheFormControl {
   @Element() host!: HTMLSlFormControlElement;

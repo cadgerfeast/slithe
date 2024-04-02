@@ -78,8 +78,5 @@ div.sl-popover {
     background-color: var(--sl-popover-background-color);
     box-shadow: var(--sl-popover-box-shadow);
     border-radius: 12px;
-    > div.popover-container {
-      padding: 8px;
-    }
   }
 }

@@ -1,15 +1,13 @@
 // Helpers
-import { Component, Element, h, Prop } from '@stencil/core';
+import { Component, Element, h } from '@stencil/core';
 import { syncWithTheme, updateStyle } from '../../helpers/theme';
 
 @Component({
-  tag: 'sl-tabs',
+  tag: 'sl-actions',
   shadow: { delegatesFocus: true }
 })
-export class SlitheTabs {
-  @Element() host!: HTMLSlTabsElement;
-  // Modifiers
-  @Prop({ reflect: true }) small?: boolean = false;
+export class SlitheActions {
+  @Element() host!: HTMLSlActionsElement;
   // Lifecycle
   connectedCallback () {
     syncWithTheme(this.host);
@@ -20,11 +18,9 @@ export class SlitheTabs {
   // Template
   render () {
     return (
-      <nav class='sl-tabs'>
-        <ul>
-          <slot/>
-        </ul>
-      </nav>
+      <ul class='sl-actions'>
+        <slot/>
+      </ul>
     );
   }
 }

@@ -55,6 +55,26 @@ Makes the input non-interactable.
 <sl-input-text placeholder="John Doe" disabled/>
 ```
 
+### Options
+
+The component can have a list of options.
+
+<Preview>
+  <sl-input-text
+    label="Gender"
+    placeholder="Pick a gender..."
+    :options="[{ value: 'Male' }, { value: 'Female' }]"
+  />
+</Preview>
+
+``` html
+<sl-input-text
+  label="Gender"
+  placeholder="Pick a gender..."
+  :options="[{ value: 'Male' }, { value: 'Female' }]"
+/>
+```
+
 ## Events
 
 ### Input

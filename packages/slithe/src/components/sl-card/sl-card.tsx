@@ -10,7 +10,7 @@ import { isEmptySlot } from '../../helpers/dom';
  */
 @Component({
   tag: 'sl-card',
-  shadow: true
+  shadow: { delegatesFocus: true }
 })
 export class SlitheCard {
   @Element() host!: HTMLSlCardElement;

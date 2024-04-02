@@ -84,6 +84,26 @@ Makes the input step when incrementing or decrementing.
 <sl-input-number label="Rating" placeholder="10" step="0.5"/>
 ```
 
+### Options
+
+The component can have a list of options.
+
+<Preview>
+  <sl-input-number
+    label="Number"
+    placeholder="Pick a number..."
+    :options="[{ value: 7 }, { value: 13 }, { value: 100 }]"
+  />
+</Preview>
+
+``` html
+<sl-input-number
+  label="Number"
+  placeholder="Pick a number..."
+  :options="[{ value: 7 }, { value: 13 }, { value: 100 }]"
+/>
+```
+
 ## Events
 
 ### Input
