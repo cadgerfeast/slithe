@@ -5,7 +5,7 @@ import { attachTooltip } from '../../helpers/dom';
 
 @Component({
   tag: 'sl-avatar',
-  shadow: true
+  shadow: { delegatesFocus: true }
 })
 export class SlitheAvatar {
   @Element() host!: HTMLSlAvatarElement;

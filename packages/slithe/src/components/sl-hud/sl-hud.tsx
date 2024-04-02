@@ -6,7 +6,7 @@ import { Notification } from '../../helpers/hud';
 
 @Component({
   tag: 'sl-hud',
-  shadow: true
+  shadow: { delegatesFocus: true }
 })
 export class SlitheHud {
   @Element() host!: HTMLSlHudElement;

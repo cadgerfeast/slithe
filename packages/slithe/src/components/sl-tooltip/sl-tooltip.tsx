@@ -6,7 +6,7 @@ import { Deferred, delay } from '../../helpers/time';
 
 @Component({
   tag: 'sl-tooltip',
-  shadow: true
+  shadow: { delegatesFocus: true }
 })
 export class SlitheTooltip {
   @Element() host!: HTMLSlTooltipElement;

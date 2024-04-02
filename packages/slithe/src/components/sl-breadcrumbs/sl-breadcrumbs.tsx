@@ -4,7 +4,7 @@ import { syncWithTheme, updateStyle } from '../../helpers/theme';
 
 @Component({
   tag: 'sl-breadcrumbs',
-  shadow: true
+  shadow: { delegatesFocus: true }
 })
 export class SlitheBreadcrumbs {
   @Element() host!: HTMLSlBreadcrumbsElement;

@@ -60,7 +60,7 @@ div.sl-input-number {
 		background-color: var(--sl-input-number-background-color);
 		border: 1px solid var(--sl-input-number-border-color);
 		box-shadow: var(--sl-input-number-box-shadow);
-		&:focus-visible {
+		&.focused, &:focus-visible {
 			border-color: var(--sl-input-number-focus-border-color);
 			outline: none;
 			box-shadow: inset 0 0 0 1px var(--sl-input-number-focus-border-color);

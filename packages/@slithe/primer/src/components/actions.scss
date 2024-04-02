@@ -1,0 +1,16 @@
+// Light
+:host([sl-theme=light]) {
+}
+// Dark
+:host([sl-theme=dark]) {
+}
+// Actions
+ul.sl-actions {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	padding: 8px 0;
+}

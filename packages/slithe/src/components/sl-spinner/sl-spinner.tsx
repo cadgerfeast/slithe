@@ -4,7 +4,7 @@ import { syncWithTheme, updateStyle } from '../../helpers/theme';
 
 @Component({
   tag: 'sl-spinner',
-  shadow: true
+  shadow: { delegatesFocus: true }
 })
 export class SlitheSpinner {
   @Element() host!: HTMLSlSpinnerElement;

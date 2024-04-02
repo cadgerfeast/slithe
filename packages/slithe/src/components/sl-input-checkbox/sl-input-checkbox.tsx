@@ -10,7 +10,7 @@ import { config } from '../../helpers/config';
  */
 @Component({
   tag: 'sl-input-checkbox',
-  shadow: true
+  shadow: { delegatesFocus: true }
 })
 export class SlitheInputCheckbox {
   @Element() host!: HTMLSlInputCheckboxElement;

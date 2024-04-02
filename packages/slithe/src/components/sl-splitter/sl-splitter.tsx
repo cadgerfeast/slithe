@@ -6,7 +6,7 @@ import { clamp } from '../../helpers/number';
 
 @Component({
   tag: 'sl-splitter',
-  shadow: true
+  shadow: { delegatesFocus: true }
 })
 export class SlitheSplitter {
   @Element() host!: HTMLSlSplitterElement;

@@ -1,0 +1,15 @@
+// Light
+:host([sl-theme=light]) {
+	--sl-action-divider-color: rgba(208, 215, 222, 0.48);
+}
+// Dark
+:host([sl-theme=dark]) {
+	--sl-action-divider-color: rgba(68, 76, 86, 0.48);
+}
+// Action Divider
+li.sl-action-divider {
+	width: 100%;
+	height: 1px;
+	background-color: var(--sl-action-divider-color);
+	margin: 7px 0 8px 0;
+}

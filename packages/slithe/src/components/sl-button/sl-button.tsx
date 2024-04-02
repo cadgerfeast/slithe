@@ -6,7 +6,7 @@ import { formStore } from '../../helpers/form';
 
 @Component({
   tag: 'sl-button',
-  shadow: true
+  shadow: { delegatesFocus: true }
 })
 export class SlitheButton {
   @Element() host!: HTMLSlButtonElement;

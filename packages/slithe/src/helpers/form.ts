@@ -1,6 +1,16 @@
 import { createStore } from '@stencil/store';
 import { Primitive } from './types';
 
+export type NumberOption = {
+	value: number;
+	name?: string;
+};
+
+export type TextOption = {
+	value: string;
+	name?: string;
+};
+
 export type ValidationLevel = 'success'|'failure';
 
 export type Validation = {
