@@ -1,5 +1,19 @@
 # Changelog
 
+## [30/07/2024 - 20:37](https://github.com/cadgerfeast/slithe/compare/slithe@0.5.0...slithe@0.5.1)
+
+### 🚀 Releases
+
+- `slithe`: *0.5.0* -> **0.5.1**
+
+### 🐛 Bug Fixes
+
+- add click event to sl-action ([6f05173](https://github.com/cadgerfeast/slithe/commit/6f051731515ba56072d985b5fb89217aea2c6281))
+
+### 🏗 Chores
+
+- changelog ([0e9cef4](https://github.com/cadgerfeast/slithe/commit/0e9cef4da1e4e5b19460709610840c8167d9c355))
+
 ## [30/07/2024 - 20:01](https://github.com/cadgerfeast/slithe/compare/slithe@0.4.0...slithe@0.5.0)
 
 ### 🚀 Releases
