@@ -1,5 +1,45 @@
 # Changelog
 
+## [30/07/2024 - 20:01](https://github.com/cadgerfeast/slithe/compare/slithe@0.4.0...slithe@0.5.0)
+
+### 🚀 Releases
+
+- `slithe`: *0.4.0* -> **0.5.0**
+
+- `@slithe/vue`: *0.1.0* -> **0.1.1**
+
+- `@slithe/svelte`: *0.1.0* -> **0.2.0**
+
+- `@slithe/primer`: *0.1.0* -> **0.2.0**
+
+### ✨ New Features
+
+- add actions component ([ff51af8](https://github.com/cadgerfeast/slithe/commit/ff51af844be0796f3ed6c4bee7080a9536b2421b))
+
+- add api methods to svelte wrappers ([b650376](https://github.com/cadgerfeast/slithe/commit/b65037693b72ea1249fe62c487761a38312a2668))
+
+- add flash component ([01fb44d](https://github.com/cadgerfeast/slithe/commit/01fb44d9966f2905a23fc8fa72c72b443337a3e9))
+
+### 🐛 Bug Fixes
+
+- add click event to slithe button ([5a378ea](https://github.com/cadgerfeast/slithe/commit/5a378ea3e81a814467b51c3c837fc66339d0ec1d))
+
+- add AlertLevel import to sl-flash component ([9291acb](https://github.com/cadgerfeast/slithe/commit/9291acbd3347b84992cff6ea277cc50effaa6d78))
+
+- add updateStyle, separated from syncWithTheme to allow component style update ([ec3ad72](https://github.com/cadgerfeast/slithe/commit/ec3ad72477a707782ef363682babfcc58981df13))
+
+- set ValidationHandler types ([e2d4a67](https://github.com/cadgerfeast/slithe/commit/e2d4a670dc0bf926909d9c81bf3253cac284a899))
+
+### ♻️ Refactoring
+
+- better form validation ([772be9f](https://github.com/cadgerfeast/slithe/commit/772be9fefc3c40e2a75706c332a2b8f75efafd5f))
+
+- ensure some component methods can be private for wrapper elements ([92534f9](https://github.com/cadgerfeast/slithe/commit/92534f9afc33041cef5fb81e2d0670d1a2adfef2))
+
+### 🏗 Chores
+
+- changelog ([a2cb77a](https://github.com/cadgerfeast/slithe/commit/a2cb77aabe6551465b747623eb5361465e88a13b))
+
 ## [12/03/2024 - 10:51](https://github.com/cadgerfeast/slithe/compare/slithe@0.3.1...slithe@0.4.0)
 
 ### 🚀 Releases
