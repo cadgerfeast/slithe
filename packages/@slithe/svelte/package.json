@@ -1,6 +1,6 @@
 {
   "name": "@slithe/svelte",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Slithe Svelte Wrapper",
   "type": "module",
   "module": "dist/index.js",

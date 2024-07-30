@@ -1,6 +1,6 @@
 {
   "name": "slithe",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Snaky web components that moults",
   "type": "module",
   "module": "dist/index.js",
