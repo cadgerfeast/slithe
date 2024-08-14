@@ -32,7 +32,7 @@
     }
   },
   "scripts": {
-    "dev": "svelte-kit sync && run-p dev:*",
+    "dev": "npm run build:wrappers && svelte-kit sync && run-p dev:*",
     "dev:wrappers": "node ./devops/npm/generate/index.js watch",
     "dev:svelte": "svelte-package -i src --watch",
     "build": "svelte-kit sync && run-s build:*",
@@ -54,6 +54,7 @@
     "eslint": "^8.56.0",
     "eta": "^2.0.0",
     "npm-run-all": "^4.1.5",
+    "slithe": "*",
     "vite": "^5.0.11"
   },
   "license": "MIT"

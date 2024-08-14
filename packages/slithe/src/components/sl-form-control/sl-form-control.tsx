@@ -7,7 +7,6 @@ import { closest, querySelector } from '../../helpers/dom';
 
 /**
  * @import ValidationHandler,slithe
- * @import Validation,slithe
  */
 @Component({
   tag: 'sl-form-control',
@@ -41,6 +40,9 @@ export class SlitheFormControl {
     this.labelClickEvent.emit();
   }
   // Methods
+  /**
+   * @private
+   */
   @Method()
   public async validate (shouldDisplay: boolean): Promise<Validation|null> {
     let status: Validation|null = null;

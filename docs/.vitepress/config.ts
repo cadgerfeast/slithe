@@ -1,10 +1,5 @@
 // Helpers
 import { defineConfig } from 'vitepress';
-import * as path from 'path';
-import * as fs from 'fs';
-import * as url from 'url';
-// Constants
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 export default defineConfig({
 	title: 'Slithe',

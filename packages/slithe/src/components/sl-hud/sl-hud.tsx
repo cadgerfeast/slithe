@@ -13,12 +13,18 @@ export class SlitheHud {
   // State
   @State() notifications: Notification[] = [];
   // Methods
+  /**
+   * @private
+   */
   @Method()
   async addNotification (notification: Notification) {
     this.notifications = [...this.notifications, notification];
     await delay(3000);
     this.removeNotification(notification);
   }
+  /**
+   * @private
+   */
   @Method()
   async removeNotification (notification: Notification) {
     this.notifications = this.notifications.filter(n => n !== notification);

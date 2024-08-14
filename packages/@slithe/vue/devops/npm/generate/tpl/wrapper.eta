@@ -1,10 +1,12 @@
 <script lang="ts" setup>
-<% if (Object.keys(it.wrapper.imports).length > 0) { %>
 	// Imports
+	import { ref } from 'vue';
+<% if (Object.keys(it.wrapper.imports).length > 0) { %>
 <% Object.keys(it.wrapper.imports).forEach((_import) => { %>
   import type { <% it.wrapper.imports[_import].forEach((type) => { %><%= type %>, <% })%> } from '<%= _import %>';
 <% }) %>
 <% } %>
+	const host = ref<<%= it.wrapper.typeName %>|null>(null);
 <% if (it.wrapper.props.length > 0) { %>
 	// Props
 	const props = defineProps<{
@@ -22,6 +24,7 @@
 		'<%= event.name %>': [detail: <%~ event.type %>];
 <% }) %>
 	}>();
+<% if (it.wrapper.bindings.length > 0 || it.wrapper.events.length > 0) { %>
 	const events = {
 <% it.wrapper.bindings.forEach((binding) => { %>
 		'<%= binding.event %>': ({ detail }: CustomEvent<<%= binding.type %>>) => {
@@ -39,10 +42,25 @@
 <% } %>
 <% }) %>
   };
+<% } %>
+<% if (it.wrapper.methods.length > 0) { %>
+  // Methods
+<% it.wrapper.methods.forEach((method) => { %>
+	type <%= method.name %>Signature = <%~ method.signature %>;
+	const <%= method.name %>: <%= method.name %>Signature = async (<% method.parameters.forEach((parameter) => { %><%= parameter.name %>, <% }) %>) => {
+		return host.value!.<%= method.name %>(<% method.parameters.forEach((parameter) => { %><%= parameter.name %>, <% }) %>);
+	};
+<% }) %>
+	defineExpose({
+<% it.wrapper.methods.forEach((method) => { %>
+    <%= method.name %>,
+<% }) %>
+	});
+<% } %>
 </script>
 
 <template>
-	<<%= it.wrapper.tagName %><% if (it.wrapper.props.length > 0) { %> v-bind.prop="props"<% } %><% if (it.wrapper.events.length > 0) { %> v-on="events"<% } %>>
+	<<%= it.wrapper.tagName %> ref='host' <% if (it.wrapper.props.length > 0) { %> v-bind.prop="props"<% } %><% if (it.wrapper.events.length > 0) { %> v-on="events"<% } %>>
 		<slot/>
 	</<%= it.wrapper.tagName %>>
 </template>

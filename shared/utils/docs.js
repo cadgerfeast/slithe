@@ -13,7 +13,9 @@ export function computeComponentWrappers () {
     const bindings = [];
 		const events = component.events.map(({ event, complexType }) => ({ name: event, type: complexType.original }));
     const slots = component.slots.map(({ name }) => name).filter((slot) => slot !== 'default');
-    const methods = component.methods.filter((method) => !method.docsTags.some(({ name }) => name === 'private')).map(({ name, complexType, docsTags }) => ({name, parameters: complexType.parameters, return: complexType.return }));
+    const methods = component.methods
+      .filter((method) => !method.docsTags.some(({ name }) => name === 'private'))
+      .map(({ name, complexType }) => ({ name, parameters: complexType.parameters, signature: complexType.signature, return: complexType.return }));
 		for (const docsTag of component.docsTags) {
 			switch (docsTag.name) {
 				case 'import': {
