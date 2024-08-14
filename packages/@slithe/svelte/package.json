@@ -1,6 +1,6 @@
 {
   "name": "@slithe/svelte",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Slithe Svelte Wrapper",
   "type": "module",
   "module": "dist/index.js",
@@ -54,7 +54,7 @@
     "eslint": "^8.56.0",
     "eta": "^2.0.0",
     "npm-run-all": "^4.1.5",
-    "slithe": "*",
+    "slithe": "^0.5.2",
     "vite": "^5.0.11"
   },
   "license": "MIT"
