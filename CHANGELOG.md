@@ -1,5 +1,21 @@
 # Changelog
 
+## [14/08/2024 - 13:29](https://github.com/cadgerfeast/slithe/compare/slithe@0.5.1...slithe@0.5.2)
+
+### 🚀 Releases
+
+- `slithe`: *0.5.1* -> **0.5.2**
+
+- `@slithe/vue`: *0.1.1* -> **0.1.2**
+
+- `@slithe/svelte`: *0.2.0* -> **0.2.1**
+
+### 🏗 Chores
+
+- upgrade dependencies ([51b5a63](https://github.com/cadgerfeast/slithe/commit/51b5a63ea567d53b3abfe5f70c0e2ddd9c5cb881))
+
+- changelog ([61ba9ab](https://github.com/cadgerfeast/slithe/commit/61ba9ab188a2a243ca7374b293611e75530b2489))
+
 ## [30/07/2024 - 20:37](https://github.com/cadgerfeast/slithe/compare/slithe@0.5.0...slithe@0.5.1)
 
 ### 🚀 Releases
