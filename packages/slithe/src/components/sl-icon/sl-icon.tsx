@@ -17,8 +17,8 @@ export class SlitheIcon {
     return {
       'display': 'inline-flex',
       'align-items': 'center',
-      'width': `var(--sl-icon-size, ${this.size})`,
-      'height': `var(--sl-icon-size, ${this.size})`
+      'width': `var(--slithe-primer-icon-size, ${this.size})`,
+      'height': `var(--slithe-primer-icon-size, ${this.size})`
     };
   }
   get svg () {

@@ -40,9 +40,6 @@
       width: 60%;
       > sl-blankslate {
         width: 100%;
-        sl-icon {
-          color: var(--pr-cornflower-blue);
-        }
       }
     }
     > sl-form {

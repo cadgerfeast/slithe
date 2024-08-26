@@ -32,7 +32,6 @@ Size defaults to `medium`.
 <Preview title="Variants">
   <sl-button>Default</sl-button>
   <sl-button primary>Primary</sl-button>
-  <sl-button outline>Outline</sl-button>
   <sl-button danger>Danger</sl-button>
   <sl-button borderless>Borderless</sl-button>
   <sl-button link>Link</sl-button>
@@ -50,7 +49,6 @@ Size defaults to `medium`.
 <!-- Variants -->
 <sl-button>Default</sl-button>
 <sl-button primary>Primary</sl-button>
-<sl-button outline>Outline</sl-button>
 <sl-button danger>Danger</sl-button>
 <sl-button borderless>Borderless</sl-button>
 <!-- Size -->

@@ -13,7 +13,6 @@ export class SlitheAvatar {
   @Prop({ reflect: true }) name: string;
   @Prop() src?: string;
   @Prop() size?: string = '32px';
-  @Prop() background?: string = 'var(--sl-avatar-background-color)';
   // Modifiers
   @Prop({ reflect: true }) circle?: boolean;
   @Prop({ reflect: true }) square?: boolean;
@@ -21,8 +20,7 @@ export class SlitheAvatar {
   get style () {
     return {
       'width': this.size,
-      'height': this.size,
-      'background-color': this.background
+      'height': this.size
     };
   }
   get initialsStyle () {
@@ -31,7 +29,7 @@ export class SlitheAvatar {
     };
   }
   get initials () {
-    const rgx = new RegExp(/(\p{L}{1})\p{L}+/, 'gu');
+    const rgx = new RegExp(/(\p{L}{1})\p{L}+/u, 'gu');
     const splits = [...this.name.matchAll(rgx)] || [];
     return ((splits.shift()?.[1] || '') + (splits.pop()?.[1] || '')).toUpperCase();
   }

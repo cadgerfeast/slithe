@@ -1,38 +1,23 @@
-// Light
-:host([sl-theme=light]) {
-  --sl-card-background-color: var(--pr-white);
-  --sl-card-color: var(--pr-shark);
-  --sl-card-border-color: var(--pr-geyser);
-  --sl-card-border-radius: 6px;
-  --sl-card-slot-divider-color: var(--pr-geyser);
-  --sl-card-header-background-color: var(--pr-aqua-haze);
+// Common
+:host {
+  --slithe-primer-card-background-color: var(--slithe-primer-background-color-2);
+  --slithe-primer-card-color: var(--slithe-primer-text-color);
+  --slithe-primer-card-border-color: var(--slithe-primer-border-color-2);
+  --slithe-primer-card-header-background-color: var(--slithe-primer-background-color);
 }
 // Danger
-:host([sl-theme=light][danger]) {
-  --sl-card-border-color: var(--pr-cardinal);
-}
-// Dark
-:host([sl-theme=dark]) {
-  --sl-card-background-color: var(--pr-bunker);
-  --sl-card-color: var(--pr-karpa-kora);
-  --sl-card-border-color: var(--pr-bright-gray);
-  --sl-card-border-radius: 6px;
-  --sl-card-slot-divider-color: var(--pr-bright-gray);
-  --sl-card-header-background-color: var(--pr-dark-artifact);
-}
-// Danger
-:host([sl-theme=dark][danger]) {
-  --sl-card-border-color: var(--pr-punch);
+:host([danger]) {
+  --slithe-primer-card-border-color: var(--slithe-primer-border-color-danger);
 }
 // Small
 :host([small]) {
-  --sl-card-padding: 8px;
+  --slithe-primer-card-padding: 8px;
 }
 // Card
 div.sl-card {
   width: 100%;
-  font-family: var(--pr-font-family);
-  color: var(--sl-card-color);
+  font-family: var(--slithe-primer-font-family);
+  color: var(--slithe-primer-card-color);
   &.has-header {
     &.has-default {
       > header {
@@ -83,26 +68,26 @@ div.sl-card {
   }
   > header {
     display: none;
-    background-color: var(--sl-card-header-background-color);
-    border-radius: var(--sl-card-border-radius);
-    border: 1px solid var(--sl-card-border-color);
-    padding: var(--sl-card-padding, 16px);
+    background-color: var(--slithe-primer-card-header-background-color);
+    border-radius: 6px;
+    border: 1px solid var(--slithe-primer-card-border-color);
+    padding: var(--slithe-primer-card-padding, 16px);
   }
   > section {
     display: none;
-    background-color: var(--sl-card-background-color);
-    border-radius: var(--sl-card-border-radius);
-    border-top: 1px solid var(--sl-card-slot-divider-color);
-    border-bottom: 1px solid var(--sl-card-slot-divider-color);
-    border-left: 1px solid var(--sl-card-border-color);
-    border-right: 1px solid var(--sl-card-border-color);
-    padding: var(--sl-card-padding, 16px);
+    background-color: var(--slithe-primer-card-background-color);
+    border-radius: 6px;
+    border-top: 1px solid var(--slithe-primer-card-border-color);
+    border-bottom: 1px solid var(--slithe-primer-card-border-color);
+    border-left: 1px solid var(--slithe-primer-card-border-color);
+    border-right: 1px solid var(--slithe-primer-card-border-color);
+    padding: var(--slithe-primer-card-padding, 16px);
   }
   > footer {
     display: none;
-    background-color: var(--sl-card-background-color);
-    border-radius: var(--sl-card-border-radius);
-    border: 1px solid var(--sl-card-border-color);
-    padding: var(--sl-card-padding, 16px);
+    background-color: var(--slithe-primer-card-background-color);
+    border-radius: 6px;
+    border: 1px solid var(--slithe-primer-card-border-color);
+    padding: var(--slithe-primer-card-padding, 16px);
   }
 }

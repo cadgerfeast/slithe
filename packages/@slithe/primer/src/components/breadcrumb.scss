@@ -1,27 +1,20 @@
+// Common
 :host {
-	--sl-button-padding: 0px;
+	--slithe-primer-button-padding: 0px;
 }
 :host(:not(:last-of-type)) {
-	--sl-breadcrumb-divider: '/';
-}
-// Light
-:host([sl-theme=light]) {
-	--sl-breadcrumb-divider-color: rgb(101, 109, 118);
-}
-// Dark
-:host([sl-theme=dark]) {
-	--sl-breadcrumb-divider-color: rgb(118, 131, 144);
+	--slithe-primer-breadcrumb-divider: '/';
 }
 // Active
 :host([active]) {
-	--sl-button-disabled-opacity: 1;
-	--sl-button-color-override: currentColor;
+	--slithe-primer-button-disabled-opacity: 1;
+	--slithe-primer-button-color-override: currentColor;
 }
 // Breadcrumb
 li.sl-breadcrumb {
 	&::after {
 		padding: 0.5em;
-    color: var(--sl-breadcrumb-divider-color);
-		content: var(--sl-breadcrumb-divider, none);
+    color: var(--slithe-primer-text-color-2);
+		content: var(--slithe-primer-breadcrumb-divider, none);
 	}
 }

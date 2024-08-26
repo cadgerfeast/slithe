@@ -1,14 +1,8 @@
-// Light
-:host([sl-theme=light]) {
-	--sl-form-control-status-success-color: rgb(26, 127, 55);
-	--sl-form-control-status-failure-color: rgb(209, 36, 47);
-	--sl-form-control-caption-color: rgb(101, 109, 118);
-}
-// Dark
-:host([sl-theme=dark]) {
-	--sl-form-control-status-success-color: rgb(87, 171, 90);
-	--sl-form-control-status-failure-color: rgb(229, 83, 75);
-	--sl-form-control-caption-color: rgb(118, 131, 144);
+// Common
+:host {
+	--slithe-primer-form-control-status-success-color: var(--slithe-primer-text-color-success-2);
+	--slithe-primer-form-control-status-failure-color: var(--slithe-primer-text-color-error-2);
+	--slithe-primer-form-control-caption-color: var(--slithe-primer-text-color-2);
 }
 // Form Control
 div.sl-form-control {
@@ -22,10 +16,10 @@ div.sl-form-control {
 		display: flex;
     align-items: center;
 		&.success {
-			color: var(--sl-form-control-status-success-color);
+			color: var(--slithe-primer-form-control-status-success-color);
 		}
 		&.failure {
-			color: var(--sl-form-control-status-failure-color);
+			color: var(--slithe-primer-form-control-status-failure-color);
 		}
 		> span {
 			font-size: 12px;
@@ -36,6 +30,6 @@ div.sl-form-control {
 	> span.caption {
 		display: block;
 		font-size: 12px;
-		color: var(--sl-form-control-caption-color);
+		color: var(--slithe-primer-form-control-caption-color);
 	}
 }

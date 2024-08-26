@@ -1,11 +1,3 @@
-// Light
-:host([sl-theme=light]) {
-	--sl-action-group-title-color: rgb(101, 109, 118);
-}
-// Dark
-:host([sl-theme=dark]) {
-	--sl-action-group-title-color: rgb(118, 131, 144);
-}
 // Action Group
 li.sl-action-group {
 	width: 100%;
@@ -13,6 +5,6 @@ li.sl-action-group {
 		padding: 6px 16px;
     font-size: 12px;
     font-weight: 600;
-		color: var(--sl-action-group-title-color);
+		color: var(--slithe-primer-text-color-2);
 	}
 }

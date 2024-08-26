@@ -1,31 +1,21 @@
-// Light
-:host([sl-theme=light]) {
-  --sl-input-number-color: var(--pr-shark);
-	--sl-input-number-background-color: var(--pr-white);
-	--sl-input-number-border-color: var(--pr-geyser);
-	--sl-input-number-box-shadow: inset 0 1px 0 rgba(208, 215, 222, 0.2);
-	--sl-input-number-focus-border-color: var(--pr-science-blue);
-	--sl-input-number-status-success-color: rgb(26, 127, 55);
-	--sl-input-number-status-failure-color: rgb(209, 36, 47);
-}
-// Dark
-:host([sl-theme=dark]) {
-	--sl-input-number-color: var(--pr-catskill-white);
-	--sl-input-number-background-color: var(--pr-bunker);
-	--sl-input-number-border-color: var(--pr-outer-space);
-	--sl-input-number-box-shadow: 0 0 transparent;
-	--sl-input-number-focus-border-color: var(--pr-dodger-blue);
-	--sl-input-number-status-success-color: rgb(87, 171, 90);
-	--sl-input-number-status-failure-color: rgb(229, 83, 75);
+// Common
+:host {
+  --slithe-primer-input-number-color: var(--slithe-primer-text-color);
+	--slithe-primer-input-number-background-color: var(--slithe-primer-background-color-2);
+	--slithe-primer-input-number-border-color: var(--slithe-primer-border-color-2);
+	--slithe-primer-input-number-box-shadow: var(--slithe-primer-box-shadow-5);
+	--slithe-primer-input-number-focus-border-color: var(--slithe-primer-outline-color-focus);
+	--slithe-primer-input-number-status-success-color: var(--slithe-primer-text-color-success-2);
+	--slithe-primer-input-number-status-failure-color: var(--slithe-primer-text-color-error-2);
 }
 // Small
 :host([small]) {
-  --sl-input-number-font-size: 12px;
-  --sl-input-number-padding: 3px 12px;
+  --slithe-primer-input-number-font-size: 12px;
+  --slithe-primer-input-number-padding: 3px 12px;
 }
 // Block
 :host([block]) {
-  --sl-input-number-width: 100%;
+  --slithe-primer-input-number-width: 100%;
 }
 // Disabled
 :host([disabled]) {
@@ -39,31 +29,31 @@ div.sl-input-number {
   flex-direction: row;
   align-items: center;
   user-select: none;
-	width: var(--sl-input-number-width, auto);
+	width: var(--slithe-primer-input-number-width, auto);
 	&.success {
 		> input {
-			border-color: var(--sl-input-number-status-success-color);
+			border-color: var(--slithe-primer-input-number-status-success-color);
 		}
 	}
 	&.failure {
 		> input {
-			border-color: var(--sl-input-number-status-failure-color);
+			border-color: var(--slithe-primer-input-number-status-failure-color);
 		}
 	}
   > input {
 		width: inherit;
-		padding: var(--sl-input-number-padding, 5px 12px);
-		font-size: var(--sl-input-number-font-size, 14px);
+		padding: var(--slithe-primer-input-number-padding, 5px 12px);
+		font-size: var(--slithe-primer-input-number-font-size, 14px);
 		line-height: 20px;
 		border-radius: 6px;
-		color: var(--sl-input-number-color);
-		background-color: var(--sl-input-number-background-color);
-		border: 1px solid var(--sl-input-number-border-color);
-		box-shadow: var(--sl-input-number-box-shadow);
+		color: var(--slithe-primer-input-number-color);
+		background-color: var(--slithe-primer-input-number-background-color);
+		border: 1px solid var(--slithe-primer-input-number-border-color);
+		box-shadow: var(--slithe-primer-input-number-box-shadow);
 		&.focused, &:focus-visible {
-			border-color: var(--sl-input-number-focus-border-color);
+			border-color: var(--slithe-primer-input-number-focus-border-color);
 			outline: none;
-			box-shadow: inset 0 0 0 1px var(--sl-input-number-focus-border-color);
+			box-shadow: inset 0 0 0 1px var(--slithe-primer-input-number-focus-border-color);
 		}
 		// Hide Arrows
 		-moz-appearance: textfield;
