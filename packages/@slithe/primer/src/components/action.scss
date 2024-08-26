@@ -1,34 +1,19 @@
-// Light
-:host([sl-theme=light]) {
-  --sl-action-color: var(--pr-shark);
-  --sl-action-hover-background-color: rgb(243, 244, 246);
-  --sl-action-active-background-color: rgb(238, 239, 242);
-	--sl-action-outline-color: var(--pr-science-blue);
+// Common
+:host {
+  --slithe-primer-action-color: var(--slithe-primer-text-color);
+	--slithe-primer-action-color-active: var(--slithe-primer-text-color);
+  --slithe-primer-action-background-color-hover: var(--slithe-primer-background-color-hover);
+	--slithe-primer-action-background-color-active: var(--slithe-primer-background-color-active);
+	--slithe-primer-action-outline-color-focus: var(--slithe-primer-outline-color-focus);
 }
 // Danger
-:host([sl-theme=light][danger]) {
-	--sl-action-color: rgb(209, 36, 47);
-	--sl-action-hover-color: rgb(209, 36, 47);
-  --sl-action-hover-background-color: rgba(255, 235, 233, 0.64);
-	--sl-action-active-color: rgb(209, 36, 47);
-  --sl-action-active-background-color: rgb(255, 235, 233);
+:host([danger]) {
+	--slithe-primer-action-color: var(--slithe-primer-text-color-danger);
+	--slithe-primer-action-color-hover: var(--slithe-primer-text-color-danger);
+  --slithe-primer-action-background-color-hover: var(--slithe-primer-background-color-danger-hover);
+	--slithe-primer-action-color-active: var(--slithe-primer-text-color-danger);
+  --slithe-primer-action-background-color-active: var(--slithe-primer-background-color-danger-active);
 }
-// Dark
-:host([sl-theme=dark]) {
-  --sl-action-color: var(--pr-karpa-kora);
-  --sl-action-hover-background-color: rgb(68, 76, 86);
-  --sl-action-active-background-color: rgb(45, 51, 59);
-	--sl-action-outline-color: var(--pr-cornflower-blue);
-}
-// Danger
-:host([sl-theme=dark][danger]) {
-	--sl-action-color: rgb(244, 112, 103);
-	--sl-action-hover-color: rgb(244, 112, 103);
-  --sl-action-hover-background-color: rgba(229, 83, 75, 0.16);
-	--sl-action-active-color: rgb(244, 112, 103);
-  --sl-action-active-background-color: rgba(229, 83, 75, 0.24);
-}
-
 // Action
 li.sl-action {
 	width: 100%;
@@ -39,20 +24,20 @@ li.sl-action {
 	min-height: 5px;
 	margin: 0 8px;
 	border-radius: 6px;
-  color: var(--sl-action-color);
+  color: var(--slithe-primer-action-color);
 	cursor: pointer;
 	background-color: transparent;
 	user-select: none;
 	&:hover {
-    background-color: var(--sl-action-hover-background-color);
-    color: var(--sl-action-hover-color, unset);
+    background-color: var(--slithe-primer-action-background-color-hover);
+    color: var(--slithe-primer-action-color-hover);
   }
   &:active {
-    background-color: var(--sl-action-active-background-color);
-    color: var(--sl-action-active-color, unset);
+    background-color: var(--slithe-primer-action-background-color-active);
+    color: var(--slithe-primer-action-color-active);
   }
   &:focus-visible {
-    outline: 2px solid var(--sl-action-outline-color);
+    outline: 2px solid var(--slithe-primer-action-outline-color-focus);
     outline-offset: -2px;
   }
 }

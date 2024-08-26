@@ -8,13 +8,11 @@ A `sl-avatar` component shows an image that usually represent a user or known en
 
 <Preview>
   <sl-avatar name="John Doe"/>
-  <sl-avatar name="John Doe" background="#4A4052"/>
   <sl-avatar name="Slithe" src="/favicon.svg"/>
 </Preview>
 
 ``` html
 <sl-avatar name="John Doe"/>
-<sl-avatar name="John Doe" background="#4A4052"/>
 <sl-avatar name="Slithe" src="/favicon.svg"/>
 ```
 

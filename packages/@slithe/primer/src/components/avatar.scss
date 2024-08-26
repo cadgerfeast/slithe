@@ -1,14 +1,6 @@
-// Light
-:host([sl-theme=light]) {
-  --sl-avatar-background-color: var(--pr-karpa-kora);
-}
-// Dark
-:host([sl-theme=dark]) {
-  --sl-avatar-background-color: var(--pr-shark);
-}
 // Square
 :host([square]) {
-  --sl-avatar-border-radius: 4px;
+  --slithe-primer-avatar-border-radius: 4px;
 }
 // Avatar
 div.sl-avatar {
@@ -16,7 +8,9 @@ div.sl-avatar {
   align-items: center;
   justify-content: center;
   vertical-align: middle;
-  border-radius: var(--sl-avatar-border-radius, 50%);
+  border-radius: var(--slithe-primer-avatar-border-radius, 50%);
+  background-color: var(--slithe-primer-background-color-primary);
+  color: var(--slithe-primer-text-color-3);
   > img {
     height: inherit;
     width: inherit;

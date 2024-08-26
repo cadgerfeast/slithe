@@ -1,13 +1,18 @@
 // Helpers
 import { createStore } from '@stencil/store';
 
-interface Theme {
-  components: Record<string, CSSStyleSheet>;
+export type Theme = {
+  components: Record<string, CSSStyleSheet[]>;
   icons: Record<string, string>;
   fallbackIcon: string;
 }
 
-const themeStore = createStore({
+type ThemeStore = {
+  key: string;
+  model: Theme;
+};
+
+const themeStore = createStore<ThemeStore>({
   key: 'light',
   model: {
     components: {},
@@ -33,9 +38,9 @@ export function syncWithTheme (element: HTMLElement) {
   const tagName = element.tagName.toLowerCase().slice(3);
   // Initialize
   element.setAttribute('sl-theme', themeStore.state.key);
-  let stylesheet = themeStore.state.model.components[tagName];
-  if (stylesheet) {
-    element.shadowRoot.adoptedStyleSheets = [stylesheet];
+  let stylesheets = themeStore.state.model.components[tagName];
+  if (stylesheets) {
+    element.shadowRoot.adoptedStyleSheets = stylesheets;
     if (styleStore.get('stylesheets').has(element)) {
       element.shadowRoot.adoptedStyleSheets.push(styleStore.get('stylesheets').get(element));
     }
@@ -43,17 +48,17 @@ export function syncWithTheme (element: HTMLElement) {
   // Reactive
   function onThemeUpdate () {
     element.setAttribute('sl-theme', themeStore.state.key);
-    const newStylesheet = themeStore.state.model.components[tagName];
-    if (newStylesheet && (stylesheet !== newStylesheet)) {
-      stylesheet = newStylesheet;
-      element.shadowRoot.adoptedStyleSheets = [stylesheet];
+    const newStylesheets = themeStore.state.model.components[tagName];
+    if (newStylesheets && (stylesheets !== newStylesheets)) {
+      stylesheets = newStylesheets;
+      element.shadowRoot.adoptedStyleSheets = stylesheets;
       if (styleStore.get('stylesheets').has(element)) {
         element.shadowRoot.adoptedStyleSheets.push(styleStore.get('stylesheets').get(element));
       }
     }
   }
   function onStyleUpdate () {
-    element.shadowRoot.adoptedStyleSheets = stylesheet ? [stylesheet] : [];
+    element.shadowRoot.adoptedStyleSheets = stylesheets ? stylesheets : [];
     if (styleStore.get('stylesheets').has(element)) {
       element.shadowRoot.adoptedStyleSheets.push(styleStore.get('stylesheets').get(element));
     }

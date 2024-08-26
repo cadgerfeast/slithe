@@ -1,15 +1,12 @@
-
-// Light
-:host([sl-theme=light]) {
-  --sl-hud-notification-background-color: var(--pr-white);
-  --sl-hud-notification-color: var(--pr-shark);
-  --sl-hud-notification-box-shadow: inset 0 0 0 1px var(--pr-geyser), 0 8px 24px rgba(140,149,159,0.2);
-}
-// Dark
-:host([sl-theme=dark]) {
-  --sl-hud-notification-background-color: var(--pr-incomplete-eclipse);
-  --sl-hud-notification-color: var(--pr-norborne);
-  --sl-hud-notification-box-shadow: inset 0 0 0 1px var(--pr-outer-space), 0 8px 24px var(--pr-black-squared);
+// Common
+:host {
+  --slithe-primer-hud-notification-background-color: var(--slithe-primer-background-color-2);
+  --slithe-primer-hud-notification-color: var(--slithe-primer-text-color);
+  --slithe-primer-hud-notification-box-shadow: var(--slithe-primer-box-shadow-4);
+  --slithe-primer-hud-notification-icon-color-info: var(--slithe-primer-text-color-info);
+	--slithe-primer-hud-notification-icon-color-success: var(--slithe-primer-text-color-success);
+	--slithe-primer-hud-notification-icon-color-warn: var(--slithe-primer-text-color-warn);
+	--slithe-primer-hud-notification-icon-color-error: var(--slithe-primer-text-color-error);
 }
 // Hud
 div.sl-hud {
@@ -18,7 +15,7 @@ div.sl-hud {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 4;
+  z-index: 10;
   pointer-events: none;
   > ul.notifications {
     position: fixed;
@@ -33,27 +30,27 @@ div.sl-hud {
       flex-direction: row;
       margin: 16px;
       border-radius: 6px;
-      background-color: var(--sl-hud-notification-background-color);
-      color: var(--sl-hud-notification-color);
-      box-shadow: var(--sl-hud-notification-box-shadow);
+      background-color: var(--slithe-primer-hud-notification-background-color);
+      color: var(--slithe-primer-hud-notification-color);
+      box-shadow: var(--slithe-primer-hud-notification-box-shadow);
       &.info {
         > div.icon {
-          background-color: var(--pr-science-blue);
+          background-color: var(--slithe-primer-hud-notification-icon-color-info);
         }
       }
       &.success {
         > div.icon {
-          background-color: var(--pr-eucalyptus);
+          background-color: var(--slithe-primer-hud-notification-icon-color-success);
         }
       }
       &.warn {
         > div.icon {
-          background-color: var(--pr-pirate-gold);
+          background-color: var(--slithe-primer-hud-notification-icon-color-warn);
         }
       }
       &.error {
         > div.icon {
-          background-color: var(--pr-cardinal);
+          background-color: var(--slithe-primer-hud-notification-icon-color-error);
         }
       }
       > div.icon {
@@ -62,7 +59,7 @@ div.sl-hud {
         justify-content: center;
         width: 48px;
         min-height: 48px;
-        color: var(--pr-white);
+        color: var(--slithe-primer-text-color-3);
         border: 1px solid transparent;
         border-right: 0;
         border-top-left-radius: inherit;

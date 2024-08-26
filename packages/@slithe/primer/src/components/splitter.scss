@@ -1,20 +1,16 @@
-// Light
-:host([sl-theme=light]) {
-  --sl-splitter-divider-border-color: var(--pr-geyser);
-  --sl-splitter-divider-hover-border-color: var(--pr-science-blue);
+// Common
+:host {
+  --slithe-primer-splitter-divider-border-color: var(--slithe-primer-border-color-2);
+  --slithe-primer-splitter-divider-hover-border-color: var(--slithe-primer-outline-color-focus);
 }
-// Dark
-:host([sl-theme=dark]) {
-  --sl-splitter-divider-border-color: var(--pr-bright-gray);
-  --sl-splitter-divider-hover-border-color: var(--pr-malibu);
-}
+// Splitter
 div.sl-splitter {
   height: 100%;
   display: flex;
   overflow: hidden;
   > div.pane {
     position: relative;
-    overflow: var(--sl-splitter-overflow, auto);
+    overflow: var(--slithe-primer-splitter-overflow, auto);
     > div.catcher {
       position: absolute;
       inset: 0;
@@ -28,14 +24,14 @@ div.sl-splitter {
       pointer-events: none;
     }
     > div.divider {
-      background-color: var(--sl-splitter-divider-border-color);
+      background-color: var(--slithe-primer-splitter-divider-border-color);
       transition: all ease-in-out .25s;
       transition-delay: .25s;
     }
     &:hover {
       > div.divider {
-        background-color: var(--sl-splitter-divider-hover-border-color);
-        box-shadow: var(--sl-splitter-divider-hover-border-color) 0px 0px 0px 1px;
+        background-color: var(--slithe-primer-splitter-divider-hover-border-color);
+        box-shadow: var(--slithe-primer-splitter-divider-hover-border-color) 0px 0px 0px 1px;
       }
     }
   }
@@ -67,6 +63,7 @@ div.sl-splitter {
     }
   }
 }
+// Animation
 @keyframes fade-offset {
   0% {
     opacity: 0;

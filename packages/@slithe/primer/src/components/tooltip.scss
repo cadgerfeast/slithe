@@ -1,24 +1,19 @@
-// Light
-:host([sl-theme=light]) {
-  --sl-tooltip-background-color: var(--pr-shark);
-  --sl-tooltip-color: var(--pr-white);
-  --sl-tooltip-border-color: transparent;
-}
-// Dark
-:host([sl-theme=dark]) {
-  --sl-tooltip-background-color: var(--pr-pale-sky);
-  --sl-tooltip-color: var(--pr-white);
-  --sl-tooltip-border-color: transparent;
+// Common
+:host {
+  --slithe-primer-tooltip-background-color: var(--slithe-primer-background-color-4);
+  --slithe-primer-tooltip-color: var(--slithe-primer-text-color-3);
+  --slithe-primer-tooltip-border-color: var(--slithe-primer-transparent);
 }
 // Tooltip
 div.sl-tooltip {
   position: fixed;
   z-index: 5;
   display: inline-flex;
-  background-color: var(--sl-tooltip-background-color);
-  color: var(--sl-tooltip-color);
-  border: 1px solid var(--sl-tooltip-border-color);
+  background-color: var(--slithe-primer-tooltip-background-color);
+  color: var(--slithe-primer-tooltip-color);
+  border: 1px solid var(--slithe-primer-tooltip-border-color);
   border-radius: 6px;
   padding: .5em .75em;
   user-select: none;
+  font-size: 12px;
 }

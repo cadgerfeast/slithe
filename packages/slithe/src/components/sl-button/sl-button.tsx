@@ -17,7 +17,6 @@ export class SlitheButton {
   @Prop({ reflect: true }) link?: boolean = false;
   // Modifiers
   @Prop({ reflect: true }) primary?: boolean;
-  @Prop({ reflect: true }) outline?: boolean;
   @Prop({ reflect: true }) danger?: boolean;
   @Prop({ reflect: true }) borderless?: boolean;
   @Prop({ reflect: true }) small?: boolean;
