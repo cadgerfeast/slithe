@@ -3,14 +3,14 @@ object-assign
 (c) Sindre Sorhus
 @license MIT
 */var p=Object.getOwnPropertySymbols,Y0=Object.prototype.hasOwnProperty,a2=Object.prototype.propertyIsEnumerable;function e2(a){if(a==null)throw new TypeError("Object.assign cannot be called with null or undefined");return Object(a)}function t2(){try{if(!Object.assign)return!1;var a=new String("abc");if(a[5]="de",Object.getOwnPropertyNames(a)[0]==="5")return!1;for(var i={},e=0;e<10;e++)i["_"+String.fromCharCode(e)]=e;var h=Object.getOwnPropertyNames(i).map(function(l){return i[l]});if(h.join("")!=="0123456789")return!1;var t={};return"abcdefghijklmnopqrst".split("").forEach(function(l){t[l]=l}),Object.keys(Object.assign({},t)).join("")==="abcdefghijklmnopqrst"}catch{return!1}}var h2=t2()?Object.assign:function(a,i){for(var e,h=e2(a),t,l=1;l<arguments.length;l++){e=Object(arguments[l]);for(var r in e)Y0.call(e,r)&&(h[r]=e[r]);if(p){t=p(e);for(var s=0;s<t.length;s++)a2.call(e,t[s])&&(h[t[s]]=e[t[s]])}}return h};const n=X0,l2=h2,i2=16;for(const a of Object.keys(n)){const i=(e,h,t)=>{const l=[],r=l2({},h,t);t&&((t.width||t.height)&&(r.width=t.width?t.width:parseInt(t.height)*h.width/h.height,r.height=t.height?t.height:parseInt(t.width)*h.height/h.width),t.class&&(r.class=`octicon octicon-${a} ${t.class}`,r.class.trim()),t["aria-label"]&&(r["aria-label"]=t["aria-label"],r.role="img",delete r["aria-hidden"]));for(const s of Object.keys(r))l.push(`${s}="${r[s]}"`);return l.join(" ").trim()};n[a].symbol=a;for(const e of Object.keys(n[a].heights))n[a].heights[e].options={version:"1.1",width:n[a].heights[e].width,height:parseInt(e),viewBox:`0 0 ${n[a].heights[e].width} ${e}`,class:`octicon octicon-${a}`,"aria-hidden":"true"};n[a].toSVG=function(e={}){const{height:h,width:t}=e,l=n2(Object.keys(n[a].heights),h||t||i2);return`<svg ${i(n[a],n[a].heights[l].options,e)}>${n[a].heights[l].path}</svg>`}}var r2=n;function n2(a,i){return a.map(e=>parseInt(e,10)).reduce((e,h)=>h<=i?h:e,a[0])}const s2=m1(r2),v2=`/* Common */
-:host {
+html {
   --slithe-primer-font-family: 'Fira Sans';
   --slithe-primer-font-family-mono: 'Fira Mono';
   --slithe-primer-transparent: transparent;
   --slithe-primer-box-shadow-transparent: 0 0 transparent;
 }
 /* Light */
-:host([sl-theme=light]) {
+html[sl-theme=light] {
   --slithe-primer-text-color: #24292F;
   --slithe-primer-text-color-2: #656D76;
   --slithe-primer-text-color-3: #FFFFFF;
@@ -72,7 +72,7 @@ object-assign
   --slithe-primer-box-shadow-6: rgba(31, 35, 40, .12) 0px 1px 3px, rgba(66, 74, 83, .12) 0px 8px 24px;
 }
 /* Dark */
-:host([sl-theme=dark]) {
+html[sl-theme=dark] {
   --slithe-primer-text-color: #ADBAC7;
   --slithe-primer-text-color-2: #768390;
   --slithe-primer-text-color-3: #FFFFFF;
