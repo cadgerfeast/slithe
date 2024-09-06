@@ -1,5 +1,25 @@
 # Changelog
 
+## [06/09/2024 - 15:20](https://github.com/cadgerfeast/slithe/compare/slithe@0.5.2...slithe@0.5.3)
+
+### 🚀 Releases
+
+- `slithe`: *0.5.2* -> **0.5.3**
+
+- `@slithe/vue`: *0.1.2* -> **0.1.3**
+
+- `@slithe/svelte`: *0.2.1* -> **0.2.2**
+
+- `@slithe/primer`: *0.2.0* -> **0.2.1**
+
+### ♻️ Refactoring
+
+- renaming primer theme variables ([2b4f906](https://github.com/cadgerfeast/slithe/commit/2b4f906ee4f00f6c7304cb47459071a0f3a85211))
+
+### 🏗 Chores
+
+- changelog ([f65d6c4](https://github.com/cadgerfeast/slithe/commit/f65d6c41591fc3c572f19bbd4cf36046b1e4d83f))
+
 ## [14/08/2024 - 13:29](https://github.com/cadgerfeast/slithe/compare/slithe@0.5.1...slithe@0.5.2)
 
 ### 🚀 Releases
