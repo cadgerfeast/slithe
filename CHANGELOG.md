@@ -1,5 +1,25 @@
 # Changelog
 
+## [06/09/2024 - 15:56](https://github.com/cadgerfeast/slithe/compare/slithe@0.5.3...slithe@0.5.4)
+
+### 🚀 Releases
+
+- `slithe`: *0.5.3* -> **0.5.4**
+
+- `@slithe/vue`: *0.1.3* -> **0.1.4**
+
+- `@slithe/svelte`: *0.2.2* -> **0.2.3**
+
+- `@slithe/primer`: *0.2.1* -> **0.2.2**
+
+### 🐛 Bug Fixes
+
+- valid primer theme export, use html to keep theme key ([6aaca7e](https://github.com/cadgerfeast/slithe/commit/6aaca7eab9f101208ed6d33e88d2b045cae8e26c))
+
+### 🏗 Chores
+
+- changelog ([4346ca5](https://github.com/cadgerfeast/slithe/commit/4346ca58c60196516f78085e855bda1dcd529527))
+
 ## [06/09/2024 - 15:20](https://github.com/cadgerfeast/slithe/compare/slithe@0.5.2...slithe@0.5.3)
 
 ### 🚀 Releases
