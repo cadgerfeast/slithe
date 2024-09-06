@@ -1,0 +1,2 @@
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/chunks/index.D-dZOZeQ.js","assets/chunks/sl-splitter.Bx1leFN3.js"])))=>i.map(i=>d[i]);
+import{X as a}from"./framework.BESzuGzH.js";async function e(i){const{addNotification:o}=await a(async()=>{const{addNotification:t}=await import("./index.D-dZOZeQ.js");return{addNotification:t}},__vite__mapDeps([0,1]));o({type:"info",icon:{name:"info",size:"16px"},message:i})}export{e as n};
