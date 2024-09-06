@@ -1,12 +1,12 @@
 /* Common */
-:host {
+html {
   --slithe-primer-font-family: 'Fira Sans';
   --slithe-primer-font-family-mono: 'Fira Mono';
   --slithe-primer-transparent: transparent;
   --slithe-primer-box-shadow-transparent: 0 0 transparent;
 }
 /* Light */
-:host([sl-theme=light]) {
+html[sl-theme=light] {
   --slithe-primer-text-color: #24292F;
   --slithe-primer-text-color-2: #656D76;
   --slithe-primer-text-color-3: #FFFFFF;
@@ -68,7 +68,7 @@
   --slithe-primer-box-shadow-6: rgba(31, 35, 40, .12) 0px 1px 3px, rgba(66, 74, 83, .12) 0px 8px 24px;
 }
 /* Dark */
-:host([sl-theme=dark]) {
+html[sl-theme=dark] {
   --slithe-primer-text-color: #ADBAC7;
   --slithe-primer-text-color-2: #768390;
   --slithe-primer-text-color-3: #FFFFFF;

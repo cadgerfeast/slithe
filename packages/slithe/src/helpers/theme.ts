@@ -28,6 +28,7 @@ export function setTheme (newTheme: string, newModel?: Theme) {
     themeStore.state.model = newModel;
   }
   themeStore.state.key = newTheme;
+  document.documentElement.setAttribute('sl-theme', newTheme);
 }
 
 const styleStore = createStore({
@@ -37,7 +38,6 @@ const styleStore = createStore({
 export function syncWithTheme (element: HTMLElement) {
   const tagName = element.tagName.toLowerCase().slice(3);
   // Initialize
-  element.setAttribute('sl-theme', themeStore.state.key);
   let stylesheets = themeStore.state.model.components[tagName];
   if (stylesheets) {
     element.shadowRoot.adoptedStyleSheets = stylesheets;
@@ -47,7 +47,6 @@ export function syncWithTheme (element: HTMLElement) {
   }
   // Reactive
   function onThemeUpdate () {
-    element.setAttribute('sl-theme', themeStore.state.key);
     const newStylesheets = themeStore.state.model.components[tagName];
     if (newStylesheets && (stylesheets !== newStylesheets)) {
       stylesheets = newStylesheets;

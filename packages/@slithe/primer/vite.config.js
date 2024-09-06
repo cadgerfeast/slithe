@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import * as path from 'path';
 import * as fs from 'fs';
+import dts from 'vite-plugin-dts';
 
 function copySync (src, dest) {
   if (fs.existsSync(src) && fs.statSync(src).isDirectory()) {
@@ -28,11 +29,11 @@ export default defineConfig({
     {
       name: 'copy',
       generateBundle () {
-        copySync(path.resolve(__dirname, './src/index.d.ts'), path.resolve(__dirname, './dist/index.d.ts'));
         copySync(path.resolve(__dirname, './src/global.css'), path.resolve(__dirname, './dist/global.css'));
         copySync(path.resolve(__dirname, './src/variables.css'), path.resolve(__dirname, './dist/variables.css'));
         copySync(path.resolve(__dirname, './src/fonts'), path.resolve(__dirname, './dist/fonts'));
       }
-    }
+    },
+    dts()
   ]
 });

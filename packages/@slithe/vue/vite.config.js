@@ -3,7 +3,6 @@ import * as path from 'path';
 import vue from '@vitejs/plugin-vue';
 import dts from 'vite-plugin-dts';
 
-let isWatching = false;
 export default defineConfig({
   publicDir: false,
   build: {
