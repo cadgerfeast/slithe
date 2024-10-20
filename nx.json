@@ -1,4 +1,6 @@
 {
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "parallel": 7,
   "tasksRunnerOptions": {
     "default": {
       "runner": "nx/tasks-runners/default",
@@ -8,8 +10,7 @@
           "build",
           "test",
           "lint"
-        ],
-        "parallel": 7
+        ]
       }
     }
   },

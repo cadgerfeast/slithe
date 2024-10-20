@@ -9,26 +9,40 @@ export type Theme = {
 
 type ThemeStore = {
   key: string;
-  model: Theme;
+  theme: Theme;
 };
 
 const themeStore = createStore<ThemeStore>({
   key: 'light',
-  model: {
+  theme: {
     components: {},
     icons: {},
     fallbackIcon: ''
   }
 });
 
+function dispatchThemeUpdate () {
+  window.dispatchEvent(new CustomEvent('slithethemechange', { detail: getTheme() }));
+}
+
+themeStore.onChange('key', dispatchThemeUpdate);
+themeStore.onChange('theme', dispatchThemeUpdate);
+
 export const theme = themeStore.state;
 
-export function setTheme (newTheme: string, newModel?: Theme) {
-  if (newModel) {
-    themeStore.state.model = newModel;
+export function getTheme (): ThemeStore {
+  return {
+    key: themeStore.get('key'),
+    theme: themeStore.get('theme')
+  };
+}
+
+export function setTheme (newKey: string, newTheme?: Theme) {
+  if (newTheme) {
+    themeStore.state.theme = newTheme;
   }
-  themeStore.state.key = newTheme;
-  document.documentElement.setAttribute('sl-theme', newTheme);
+  themeStore.state.key = newKey;
+  document.documentElement.setAttribute('sl-theme', newKey);
 }
 
 const styleStore = createStore({
@@ -38,7 +52,7 @@ const styleStore = createStore({
 export function syncWithTheme (element: HTMLElement) {
   const tagName = element.tagName.toLowerCase().slice(3);
   // Initialize
-  let stylesheets = themeStore.state.model.components[tagName];
+  let stylesheets = themeStore.state.theme.components[tagName];
   if (stylesheets) {
     element.shadowRoot.adoptedStyleSheets = stylesheets;
     if (styleStore.get('stylesheets').has(element)) {
@@ -47,7 +61,7 @@ export function syncWithTheme (element: HTMLElement) {
   }
   // Reactive
   function onThemeUpdate () {
-    const newStylesheets = themeStore.state.model.components[tagName];
+    const newStylesheets = themeStore.state.theme.components[tagName];
     if (newStylesheets && (stylesheets !== newStylesheets)) {
       stylesheets = newStylesheets;
       element.shadowRoot.adoptedStyleSheets = stylesheets;
@@ -63,7 +77,7 @@ export function syncWithTheme (element: HTMLElement) {
     }
   }
   themeStore.onChange('key', onThemeUpdate);
-  themeStore.onChange('model', onThemeUpdate);
+  themeStore.onChange('theme', onThemeUpdate);
   styleStore.onChange('stylesheets', onStyleUpdate);
 }
 

@@ -1,0 +1,53 @@
+{
+  "name": "@slithe/cli",
+  "version": "0.0.0",
+  "description": "Slithe Command Line Interface",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "slithe": "./cli.js"
+  },
+  "files": [
+    "./dist",
+    "./cli.js"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "author": "Jérémie Pichon <contact@cadgerfeast.com>",
+  "homepage": "https://slithe.cadgerfeast.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cadgerfeast/slithe.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cadgerfeast/slithe/issues"
+  },
+  "keywords": [
+    "slithe",
+    "primer",
+    "cli"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite build --watch",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "@types/node": "^20.7.0",
+    "@types/yargs": "^17.0.25",
+    "@typescript-eslint/eslint-plugin": "^6.7.3",
+    "@typescript-eslint/parser": "^6.7.3",
+    "vite-plugin-dts": "^3.6.0"
+  },
+  "dependencies": {
+    "picocolors": "^1.1.1",
+    "typescript": "^5.2.2",
+    "vite": "^4.4.9",
+    "yargs": "^17.7.2"
+  }
+}

@@ -22,7 +22,7 @@ export class SlitheIcon {
     };
   }
   get svg () {
-    return theme.model.icons[this.name] || theme.model.fallbackIcon;
+    return theme.theme.icons[this.name] || theme.theme.fallbackIcon;
   }
   // Lifecycle
   connectedCallback () {

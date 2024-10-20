@@ -15,6 +15,7 @@
 <% }) %>
 	}>();
 <% } %>
+<% if (it.wrapper.bindings.length > 0 || it.wrapper.events.length > 0) { %>
   // Bindings
 	const emit = defineEmits<{
 <% it.wrapper.bindings.forEach((binding) => { %>
@@ -24,7 +25,6 @@
 		'<%= event.name %>': [detail: <%~ event.type %>];
 <% }) %>
 	}>();
-<% if (it.wrapper.bindings.length > 0 || it.wrapper.events.length > 0) { %>
 	const events = {
 <% it.wrapper.bindings.forEach((binding) => { %>
 		'<%= binding.event %>': ({ detail }: CustomEvent<<%= binding.type %>>) => {
