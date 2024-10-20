@@ -1,0 +1,60 @@
+{
+  "name": "@slithe/playground",
+  "version": "0.0.0",
+  "description": "Slithe Playground",
+  "type": "module",
+  "files": [
+    "./.vitepress",
+    "./dist"
+  ],
+  "exports": {
+    "./cli": {
+      "import": "./dist/cli.js",
+      "types": "./dist/cli.d.ts"
+    },
+    "./client": {
+      "import": "./dist/client.js",
+      "types": "./dist/client.d.ts"
+    },
+    "./node": {
+      "import": "./dist/node.js",
+      "types": "./dist/node.d.ts"
+    }
+  },
+  "author": "Jérémie Pichon <contact@cadgerfeast.com>",
+  "homepage": "https://slithe.cadgerfeast.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cadgerfeast/slithe.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cadgerfeast/slithe/issues"
+  },
+  "keywords": [
+    "slithe",
+    "primer",
+    "playground"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite build --watch",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "@types/node": "^20.7.0",
+    "@types/polka": "^0.5.7",
+    "@typescript-eslint/eslint-plugin": "^6.7.3",
+    "@typescript-eslint/parser": "^6.7.3",
+    "vite-plugin-dts": "^3.6.0"
+  },
+  "dependencies": {
+    "@slithe/cli": "*",
+    "@polka/compression": "^1.0.0-next.25",
+    "jiti": "^2.3.3",
+    "picocolors": "^1.1.1",
+    "polka": "^0.5.2",
+    "typescript": "^5.2.2",
+    "vite": "^4.4.9",
+    "vitepress": "^1.4.1"
+  }
+}

@@ -1,7 +1,10 @@
 {
-	"compilerOptions": {
+  "compilerOptions": {
 		"module": "node16",
-		"types": ["vite/client"],
+		"types": [
+			"node",
+			"vite/client"
+		],
 		"declaration": true,
 		"declarationMap": true
 	},

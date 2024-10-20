@@ -8,7 +8,9 @@
     "resolveJsonModule": true,
     "allowJs": true,
     "checkJs": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+		"declaration": true,
+		"declarationMap": true
   },
   "include": [
 		"src/**/*.ts",
