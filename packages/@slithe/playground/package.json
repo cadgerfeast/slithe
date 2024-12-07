@@ -1,6 +1,6 @@
 {
   "name": "@slithe/playground",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Slithe Playground",
   "type": "module",
   "files": [
@@ -48,8 +48,8 @@
     "vite-plugin-dts": "^3.6.0"
   },
   "dependencies": {
-    "@slithe/cli": "*",
     "@polka/compression": "^1.0.0-next.25",
+    "@slithe/cli": "^0.1.0",
     "jiti": "^2.3.3",
     "picocolors": "^1.1.1",
     "polka": "^0.5.2",

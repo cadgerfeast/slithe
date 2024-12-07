@@ -1,6 +1,6 @@
 {
   "name": "@slithe/primer",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Slithe Primer Theme",
   "type": "module",
   "module": "dist/index.js",
@@ -41,7 +41,7 @@
     "@types/primer__octicons": "^17.5.0",
     "eslint": "^8.56.0",
     "sass": "^1.69.5",
-    "slithe": "^0.5.4",
+    "slithe": "^0.6.0",
     "vite": "^5.0.11",
     "vite-plugin-dts": "^4.0.2"
   }
