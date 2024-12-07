@@ -130,6 +130,13 @@ export default defineConfig({
 		}
 	},
 	vite: {
+		css: {
+			preprocessorOptions: {
+				scss: {
+					api: 'modern-compiler'
+				}
+			}
+		},
 		define: {
 			SLITHE_PLAYGROUND_FAVICON: `"${favicon}"`
 		},

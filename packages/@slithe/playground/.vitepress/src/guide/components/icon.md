@@ -1,8 +1,9 @@
 <script setup>
 	import { ref, onMounted, onUnmounted } from 'vue';
+  import { getTheme } from 'slithe';
   import Preview from '../../components/preview.vue';
   // State
-  const icons = ref([]);
+  const icons = ref(getTheme().theme.icons);
   // Handlers
   function handleThemeChange ({ detail: { theme } }) {
     icons.value = theme.icons;

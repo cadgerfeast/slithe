@@ -17,6 +17,13 @@ function copySync (src, dest) {
 
 export default defineConfig({
   publicDir: false,
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: 'modern-compiler'
+      }
+    }
+  },
   build: {
     lib: {
       entry: path.resolve(__dirname, './src/index.ts'),
