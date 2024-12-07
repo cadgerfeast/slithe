@@ -1,6 +1,6 @@
 {
   "name": "@slithe/playground",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "Slithe Playground",
   "type": "module",
   "files": [
@@ -23,6 +23,9 @@
   },
   "author": "Jérémie Pichon <contact@cadgerfeast.com>",
   "homepage": "https://slithe.cadgerfeast.dev",
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cadgerfeast/slithe.git"
@@ -49,12 +52,12 @@
   },
   "dependencies": {
     "@polka/compression": "^1.0.0-next.25",
-    "@slithe/cli": "^0.1.0",
+    "@slithe/cli": "*",
     "jiti": "^2.3.3",
     "picocolors": "^1.1.1",
     "polka": "^0.5.2",
     "typescript": "^5.2.2",
-    "vite": "^4.4.9",
+    "vite": "^6.0.3",
     "vitepress": "^1.4.1"
   }
 }
