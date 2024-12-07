@@ -53,6 +53,7 @@
   "dependencies": {
     "@polka/compression": "^1.0.0-next.25",
     "@slithe/cli": "*",
+    "@slithe/vue": "*",
     "jiti": "^2.3.3",
     "picocolors": "^1.1.1",
     "polka": "^0.5.2",
