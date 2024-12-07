@@ -1,5 +1,15 @@
 # Changelog
 
+## [07/12/2024 - 13:36](https://github.com/cadgerfeast/slithe/compare/@slithe/playground@0.0.3...@slithe/playground@0.0.4)
+
+### 🚀 Releases
+
+- `@slithe/playground`: *0.0.3* -> **0.0.4**
+
+### 🐛 Bug Fixes
+
+- add alias for playground client, disable cache ([7cdfc2b](https://github.com/cadgerfeast/slithe/commit/7cdfc2b5295743694736c34e153aad93a709d1d9))
+
 ## [07/12/2024 - 12:39](https://github.com/cadgerfeast/slithe/compare/@slithe/playground@0.0.2...@slithe/playground@0.0.3)
 
 ### 🚀 Releases
