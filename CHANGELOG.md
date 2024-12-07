@@ -1,5 +1,19 @@
 # Changelog
 
+## [07/12/2024 - 12:32](https://github.com/cadgerfeast/slithe/compare/slithe@0.6.1...@slithe/playground@0.0.2)
+
+### 🚀 Releases
+
+- `@slithe/playground`: *0.0.1* -> **0.0.2**
+
+### 🐛 Bug Fixes
+
+- add sirv dependency to slithe playground ([f3bb31a](https://github.com/cadgerfeast/slithe/commit/f3bb31afc0fb55f404c607da1f479eae240d952b))
+
+### 🏗 Chores
+
+- changelog ([0ae16f3](https://github.com/cadgerfeast/slithe/commit/0ae16f3111fd6ecbbae15b9ba2c698db611c281c))
+
 ## [07/12/2024 - 10:28](https://github.com/cadgerfeast/slithe/compare/slithe@0.6.0...slithe@0.6.1)
 
 ### 🚀 Releases
