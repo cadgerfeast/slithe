@@ -1,5 +1,37 @@
 # Changelog
 
+## [07/12/2024 - 09:51](https://github.com/cadgerfeast/slithe/compare/slithe@0.5.4...slithe@0.6.0)
+
+### 🚀 Releases
+
+- `slithe`: *0.5.4* -> **0.6.0**
+
+- `@slithe/vue`: *0.1.4* -> **0.2.0**
+
+- `@slithe/svelte`: *0.2.3* -> **0.3.0**
+
+- `@slithe/primer`: *0.2.2* -> **0.3.0**
+
+- `@slithe/playground`: **0.1.0**
+
+- `@slithe/cli`: **0.1.0**
+
+### ✨ New Features
+
+- add playground and cli packages ([1ee4860](https://github.com/cadgerfeast/slithe/commit/1ee48601572c2a45f9561cef5afff56c02923716))
+
+### 🐛 Bug Fixes
+
+- add exec permission to cli ([4a2ad03](https://github.com/cadgerfeast/slithe/commit/4a2ad03dbc152cc4a4d14e39ada5d10dd342f418))
+
+### 📚 Documentation
+
+- remove unused documentation items ([ff2e5c8](https://github.com/cadgerfeast/slithe/commit/ff2e5c88f164086cfbd094cc8d4e344d2e31f3dc))
+
+### 🏗 Chores
+
+- changelog ([6248172](https://github.com/cadgerfeast/slithe/commit/62481727b5f34a6d228991d2586544d04901e9f6))
+
 ## [06/09/2024 - 15:56](https://github.com/cadgerfeast/slithe/compare/slithe@0.5.3...slithe@0.5.4)
 
 ### 🚀 Releases
