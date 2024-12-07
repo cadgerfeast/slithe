@@ -3,7 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import { DefaultTheme, defineConfig } from 'vitepress';
 import { createJiti } from 'jiti';
-import { PlaygroundNode, defaultPlaygroundNode, isPlaygroundNode } from '../src/node.js';
+import { PlaygroundNode, defaultPlaygroundNode, isPlaygroundNode } from '../dist/node.js';
 // Constants
 const jiti = createJiti(import.meta.url);
 const userNodeConfig = path.resolve(process.cwd(), './.slithe/node.ts');
