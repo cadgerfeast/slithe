@@ -1,5 +1,33 @@
 # Changelog
 
+## [07/12/2024 - 10:28](https://github.com/cadgerfeast/slithe/compare/slithe@0.6.0...slithe@0.6.1)
+
+### 🚀 Releases
+
+- `slithe`: *0.6.0* -> **0.6.1**
+
+- `@slithe/vue`: *0.2.0* -> **0.2.1**
+
+- `@slithe/svelte`: *0.3.0* -> **0.3.1**
+
+- `@slithe/primer`: *0.3.0* -> **0.3.1**
+
+- `@slithe/playground`: *0.1.0* -> **0.0.1**
+
+- `@slithe/cli`: *0.1.0* -> **0.0.1**
+
+### 🐛 Bug Fixes
+
+- add vue dependency to slithe playground ([3866ebe](https://github.com/cadgerfeast/slithe/commit/3866ebe20deab7308e027b2d7571b09c2dba97f1))
+
+- migrate from import tag to imports ([fa51e46](https://github.com/cadgerfeast/slithe/commit/fa51e465507b67b5481a231bb537b9b364d557cb))
+
+### 🏗 Chores
+
+- update packages for publishing ([a2ebce0](https://github.com/cadgerfeast/slithe/commit/a2ebce0b0dc4be1afcd31514bdb8b865710531a3))
+
+- changelog ([2ce7506](https://github.com/cadgerfeast/slithe/commit/2ce7506eee6afd9e5074d13cea044109742d6413))
+
 ## [07/12/2024 - 09:51](https://github.com/cadgerfeast/slithe/compare/slithe@0.5.4...slithe@0.6.0)
 
 ### 🚀 Releases
