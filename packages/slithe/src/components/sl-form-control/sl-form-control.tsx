@@ -6,7 +6,7 @@ import { config } from '../../helpers/config';
 import { closest, querySelector } from '../../helpers/dom';
 
 /**
- * @import ValidationHandler,slithe
+ * @imports ValidationHandler,slithe
  */
 @Component({
   tag: 'sl-form-control',

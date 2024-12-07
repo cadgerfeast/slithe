@@ -6,9 +6,9 @@ import { NumberAutocomplete, NumberOption, ValidationLevel, formStore } from '..
 import { fullTextMatch } from '../../helpers/text';
 
 /**
- * @import NumberAutocomplete,slithe
- * @import ValidationLevel,slithe
- * @import NumberOption,slithe
+ * @imports NumberAutocomplete,slithe
+ * @imports ValidationLevel,slithe
+ * @imports NumberOption,slithe
  */
 @Component({
   tag: 'sl-input-number',

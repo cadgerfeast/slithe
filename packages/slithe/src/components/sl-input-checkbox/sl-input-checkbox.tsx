@@ -6,7 +6,7 @@ import { ValidationLevel, formStore } from '../../helpers/form';
 import { config } from '../../helpers/config';
 
 /**
- * @import ValidationLevel,slithe
+ * @imports ValidationLevel,slithe
  */
 @Component({
   tag: 'sl-input-checkbox',

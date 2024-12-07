@@ -5,7 +5,7 @@ import { ValidationLevel, addForm, removeForm } from '../../helpers/form';
 import { querySelectorAll } from '../../helpers/dom';
 
 /**
- * @import ValidationLevel,slithe
+ * @imports ValidationLevel,slithe
  */
 @Component({
   tag: 'sl-form',

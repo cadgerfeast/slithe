@@ -4,7 +4,7 @@ import { syncWithTheme, updateStyle } from '../../helpers/theme';
 import { AlertLevel } from '../../helpers/types';
 
 /**
- * @import AlertLevel,slithe
+ * @imports AlertLevel,slithe
  */
 @Component({
   tag: 'sl-flash',

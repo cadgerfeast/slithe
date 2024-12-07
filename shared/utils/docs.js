@@ -16,9 +16,9 @@ export function computeComponentWrappers () {
     const methods = component.methods
       .filter((method) => !method.docsTags.some(({ name }) => name === 'private'))
       .map(({ name, complexType }) => ({ name, parameters: complexType.parameters, signature: complexType.signature, return: complexType.return }));
-		for (const docsTag of component.docsTags) {
+    for (const docsTag of component.docsTags) {
 			switch (docsTag.name) {
-				case 'import': {
+				case 'imports': {
 					const [type, lib] = docsTag.text.trim().split(',');
 					imports[lib] = imports[lib] || [];
 					imports[lib].push(type);

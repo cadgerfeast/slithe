@@ -6,9 +6,9 @@ import { TextAutocomplete, ValidationLevel, formStore, TextOption } from '../../
 import { fullTextMatch } from '../../helpers/text';
 
 /**
- * @import TextAutocomplete,slithe
- * @import ValidationLevel,slithe
- * @import TextOption,slithe
+ * @imports TextAutocomplete,slithe
+ * @imports ValidationLevel,slithe
+ * @imports TextOption,slithe
  */
 @Component({
   tag: 'sl-input-text',

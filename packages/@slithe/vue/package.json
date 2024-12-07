@@ -3,7 +3,7 @@
   "version": "0.2.0",
   "description": "Slithe Vue Wrapper",
   "type": "module",
-  "module": "dist/index.js",
+  "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": {
     "type": "git",

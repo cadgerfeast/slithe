@@ -4,7 +4,7 @@ import { syncWithTheme, updateStyle } from '../../helpers/theme';
 import { Alignment, contains } from '../../helpers/dom';
 
 /**
- * @import Alignment,slithe
+ * @imports Alignment,slithe
  */
 @Component({
   tag: 'sl-popover',
