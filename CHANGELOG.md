@@ -1,5 +1,15 @@
 # Changelog
 
+## [07/12/2024 - 12:39](https://github.com/cadgerfeast/slithe/compare/@slithe/playground@0.0.2...@slithe/playground@0.0.3)
+
+### 🚀 Releases
+
+- `@slithe/playground`: *0.0.2* -> **0.0.3**
+
+### 🐛 Bug Fixes
+
+- use build output in sithe playground vitepress config ([7748aed](https://github.com/cadgerfeast/slithe/commit/7748aed593838d9ce1ecf604db80870edcaf9ccd))
+
 ## [07/12/2024 - 12:32](https://github.com/cadgerfeast/slithe/compare/slithe@0.6.1...@slithe/playground@0.0.2)
 
 ### 🚀 Releases
@@ -9,10 +19,6 @@
 ### 🐛 Bug Fixes
 
 - add sirv dependency to slithe playground ([f3bb31a](https://github.com/cadgerfeast/slithe/commit/f3bb31afc0fb55f404c607da1f479eae240d952b))
-
-### 🏗 Chores
-
-- changelog ([0ae16f3](https://github.com/cadgerfeast/slithe/commit/0ae16f3111fd6ecbbae15b9ba2c698db611c281c))
 
 ## [07/12/2024 - 10:28](https://github.com/cadgerfeast/slithe/compare/slithe@0.6.0...slithe@0.6.1)
 
@@ -39,8 +45,6 @@
 ### 🏗 Chores
 
 - update packages for publishing ([a2ebce0](https://github.com/cadgerfeast/slithe/commit/a2ebce0b0dc4be1afcd31514bdb8b865710531a3))
-
-- changelog ([2ce7506](https://github.com/cadgerfeast/slithe/commit/2ce7506eee6afd9e5074d13cea044109742d6413))
 
 ## [07/12/2024 - 09:51](https://github.com/cadgerfeast/slithe/compare/slithe@0.5.4...slithe@0.6.0)
 
@@ -70,10 +74,6 @@
 
 - remove unused documentation items ([ff2e5c8](https://github.com/cadgerfeast/slithe/commit/ff2e5c88f164086cfbd094cc8d4e344d2e31f3dc))
 
-### 🏗 Chores
-
-- changelog ([6248172](https://github.com/cadgerfeast/slithe/commit/62481727b5f34a6d228991d2586544d04901e9f6))
-
 ## [06/09/2024 - 15:56](https://github.com/cadgerfeast/slithe/compare/slithe@0.5.3...slithe@0.5.4)
 
 ### 🚀 Releases
@@ -89,10 +89,6 @@
 ### 🐛 Bug Fixes
 
 - valid primer theme export, use html to keep theme key ([6aaca7e](https://github.com/cadgerfeast/slithe/commit/6aaca7eab9f101208ed6d33e88d2b045cae8e26c))
-
-### 🏗 Chores
-
-- changelog ([4346ca5](https://github.com/cadgerfeast/slithe/commit/4346ca58c60196516f78085e855bda1dcd529527))
 
 ## [06/09/2024 - 15:20](https://github.com/cadgerfeast/slithe/compare/slithe@0.5.2...slithe@0.5.3)
 
@@ -110,10 +106,6 @@
 
 - renaming primer theme variables ([2b4f906](https://github.com/cadgerfeast/slithe/commit/2b4f906ee4f00f6c7304cb47459071a0f3a85211))
 
-### 🏗 Chores
-
-- changelog ([f65d6c4](https://github.com/cadgerfeast/slithe/commit/f65d6c41591fc3c572f19bbd4cf36046b1e4d83f))
-
 ## [14/08/2024 - 13:29](https://github.com/cadgerfeast/slithe/compare/slithe@0.5.1...slithe@0.5.2)
 
 ### 🚀 Releases
@@ -128,8 +120,6 @@
 
 - upgrade dependencies ([51b5a63](https://github.com/cadgerfeast/slithe/commit/51b5a63ea567d53b3abfe5f70c0e2ddd9c5cb881))
 
-- changelog ([61ba9ab](https://github.com/cadgerfeast/slithe/commit/61ba9ab188a2a243ca7374b293611e75530b2489))
-
 ## [30/07/2024 - 20:37](https://github.com/cadgerfeast/slithe/compare/slithe@0.5.0...slithe@0.5.1)
 
 ### 🚀 Releases
@@ -139,10 +129,6 @@
 ### 🐛 Bug Fixes
 
 - add click event to sl-action ([6f05173](https://github.com/cadgerfeast/slithe/commit/6f051731515ba56072d985b5fb89217aea2c6281))
-
-### 🏗 Chores
-
-- changelog ([0e9cef4](https://github.com/cadgerfeast/slithe/commit/0e9cef4da1e4e5b19460709610840c8167d9c355))
 
 ## [30/07/2024 - 20:01](https://github.com/cadgerfeast/slithe/compare/slithe@0.4.0...slithe@0.5.0)
 
@@ -180,10 +166,6 @@
 
 - ensure some component methods can be private for wrapper elements ([92534f9](https://github.com/cadgerfeast/slithe/commit/92534f9afc33041cef5fb81e2d0670d1a2adfef2))
 
-### 🏗 Chores
-
-- changelog ([a2cb77a](https://github.com/cadgerfeast/slithe/commit/a2cb77aabe6551465b747623eb5361465e88a13b))
-
 ## [12/03/2024 - 10:51](https://github.com/cadgerfeast/slithe/compare/slithe@0.3.1...slithe@0.4.0)
 
 ### 🚀 Releases
@@ -216,10 +198,6 @@
 
 - upgrade dependencies ([ca68ed0](https://github.com/cadgerfeast/slithe/commit/ca68ed0f66b1e92da38161e0ec2aa14650ae4f39))
 
-### 🏗 Chores
-
-- changelog ([03189ac](https://github.com/cadgerfeast/slithe/commit/03189acc438063736e3e8beb9804ab6ea2a3ae4d))
-
 ## [24/01/2024 - 09:40](https://github.com/cadgerfeast/slithe/compare/slithe@0.3.0...slithe@0.3.1)
 
 ### 🚀 Releases
@@ -235,8 +213,6 @@
 ### 🏗 Chores
 
 - add svelte wrapper package ([cf84947](https://github.com/cadgerfeast/slithe/commit/cf84947ce054c3c2532d132fbc632cadfcc304af))
-
-- changelog ([ef82fef](https://github.com/cadgerfeast/slithe/commit/ef82fef6c3ba0cd353771372d6c752315079650a))
 
 ## [17/01/2024 - 13:23](https://github.com/cadgerfeast/slithe/compare/slithe@0.2.12...slithe@0.3.0)
 
@@ -273,8 +249,6 @@
 ### 🏗 Chores
 
 - add commit-msg hook to husky ([06802c8](https://github.com/cadgerfeast/slithe/commit/06802c8125b7c8e35fed45a44c07e3a89c69a60f))
-
-- changelog ([85e56a1](https://github.com/cadgerfeast/slithe/commit/85e56a163643a42726ea977796c11ef79a6ceebc))
 
 ## 20/12/2023 - 18:28
 
