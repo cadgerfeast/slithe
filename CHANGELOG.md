@@ -1,5 +1,19 @@
 # Changelog
 
+## [07/12/2024 - 13:51](https://github.com/cadgerfeast/slithe/compare/@slithe/playground@0.0.4...@slithe/vue@0.2.2)
+
+### 🚀 Releases
+
+- `@slithe/vue`: *0.2.1* -> **0.2.2**
+
+- `@slithe/primer`: *0.3.1* -> **0.3.2**
+
+- `@slithe/playground`: *0.0.4* -> **0.0.5**
+
+### 🐛 Bug Fixes
+
+- show full list of icons in docs, migrate to modern css compiler ([04a0df8](https://github.com/cadgerfeast/slithe/commit/04a0df81a6dd4084fbc6f3dfe219e561ee2cc5ed))
+
 ## [07/12/2024 - 13:36](https://github.com/cadgerfeast/slithe/compare/@slithe/playground@0.0.3...@slithe/playground@0.0.4)
 
 ### 🚀 Releases
