@@ -1,6 +1,6 @@
 {
   "name": "@slithe/cli",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Slithe Command Line Interface",
   "type": "module",
   "main": "./dist/index.js",
