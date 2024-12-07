@@ -1,13 +1,16 @@
 // Helpers
 import path from 'path';
 import fs from 'fs';
+import url from 'url';
 import { DefaultTheme, defineConfig } from 'vitepress';
 import { createJiti } from 'jiti';
 import { PlaygroundNode, defaultPlaygroundNode, isPlaygroundNode } from '../dist/node.js';
 // Constants
+const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 const jiti = createJiti(import.meta.url);
 const userNodeConfig = path.resolve(process.cwd(), './.slithe/node.ts');
 const userClientConfig = path.resolve(process.cwd(), './.slithe/client.ts');
+const defaultTheme = path.resolve(__dirname, './slithe/client.ts');
 const userPlaygroundDir = path.resolve(process.cwd(), './.slithe/playground');
 const userPublicDir = path.resolve(userPlaygroundDir, './public');
 
@@ -17,11 +20,6 @@ if (fs.existsSync(userNodeConfig)) {
 	if (typeof mod === 'object' && 'playground' in mod && isPlaygroundNode(mod.playground)) {
 		nodeConfig = mod.playground;
 	}
-}
-
-const alias = {};
-if (fs.existsSync(userClientConfig)) {
-	alias['../slithe/client.js'] = userClientConfig;
 }
 
 const nav: DefaultTheme.NavItem[] = [
@@ -153,7 +151,9 @@ export default defineConfig({
 		}],
 		resolve: {
 			dedupe: ['vue'],
-			alias
+			alias: {
+				'@theme/slithe': fs.existsSync(userClientConfig) ? userClientConfig : defaultTheme
+			}
 		}
 	},
 	vue: {

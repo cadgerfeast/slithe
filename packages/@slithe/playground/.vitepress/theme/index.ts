@@ -13,7 +13,7 @@ export default {
   async setup () {
     const { isDark } = useData();
     if (!import.meta.env.SSR) {
-      const config = await import('../slithe/client.js');
+      const config = await import('@theme/slithe');
       watch([isDark], () => {
         config.playground.setTheme(isDark.value ? 'dark': 'light');
       }, { immediate: true });
