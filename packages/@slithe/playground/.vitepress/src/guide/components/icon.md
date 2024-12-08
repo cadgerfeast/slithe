@@ -1,15 +1,16 @@
 <script setup>
 	import { ref, onMounted, onUnmounted } from 'vue';
-  import { getTheme } from 'slithe';
   import Preview from '../../components/preview.vue';
   // State
-  const icons = ref(getTheme().theme.icons);
+  const icons = ref([]);
   // Handlers
   function handleThemeChange ({ detail: { theme } }) {
     icons.value = theme.icons;
   }
   // Lifecycle
-  onMounted(() => {
+  onMounted(async () => {
+    const { getTheme } = await import('slithe');
+    icons.value = getTheme().theme.icons;
     window.addEventListener('slithethemechange', handleThemeChange);
   });
   onUnmounted(() => {
