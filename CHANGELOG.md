@@ -1,5 +1,15 @@
 # Changelog
 
+## [08/12/2024 - 14:04](https://github.com/cadgerfeast/slithe/compare/@slithe/vue@0.2.2...@slithe/playground@0.0.6)
+
+### 🚀 Releases
+
+- `@slithe/playground`: *0.0.5* -> **0.0.6**
+
+### 🐛 Bug Fixes
+
+- use slithe as a dynamic import ([e8d742d](https://github.com/cadgerfeast/slithe/commit/e8d742d6d5fcf3c5161fb74e509f0389d4b7512a))
+
 ## [07/12/2024 - 13:51](https://github.com/cadgerfeast/slithe/compare/@slithe/playground@0.0.4...@slithe/vue@0.2.2)
 
 ### 🚀 Releases
