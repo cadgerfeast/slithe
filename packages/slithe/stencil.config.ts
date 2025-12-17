@@ -19,6 +19,7 @@ export const config: Config = {
     collectCoverage: true,
     setupFiles: [
       './devops/npm/test/setup.ts'
-    ]
+    ],
+    browserArgs: ['--no-sandbox', '--disable-setuid-sandbox']
   }
 };

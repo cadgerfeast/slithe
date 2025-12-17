@@ -1,6 +1,6 @@
 # Slithe
 
-<p align="center"><br/><img width="200" src="https://slithe.cadgerfeast.dev/favicon.svg" alt="Slithe Icon"/><br/><br/></p>
+<p align="center"><br/><img width="200" src="https://slithe.cadgerfeast.com/favicon.svg" alt="Slithe Icon"/><br/><br/></p>
 
 > Snaky web components that moults
 
@@ -10,7 +10,7 @@ It has been built to be as flexible as possible, so you can customize components
 
 ## 📄 Get Started
 
-Please check out the official documentation to get started using **Slithe**, visit [slithe.cadgerfeast.dev](https://slithe.cadgerfeast.dev).
+Please check out the official documentation to get started using **Slithe**, visit [slithe.cadgerfeast.com](https://slithe.cadgerfeast.com).
 
 ## 👏 Contributing
 

@@ -22,7 +22,7 @@
     }
   },
   "author": "Jérémie Pichon <contact@cadgerfeast.com>",
-  "homepage": "https://slithe.cadgerfeast.dev",
+  "homepage": "https://slithe.cadgerfeast.com",
   "publishConfig": {
     "access": "public"
   },
